@@ -221,3 +221,35 @@ Gate constraint:
 - Only one fixed-snapshot 15-candidate cloud diagnostic is authorized next.
 - Do not begin the 20-episode benchmark until the responsible clearance pairs
   and overlap depths have been reviewed.
+
+## 2026-07-25 — Gate 2.5 Radeon Cloud diagnostic
+
+- Pulled commit `e6bfe2f` on active instance `u-13907-735d71cb`.
+- Cloud verification: 16/16 tests passed.
+- Ran the default 15-candidate matrix for `011_banana`, seed `41`.
+- Process exit code: `0`.
+- Exact evidence:
+  [`evidence/gate-2-5/candidates.json`](evidence/gate-2-5/candidates.json).
+
+Decisive result:
+
+- All 15 critical pairs were `right_finger -> table_top`.
+- Every pair was a strict AABB overlap against a support surface.
+- Overlap depths ranged from approximately 1.1 to 1.6 mm.
+- The zero-clearance metric is dominated by intentional grasp/support contact,
+  so it cannot currently represent clutter-collision safety.
+
+Candidate result:
+
+- Rank 1: `yaw_+00.0_offset_+0.000`, success estimate `0.4648455`.
+- Rank 2: `yaw_+00.0_offset_+0.020`, success estimate `0.4640648`.
+- All five `offset_-0.020` candidates retained zero requested lift and ranked
+  11–15.
+- Lateral offsets materially distinguish grasp outcomes and remain in scope.
+
+Gate decision:
+
+- Do not run the 20-episode benchmark yet.
+- Proposed Gate 2.6 separates support-contact depth from clutter clearance,
+  then performs one final fixed-snapshot 15-candidate validation.
+- The cloud instance remains running per owner instruction.

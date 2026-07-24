@@ -52,8 +52,7 @@ Verified in Radeon Cloud Session B:
 
 Evidence: [`evidence/session-b/README.md`](evidence/session-b/README.md)
 
-**Gate 2.5 — Metric calibration: local implementation complete; cloud
-diagnostic pending.**
+**Gate 2.5 — Metric calibration: cloud diagnostic complete.**
 
 All five rollouts reported `collision_margin_m = 0.0`, so collision risk
 dominates every score. The local diagnostic implementation now:
@@ -65,8 +64,27 @@ dominates every score. The local diagnostic implementation now:
   offsets, for 15 candidates total;
 - preserves the diagnostic alongside each candidate's scoring metrics.
 
-The next permitted GPU action is one fixed-snapshot 15-candidate diagnostic.
-Do not begin the 20-episode comparison until its result has been reviewed.
+The fixed-snapshot 15-candidate diagnostic completed successfully on Radeon
+Cloud. All 15 critical pairs were `right_finger -> table_top`, with strict AABB
+overlap depths between roughly 1.1 and 1.6 mm. The degenerate zero-clearance
+metric is therefore caused by intentional support-surface contact, not proven
+clutter collision.
+
+Evidence:
+[`evidence/gate-2-5/README.md`](evidence/gate-2-5/README.md)
+
+The offset dimension is useful: every `-0.02 m` candidate retained zero lift and
+ranked 11–15, while zero and positive offsets retained most of the requested
+lift.
+
+**Gate 2.6 — Two-channel safety metric: review required before implementation.**
+
+Separate support contact from clutter safety:
+
+- clutter clearance excludes support surfaces and drives collision risk;
+- support-contact overlap depth remains visible as a diagnostic;
+- one further 15-candidate fixed-snapshot verification is required before the
+  20-episode benchmark.
 
 ## Verified environment
 
@@ -109,15 +127,13 @@ to avoid a NumPy 2 ABI mismatch.
 
 Do not scale the current scoring configuration directly to 20 episodes.
 
-Gate 2.5 execution route:
+Gate 2.6 proposed route:
 
-1. run the fixed-snapshot 15-candidate diagnostic on Session B;
-2. use the named critical pairs to decide whether the table, support surfaces, or intentionally contacted
-   geometry should be excluded from the safety clearance;
-3. require at least one candidate to differ in clearance or overlap severity,
-   or document why the current AABB metric is structurally degenerate;
-4. require non-degenerate safety
-   measurements before starting the fixed-seed benchmark.
+1. measure clutter and support surfaces in separate recorder channels;
+2. feed only clutter clearance into the existing collision-risk feature;
+3. preserve support link, sample, and overlap depth in evidence;
+4. rerun the same 15-candidate snapshot and require a non-degenerate clutter
+   clearance before starting the fixed-seed benchmark.
 
 ## Working agreement
 
