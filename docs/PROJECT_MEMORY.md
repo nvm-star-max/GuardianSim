@@ -1,6 +1,6 @@
 # GuardianSim Project Memory
 
-Last updated: 2026-07-24
+Last updated: 2026-07-25
 
 This file is the durable source of truth for continuing GuardianSim work across
 machines and agent sessions. Update it after every verified milestone, cloud
@@ -29,10 +29,9 @@ Verified on Radeon Cloud:
 
 Evidence: [`evidence/session-a/README.md`](evidence/session-a/README.md)
 
-**Gate 2 — Counterfactual planning: local implementation complete; cloud
-validation pending.**
+**Gate 2 — Counterfactual planning: cloud validation complete.**
 
-The repository now includes:
+The repository includes:
 
 - a serializable episode snapshot and stable SHA-256 state fingerprint;
 - a concrete `GenesisSceneDriver` that captures and restores Franka qpos and all
@@ -40,10 +39,25 @@ The repository now includes:
 - physical trace measurement for path length, retained lift, alignment, and
   sampled collision-AABB clearance;
 - a real five-candidate Franka grasp-and-lift executor;
-- an exact Session B dry-run command that emits ranked JSON.
+- an exact Session B dry-run command that emits ranked JSON;
+- JSON-safe export for simulator/NumPy scalar and array-like values.
 
-No real candidate ranking result may be presented until the Session B command
-has run successfully on Radeon Cloud.
+Verified in Radeon Cloud Session B:
+
+- 14/14 tests passed.
+- Genesis 1.2.3 ran on `gs.amdgpu` with 47.98 GB device memory.
+- Five fixed-snapshot banana-grasp candidates executed and ranked.
+- Exit code: `0`.
+- The aligned `0°` candidate ranked first with predicted success `0.4648`.
+
+Evidence: [`evidence/session-b/README.md`](evidence/session-b/README.md)
+
+**Gate 2.5 — Metric calibration: review required before implementation.**
+
+All five rollouts reported `collision_margin_m = 0.0`, so collision risk
+dominates every score. Before running a 20-episode comparison, inspect and log
+the link/obstacle pair responsible for minimum clearance, distinguish contact
+from true collision, and add non-zero lateral offsets to the candidate set.
 
 ## Verified environment
 
@@ -63,13 +77,15 @@ to avoid a NumPy 2 ABI mismatch.
 
 - Repository: <https://github.com/nvm-star-max/GuardianSim>
 - Branch: `main`
-- Latest verified milestone commit: `c658a39`
+- Latest verified code milestone commit: `004e47c`
 - Relevant commits:
   - `2119d0d` — Genesis evaluation and benchmark pipeline
   - `2283818` — compatible NumPy/scikit-image bounds
   - `64991a7` — Radeon Cloud Session A evidence
   - `1c17e90` — durable project memory and worklog
   - `c658a39` — snapshot-safe Genesis candidate rollouts
+  - `d0017fd` — Gate 2 local milestone record
+  - `004e47c` — JSON-safe simulator numeric export
 
 ## Architecture already implemented
 
@@ -81,12 +97,18 @@ to avoid a NumPy 2 ABI mismatch.
 
 ## Next-stage proposal
 
-Review and commit the local Gate 2 implementation. Then launch Session B only to
-run the five-candidate dry run documented in [`RADEON_CLOUD.md`](RADEON_CLOUD.md).
-Inspect the ranked JSON and trace log before deciding whether to:
+Do not scale the current scoring configuration directly to 20 episodes.
 
-1. refine the measurement implementation locally; or
-2. continue the same session into a 20-episode fixed-seed comparison.
+Recommended Gate 2.5 route:
+
+1. add clearance diagnostics that identify the minimum-distance robot link,
+   obstacle, sample index, and whether AABBs overlap;
+2. decide whether the table, support surfaces, or intentionally contacted
+   geometry should be excluded from the safety clearance;
+3. expand the small candidate matrix with lateral offsets such as
+   `-0.02, 0.00, +0.02 m`;
+4. run one fixed-snapshot banana probe and require non-degenerate safety
+   measurements before starting the fixed-seed benchmark.
 
 ## Working agreement
 
@@ -100,8 +122,9 @@ Inspect the ranked JSON and trace log before deciding whether to:
   - the exit criteria and expected credit cost.
 - Do not begin the next major stage until the route has been reviewed with the
   owner.
-- Destroy cloud instances after evidence is copied and code is pushed. Closing
-  the browser is not sufficient.
+- Cloud-instance lifecycle follows the owner's latest explicit instruction.
+  The current owner decision is to keep Session B running because the profile
+  still shows zero credits consumed after an extended runtime.
 
 ## Cloud access and instance state
 
@@ -112,6 +135,7 @@ Inspect the ranked JSON and trace log before deciding whether to:
   `SHA256:8VLTCjgZI8Ufo+CTDck01Zv8WUJMgPw9zTFa/FPF83Q`.
 - The key applies only to future SSH-enabled templates that expose a host and
   port. Blank OpenCode did not display an SSH endpoint.
-- The Session A instance was destroyed after its evidence was secured.
-- Final profile check: `No active instance`, `Key on file`, and 10 credits
-  available.
+- Session A was destroyed after its evidence was secured.
+- Session B instance `u-13907-735d71cb` is intentionally still running.
+- At the latest verified profile check, the instance was ready, 10 credits were
+  available, and 0 credits had been consumed despite an extended runtime.

@@ -139,3 +139,62 @@ SSH-enabled template and expose a hostname and port.
 
 The local implementation is not competition evidence until the dry run executes
 successfully on Radeon Cloud.
+
+## 2026-07-25 — Radeon Cloud Session B
+
+### Five-candidate dry run
+
+- Launched `Blank OpenCode Workspace` instance `u-13907-735d71cb`.
+- Verified PyTorch/HIP and Genesis on one AMD Radeon GPU.
+- Genesis reported backend `gs.amdgpu`, version `1.2.3`, and 47.98 GB device
+  memory.
+- Pulled the Gate 2 implementation and ran all tests.
+- The first five-candidate simulation completed its rollouts but failed during
+  JSON export because simulator numeric values included `float32` scalars.
+
+### Serialization fix
+
+- Added `guardian_sim.serialization.json_default`.
+- Added conversion for scalar values exposing `.item()` and array-like values
+  exposing `.tolist()`.
+- Added a regression test.
+- Local verification: 14/14 tests passed, `compileall` passed, and
+  `git diff --check` passed.
+- Commit: `004e47c` — `fix: serialize simulator numeric values`.
+
+### Successful fixed-seed rerun
+
+Command:
+
+```bash
+PYTHONUNBUFFERED=1 /opt/venv/bin/python \
+  scripts/run_candidate_dry_run.py \
+  --pick 011_banana \
+  --seed 41 \
+  --output outputs/guardian_dry_run/candidates.json
+```
+
+Verified result:
+
+- Cloud tests: 14/14 passed.
+- Exit code: `0`.
+- Five candidates ranked from one restored snapshot.
+- Best candidate: `yaw_+00.0_offset_+0.000`.
+- Best predicted success: `0.46479433192676345`.
+- Best utility: `0.7509158463377993`.
+- Exact evidence:
+  [`evidence/session-b/candidates.json`](evidence/session-b/candidates.json).
+
+Stage-gate finding:
+
+- All candidates reported `collision_margin_m = 0.0`.
+- The ranking still discriminates yaw using alignment, retained-lift stability,
+  and path length, but the safety score is not yet calibrated.
+- The agreed next decision point is metric diagnostics plus lateral-offset
+  candidates, not an immediate 20-episode expansion.
+
+Instance state:
+
+- The owner explicitly requested that Session B remain running.
+- The profile continued to show 10 available credits and 0 consumed after an
+  extended runtime.

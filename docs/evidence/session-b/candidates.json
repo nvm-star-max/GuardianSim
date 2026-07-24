@@ -1,0 +1,145 @@
+{
+  "candidate_count": 5,
+  "data_source": "genesis_counterfactual_rollout",
+  "measurement_notes": {
+    "clearance": "minimum sampled AABB separation from distal arm links to non-target obstacles",
+    "perception_uncertainty": "fixed 0.05 prior for this simulator-state dry run",
+    "retained_lift": "object height retained after a requested 0.10 m gripper lift"
+  },
+  "pick_object": "011_banana",
+  "ranking": [
+    {
+      "candidate": {
+        "approach_height_m": 0.1,
+        "candidate_id": "yaw_+00.0_offset_+0.000",
+        "gripper_width_m": 0.06,
+        "lateral_offset_m": 0.0,
+        "target_xyz": [
+          0.3103834092617035,
+          0.220341295003891,
+          0.7701257467269897
+        ],
+        "yaw_degrees": 0.0
+      },
+      "metrics": {
+        "collision_margin_m": 0.0,
+        "grasp_alignment": 1.0,
+        "path_length_m": 0.6724535810460174,
+        "perception_uncertainty": 0.05,
+        "predicted_stability": 0.9043329954147339,
+        "reachability": 1.0
+      },
+      "rank": 1,
+      "risk": 0.58620010137558,
+      "success_probability": 0.46479433192676345,
+      "utility": 0.7509158463377993
+    },
+    {
+      "candidate": {
+        "approach_height_m": 0.1,
+        "candidate_id": "yaw_+22.5_offset_+0.000",
+        "gripper_width_m": 0.06,
+        "lateral_offset_m": 0.0,
+        "target_xyz": [
+          0.3103834092617035,
+          0.220341295003891,
+          0.7701257467269897
+        ],
+        "yaw_degrees": 22.5
+      },
+      "metrics": {
+        "collision_margin_m": 0.0,
+        "grasp_alignment": 0.75,
+        "path_length_m": 0.6747556035618485,
+        "perception_uncertainty": 0.05,
+        "predicted_stability": 0.8997613191604614,
+        "reachability": 1.0
+      },
+      "rank": 2,
+      "risk": 0.5875716042518617,
+      "success_probability": 0.42928577010221264,
+      "utility": 0.6945489930546112
+    },
+    {
+      "candidate": {
+        "approach_height_m": 0.1,
+        "candidate_id": "yaw_-22.5_offset_+0.000",
+        "gripper_width_m": 0.06,
+        "lateral_offset_m": 0.0,
+        "target_xyz": [
+          0.3103834092617035,
+          0.220341295003891,
+          0.7701257467269897
+        ],
+        "yaw_degrees": -22.5
+      },
+      "metrics": {
+        "collision_margin_m": 0.0,
+        "grasp_alignment": 0.75,
+        "path_length_m": 0.7273482935348128,
+        "perception_uncertainty": 0.05,
+        "predicted_stability": 0.898970365524292,
+        "reachability": 1.0
+      },
+      "rank": 3,
+      "risk": 0.5878088903427126,
+      "success_probability": 0.4278577510800451,
+      "utility": 0.6924113610495342
+    },
+    {
+      "candidate": {
+        "approach_height_m": 0.1,
+        "candidate_id": "yaw_+45.0_offset_+0.000",
+        "gripper_width_m": 0.06,
+        "lateral_offset_m": 0.0,
+        "target_xyz": [
+          0.3103834092617035,
+          0.220341295003891,
+          0.7701257467269897
+        ],
+        "yaw_degrees": 45.0
+      },
+      "metrics": {
+        "collision_margin_m": 0.0,
+        "grasp_alignment": 0.5,
+        "path_length_m": 0.6571154961817167,
+        "perception_uncertainty": 0.05,
+        "predicted_stability": 0.8957511186599731,
+        "reachability": 1.0
+      },
+      "rank": 4,
+      "risk": 0.5887746644020082,
+      "success_probability": 0.39451267291897835,
+      "utility": 0.6390975702623637
+    },
+    {
+      "candidate": {
+        "approach_height_m": 0.1,
+        "candidate_id": "yaw_-45.0_offset_+0.000",
+        "gripper_width_m": 0.06,
+        "lateral_offset_m": 0.0,
+        "target_xyz": [
+          0.3103834092617035,
+          0.220341295003891,
+          0.7701257467269897
+        ],
+        "yaw_degrees": -45.0
+      },
+      "metrics": {
+        "collision_margin_m": 0.0,
+        "grasp_alignment": 0.5,
+        "path_length_m": 0.6571404574200224,
+        "perception_uncertainty": 0.05,
+        "predicted_stability": 0.8558845520019531,
+        "reachability": 1.0
+      },
+      "rank": 5,
+      "risk": 0.6007346343994142,
+      "success_probability": 0.38273987607966925,
+      "utility": 0.6279339710030295
+    }
+  ],
+  "schema_version": 1,
+  "seed": 41,
+  "snapshot_fingerprint": "8a3692e8f016af7602ecb54e6f4db1cde765ce232138c9e72f8939ca2c8e2ee2"
+}
