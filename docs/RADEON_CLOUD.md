@@ -17,6 +17,7 @@ Never paste an SSH private key, password, API key, or verification code into the
 ```bash
 git clone <YOUR_GUARDIANSIM_REPOSITORY_URL>
 cd GuardianSim
+scripts/install_system_deps.sh
 uv python install 3.12
 uv sync --python 3.12
 scripts/install_rocm_stack.sh
