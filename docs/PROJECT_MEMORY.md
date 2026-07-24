@@ -114,6 +114,8 @@ to avoid a NumPy 2 ABI mismatch.
   - `d0017fd` — Gate 2 local milestone record
   - `004e47c` — JSON-safe simulator numeric export
   - `ae34c62` — Radeon Cloud Session B evidence and stage-gate record
+  - `e6bfe2f` — named clearance diagnostics and 15-candidate matrix
+  - `858a039` — Gate 2.5 Radeon Cloud evidence
 
 ## Architecture already implemented
 
