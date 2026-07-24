@@ -43,6 +43,33 @@ synthetic pipeline smoke test, and a real Genesis GPU scene probe with world and
 wrist frames. If only the non-GPU setup is being prepared, set
 `GUARDIANSIM_SKIP_SCENE_PROBE=1`.
 
+## Session B dry run
+
+Do not launch Session B until the local tests pass and the intended commit is
+pushed. The first command evaluates exactly five yaw candidates from one
+captured episode state:
+
+```bash
+git pull --ff-only
+/opt/venv/bin/python -m unittest discover -s tests -v
+PYTHONUNBUFFERED=1 /opt/venv/bin/python scripts/run_candidate_dry_run.py \
+  --pick 011_banana \
+  --seed 41 \
+  --output outputs/guardian_dry_run/candidates.json \
+  2>&1 | tee outputs/guardian_dry_run/run.log
+```
+
+Required exit checks:
+
+- JSON contains five ranked candidates.
+- Every candidate was evaluated against the same `snapshot_fingerprint`.
+- At least one candidate is reachable.
+- Retained lift, path length, and clearance are finite.
+- The run log contains no unhandled exception.
+
+Copy `outputs/guardian_dry_run/` off the instance before destroying it. Do not
+expand to the 20-episode benchmark until these checks pass.
+
 ## Evidence to save
 
 ```bash

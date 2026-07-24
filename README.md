@@ -5,10 +5,11 @@ Hackathon. It adds counterfactual action evaluation, explainable risk scoring,
 post-condition monitoring, and bounded failure recovery to a Franka Panda
 manipulation pipeline on Genesis, LeRobot, AMD Radeon GPUs, and ROCm.
 
-The current milestone provides a simulator-independent decision core that can be
-tested locally. It now includes a Genesis rollout adapter boundary and a
-baseline-vs-GuardianSim benchmark exporter. The next cloud milestone implements
-the concrete rollout backend against the retained Franka reference scene.
+The current milestone provides a simulator-independent decision core, a
+snapshot-safe Genesis reference-scene rollout backend, physical candidate
+measurements, and a baseline-vs-GuardianSim benchmark exporter. The next cloud
+milestone validates the five-candidate dry run on Radeon Cloud before expanding
+to fixed-seed comparative episodes.
 
 ```bash
 python3 -m unittest discover -s tests -v

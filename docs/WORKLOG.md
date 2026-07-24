@@ -97,3 +97,43 @@ snapshot-safe Genesis rollout backend. No additional GPU session should be
 launched until the five-candidate dry-run command and expected outputs are
 defined and locally tested.
 
+## 2026-07-24 — Gate 2 local implementation
+
+### Cloud access and Session A shutdown
+
+- Created a dedicated ED25519 key for GuardianSim Radeon Cloud access.
+- Saved only the public key to the Radeon Cloud profile.
+- Verified the profile displayed `SSH public key saved` and `Key on file`.
+- Key fingerprint:
+  `SHA256:8VLTCjgZI8Ufo+CTDck01Zv8WUJMgPw9zTFa/FPF83Q`.
+- Requested destruction of instance `u-13907-735d71cb`.
+- The platform changed its status to `Shutting down`, reset runtime to
+  `0 minutes`, and continued to display 10 available credits / 0 consumed at
+  that moment.
+- A later profile refresh confirmed `No active instance`; the account still
+  displayed 10 available credits and the SSH key remained on file.
+
+The key does not create an SSH endpoint by itself. A future launch must use an
+SSH-enabled template and expose a hostname and port.
+
+### Counterfactual rollout implementation
+
+- Added a stable, canonical SHA-256 fingerprint for each initial episode state.
+- Added capture/restore of Franka qpos and all YCB object poses.
+- State restoration uses Genesis setters with `zero_velocity=True`.
+- Added physical rollout trace conversion:
+  - distal-link/non-target AABB clearance;
+  - reachability;
+  - relative grasp alignment;
+  - retained object lift;
+  - sampled end-effector path length;
+  - explicit perception-uncertainty prior.
+- Added candidate-relative grasp pose geometry.
+- Added a real Genesis grasp-and-lift candidate executor using the retained
+  Franka motion primitives.
+- Added `scripts/run_candidate_dry_run.py` for an exact five-candidate,
+  fixed-snapshot Session B run.
+- Local result: 13/13 unit tests passed and all Python files compiled.
+
+The local implementation is not competition evidence until the dry run executes
+successfully on Radeon Cloud.

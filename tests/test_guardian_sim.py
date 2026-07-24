@@ -11,7 +11,15 @@ from guardian_sim.failure import diagnose_outcome
 from guardian_sim.genesis_adapter import GenesisCandidateEvaluator, GenesisRolloutMeasurement
 from guardian_sim.models import CandidateMetrics, ExecutionOutcome, FailureType, RecoveryAction
 from guardian_sim.planner import execute_ranked_plan
+from guardian_sim.reference_backend import (
+    EntityPose,
+    EpisodeSnapshot,
+    GenesisSceneDriver,
+    ReferenceSceneRolloutBackend,
+)
+from guardian_sim.reference_motion import candidate_grasp_pose
 from guardian_sim.recovery import choose_recovery
+from guardian_sim.rollout_metrics import RolloutTrace, aabb_clearance, measure_rollout
 from guardian_sim.scoring import rank_candidates
 
 
@@ -99,6 +107,165 @@ class EvaluatorTests(unittest.TestCase):
         self.assertEqual(backend.restores, 2)
         self.assertEqual(set(metrics), {candidate.candidate_id for candidate in candidates})
         self.assertAlmostEqual(next(iter(metrics.values())).predicted_stability, 0.9)
+
+
+class ReferenceBackendTests(unittest.TestCase):
+    def test_restores_the_captured_episode_before_rollouts(self) -> None:
+        initial = EpisodeSnapshot(
+            seed=17,
+            robot_qpos=(0.0, -0.7, 0.0, -2.2, 0.0, 1.5, 0.7, 0.04, 0.04),
+            object_poses={
+                "011_banana": EntityPose(
+                    position=(0.31, 0.22, 0.77),
+                    quaternion=(1.0, 0.0, 0.0, 0.0),
+                )
+            },
+        )
+
+        class FakeSceneDriver:
+            state = initial
+
+            def capture_snapshot(self) -> EpisodeSnapshot:
+                return self.state
+
+            def restore_snapshot(self, snapshot: EpisodeSnapshot) -> None:
+                self.state = snapshot
+
+            def rollout_candidate(self, candidate):
+                return GenesisRolloutMeasurement(0.08, True, 9.0, 0.09, 0.10, 0.4, 0.05)
+
+        driver = FakeSceneDriver()
+        backend = ReferenceSceneRolloutBackend.from_current_state(driver)
+        driver.state = EpisodeSnapshot(seed=99, robot_qpos=(1.0,), object_poses={})
+
+        backend.restore_reference_state()
+
+        self.assertEqual(driver.state, initial)
+
+    def test_genesis_driver_round_trips_robot_and_object_state(self) -> None:
+        class FakeEntity:
+            def __init__(self, *, qpos=(), position=(), quaternion=()) -> None:
+                self.qpos = tuple(qpos)
+                self.position = tuple(position)
+                self.quaternion = tuple(quaternion)
+
+            def get_qpos(self):
+                return self.qpos
+
+            def get_pos(self):
+                return self.position
+
+            def get_quat(self):
+                return self.quaternion
+
+            def set_qpos(self, value, *, zero_velocity):
+                self.qpos = tuple(value)
+
+            def set_pos(self, value, *, zero_velocity):
+                self.position = tuple(value)
+
+            def set_quat(self, value, *, zero_velocity):
+                self.quaternion = tuple(value)
+
+        class FakeBundle:
+            franka = FakeEntity(qpos=(0.0, -0.7, 0.04, 0.04))
+            ycb = {
+                "011_banana": FakeEntity(
+                    position=(0.31, 0.22, 0.77),
+                    quaternion=(1.0, 0.0, 0.0, 0.0),
+                )
+            }
+
+        bundle = FakeBundle()
+        driver = GenesisSceneDriver(bundle, seed=23)
+        snapshot = driver.capture_snapshot()
+        bundle.franka.qpos = (9.0,)
+        bundle.ycb["011_banana"].position = (8.0, 8.0, 8.0)
+
+        driver.restore_snapshot(snapshot)
+
+        self.assertEqual(bundle.franka.qpos, snapshot.robot_qpos)
+        self.assertEqual(
+            bundle.ycb["011_banana"].position,
+            snapshot.object_poses["011_banana"].position,
+        )
+        self.assertEqual(
+            bundle.ycb["011_banana"].quaternion,
+            snapshot.object_poses["011_banana"].quaternion,
+        )
+
+    def test_snapshot_fingerprint_is_stable_across_object_mapping_order(self) -> None:
+        banana = EntityPose((0.31, 0.22, 0.77), (1.0, 0.0, 0.0, 0.0))
+        bowl = EntityPose((0.50, -0.10, 0.78), (1.0, 0.0, 0.0, 0.0))
+        first = EpisodeSnapshot(
+            seed=31,
+            robot_qpos=(0.0, -0.7, 0.04, 0.04),
+            object_poses={"011_banana": banana, "024_bowl": bowl},
+        )
+        reordered = EpisodeSnapshot(
+            seed=31,
+            robot_qpos=(0.0, -0.7, 0.04, 0.04),
+            object_poses={"024_bowl": bowl, "011_banana": banana},
+        )
+        changed = EpisodeSnapshot(
+            seed=31,
+            robot_qpos=(0.0, -0.7, 0.04, 0.04),
+            object_poses={
+                "011_banana": EntityPose((0.32, 0.22, 0.77), banana.quaternion),
+                "024_bowl": bowl,
+            },
+        )
+
+        self.assertEqual(first.fingerprint(), reordered.fingerprint())
+        self.assertNotEqual(first.fingerprint(), changed.fingerprint())
+
+
+class RolloutMeasurementTests(unittest.TestCase):
+    def test_converts_sampled_motion_into_physical_candidate_measurements(self) -> None:
+        trace = RolloutTrace(
+            minimum_clearance_m=0.032,
+            reachable=True,
+            alignment_error_degrees=12.0,
+            object_start_height_m=0.77,
+            object_retained_height_m=0.855,
+            requested_lift_height_m=0.10,
+            end_effector_positions=(
+                (0.30, 0.20, 0.90),
+                (0.30, 0.20, 0.80),
+                (0.30, 0.20, 0.90),
+                (0.50, -0.10, 0.90),
+            ),
+            perception_uncertainty=0.07,
+        )
+
+        measurement = measure_rollout(trace)
+
+        self.assertAlmostEqual(measurement.retained_lift_height_m, 0.085)
+        self.assertAlmostEqual(measurement.path_length_m, 0.5605551275)
+        self.assertEqual(measurement.minimum_clearance_m, 0.032)
+        self.assertTrue(measurement.reachable)
+
+    def test_measures_clearance_between_collision_bounds(self) -> None:
+        hand = ((0.00, 0.00, 0.80), (0.10, 0.10, 0.90))
+        obstacle = ((0.13, 0.14, 0.80), (0.20, 0.20, 0.90))
+        overlapping = ((0.05, 0.05, 0.85), (0.15, 0.15, 0.95))
+
+        self.assertAlmostEqual(aabb_clearance(hand, obstacle), 0.05)
+        self.assertEqual(aabb_clearance(hand, overlapping), 0.0)
+
+    def test_maps_candidate_offset_into_the_gripper_lateral_axis(self) -> None:
+        candidate = generate_grasp_candidates(
+            (0.50, 0.10, 0.77),
+            yaw_degrees=(90.0,),
+            lateral_offsets_m=(0.02,),
+        )[0]
+
+        position, yaw_degrees = candidate_grasp_pose(candidate, object_yaw_degrees=0.0)
+
+        self.assertAlmostEqual(position[0], 0.48)
+        self.assertAlmostEqual(position[1], 0.10)
+        self.assertAlmostEqual(position[2], 0.77)
+        self.assertEqual(yaw_degrees, 90.0)
 
 
 class BenchmarkTests(unittest.TestCase):

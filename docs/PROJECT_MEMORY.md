@@ -29,12 +29,21 @@ Verified on Radeon Cloud:
 
 Evidence: [`evidence/session-a/README.md`](evidence/session-a/README.md)
 
-**Gate 2 — Counterfactual planning: not started.**
+**Gate 2 — Counterfactual planning: local implementation complete; cloud
+validation pending.**
 
-The decision core and `GenesisCandidateEvaluator` boundary exist, but
-`GenesisRolloutBackend` is still a protocol. No real candidate ranking result
-may be presented until a concrete Genesis backend restores an identical episode
-state and measures every candidate rollout.
+The repository now includes:
+
+- a serializable episode snapshot and stable SHA-256 state fingerprint;
+- a concrete `GenesisSceneDriver` that captures and restores Franka qpos and all
+  YCB poses with dynamic velocity cleared;
+- physical trace measurement for path length, retained lift, alignment, and
+  sampled collision-AABB clearance;
+- a real five-candidate Franka grasp-and-lift executor;
+- an exact Session B dry-run command that emits ranked JSON.
+
+No real candidate ranking result may be presented until the Session B command
+has run successfully on Radeon Cloud.
 
 ## Verified environment
 
@@ -54,11 +63,12 @@ to avoid a NumPy 2 ABI mismatch.
 
 - Repository: <https://github.com/nvm-star-max/GuardianSim>
 - Branch: `main`
-- Latest verified milestone commit: `64991a7`
+- Latest verified documentation commit: `1c17e90`
 - Relevant commits:
   - `2119d0d` — Genesis evaluation and benchmark pipeline
   - `2283818` — compatible NumPy/scikit-image bounds
   - `64991a7` — Radeon Cloud Session A evidence
+  - `1c17e90` — durable project memory and worklog
 
 ## Architecture already implemented
 
@@ -70,20 +80,12 @@ to avoid a NumPy 2 ABI mismatch.
 
 ## Next-stage proposal
 
-Before spending another cloud credit:
+Review and commit the local Gate 2 implementation. Then launch Session B only to
+run the five-candidate dry run documented in [`RADEON_CLOUD.md`](RADEON_CLOUD.md).
+Inspect the ranked JSON and trace log before deciding whether to:
 
-1. Define a serializable episode snapshot with object poses, robot qpos, task,
-   seed, and perturbation condition.
-2. Implement a concrete reference-scene rollout backend behind the existing
-   `GenesisRolloutBackend` protocol.
-3. Measure reachability, path length, minimum clearance, alignment, retained
-   lift height, and execution outcome from the simulator.
-4. Add deterministic fake-scene and snapshot/restore tests on macOS.
-5. Prepare one exact cloud command for a five-candidate dry run.
-
-Only after those checks pass should Session B launch. Session B should first run
-five candidates from one identical state, then expand to a 20-episode fixed-seed
-baseline comparison if the dry run is valid.
+1. refine the measurement implementation locally; or
+2. continue the same session into a 20-episode fixed-seed comparison.
 
 ## Working agreement
 
@@ -100,9 +102,15 @@ baseline comparison if the dry run is valid.
 - Destroy cloud instances after evidence is copied and code is pushed. Closing
   the browser is not sufficient.
 
-## Pending operational action
+## Cloud access and instance state
 
-The Session A instance had completed its end-of-session script and was idle at
-the last check. Its final destruction was intentionally not performed without
-an explicit confirmation because it removes the cloud environment.
-
+- A dedicated local ED25519 key was created at
+  `~/.ssh/guardiansim_radeon_ed25519`.
+- Only its public key was saved to Radeon Cloud.
+- Key fingerprint:
+  `SHA256:8VLTCjgZI8Ufo+CTDck01Zv8WUJMgPw9zTFa/FPF83Q`.
+- The key applies only to future SSH-enabled templates that expose a host and
+  port. Blank OpenCode did not display an SSH endpoint.
+- The Session A instance was destroyed after its evidence was secured.
+- Final profile check: `No active instance`, `Key on file`, and 10 credits
+  available.
