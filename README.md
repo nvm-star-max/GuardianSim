@@ -6,13 +6,20 @@ post-condition monitoring, and bounded failure recovery to a Franka Panda
 manipulation pipeline on Genesis, LeRobot, AMD Radeon GPUs, and ROCm.
 
 The current milestone provides a simulator-independent decision core that can be
-tested locally. The next milestone connects candidate evaluation to parallel
-Genesis environments on Radeon Cloud.
+tested locally. It now includes a Genesis rollout adapter boundary and a
+baseline-vs-GuardianSim benchmark exporter. The next cloud milestone implements
+the concrete rollout backend against the retained Franka reference scene.
 
 ```bash
 python3 -m unittest discover -s tests -v
 python3 -m guardian_sim.cli
+python3 -m guardian_sim.benchmark_cli --episodes 100
 ```
+
+The synthetic benchmark is only a deterministic pipeline smoke test. Its numbers
+must not be presented as competition evidence. Judge-facing metrics will be
+generated from Genesis rollouts on Radeon Cloud with fixed seeds and identical
+episode states for both strategies.
 
 Project documents:
 

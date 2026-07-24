@@ -21,6 +21,18 @@ fi
 
 uv run python -m unittest discover -s tests -v
 uv run python -m guardian_sim.cli | tee "$evidence_dir/planner-smoke.json"
+uv run python -m guardian_sim.benchmark_cli \
+  --episodes 100 \
+  --seed 7 \
+  --output-dir "$evidence_dir/synthetic-benchmark"
+
+if [[ "${GUARDIANSIM_SKIP_SCENE_PROBE:-0}" != "1" ]]; then
+  uv run python scripts/probe_genesis.py \
+    --steps 20 \
+    --save-frames \
+    --output-dir "$evidence_dir/genesis-probe" \
+    | tee "$evidence_dir/genesis-probe.log"
+fi
 
 echo
 echo "GPU session checks passed."

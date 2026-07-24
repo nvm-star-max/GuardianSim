@@ -15,7 +15,7 @@ Never paste an SSH private key, password, API key, or verification code into the
 ## Clone and verify
 
 ```bash
-git clone <YOUR_GUARDIANSIM_REPOSITORY_URL>
+git clone https://github.com/nvm-star-max/GuardianSim.git
 cd GuardianSim
 scripts/install_system_deps.sh
 uv python install 3.12
@@ -31,13 +31,17 @@ Expected conditions:
 
 ## Install the upstream environment
 
-Follow the pinned ROCm-wheel installation in the root README. Then run:
+Follow the pinned ROCm-wheel installation in the root README. Session A is a
+single command after installation:
 
 ```bash
-uv run python franka_fruit_pick/setup_assets.py
-uv run python franka_fruit_pick/build_scene.py --steps 50 --save-frames
 scripts/start_gpu_session.sh
 ```
+
+It records the commit, ROCm/PyTorch device information, tests, a labeled
+synthetic pipeline smoke test, and a real Genesis GPU scene probe with world and
+wrist frames. If only the non-GPU setup is being prepared, set
+`GUARDIANSIM_SKIP_SCENE_PROBE=1`.
 
 ## Evidence to save
 
