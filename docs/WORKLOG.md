@@ -134,6 +134,8 @@ SSH-enabled template and expose a hostname and port.
 - Added `scripts/run_candidate_dry_run.py` for an exact five-candidate,
   fixed-snapshot Session B run.
 - Local result: 13/13 unit tests passed and all Python files compiled.
+- Milestone commit: `c658a39` —
+  `feat: add snapshot-safe Genesis candidate rollouts`.
 
 The local implementation is not competition evidence until the dry run executes
 successfully on Radeon Cloud.

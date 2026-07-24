@@ -63,12 +63,13 @@ to avoid a NumPy 2 ABI mismatch.
 
 - Repository: <https://github.com/nvm-star-max/GuardianSim>
 - Branch: `main`
-- Latest verified documentation commit: `1c17e90`
+- Latest verified milestone commit: `c658a39`
 - Relevant commits:
   - `2119d0d` — Genesis evaluation and benchmark pipeline
   - `2283818` — compatible NumPy/scikit-image bounds
   - `64991a7` — Radeon Cloud Session A evidence
   - `1c17e90` — durable project memory and worklog
+  - `c658a39` — snapshot-safe Genesis candidate rollouts
 
 ## Architecture already implemented
 
