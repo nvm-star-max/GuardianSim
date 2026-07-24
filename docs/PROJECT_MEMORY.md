@@ -86,6 +86,7 @@ to avoid a NumPy 2 ABI mismatch.
   - `c658a39` — snapshot-safe Genesis candidate rollouts
   - `d0017fd` — Gate 2 local milestone record
   - `004e47c` — JSON-safe simulator numeric export
+  - `ae34c62` — Radeon Cloud Session B evidence and stage-gate record
 
 ## Architecture already implemented
 
