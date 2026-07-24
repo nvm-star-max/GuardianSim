@@ -11,7 +11,11 @@ requires-python = ">=3.12,<3.14"
 dependencies = [
     # Physics engine + renderer this demo is built on.
     "genesis-world>=1.1.2",
-    "numpy>=1.26.4",
+    # Numba (used by Genesis) currently rejects NumPy >=2.3.  Keeping this
+    # explicit also prevents uv from silently upgrading a working ROCm image.
+    "numpy>=1.26.4,<2.3",
+    # Genesis' older transitive pin is not NumPy-2 ABI compatible.
+    "scikit-image>=0.25.2",
     "trimesh>=4.8.2",
     # Camera-image handling and video export.
     "opencv-python",
