@@ -18,6 +18,7 @@ Project documents:
 
 - [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md)
 - [`docs/RADEON_CLOUD.md`](docs/RADEON_CLOUD.md)
+- [`docs/GPU_BUDGET.md`](docs/GPU_BUDGET.md)
 
 ## Upstream reference
 

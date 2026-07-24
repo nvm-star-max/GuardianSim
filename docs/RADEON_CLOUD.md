@@ -17,7 +17,9 @@ Never paste an SSH private key, password, API key, or verification code into the
 ```bash
 git clone <YOUR_GUARDIANSIM_REPOSITORY_URL>
 cd GuardianSim
-python3 scripts/verify_rocm.py
+uv python install 3.12
+uv sync --python 3.12
+scripts/install_rocm_stack.sh
 ```
 
 Expected conditions:
@@ -31,11 +33,9 @@ Expected conditions:
 Follow the pinned ROCm-wheel installation in the root README. Then run:
 
 ```bash
-uv sync
 uv run python franka_fruit_pick/setup_assets.py
 uv run python franka_fruit_pick/build_scene.py --steps 50 --save-frames
-uv run python -m unittest discover -s tests -v
-uv run python -m guardian_sim.cli
+scripts/start_gpu_session.sh
 ```
 
 ## Evidence to save
@@ -50,3 +50,5 @@ git rev-parse HEAD | tee outputs/evidence/git-commit.txt
 Use the Persistent PVC for datasets, checkpoints, videos, and evidence. Push source changes
 to GitHub frequently. Destroy the active instance when work stops because it continues to
 consume credits.
+
+The full ten-credit allocation is planned in [`GPU_BUDGET.md`](GPU_BUDGET.md).
