@@ -25,6 +25,11 @@ from guardian_sim.reference_backend import (
     ReferenceSceneRolloutBackend,
 )
 from guardian_sim.reference_motion import candidate_grasp_pose
+from guardian_sim.real_benchmark import (
+    execution_succeeded,
+    perturb_snapshot,
+    summarize_real_benchmark,
+)
 from guardian_sim.recovery import choose_recovery
 from guardian_sim.rollout_metrics import (
     RolloutTrace,
@@ -391,6 +396,88 @@ class RolloutMeasurementTests(unittest.TestCase):
 
 
 class BenchmarkTests(unittest.TestCase):
+    def test_fixed_seed_snapshot_jitter_is_deterministic(self) -> None:
+        snapshot = EpisodeSnapshot(
+            seed=1,
+            robot_qpos=(0.0, 1.0),
+            object_poses={
+                "011_banana": EntityPose(
+                    position=(0.31, 0.22, 0.77),
+                    quaternion=(1.0, 0.0, 0.0, 0.0),
+                )
+            },
+        )
+
+        first = perturb_snapshot(snapshot, seed=101, xy_jitter_m=0.015)
+        repeated = perturb_snapshot(snapshot, seed=101, xy_jitter_m=0.015)
+        changed = perturb_snapshot(snapshot, seed=102, xy_jitter_m=0.015)
+
+        self.assertEqual(first, repeated)
+        self.assertNotEqual(first.object_poses, changed.object_poses)
+        self.assertEqual(first.robot_qpos, snapshot.robot_qpos)
+
+    def test_real_execution_requires_lift_and_no_clutter_overlap(self) -> None:
+        safe = CandidateMetrics(0.06, 1.0, 1.0, 0.75, 0.4, 0.05)
+        dropped = CandidateMetrics(0.06, 1.0, 1.0, 0.0, 0.4, 0.05)
+        collision = CandidateMetrics(
+            0.0,
+            1.0,
+            1.0,
+            0.90,
+            0.4,
+            0.05,
+            clearance_diagnostic=ClearanceDiagnostic(
+                sample_index=1,
+                step_index=5,
+                link_name="hand",
+                obstacle_name="018_plum",
+                clearance_m=0.0,
+                overlaps=True,
+                overlap_depth_m=0.002,
+                support_surface=False,
+            ),
+        )
+
+        self.assertTrue(execution_succeeded(safe))
+        self.assertFalse(execution_succeeded(dropped))
+        self.assertFalse(execution_succeeded(collision))
+
+    def test_summarizes_independent_execution_results(self) -> None:
+        candidate = {"candidate_id": "yaw_+00.0_offset_+0.000"}
+        metrics = {"predicted_stability": 0.8, "collision_margin_m": 0.05}
+        episodes = [
+            {
+                "baseline": {
+                    "candidate": candidate,
+                    "execution_metrics": metrics,
+                    "succeeded": False,
+                },
+                "guardiansim": {
+                    "candidate": candidate,
+                    "execution_metrics": metrics,
+                    "succeeded": True,
+                },
+            },
+            {
+                "baseline": {
+                    "candidate": candidate,
+                    "execution_metrics": metrics,
+                    "succeeded": True,
+                },
+                "guardiansim": {
+                    "candidate": candidate,
+                    "execution_metrics": metrics,
+                    "succeeded": True,
+                },
+            },
+        ]
+
+        summary = summarize_real_benchmark(episodes)
+
+        self.assertEqual(summary["baseline"]["success_rate"], 0.5)
+        self.assertEqual(summary["guardiansim"]["success_rate"], 1.0)
+        self.assertEqual(summary["absolute_success_rate_lift"], 0.5)
+
     def test_guardian_recovers_when_baseline_candidate_fails(self) -> None:
         candidates = tuple(
             generate_grasp_candidates(

@@ -76,6 +76,32 @@ Copy `outputs/guardian_dry_run/` into durable evidence. Do not expand to the
 20-episode benchmark until the zero-clearance source has been explained and the
 safety metric is demonstrably non-degenerate.
 
+## Fixed-seed real execution benchmark
+
+After Gate 2.6 passes, run a two-episode smoke test before the full benchmark:
+
+```bash
+PYTHONUNBUFFERED=1 /opt/venv/bin/python scripts/run_fixed_seed_benchmark.py \
+  --episodes 2 \
+  --seed-start 101 \
+  --output outputs/fixed_seed_benchmark/smoke.json
+```
+
+The full run uses 20 deterministic object-layout perturbations. Each episode:
+
+1. restores a fixed-seed jittered scene snapshot;
+2. evaluates all 15 counterfactual candidates;
+3. independently re-executes the nominal baseline candidate;
+4. independently re-executes GuardianSim's top-ranked candidate;
+5. writes progress after the episode, so an interrupted run retains evidence.
+
+```bash
+PYTHONUNBUFFERED=1 /opt/venv/bin/python scripts/run_fixed_seed_benchmark.py \
+  --episodes 20 \
+  --seed-start 101 \
+  --output outputs/fixed_seed_benchmark/report.json
+```
+
 ## Evidence to save
 
 ```bash

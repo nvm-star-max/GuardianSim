@@ -267,3 +267,37 @@ Gate decision:
   collision-risk score when clutter clearance is unchanged.
 - Local verification: 17/17 tests passed, Python compilation passed, and
   `git diff --check` passed.
+
+## 2026-07-25 — Gate 2.6 Radeon Cloud validation
+
+- Pulled commit `98624d6` on active instance `u-13907-735d71cb`.
+- Cloud verification: 17/17 tests passed.
+- Ran the fixed-snapshot 15-candidate matrix for `011_banana`, seed `41`.
+- Process exit code: `0`; evidence schema version: `3`.
+- All candidates shared snapshot fingerprint
+  `347dfaf0e99c698474afbf06091886915fabf91fafe61581e8c6762685b2bc8b`.
+- Non-support clutter clearance ranged from `0.0353657 m` to `0.0806255 m`;
+  no clutter critical pair overlapped.
+- The critical clutter obstacle was `018_plum`, measured against `hand` for
+  12 candidates and `left_finger` for three.
+- Intentional `right_finger -> table_top` overlap remained visible in the
+  support-only channel for all 15 candidates.
+- Best candidate changed to `yaw_-22.5_offset_+0.000`, with estimated success
+  `0.7326756`, clearance `0.0744362 m`, and stability `0.8996660`.
+- Gate 2.6 exit criteria passed. The safety metric is non-degenerate and the
+  fixed-seed independent-execution benchmark is now authorized.
+
+## 2026-07-25 — Fixed-seed real benchmark implementation
+
+- Added deterministic fixed-seed XY perturbations while preserving robot state
+  and object orientation.
+- Added a real-execution classifier requiring reachability, retained-lift
+  stability of at least `0.60`, and no non-support clutter overlap.
+- Added a resumable JSON benchmark command that writes after every episode.
+- Every episode evaluates all 15 counterfactual candidates and then independently
+  re-executes both the nominal baseline and GuardianSim's selected candidate.
+- Episode snapshots record the actual episode seed in their fingerprints.
+- Added aggregate success-rate, stability, clutter-clearance, candidate-selection,
+  and absolute-lift summaries.
+- Local verification: 20/20 tests passed, Python compilation passed, and
+  `git diff --check` passed.

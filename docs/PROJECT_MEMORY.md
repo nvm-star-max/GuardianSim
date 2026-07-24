@@ -77,18 +77,27 @@ The offset dimension is useful: every `-0.02 m` candidate retained zero lift and
 ranked 11–15, while zero and positive offsets retained most of the requested
 lift.
 
-**Gate 2.6 — Two-channel safety metric: local implementation complete; cloud
-verification pending.**
+**Gate 2.6 — Two-channel safety metric: cloud validation complete.**
 
 The recorder now separates support contact from clutter safety:
 
 - clutter clearance excludes support surfaces and drives collision risk;
 - support-contact overlap depth remains visible as a diagnostic;
 - evidence schema version 3 preserves both critical pairs;
-- local verification passes 17/17 tests.
+- cloud and local verification pass 17/17 tests;
+- the 15-candidate cloud run measured `0.0354–0.0806 m` of non-support clutter
+  clearance with no clutter overlap;
+- `018_plum` is the measured critical clutter obstacle;
+- intentional `right_finger -> table_top` overlap remains visible only in the
+  support diagnostic;
+- `yaw_-22.5_offset_+0.000` ranked first at estimated success `0.7327`.
 
-One further 15-candidate fixed-snapshot verification is required before the
-real 20-episode benchmark implementation proceeds.
+The fixed-seed real benchmark implementation is complete locally. It performs
+15-candidate counterfactual planning followed by independent baseline and
+GuardianSim executions for each deterministic scene perturbation, and writes a
+resumable JSON report after every episode. Local verification passes 20/20
+tests. The next operation is a two-episode Radeon Cloud smoke run followed by
+the full 20-episode run if the smoke result is physically valid.
 
 ## Verified environment
 
@@ -129,17 +138,14 @@ to avoid a NumPy 2 ABI mismatch.
 - Baseline-vs-GuardianSim benchmark schema and CSV/JSON export.
 - Lazy Genesis adapter boundary so local macOS tests do not import Genesis.
 
-## Next-stage proposal
+## Current execution route
 
-Do not scale the current scoring configuration directly to 20 episodes.
-
-Gate 2.6 proposed route:
-
-1. measure clutter and support surfaces in separate recorder channels;
-2. feed only clutter clearance into the existing collision-risk feature;
-3. preserve support link, sample, and overlap depth in evidence;
-4. rerun the same 15-candidate snapshot and require a non-degenerate clutter
-   clearance before starting the fixed-seed benchmark.
+1. Run a two-episode Radeon Cloud smoke benchmark.
+2. Require complete reports, independent baseline/Guardian executions, finite
+   metrics, unique episode fingerprints, and no unhandled exception.
+3. If valid, run all 20 fixed seeds without changing the scoring configuration.
+4. Preserve raw report, run log, environment metadata, and a concise comparison
+   as durable repository evidence.
 
 ## Working agreement
 
