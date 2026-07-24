@@ -1,3 +1,31 @@
+# GuardianSim
+
+GuardianSim is a Track 3 Physical AI project for the 2026 AMD AI DevMaster
+Hackathon. It adds counterfactual action evaluation, explainable risk scoring,
+post-condition monitoring, and bounded failure recovery to a Franka Panda
+manipulation pipeline on Genesis, LeRobot, AMD Radeon GPUs, and ROCm.
+
+The current milestone provides a simulator-independent decision core that can be
+tested locally. The next milestone connects candidate evaluation to parallel
+Genesis environments on Radeon Cloud.
+
+```bash
+python3 -m unittest discover -s tests -v
+python3 -m guardian_sim.cli
+```
+
+Project documents:
+
+- [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md)
+- [`docs/RADEON_CLOUD.md`](docs/RADEON_CLOUD.md)
+
+## Upstream reference
+
+This repository is based on the AMD competition's recommended
+[`franka_fruit_pick_demo`](https://github.com/wangxunx/franka_fruit_pick_demo).
+The original reference pipeline is retained below with its attribution and asset
+licenses.
+
 # Franka Fruit-Pick Demo
 
 A compact, end-to-end **reference pipeline** for scripted-to-learned robotic manipulation,
@@ -158,4 +186,3 @@ the following projects and remain under their respective licenses:
 
 Please refer to the upstream projects for their original licenses and citation requirements
 if you redistribute or build on these assets.
-

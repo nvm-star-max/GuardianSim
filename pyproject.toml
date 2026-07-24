@@ -3,9 +3,9 @@ requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "franka-fruit-pick-demo"
+name = "guardiansim"
 version = "0.1.0"
-description = "Reference demo: a scripted-to-learned Franka fruit-pick pipeline (M1-M5) on the Genesis physics engine."
+description = "Counterfactual planning, risk scoring, and failure recovery for robot manipulation on AMD Radeon GPUs."
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
 dependencies = [
@@ -34,6 +34,9 @@ learn = [
     "lerobot",
 ]
 
+[project.scripts]
+guardiansim-demo = "guardian_sim.cli:main"
+
 [tool.uv]
 # genesis-world pulls an unpinned numba; on Python 3.12 the resolver can pick 0.53.x
 # (llvmlite 0.36) which only supports Python <3.10. Force a 3.12-compatible stack.
@@ -43,7 +46,7 @@ override-dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["franka_fruit_pick*"]
+include = ["franka_fruit_pick*", "guardian_sim*"]
 
 [tool.ruff]
 line-length = 120
