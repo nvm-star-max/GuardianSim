@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -21,6 +22,7 @@ from guardian_sim.reference_motion import candidate_grasp_pose
 from guardian_sim.recovery import choose_recovery
 from guardian_sim.rollout_metrics import RolloutTrace, aabb_clearance, measure_rollout
 from guardian_sim.scoring import rank_candidates
+from guardian_sim.serialization import json_default
 
 
 class CandidateTests(unittest.TestCase):
@@ -49,6 +51,26 @@ class ScoringTests(unittest.TestCase):
         ranked = rank_candidates(candidates, metrics)
         self.assertEqual(ranked[0].candidate, safe)
         self.assertLess(ranked[0].risk, ranked[1].risk)
+
+
+class SerializationTests(unittest.TestCase):
+    def test_serializes_numpy_scalars_and_arrays(self) -> None:
+        class ScalarLike:
+            def item(self) -> float:
+                return 0.125
+
+        class ArrayLike:
+            def tolist(self) -> list[int]:
+                return [1, 2]
+
+        payload = {
+            "scalar": ScalarLike(),
+            "array": ArrayLike(),
+        }
+
+        rendered = json.dumps(payload, default=json_default)
+
+        self.assertEqual(json.loads(rendered), {"scalar": 0.125, "array": [1, 2]})
 
 
 class FailureTests(unittest.TestCase):

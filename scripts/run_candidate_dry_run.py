@@ -18,6 +18,7 @@ from guardian_sim.evaluator import evaluate_candidates
 from guardian_sim.genesis_adapter import GenesisCandidateEvaluator
 from guardian_sim.reference_backend import GenesisSceneDriver, ReferenceSceneRolloutBackend
 from guardian_sim.scoring import rank_candidates
+from guardian_sim.serialization import json_default
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -92,8 +93,9 @@ def main() -> None:
     }
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps(payload, indent=2, sort_keys=True))
+    rendered = json.dumps(payload, default=json_default, indent=2, sort_keys=True)
+    output_path.write_text(rendered + "\n", encoding="utf-8")
+    print(rendered)
 
 
 if __name__ == "__main__":
