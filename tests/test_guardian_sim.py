@@ -32,7 +32,7 @@ from guardian_sim.rollout_metrics import (
     aabb_overlap_depth,
     measure_rollout,
 )
-from guardian_sim.scoring import rank_candidates
+from guardian_sim.scoring import rank_candidates, score_candidate
 from guardian_sim.serialization import json_default
 
 
@@ -71,6 +71,38 @@ class ScoringTests(unittest.TestCase):
         ranked = rank_candidates(candidates, metrics)
         self.assertEqual(ranked[0].candidate, safe)
         self.assertLess(ranked[0].risk, ranked[1].risk)
+
+    def test_support_contact_does_not_change_collision_risk(self) -> None:
+        candidate = generate_grasp_candidates(
+            (0.5, 0.0, 0.04),
+            yaw_degrees=(0.0,),
+            lateral_offsets_m=(0.0,),
+        )[0]
+        support_contact = ClearanceDiagnostic(
+            sample_index=10,
+            step_index=50,
+            link_name="right_finger",
+            obstacle_name="table_top",
+            clearance_m=0.0,
+            overlaps=True,
+            overlap_depth_m=0.0015,
+            support_surface=True,
+        )
+        without_contact = CandidateMetrics(0.08, 1.0, 1.0, 0.90, 0.4, 0.05)
+        with_contact = CandidateMetrics(
+            0.08,
+            1.0,
+            1.0,
+            0.90,
+            0.4,
+            0.05,
+            support_contact_diagnostic=support_contact,
+        )
+
+        self.assertEqual(
+            score_candidate(candidate, without_contact).risk,
+            score_candidate(candidate, with_contact).risk,
+        )
 
 
 class SerializationTests(unittest.TestCase):
@@ -130,14 +162,24 @@ class PlannerTests(unittest.TestCase):
 
 class EvaluatorTests(unittest.TestCase):
     def test_genesis_adapter_restores_state_for_every_candidate(self) -> None:
-        diagnostic = ClearanceDiagnostic(
+        clutter_diagnostic = ClearanceDiagnostic(
             sample_index=4,
             step_index=20,
             link_name="hand",
+            obstacle_name="014_lemon",
+            clearance_m=0.08,
+            overlaps=False,
+            overlap_depth_m=0.0,
+            support_surface=False,
+        )
+        support_diagnostic = ClearanceDiagnostic(
+            sample_index=5,
+            step_index=25,
+            link_name="right_finger",
             obstacle_name="table_top",
             clearance_m=0.0,
             overlaps=True,
-            overlap_depth_m=0.003,
+            overlap_depth_m=0.0015,
             support_surface=True,
         )
 
@@ -156,7 +198,8 @@ class EvaluatorTests(unittest.TestCase):
                     0.10,
                     0.4,
                     0.05,
-                    diagnostic,
+                    clutter_diagnostic,
+                    support_diagnostic,
                 )
 
         backend = FakeBackend()
@@ -169,7 +212,14 @@ class EvaluatorTests(unittest.TestCase):
         self.assertEqual(backend.restores, 2)
         self.assertEqual(set(metrics), {candidate.candidate_id for candidate in candidates})
         self.assertAlmostEqual(next(iter(metrics.values())).predicted_stability, 0.9)
-        self.assertEqual(next(iter(metrics.values())).clearance_diagnostic, diagnostic)
+        self.assertEqual(
+            next(iter(metrics.values())).clearance_diagnostic,
+            clutter_diagnostic,
+        )
+        self.assertEqual(
+            next(iter(metrics.values())).support_contact_diagnostic,
+            support_diagnostic,
+        )
 
 
 class ReferenceBackendTests(unittest.TestCase):

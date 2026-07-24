@@ -73,15 +73,16 @@ def main() -> None:
     ranked = rank_candidates(candidates, metrics_by_id)
 
     payload = {
-        "schema_version": 2,
+        "schema_version": 3,
         "data_source": "genesis_counterfactual_rollout",
         "seed": args.seed,
         "pick_object": args.pick,
         "snapshot_fingerprint": backend.snapshot.fingerprint(),
         "candidate_count": len(candidates),
         "measurement_notes": {
-            "clearance": "minimum sampled AABB separation from distal arm links to named non-target obstacles",
-            "clearance_diagnostic": "responsible sample/link/obstacle plus strict AABB overlap depth",
+            "clearance": "minimum sampled AABB separation from distal arm links to named non-target clutter; support surfaces excluded",
+            "clearance_diagnostic": "responsible non-support sample/link/obstacle plus strict AABB overlap depth",
+            "support_contact_diagnostic": "support contact is reported separately and does not drive collision risk",
             "perception_uncertainty": "fixed 0.05 prior for this simulator-state dry run",
             "retained_lift": "object height retained after a requested 0.10 m gripper lift",
         },

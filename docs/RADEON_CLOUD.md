@@ -68,6 +68,8 @@ Required Gate 2.5 exit checks:
 - Retained lift, path length, and clearance are finite.
 - Every candidate contains a clearance diagnostic naming the responsible
   sample, robot link, obstacle, strict-overlap state, and overlap depth.
+- Support-surface contact appears only in `support_contact_diagnostic` and does
+  not determine `collision_margin_m`.
 - The run log contains no unhandled exception.
 
 Copy `outputs/guardian_dry_run/` into durable evidence. Do not expand to the

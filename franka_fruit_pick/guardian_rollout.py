@@ -66,6 +66,7 @@ class _RolloutRecorder:
         self.end_effector_positions: list[tuple[float, float, float]] = []
         self.minimum_clearance_m = inf
         self.clearance_diagnostic: ClearanceDiagnostic | None = None
+        self.support_contact_diagnostic: ClearanceDiagnostic | None = None
 
     def on_step(self, _action) -> None:
         self._step += 1
@@ -90,15 +91,26 @@ class _RolloutRecorder:
                     overlap_depth_m=overlap_depth,
                     support_surface=support_surface,
                 )
-                if self._is_more_critical(diagnostic):
+                if support_surface and self._is_more_critical(
+                    diagnostic,
+                    self.support_contact_diagnostic,
+                ):
+                    self.support_contact_diagnostic = diagnostic
+                elif not support_surface and self._is_more_critical(
+                    diagnostic,
+                    self.clearance_diagnostic,
+                ):
                     self.minimum_clearance_m = clearance
                     self.clearance_diagnostic = diagnostic
         self._sample_index += 1
 
-    def _is_more_critical(self, diagnostic: ClearanceDiagnostic) -> bool:
-        if self.clearance_diagnostic is None:
+    @staticmethod
+    def _is_more_critical(
+        diagnostic: ClearanceDiagnostic,
+        current: ClearanceDiagnostic | None,
+    ) -> bool:
+        if current is None:
             return True
-        current = self.clearance_diagnostic
         return (
             diagnostic.clearance_m,
             -diagnostic.overlap_depth_m,
@@ -197,5 +209,6 @@ def run_grasp_candidate(
         end_effector_positions=tuple(recorder.end_effector_positions),
         perception_uncertainty=perception_uncertainty,
         clearance_diagnostic=recorder.clearance_diagnostic,
+        support_contact_diagnostic=recorder.support_contact_diagnostic,
     )
     return measure_rollout(trace)

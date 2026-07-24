@@ -77,14 +77,18 @@ The offset dimension is useful: every `-0.02 m` candidate retained zero lift and
 ranked 11–15, while zero and positive offsets retained most of the requested
 lift.
 
-**Gate 2.6 — Two-channel safety metric: review required before implementation.**
+**Gate 2.6 — Two-channel safety metric: local implementation complete; cloud
+verification pending.**
 
-Separate support contact from clutter safety:
+The recorder now separates support contact from clutter safety:
 
 - clutter clearance excludes support surfaces and drives collision risk;
 - support-contact overlap depth remains visible as a diagnostic;
-- one further 15-candidate fixed-snapshot verification is required before the
-  20-episode benchmark.
+- evidence schema version 3 preserves both critical pairs;
+- local verification passes 17/17 tests.
+
+One further 15-candidate fixed-snapshot verification is required before the
+real 20-episode benchmark implementation proceeds.
 
 ## Verified environment
 

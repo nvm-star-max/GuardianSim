@@ -253,3 +253,17 @@ Gate decision:
 - Proposed Gate 2.6 separates support-contact depth from clutter clearance,
   then performs one final fixed-snapshot 15-candidate validation.
 - The cloud instance remains running per owner instruction.
+
+## 2026-07-25 — Gate 2.6 two-channel safety implementation
+
+- Split the rollout recorder into two independent critical-pair channels:
+  - non-support clutter clearance, which feeds `collision_margin_m`;
+  - support contact, which remains diagnostic-only.
+- Added `support_contact_diagnostic` to raw Genesis measurements and normalized
+  candidate metrics.
+- Kept named sample, link, obstacle, overlap state, and depth in both channels.
+- Bumped diagnostic evidence schema to version 3.
+- Added a regression test proving support-contact depth does not change the
+  collision-risk score when clutter clearance is unchanged.
+- Local verification: 17/17 tests passed, Python compilation passed, and
+  `git diff --check` passed.

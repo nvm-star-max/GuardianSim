@@ -22,6 +22,7 @@ class RolloutTrace:
     end_effector_positions: tuple[tuple[float, float, float], ...]
     perception_uncertainty: float
     clearance_diagnostic: ClearanceDiagnostic | None = None
+    support_contact_diagnostic: ClearanceDiagnostic | None = None
 
 
 def aabb_clearance(
@@ -75,4 +76,5 @@ def measure_rollout(trace: RolloutTrace) -> GenesisRolloutMeasurement:
         path_length_m=path_length_m,
         perception_uncertainty=trace.perception_uncertainty,
         clearance_diagnostic=trace.clearance_diagnostic,
+        support_contact_diagnostic=trace.support_contact_diagnostic,
     )

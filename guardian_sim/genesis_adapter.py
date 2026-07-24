@@ -29,6 +29,7 @@ class GenesisRolloutMeasurement:
     path_length_m: float
     perception_uncertainty: float
     clearance_diagnostic: ClearanceDiagnostic | None = None
+    support_contact_diagnostic: ClearanceDiagnostic | None = None
 
 
 class GenesisRolloutBackend(Protocol):
@@ -59,6 +60,7 @@ class GenesisCandidateEvaluator:
             path_length_m=max(0.0, measurement.path_length_m),
             perception_uncertainty=_clamp(measurement.perception_uncertainty),
             clearance_diagnostic=measurement.clearance_diagnostic,
+            support_contact_diagnostic=measurement.support_contact_diagnostic,
         )
 
 

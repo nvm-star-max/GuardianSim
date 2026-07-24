@@ -43,6 +43,7 @@ class CandidateMetrics:
     path_length_m: float
     perception_uncertainty: float
     clearance_diagnostic: ClearanceDiagnostic | None = None
+    support_contact_diagnostic: ClearanceDiagnostic | None = None
 
 
 @dataclass(frozen=True, slots=True)
