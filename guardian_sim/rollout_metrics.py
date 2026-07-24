@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from math import dist, sqrt
 
 from guardian_sim.genesis_adapter import GenesisRolloutMeasurement
+from guardian_sim.models import ClearanceDiagnostic
 
 
 @dataclass(frozen=True, slots=True)
@@ -20,6 +21,7 @@ class RolloutTrace:
     requested_lift_height_m: float
     end_effector_positions: tuple[tuple[float, float, float], ...]
     perception_uncertainty: float
+    clearance_diagnostic: ClearanceDiagnostic | None = None
 
 
 def aabb_clearance(
@@ -33,6 +35,21 @@ def aabb_clearance(
         for axis in range(3)
     ]
     return sqrt(sum(gap * gap for gap in gaps))
+
+
+def aabb_overlap_depth(
+    first: tuple[tuple[float, float, float], tuple[float, float, float]],
+    second: tuple[tuple[float, float, float], tuple[float, float, float]],
+) -> float:
+    """Minimum axis penetration when two AABBs strictly overlap."""
+
+    overlaps = [
+        min(first[1][axis], second[1][axis]) - max(first[0][axis], second[0][axis])
+        for axis in range(3)
+    ]
+    if any(overlap <= 0.0 for overlap in overlaps):
+        return 0.0
+    return min(overlaps)
 
 
 def measure_rollout(trace: RolloutTrace) -> GenesisRolloutMeasurement:
@@ -57,4 +74,5 @@ def measure_rollout(trace: RolloutTrace) -> GenesisRolloutMeasurement:
         requested_lift_height_m=trace.requested_lift_height_m,
         path_length_m=path_length_m,
         perception_uncertainty=trace.perception_uncertainty,
+        clearance_diagnostic=trace.clearance_diagnostic,
     )

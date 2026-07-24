@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
 
-from guardian_sim.models import ActionCandidate, CandidateMetrics
+from guardian_sim.models import ActionCandidate, CandidateMetrics, ClearanceDiagnostic
 
 
 def _clamp(value: float, low: float = 0.0, high: float = 1.0) -> float:
@@ -28,6 +28,7 @@ class GenesisRolloutMeasurement:
     requested_lift_height_m: float
     path_length_m: float
     perception_uncertainty: float
+    clearance_diagnostic: ClearanceDiagnostic | None = None
 
 
 class GenesisRolloutBackend(Protocol):
@@ -57,6 +58,7 @@ class GenesisCandidateEvaluator:
             predicted_stability=_clamp(measurement.retained_lift_height_m / lift_denominator),
             path_length_m=max(0.0, measurement.path_length_m),
             perception_uncertainty=_clamp(measurement.perception_uncertainty),
+            clearance_diagnostic=measurement.clearance_diagnostic,
         )
 
 

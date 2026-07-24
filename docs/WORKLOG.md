@@ -198,3 +198,26 @@ Instance state:
 - The owner explicitly requested that Session B remain running.
 - The profile continued to show 10 available credits and 0 consumed after an
   extended runtime.
+
+## 2026-07-25 — Gate 2.5 local clearance diagnostics
+
+- Added structured clearance diagnostics to every Genesis rollout:
+  - sample index and simulator step;
+  - responsible Franka link and named obstacle;
+  - support-surface flag;
+  - exact AABB contact versus strict overlap;
+  - strict-overlap depth.
+- Critical-pair selection keeps the minimum separation and, when several pairs
+  have zero separation, retains the pair with the deepest overlap.
+- Expanded the diagnostic command's default candidate matrix from five
+  zero-offset yaw candidates to 15 actions:
+  five yaw angles crossed with lateral offsets `-0.02, 0.00, +0.02 m`.
+- Bumped the diagnostic evidence schema from version 1 to version 2.
+- Local verification: 16/16 tests passed, all Python modules compiled, and
+  `git diff --check` passed.
+
+Gate constraint:
+
+- Only one fixed-snapshot 15-candidate cloud diagnostic is authorized next.
+- Do not begin the 20-episode benchmark until the responsible clearance pairs
+  and overlap depths have been reviewed.

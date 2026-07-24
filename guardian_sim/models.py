@@ -19,6 +19,20 @@ class ActionCandidate:
 
 
 @dataclass(frozen=True, slots=True)
+class ClearanceDiagnostic:
+    """The sampled robot/obstacle pair that determined minimum clearance."""
+
+    sample_index: int
+    step_index: int
+    link_name: str
+    obstacle_name: str
+    clearance_m: float
+    overlaps: bool
+    overlap_depth_m: float
+    support_surface: bool
+
+
+@dataclass(frozen=True, slots=True)
 class CandidateMetrics:
     """Normalized rollout metrics; all probabilities must be in [0, 1]."""
 
@@ -28,6 +42,7 @@ class CandidateMetrics:
     predicted_stability: float
     path_length_m: float
     perception_uncertainty: float
+    clearance_diagnostic: ClearanceDiagnostic | None = None
 
 
 @dataclass(frozen=True, slots=True)

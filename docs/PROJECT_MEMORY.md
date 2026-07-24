@@ -52,12 +52,21 @@ Verified in Radeon Cloud Session B:
 
 Evidence: [`evidence/session-b/README.md`](evidence/session-b/README.md)
 
-**Gate 2.5 — Metric calibration: review required before implementation.**
+**Gate 2.5 — Metric calibration: local implementation complete; cloud
+diagnostic pending.**
 
 All five rollouts reported `collision_margin_m = 0.0`, so collision risk
-dominates every score. Before running a 20-episode comparison, inspect and log
-the link/obstacle pair responsible for minimum clearance, distinguish contact
-from true collision, and add non-zero lateral offsets to the candidate set.
+dominates every score. The local diagnostic implementation now:
+
+- records the responsible sample index, simulator step, Franka link, obstacle,
+  support-surface flag, strict-overlap state, and AABB overlap depth;
+- distinguishes exact AABB contact from strict overlap;
+- evaluates the default Cartesian matrix of five yaw angles and three lateral
+  offsets, for 15 candidates total;
+- preserves the diagnostic alongside each candidate's scoring metrics.
+
+The next permitted GPU action is one fixed-snapshot 15-candidate diagnostic.
+Do not begin the 20-episode comparison until its result has been reviewed.
 
 ## Verified environment
 
@@ -100,15 +109,14 @@ to avoid a NumPy 2 ABI mismatch.
 
 Do not scale the current scoring configuration directly to 20 episodes.
 
-Recommended Gate 2.5 route:
+Gate 2.5 execution route:
 
-1. add clearance diagnostics that identify the minimum-distance robot link,
-   obstacle, sample index, and whether AABBs overlap;
-2. decide whether the table, support surfaces, or intentionally contacted
+1. run the fixed-snapshot 15-candidate diagnostic on Session B;
+2. use the named critical pairs to decide whether the table, support surfaces, or intentionally contacted
    geometry should be excluded from the safety clearance;
-3. expand the small candidate matrix with lateral offsets such as
-   `-0.02, 0.00, +0.02 m`;
-4. run one fixed-snapshot banana probe and require non-degenerate safety
+3. require at least one candidate to differ in clearance or overlap severity,
+   or document why the current AABB metric is structurally degenerate;
+4. require non-degenerate safety
    measurements before starting the fixed-seed benchmark.
 
 ## Working agreement

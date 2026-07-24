@@ -10,7 +10,13 @@ from guardian_sim.candidates import generate_grasp_candidates
 from guardian_sim.evaluator import evaluate_candidates
 from guardian_sim.failure import diagnose_outcome
 from guardian_sim.genesis_adapter import GenesisCandidateEvaluator, GenesisRolloutMeasurement
-from guardian_sim.models import CandidateMetrics, ExecutionOutcome, FailureType, RecoveryAction
+from guardian_sim.models import (
+    CandidateMetrics,
+    ClearanceDiagnostic,
+    ExecutionOutcome,
+    FailureType,
+    RecoveryAction,
+)
 from guardian_sim.planner import execute_ranked_plan
 from guardian_sim.reference_backend import (
     EntityPose,
@@ -20,12 +26,26 @@ from guardian_sim.reference_backend import (
 )
 from guardian_sim.reference_motion import candidate_grasp_pose
 from guardian_sim.recovery import choose_recovery
-from guardian_sim.rollout_metrics import RolloutTrace, aabb_clearance, measure_rollout
+from guardian_sim.rollout_metrics import (
+    RolloutTrace,
+    aabb_clearance,
+    aabb_overlap_depth,
+    measure_rollout,
+)
 from guardian_sim.scoring import rank_candidates
 from guardian_sim.serialization import json_default
 
 
 class CandidateTests(unittest.TestCase):
+    def test_default_candidate_matrix_contains_fifteen_actions(self) -> None:
+        candidates = generate_grasp_candidates((0.5, 0.0, 0.04))
+
+        self.assertEqual(len(candidates), 15)
+        self.assertEqual(
+            {candidate.lateral_offset_m for candidate in candidates},
+            {-0.02, 0.0, 0.02},
+        )
+
     def test_generates_cartesian_candidate_set(self) -> None:
         candidates = generate_grasp_candidates(
             (0.5, 0.0, 0.04),
@@ -110,6 +130,17 @@ class PlannerTests(unittest.TestCase):
 
 class EvaluatorTests(unittest.TestCase):
     def test_genesis_adapter_restores_state_for_every_candidate(self) -> None:
+        diagnostic = ClearanceDiagnostic(
+            sample_index=4,
+            step_index=20,
+            link_name="hand",
+            obstacle_name="table_top",
+            clearance_m=0.0,
+            overlaps=True,
+            overlap_depth_m=0.003,
+            support_surface=True,
+        )
+
         class FakeBackend:
             restores = 0
 
@@ -117,7 +148,16 @@ class EvaluatorTests(unittest.TestCase):
                 self.restores += 1
 
             def rollout(self, candidate):
-                return GenesisRolloutMeasurement(0.08, True, 9.0, 0.09, 0.10, 0.4, 0.05)
+                return GenesisRolloutMeasurement(
+                    0.08,
+                    True,
+                    9.0,
+                    0.09,
+                    0.10,
+                    0.4,
+                    0.05,
+                    diagnostic,
+                )
 
         backend = FakeBackend()
         candidates = generate_grasp_candidates(
@@ -129,6 +169,7 @@ class EvaluatorTests(unittest.TestCase):
         self.assertEqual(backend.restores, 2)
         self.assertEqual(set(metrics), {candidate.candidate_id for candidate in candidates})
         self.assertAlmostEqual(next(iter(metrics.values())).predicted_stability, 0.9)
+        self.assertEqual(next(iter(metrics.values())).clearance_diagnostic, diagnostic)
 
 
 class ReferenceBackendTests(unittest.TestCase):
@@ -274,6 +315,15 @@ class RolloutMeasurementTests(unittest.TestCase):
 
         self.assertAlmostEqual(aabb_clearance(hand, obstacle), 0.05)
         self.assertEqual(aabb_clearance(hand, overlapping), 0.0)
+        self.assertAlmostEqual(aabb_overlap_depth(hand, overlapping), 0.05)
+        self.assertEqual(aabb_overlap_depth(hand, obstacle), 0.0)
+
+    def test_touching_aabbs_are_not_classified_as_overlapping(self) -> None:
+        hand = ((0.00, 0.00, 0.80), (0.10, 0.10, 0.90))
+        touching = ((0.10, 0.00, 0.80), (0.20, 0.10, 0.90))
+
+        self.assertEqual(aabb_clearance(hand, touching), 0.0)
+        self.assertEqual(aabb_overlap_depth(hand, touching), 0.0)
 
     def test_maps_candidate_offset_into_the_gripper_lateral_axis(self) -> None:
         candidate = generate_grasp_candidates(

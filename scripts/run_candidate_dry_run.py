@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run five fixed-state GuardianSim grasp candidates in Genesis."""
+"""Run a fixed-state GuardianSim grasp-candidate matrix in Genesis."""
 
 from __future__ import annotations
 
@@ -32,7 +32,12 @@ def build_parser() -> argparse.ArgumentParser:
         nargs="+",
         default=(-45.0, -22.5, 0.0, 22.5, 45.0),
     )
-    parser.add_argument("--offset", type=float, default=0.0)
+    parser.add_argument(
+        "--offsets",
+        type=float,
+        nargs="+",
+        default=(-0.02, 0.0, 0.02),
+    )
     parser.add_argument("--output", default="outputs/guardian_dry_run/candidates.json")
     return parser
 
@@ -51,7 +56,7 @@ def main() -> None:
         generate_grasp_candidates(
             target_xyz,
             yaw_degrees=args.yaws,
-            lateral_offsets_m=(args.offset,),
+            lateral_offsets_m=args.offsets,
         )
     )
     driver = GenesisSceneDriver(
@@ -68,14 +73,15 @@ def main() -> None:
     ranked = rank_candidates(candidates, metrics_by_id)
 
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "data_source": "genesis_counterfactual_rollout",
         "seed": args.seed,
         "pick_object": args.pick,
         "snapshot_fingerprint": backend.snapshot.fingerprint(),
         "candidate_count": len(candidates),
         "measurement_notes": {
-            "clearance": "minimum sampled AABB separation from distal arm links to non-target obstacles",
+            "clearance": "minimum sampled AABB separation from distal arm links to named non-target obstacles",
+            "clearance_diagnostic": "responsible sample/link/obstacle plus strict AABB overlap depth",
             "perception_uncertainty": "fixed 0.05 prior for this simulator-state dry run",
             "retained_lift": "object height retained after a requested 0.10 m gripper lift",
         },

@@ -8,9 +8,14 @@ from math import inf
 import numpy as np
 
 from guardian_sim.genesis_adapter import GenesisRolloutMeasurement
-from guardian_sim.models import ActionCandidate
+from guardian_sim.models import ActionCandidate, ClearanceDiagnostic
 from guardian_sim.reference_motion import candidate_grasp_pose
-from guardian_sim.rollout_metrics import RolloutTrace, aabb_clearance, measure_rollout
+from guardian_sim.rollout_metrics import (
+    RolloutTrace,
+    aabb_clearance,
+    aabb_overlap_depth,
+    measure_rollout,
+)
 
 from .grasp_demo import (
     DEFAULT_PROFILE,
@@ -46,15 +51,21 @@ class _RolloutRecorder:
         self._bundle = bundle
         self._sample_every = max(1, sample_every)
         self._step = 0
+        self._sample_index = 0
         self._hand = bundle.franka.get_link("hand")
-        self._links = [bundle.franka.get_link(name) for name in _CLEARANCE_LINK_NAMES]
+        self._links = [
+            (name, bundle.franka.get_link(name)) for name in _CLEARANCE_LINK_NAMES
+        ]
         self._obstacles = [
-            entity for name, entity in sorted(bundle.ycb.items()) if name != pick_object
+            (name, entity, False)
+            for name, entity in sorted(bundle.ycb.items())
+            if name != pick_object
         ]
         if bundle.table:
-            self._obstacles.append(bundle.table[0])
+            self._obstacles.append(("table_top", bundle.table[0], True))
         self.end_effector_positions: list[tuple[float, float, float]] = []
         self.minimum_clearance_m = inf
+        self.clearance_diagnostic: ClearanceDiagnostic | None = None
 
     def on_step(self, _action) -> None:
         self._step += 1
@@ -63,13 +74,38 @@ class _RolloutRecorder:
 
     def sample(self) -> None:
         self.end_effector_positions.append(tuple(_to_numpy(self._hand.get_pos())[:3]))
-        for link in self._links:
+        for link_name, link in self._links:
             link_bounds = _aabb_tuple(link)
-            for obstacle in self._obstacles:
-                self.minimum_clearance_m = min(
-                    self.minimum_clearance_m,
-                    aabb_clearance(link_bounds, _aabb_tuple(obstacle)),
+            for obstacle_name, obstacle, support_surface in self._obstacles:
+                obstacle_bounds = _aabb_tuple(obstacle)
+                clearance = aabb_clearance(link_bounds, obstacle_bounds)
+                overlap_depth = aabb_overlap_depth(link_bounds, obstacle_bounds)
+                diagnostic = ClearanceDiagnostic(
+                    sample_index=self._sample_index,
+                    step_index=self._step,
+                    link_name=link_name,
+                    obstacle_name=obstacle_name,
+                    clearance_m=clearance,
+                    overlaps=overlap_depth > 0.0,
+                    overlap_depth_m=overlap_depth,
+                    support_surface=support_surface,
                 )
+                if self._is_more_critical(diagnostic):
+                    self.minimum_clearance_m = clearance
+                    self.clearance_diagnostic = diagnostic
+        self._sample_index += 1
+
+    def _is_more_critical(self, diagnostic: ClearanceDiagnostic) -> bool:
+        if self.clearance_diagnostic is None:
+            return True
+        current = self.clearance_diagnostic
+        return (
+            diagnostic.clearance_m,
+            -diagnostic.overlap_depth_m,
+        ) < (
+            current.clearance_m,
+            -current.overlap_depth_m,
+        )
 
     def clearance_or_zero(self) -> float:
         return 0.0 if self.minimum_clearance_m == inf else self.minimum_clearance_m
@@ -160,5 +196,6 @@ def run_grasp_candidate(
         requested_lift_height_m=COUNTERFACTUAL_LIFT_HEIGHT_M,
         end_effector_positions=tuple(recorder.end_effector_positions),
         perception_uncertainty=perception_uncertainty,
+        clearance_diagnostic=recorder.clearance_diagnostic,
     )
     return measure_rollout(trace)

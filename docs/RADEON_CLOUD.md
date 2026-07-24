@@ -43,11 +43,12 @@ synthetic pipeline smoke test, and a real Genesis GPU scene probe with world and
 wrist frames. If only the non-GPU setup is being prepared, set
 `GUARDIANSIM_SKIP_SCENE_PROBE=1`.
 
-## Session B dry run
+## Session B / Gate 2.5 diagnostic run
 
-Do not launch Session B until the local tests pass and the intended commit is
-pushed. The first command evaluates exactly five yaw candidates from one
-captured episode state:
+Do not launch the diagnostic until local tests pass and the intended commit is
+pushed. By default the command evaluates 15 candidates: five yaw angles crossed
+with lateral offsets `-0.02, 0.00, +0.02 m`, all from one captured episode
+state:
 
 ```bash
 git pull --ff-only
@@ -59,16 +60,19 @@ PYTHONUNBUFFERED=1 /opt/venv/bin/python scripts/run_candidate_dry_run.py \
   2>&1 | tee outputs/guardian_dry_run/run.log
 ```
 
-Required exit checks:
+Required Gate 2.5 exit checks:
 
-- JSON contains five ranked candidates.
+- JSON contains 15 ranked candidates.
 - Every candidate was evaluated against the same `snapshot_fingerprint`.
 - At least one candidate is reachable.
 - Retained lift, path length, and clearance are finite.
+- Every candidate contains a clearance diagnostic naming the responsible
+  sample, robot link, obstacle, strict-overlap state, and overlap depth.
 - The run log contains no unhandled exception.
 
-Copy `outputs/guardian_dry_run/` off the instance before destroying it. Do not
-expand to the 20-episode benchmark until these checks pass.
+Copy `outputs/guardian_dry_run/` into durable evidence. Do not expand to the
+20-episode benchmark until the zero-clearance source has been explained and the
+safety metric is demonstrably non-degenerate.
 
 ## Evidence to save
 
