@@ -24,6 +24,8 @@ episode states for both strategies.
 Project documents:
 
 - [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md)
+- [`docs/PROJECT_MEMORY.md`](docs/PROJECT_MEMORY.md)
+- [`docs/WORKLOG.md`](docs/WORKLOG.md)
 - [`docs/RADEON_CLOUD.md`](docs/RADEON_CLOUD.md)
 - [`docs/GPU_BUDGET.md`](docs/GPU_BUDGET.md)
 - [`docs/evidence/session-a/README.md`](docs/evidence/session-a/README.md)
