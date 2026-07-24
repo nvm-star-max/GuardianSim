@@ -89,3 +89,39 @@ def summarize_real_benchmark(
     guardian_rate = float(summary["guardiansim"]["success_rate"])
     summary["absolute_success_rate_lift"] = guardian_rate - baseline_rate
     return summary
+
+
+def validate_resume_payload(
+    payload: Mapping[str, object],
+    *,
+    expected_configuration: Mapping[str, object],
+    requested_episode_count: int,
+    seed_start: int,
+) -> list[dict[str, object]]:
+    """Return a valid contiguous episode prefix or reject incompatible evidence."""
+
+    mismatches = {
+        key: (payload.get(key), value)
+        for key, value in expected_configuration.items()
+        if payload.get(key) != value
+    }
+    if mismatches:
+        raise ValueError(
+            "existing report configuration does not match this run; "
+            f"use --fresh to replace it: {mismatches}"
+        )
+    episodes = payload.get("episodes")
+    if not isinstance(episodes, list) or not all(
+        isinstance(episode, dict) for episode in episodes
+    ):
+        raise ValueError("existing report has no valid episodes list")
+    expected_seeds = list(range(seed_start, seed_start + len(episodes)))
+    actual_seeds = [episode.get("seed") for episode in episodes]
+    if actual_seeds != expected_seeds:
+        raise ValueError(
+            "existing report episodes are not a contiguous seed prefix: "
+            f"{actual_seeds}"
+        )
+    if len(episodes) > requested_episode_count:
+        raise ValueError("existing report contains more episodes than requested")
+    return episodes

@@ -20,6 +20,7 @@ from guardian_sim.real_benchmark import (
     execution_succeeded,
     perturb_snapshot,
     summarize_real_benchmark,
+    validate_resume_payload,
 )
 from guardian_sim.reference_backend import (
     EpisodeSnapshot,
@@ -42,24 +43,66 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--settle-steps", type=int, default=30)
     parser.add_argument("--minimum-stability", type=float, default=0.60)
     parser.add_argument("--output", default="outputs/fixed_seed_benchmark/report.json")
+    parser.add_argument(
+        "--fresh",
+        action="store_true",
+        help="discard an existing report instead of resuming its completed prefix",
+    )
     return parser
+
+
+def _report_configuration(
+    args: argparse.Namespace,
+    *,
+    base_snapshot_fingerprint: str,
+) -> dict[str, object]:
+    return {
+        "schema_version": 2,
+        "data_source": "independent_genesis_execution",
+        "pick_object": args.pick,
+        "requested_episode_count": args.episodes,
+        "seed_start": args.seed_start,
+        "xy_jitter_m": args.xy_jitter_m,
+        "settle_steps": args.settle_steps,
+        "minimum_stability": args.minimum_stability,
+        "base_snapshot_fingerprint": base_snapshot_fingerprint,
+    }
+
+
+def _load_completed_episodes(
+    output_path: Path,
+    *,
+    args: argparse.Namespace,
+    base_snapshot_fingerprint: str,
+) -> list[dict[str, object]]:
+    if args.fresh or not output_path.exists():
+        return []
+    payload = json.loads(output_path.read_text(encoding="utf-8"))
+    expected = _report_configuration(
+        args,
+        base_snapshot_fingerprint=base_snapshot_fingerprint,
+    )
+    return validate_resume_payload(
+        payload,
+        expected_configuration=expected,
+        requested_episode_count=args.episodes,
+        seed_start=args.seed_start,
+    )
 
 
 def _write_report(
     output_path: Path,
     *,
     args: argparse.Namespace,
+    base_snapshot_fingerprint: str,
     episodes: list[dict[str, object]],
 ) -> None:
     payload = {
-        "schema_version": 1,
-        "data_source": "independent_genesis_execution",
-        "pick_object": args.pick,
-        "requested_episode_count": args.episodes,
+        **_report_configuration(
+            args,
+            base_snapshot_fingerprint=base_snapshot_fingerprint,
+        ),
         "completed_episode_count": len(episodes),
-        "seed_start": args.seed_start,
-        "xy_jitter_m": args.xy_jitter_m,
-        "minimum_stability": args.minimum_stability,
         "summary": summarize_real_benchmark(episodes),
         "episodes": episodes,
     }
@@ -93,9 +136,19 @@ def main() -> None:
     )
     base_snapshot = driver.capture_snapshot()
     output_path = Path(args.output)
-    episodes: list[dict[str, object]] = []
+    base_snapshot_fingerprint = base_snapshot.fingerprint()
+    episodes = _load_completed_episodes(
+        output_path,
+        args=args,
+        base_snapshot_fingerprint=base_snapshot_fingerprint,
+    )
+    if episodes:
+        print(
+            f"resuming {len(episodes)}/{args.episodes} completed episodes",
+            flush=True,
+        )
 
-    for episode_index in range(args.episodes):
+    for episode_index in range(len(episodes), args.episodes):
         seed = args.seed_start + episode_index
         driver.restore_snapshot(
             perturb_snapshot(
@@ -162,7 +215,12 @@ def main() -> None:
             },
         }
         episodes.append(episode)
-        _write_report(output_path, args=args, episodes=episodes)
+        _write_report(
+            output_path,
+            args=args,
+            base_snapshot_fingerprint=base_snapshot_fingerprint,
+            episodes=episodes,
+        )
         print(
             f"episode={episode_index + 1}/{args.episodes} seed={seed} "
             f"baseline={episode['baseline']['succeeded']} "

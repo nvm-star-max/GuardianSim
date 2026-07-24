@@ -299,5 +299,8 @@ Gate decision:
 - Episode snapshots record the actual episode seed in their fingerprints.
 - Added aggregate success-rate, stability, clutter-clearance, candidate-selection,
   and absolute-lift summaries.
-- Local verification: 20/20 tests passed, Python compilation passed, and
+- Added validated continuation from a completed seed prefix. Resume is rejected
+  if the configuration, seed sequence, or rebuilt base-snapshot fingerprint
+  differs; `--fresh` is required to overwrite incompatible evidence.
+- Local verification: 21/21 tests passed, Python compilation passed, and
   `git diff --check` passed.

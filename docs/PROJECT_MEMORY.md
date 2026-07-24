@@ -95,8 +95,9 @@ The recorder now separates support contact from clutter safety:
 The fixed-seed real benchmark implementation is complete locally. It performs
 15-candidate counterfactual planning followed by independent baseline and
 GuardianSim executions for each deterministic scene perturbation, and writes a
-resumable JSON report after every episode. Local verification passes 20/20
-tests. The next operation is a two-episode Radeon Cloud smoke run followed by
+resumable JSON report after every episode. Resume requires the same configuration,
+contiguous seeds, and matching rebuilt base-snapshot fingerprint. Local
+verification passes 21/21 tests. The next operation is a two-episode Radeon Cloud smoke run followed by
 the full 20-episode run if the smoke result is physically valid.
 
 ## Verified environment

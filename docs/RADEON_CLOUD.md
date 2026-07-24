@@ -95,6 +95,11 @@ The full run uses 20 deterministic object-layout perturbations. Each episode:
 4. independently re-executes GuardianSim's top-ranked candidate;
 5. writes progress after the episode, so an interrupted run retains evidence.
 
+If the process is restarted with the same command, it resumes the contiguous
+completed seed prefix only when the run configuration and rebuilt base snapshot
+fingerprint match. Pass `--fresh` only when intentionally replacing an existing
+report.
+
 ```bash
 PYTHONUNBUFFERED=1 /opt/venv/bin/python scripts/run_fixed_seed_benchmark.py \
   --episodes 20 \

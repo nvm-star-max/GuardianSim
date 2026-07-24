@@ -29,6 +29,7 @@ from guardian_sim.real_benchmark import (
     execution_succeeded,
     perturb_snapshot,
     summarize_real_benchmark,
+    validate_resume_payload,
 )
 from guardian_sim.recovery import choose_recovery
 from guardian_sim.rollout_metrics import (
@@ -477,6 +478,40 @@ class BenchmarkTests(unittest.TestCase):
         self.assertEqual(summary["baseline"]["success_rate"], 0.5)
         self.assertEqual(summary["guardiansim"]["success_rate"], 1.0)
         self.assertEqual(summary["absolute_success_rate_lift"], 0.5)
+
+    def test_resume_requires_compatible_contiguous_episode_prefix(self) -> None:
+        configuration = {
+            "schema_version": 2,
+            "pick_object": "011_banana",
+            "base_snapshot_fingerprint": "abc123",
+        }
+        payload = {
+            **configuration,
+            "episodes": [{"seed": 101}, {"seed": 102}],
+        }
+
+        resumed = validate_resume_payload(
+            payload,
+            expected_configuration=configuration,
+            requested_episode_count=20,
+            seed_start=101,
+        )
+
+        self.assertEqual(resumed, payload["episodes"])
+        with self.assertRaisesRegex(ValueError, "contiguous seed prefix"):
+            validate_resume_payload(
+                {**configuration, "episodes": [{"seed": 102}]},
+                expected_configuration=configuration,
+                requested_episode_count=20,
+                seed_start=101,
+            )
+        with self.assertRaisesRegex(ValueError, "configuration does not match"):
+            validate_resume_payload(
+                {**payload, "pick_object": "014_lemon"},
+                expected_configuration=configuration,
+                requested_episode_count=20,
+                seed_start=101,
+            )
 
     def test_guardian_recovers_when_baseline_candidate_fails(self) -> None:
         candidates = tuple(
