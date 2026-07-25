@@ -389,3 +389,6 @@ Gate decision:
 - Production build passed; rendered-content and evidence-integrity tests passed
   2/2.
 - Local launch command: `./scripts/run_showcase.sh`.
+- Sites version 1 deployed successfully with owner-only access:
+  <https://guardiansim-proof.dghcdtddgh.chatgpt.site>.
+- Public access was not enabled without explicit owner approval.

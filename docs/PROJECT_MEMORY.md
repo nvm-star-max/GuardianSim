@@ -156,6 +156,10 @@ The standalone production build and rendered-content tests pass. The site is
 contained in [`../showcase`](../showcase) and launches from the repository root
 with `./scripts/run_showcase.sh`.
 
+Sites version 1 is privately deployed at
+<https://guardiansim-proof.dghcdtddgh.chatgpt.site>. Public access has not been
+enabled; sharing it with judges requires an explicit owner decision.
+
 ## Verified environment
 
 - Cloud template: Radeon Cloud Blank OpenCode Workspace
