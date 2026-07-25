@@ -304,3 +304,22 @@ Gate decision:
   differs; `--fresh` is required to overwrite incompatible evidence.
 - Local verification: 21/21 tests passed, Python compilation passed, and
   `git diff --check` passed.
+
+## 2026-07-25 — Gate 2.7 twenty-episode Radeon Cloud benchmark
+
+- Ran commit `f0cc4e3` on instance `u-13907-735d71cb`.
+- Completed all 20 paired episodes for seeds `101–120`.
+- Verified 20 unique episode snapshot fingerprints and normal Genesis exit.
+- Baseline: 20/20 success, mean clearance `0.04399 m`, mean stability `0.90413`.
+- GuardianSim: 17/20 success, mean clearance `0.07438 m`, mean stability
+  `0.76416`.
+- GuardianSim increased clearance in every episode by a mean `0.03038 m`, but
+  reduced success by 15 percentage points and stability by a mean `0.13996`.
+- Failures were seeds 104, 107, and 120. All selected
+  `yaw_-22.5_offset_-0.020`; counterfactual success estimates were
+  `0.70665–0.85040`, but independent stability was `0.0`.
+- Decision: one-shot counterfactual ranking is not repeatable enough. Gate 2.7
+  is preserved as negative evidence. Next revision requires repeated
+  confirmation, conservative aggregation, and a nominal stability fallback.
+- Raw evidence:
+  [`evidence/gate-2-7/README.md`](evidence/gate-2-7/README.md).

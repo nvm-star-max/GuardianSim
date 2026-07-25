@@ -97,8 +97,27 @@ The fixed-seed real benchmark implementation is complete locally. It performs
 GuardianSim executions for each deterministic scene perturbation, and writes a
 resumable JSON report after every episode. Resume requires the same configuration,
 contiguous seeds, and matching rebuilt base-snapshot fingerprint. Local
-verification passes 21/21 tests. The next operation is a two-episode Radeon Cloud smoke run followed by
-the full 20-episode run if the smoke result is physically valid.
+verification passes 21/21 tests.
+
+**Gate 2.7 — Twenty-episode benchmark complete; planner revision required.**
+
+The paired seeds `101–120` completed with 20 unique episode fingerprints.
+Baseline succeeded 20/20; GuardianSim succeeded 17/20. GuardianSim increased
+mean clutter clearance by `0.03038 m` and improved clearance in every episode,
+but reduced mean retained-lift stability by `0.13996`.
+
+All failures were negative-offset selections on seeds 104, 107, and 120. Their
+one-shot counterfactual success estimates were high (`0.70665–0.85040`), while
+independent replay stability was zero. This demonstrates rollout-repeatability
+risk rather than clutter collision.
+
+Do not present the current planner as outperforming the nominal baseline. The
+next gate is a predeclared robust-selection revision: repeated confirmation
+rollouts, conservative stability aggregation, and nominal fallback. Preserve
+Gate 2.7 unchanged as negative evidence.
+
+Evidence:
+[`evidence/gate-2-7/README.md`](evidence/gate-2-7/README.md)
 
 ## Verified environment
 
@@ -141,12 +160,12 @@ to avoid a NumPy 2 ABI mismatch.
 
 ## Current execution route
 
-1. Run a two-episode Radeon Cloud smoke benchmark.
-2. Require complete reports, independent baseline/Guardian executions, finite
-   metrics, unique episode fingerprints, and no unhandled exception.
-3. If valid, run all 20 fixed seeds without changing the scoring configuration.
-4. Preserve raw report, run log, environment metadata, and a concise comparison
-   as durable repository evidence.
+1. Define the repeated-rollout aggregation and nominal fallback before looking
+   at revised benchmark outcomes.
+2. Add deterministic tests proving an unstable high-clearance candidate cannot
+   outrank a repeatable stable candidate.
+3. Run a small confirmation smoke test.
+4. Rerun seeds `101–120` as a new gate without altering Gate 2.7 evidence.
 
 ## Working agreement
 
