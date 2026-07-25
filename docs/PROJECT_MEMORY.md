@@ -274,8 +274,9 @@ predeclared Gate 3.2 that expands the candidate action space with obstacle-aware
 approach direction/height and strengthens execution-repeatability checks. Gate
 3.1 must remain unchanged as negative evidence.
 
-**Gate 3.2 is now implemented and predeclared locally; no Gate 3.2 Radeon
-Cloud outcome has been inspected.**
+**Gate 3.2 is implemented and predeclared; its two-scenario Radeon Cloud
+engineering smoke prefix is complete and schema-5-valid. No formal Gate 3.2
+result has been run or inspected.**
 
 - New untouched seeds: `401–430`.
 - Frozen 18-action family: nine yaws from `-90°` to `90°`, with centered and
@@ -293,11 +294,25 @@ Cloud outcome has been inspected.**
   `69f87994b87f2def788cd944ad75210cdeddeafcaa3d0a3844fef04efca9cb03`.
 - Formal protocol:
   [`GATE_3_2_PROTOCOL.md`](GATE_3_2_PROTOCOL.md).
+- Smoke seeds `401–402` completed on the Radeon GPU:
+  - both baseline and GuardianSim achieved `2/2` repeatable safe completion
+    and zero clutter contacts;
+  - mean clearance was `0.04797 m` for baseline and `0.09272 m` for
+    GuardianSim;
+  - mean stability was `0.90203` for baseline and `0.86074` for GuardianSim;
+  - both episodes selected a `higher_margin_alternative`;
+  - planning wall time was `269.55 s` and `266.57 s`;
+  - all 18 initial metrics, four observations per confirmed candidate, and
+    three final executions per strategy passed the partial schema-5 validator.
+- These two smoke episodes are an engineering check only and must not be used
+  as a competition performance claim.
+- The raw cloud bundle is
+  `outputs/gate-3-2/gate-3-2-smoke-evidence.tar.gz` on instance
+  `u-13907-735d71cb`. Browser download requires one manual owner action before
+  the raw files can be committed locally.
 
-Next gate: owner review of the frozen local design, followed by a two-scenario
-cloud engineering smoke prefix. Do not start the full Gate 3.2 run until the
-prefix passes schema-5 validation and the owner reviews its engineering
-quality.
+Next gate: retrieve and verify the smoke evidence bundle locally, then owner
+review. Do not start the full Gate 3.2 run until both are complete.
 
 ## Working agreement
 

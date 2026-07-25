@@ -524,3 +524,37 @@ Gate decision:
 - No Gate 3.2 cloud outcome has been inspected.
 - Protocol:
   [`GATE_3_2_PROTOCOL.md`](GATE_3_2_PROTOCOL.md).
+
+## 2026-07-26 — Gate 3.2 Radeon Cloud engineering smoke complete
+
+- Pulled frozen implementation commit `67d3235` on Radeon Cloud instance
+  `u-13907-735d71cb`.
+- Cloud unit tests passed 39/39.
+- Ran only the predeclared prefix seeds `401–402` with
+  `--max-new-scenarios 2 --fresh`.
+- Both resumable checkpoints passed the schema-5 partial validator.
+- Evidence completeness:
+  - 18/18 initial candidate metrics per episode;
+  - five or six confirmed candidates, each with four observations;
+  - three final executions for both baseline and GuardianSim;
+  - protocol identity, scenario order, timing, fingerprints, aggregates, and
+    stored summary all validated.
+- Engineering smoke outcomes, not formal performance claims:
+  - baseline repeatable safe completion: `2/2`;
+  - GuardianSim repeatable safe completion: `2/2`;
+  - clutter contacts: zero for both;
+  - mean clearance: baseline `0.0479732 m`, GuardianSim `0.0927164 m`;
+  - mean stability: baseline `0.902032`, GuardianSim `0.860738`;
+  - both decisions were `higher_margin_alternative`;
+  - selected actions were centered yaw `-45°` and yaw `-22.5°` with
+    `0.025 m` obstacle retreat;
+  - planning wall time: `269.55 s` and `266.57 s`.
+- Genesis emitted intermittent RRTConnect planning-failed/retrying messages,
+  but both episodes completed, reports were written, and validation exited
+  successfully.
+- Cloud archive created at
+  `outputs/gate-3-2/gate-3-2-smoke-evidence.tar.gz`, containing the raw report,
+  log, validation output, cloud test log, and SHA-256 manifest.
+- Automatic browser download was blocked by browser security policy. The
+  archive remains visible in the Jupyter file browser for one manual owner
+  download; no formal run has started.
