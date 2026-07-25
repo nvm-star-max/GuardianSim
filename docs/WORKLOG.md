@@ -343,3 +343,31 @@ Gate decision:
   passed.
 - Cloud gate: rerun seeds 104, 107, and 120 independently before authorizing
   another 20-seed benchmark.
+
+## 2026-07-25 — Gate 2.8 Radeon Cloud benchmark
+
+- Pulled commit `3c63236` on instance `u-13907-735d71cb`.
+- Cloud verification passed 24/24 tests.
+- Authorized one-episode smoke reruns for seeds 104, 107, and 120 all completed
+  successfully with full confirmation evidence.
+- Because all three smoke gates passed, ran the predeclared robust-selection
+  policy on seeds `101–120` without changing thresholds.
+- Process exit code: `0`; evidence schema version: `3`.
+- Verified 20 completed episodes, contiguous seeds, and 20 unique episode
+  snapshot fingerprints.
+- The report contains 240 confirmation observations: four candidates per
+  episode with one initial and two additional rollouts each.
+- Baseline: 20/20 success, mean clutter clearance `0.04399 m`, mean stability
+  `0.90338`.
+- GuardianSim: 20/20 success, mean clutter clearance `0.07212 m`, mean
+  stability `0.89731`.
+- GuardianSim therefore preserved baseline success while increasing mean
+  clutter clearance by `0.02813 m` (`+63.93%`); mean stability was lower by
+  `0.00607`.
+- Compared with Gate 2.7, GuardianSim success improved by 15 percentage points
+  and mean stability improved by `0.13315`; mean GuardianSim clearance decreased
+  by `0.00226 m`.
+- Nominal fallback activated once, on seed 113, and succeeded.
+- The prior failure seeds 104, 107, and 120 all succeeded in the full run.
+- Raw evidence:
+  [`evidence/gate-2-8/README.md`](evidence/gate-2-8/README.md).

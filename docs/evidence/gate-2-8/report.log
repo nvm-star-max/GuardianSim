@@ -1,0 +1,205 @@
+[38;5;159m[Genesis] [06:03:18] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [06:03:18] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [06:03:18] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [06:03:19] [INFO] Running on [38;5;121m[4m[AMD Radeon Graphics][0m[38;5;159m with backend [38;5;121m[4mgs.amdgpu[0m[38;5;159m. Device memory: [38;5;121m[4m47.98[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [06:03:19] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m1.2.3[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [06:03:20] [INFO] Scene [38;5;121m[3m<fcad04c>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [06:03:20] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<78f7377>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Plane>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<02734e5>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m2[0m[38;5;159m, uid: [38;5;121m[3m<19f27b3>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m3[0m[38;5;159m, uid: [38;5;121m[3m<9deaba0>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m4[0m[38;5;159m, uid: [38;5;121m[3m<a10d742>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m5[0m[38;5;159m, uid: [38;5;121m[3m<12fe5f7>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m6[0m[38;5;159m, uid: [38;5;121m[3m<5fcedde>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/011_banana/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Convex hull is not accurate enough for collision detection (0.547). Falling back to more expensive convex decomposition (see FileMorph options).[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m7[0m[38;5;159m, uid: [38;5;121m[3m<64c95b5>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/014_lemon/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m8[0m[38;5;159m, uid: [38;5;121m[3m<3d3102f>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/018_plum/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m9[0m[38;5;159m, uid: [38;5;121m[3m<8b4703e>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/024_bowl/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Convex hull is not accurate enough for collision detection (21.454). Falling back to more expensive convex decomposition (see FileMorph options).[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m10[0m[38;5;159m, uid: [38;5;121m[3m<5059589>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.MJCF(file='/workspace/GuardianSim/assets/robots/franka/panda.xml')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;226m[Genesis] [06:03:21] [WARNING] (MJCF) Approximating tendon by joint actuator for `finger_joint1`[0m
+[38;5;226m[Genesis] [06:03:21] [WARNING] (MJCF) Approximating tendon by joint actuator for `finger_joint2`[0m
+[38;5;159m[Genesis] [06:03:21] [INFO] Building scene [38;5;121m[3m<fcad04c>[0m[38;5;159m...[0m
+[38;5;226m[Genesis] [06:03:22] [WARNING] Neutral robot position (qpos0) exceeds joint limits.[0m
+[38;5;226m[Genesis] [06:03:23] [WARNING] Constraint solver time constant should be greater than 2*substep_dt. timeconst is changed from `0.005` to `0.01`). Decrease simulation timestep or increase timeconst to avoid altering the original value.[0m
+[38;5;226m[Genesis] [06:03:24] [WARNING] Filtered out geometry pairs causing self-collision for the neutral configuration (qpos0): (38, 43), (39, 43), (46, 53), (47, 52), (48, 55), (49, 54). Consider tuning Morph option 'decompose_robot_error_threshold' or specify dedicated collision meshes. This behavior can be disabled by setting Morph option 'enable_neutral_collision=True'.[0m
+[38;5;159m[Genesis] [06:03:26] [INFO] Compiling simulation kernels...[0m
+[38;5;159m[Genesis] [06:03:39] [INFO] Building visualizer...[0m
+/opt/venv/lib/python3.12/site-packages/quadrants/_test_tools/warnings_helper.py:11: UserWarning: cannot create weak reference to 'tuple' object. Template mapper caching disabled.
+  warnings.warn(message)
+[38;5;159m[Genesis] [06:04:06] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:04:06] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:04:08] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:04:08] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:04:43] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:04:43] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:05:30] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:05:30] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=1/20 seed=101 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+[38;5;159m[Genesis] [06:06:52] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:06:52] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:08:05] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:08:05] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:08:32] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:08:32] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=2/20 seed=102 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+[38;5;159m[Genesis] [06:10:42] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:10:42] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:10:44] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:10:44] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:11:48] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:11:48] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:13:36] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:13:36] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=3/20 seed=103 baseline=True guardian=True selected=yaw_-22.5_offset_+0.000
+[38;5;159m[Genesis] [06:15:48] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:15:48] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:15:50] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:15:50] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:17:01] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:17:01] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=4/20 seed=104 baseline=True guardian=True selected=yaw_-22.5_offset_+0.000
+episode=5/20 seed=105 baseline=True guardian=True selected=yaw_-22.5_offset_+0.000
+[38;5;159m[Genesis] [06:20:35] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:20:35] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:20:36] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:20:36] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:21:01] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:21:01] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:21:03] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:21:03] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:22:35] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:22:35] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:22:54] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:22:54] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:22:56] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:22:56] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=6/20 seed=106 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+[38;5;159m[Genesis] [06:24:08] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:24:08] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:24:42] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:24:42] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=7/20 seed=107 baseline=True guardian=True selected=yaw_-22.5_offset_+0.000
+[38;5;159m[Genesis] [06:28:03] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:28:03] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:29:03] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:29:03] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:29:48] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:29:48] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:29:49] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:29:49] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:30:13] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:30:13] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:30:14] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:30:14] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=8/20 seed=108 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+episode=9/20 seed=109 baseline=True guardian=True selected=yaw_+45.0_offset_+0.020
+episode=10/20 seed=110 baseline=True guardian=True selected=yaw_-22.5_offset_+0.000
+[38;5;159m[Genesis] [06:37:53] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:37:53] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:38:41] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:38:41] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:39:55] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:39:55] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=11/20 seed=111 baseline=True guardian=True selected=yaw_-22.5_offset_+0.000
+[38;5;159m[Genesis] [06:41:05] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:41:05] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:41:39] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:41:39] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:42:31] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:42:31] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:43:16] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:43:16] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=12/20 seed=112 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+[38;5;159m[Genesis] [06:44:43] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:44:43] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:44:44] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:44:44] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:45:07] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:45:07] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=13/20 seed=113 baseline=True guardian=True selected=yaw_+00.0_offset_+0.000
+[38;5;159m[Genesis] [06:48:11] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:48:11] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:48:37] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:48:37] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:50:34] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:50:34] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=14/20 seed=114 baseline=True guardian=True selected=yaw_-22.5_offset_+0.000
+[38;5;159m[Genesis] [06:52:35] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:52:35] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:53:34] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:53:34] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:54:06] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:54:06] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=15/20 seed=115 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+[38;5;159m[Genesis] [06:56:28] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:56:28] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:58:14] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:58:14] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:58:26] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:58:26] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [06:58:47] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:58:47] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=16/20 seed=116 baseline=True guardian=True selected=yaw_-22.5_offset_+0.000
+[38;5;159m[Genesis] [06:59:58] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [06:59:58] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:00:00] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:00:00] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:00:27] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:00:27] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:00:29] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:00:29] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:02:14] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:02:14] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:02:26] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:02:26] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:02:28] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:02:28] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=17/20 seed=117 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+[38;5;159m[Genesis] [07:04:40] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:04:40] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:05:52] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:05:52] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=18/20 seed=118 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+[38;5;159m[Genesis] [07:09:32] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:09:32] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:10:46] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:10:46] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:10:57] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:10:57] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=19/20 seed=119 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+[38;5;159m[Genesis] [07:12:54] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:12:54] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:13:33] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:13:33] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:15:34] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:15:34] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [07:15:45] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [07:15:45] [INFO] Planning failed. Retrying for 1 environments...[0m
+episode=20/20 seed=120 baseline=True guardian=True selected=yaw_-22.5_offset_+0.020
+{
+  "absolute_success_rate_lift": 0.0,
+  "baseline": {
+    "candidate_selections": {
+      "yaw_+00.0_offset_+0.000": 20
+    },
+    "mean_clutter_clearance_m": 0.043993625607145585,
+    "mean_stability": 0.9033806920051575,
+    "success_count": 20,
+    "success_rate": 1.0
+  },
+  "episode_count": 20,
+  "guardiansim": {
+    "candidate_selections": {
+      "yaw_+00.0_offset_+0.000": 1,
+      "yaw_+45.0_offset_+0.020": 1,
+      "yaw_-22.5_offset_+0.000": 8,
+      "yaw_-22.5_offset_+0.020": 10
+    },
+    "mean_clutter_clearance_m": 0.07211873686560787,
+    "mean_stability": 0.8973091840744019,
+    "success_count": 20,
+    "success_rate": 1.0
+  }
+}
+[38;5;159m[Genesis] [07:16:32] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

@@ -6,10 +6,12 @@ post-condition monitoring, and bounded failure recovery to a Franka Panda
 manipulation pipeline on Genesis, LeRobot, AMD Radeon GPUs, and ROCm.
 
 The current milestone provides a simulator-independent decision core, a
-snapshot-safe Genesis reference-scene rollout backend, physical candidate
-measurements, and a baseline-vs-GuardianSim benchmark exporter. The next cloud
-milestone validates the five-candidate dry run on Radeon Cloud before expanding
-to fixed-seed comparative episodes.
+snapshot-safe Genesis rollout backend, physical candidate measurements, and a
+repeatability-aware robust selector. On Radeon Cloud, the fixed Gate 2.8 policy
+completed 20 paired Genesis episodes with 20/20 success for both the nominal
+baseline and GuardianSim. GuardianSim increased mean non-support clutter
+clearance from `0.04399 m` to `0.07212 m` (`+63.93%`) while recording all
+confirmation observations in a schema-3 report.
 
 ```bash
 python3 -m unittest discover -s tests -v
@@ -17,10 +19,10 @@ python3 -m guardian_sim.cli
 python3 -m guardian_sim.benchmark_cli --episodes 100
 ```
 
-The synthetic benchmark is only a deterministic pipeline smoke test. Its numbers
-must not be presented as competition evidence. Judge-facing metrics will be
-generated from Genesis rollouts on Radeon Cloud with fixed seeds and identical
-episode states for both strategies.
+The synthetic CLI benchmark remains only a deterministic pipeline smoke test.
+The metrics above come from Genesis rollouts on an AMD Radeon GPU with fixed
+seeds and identical episode snapshots for both strategies. They are simulation
+results, not physical-robot deployment claims.
 
 Project documents:
 
@@ -29,7 +31,9 @@ Project documents:
 - [`docs/WORKLOG.md`](docs/WORKLOG.md)
 - [`docs/RADEON_CLOUD.md`](docs/RADEON_CLOUD.md)
 - [`docs/GPU_BUDGET.md`](docs/GPU_BUDGET.md)
+- [`docs/RESUME_SHOWCASE_ZH.md`](docs/RESUME_SHOWCASE_ZH.md)
 - [`docs/evidence/session-a/README.md`](docs/evidence/session-a/README.md)
+- [`docs/evidence/gate-2-8/README.md`](docs/evidence/gate-2-8/README.md)
 
 ## Upstream reference
 

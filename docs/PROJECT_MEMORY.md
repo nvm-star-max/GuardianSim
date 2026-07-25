@@ -119,17 +119,26 @@ Gate 2.7 unchanged as negative evidence.
 Evidence:
 [`evidence/gate-2-7/README.md`](evidence/gate-2-7/README.md)
 
-**Gate 2.8 — Robust-selection policy implemented locally.**
+**Gate 2.8 — Robust-selection benchmark complete.**
 
 The fixed policy confirms the top-three initial candidates plus nominal with
 two additional rollouts, aggregates metrics pessimistically, requires minimum
 stability `0.60`, and requires a `0.02` robust-success advantage over nominal.
-Otherwise it executes nominal. Schema 3 records every confirmation observation.
-Local verification passes 24/24 tests.
+Otherwise it executes nominal.
 
-Cloud authorization is limited to independent one-episode reruns for seeds
-104, 107, and 120. A full rerun is allowed only if all three GuardianSim
-independent executions succeed with complete confirmation evidence.
+The authorized smoke reruns for failure seeds 104, 107, and 120 all succeeded,
+so the full paired benchmark was run without changing the predeclared policy.
+Seeds `101–120` produced 20 unique episode fingerprints. Baseline and
+GuardianSim both succeeded 20/20. GuardianSim increased mean clutter clearance
+from `0.04399 m` to `0.07212 m` (`+63.93%`) while mean stability changed from
+`0.90338` to `0.89731`.
+
+Schema 3 records 240 confirmation observations. Nominal fallback activated once
+and succeeded. Compared with Gate 2.7, GuardianSim success improved from 17/20
+to 20/20 and mean stability improved by `0.13315`.
+
+Evidence:
+[`evidence/gate-2-8/README.md`](evidence/gate-2-8/README.md)
 
 ## Verified environment
 
@@ -149,7 +158,7 @@ to avoid a NumPy 2 ABI mismatch.
 
 - Repository: <https://github.com/nvm-star-max/GuardianSim>
 - Branch: `main`
-- Latest verified code milestone commit: `004e47c`
+- Latest verified code milestone commit: `3c63236`
 - Relevant commits:
   - `2119d0d` — Genesis evaluation and benchmark pipeline
   - `2283818` — compatible NumPy/scikit-image bounds
@@ -161,6 +170,8 @@ to avoid a NumPy 2 ABI mismatch.
   - `ae34c62` — Radeon Cloud Session B evidence and stage-gate record
   - `e6bfe2f` — named clearance diagnostics and 15-candidate matrix
   - `858a039` — Gate 2.5 Radeon Cloud evidence
+  - `816cf9b` — Gate 2.7 benchmark evidence
+  - `3c63236` — repeatability-aware robust selection
 
 ## Architecture already implemented
 
@@ -172,12 +183,16 @@ to avoid a NumPy 2 ABI mismatch.
 
 ## Current execution route
 
-1. Define the repeated-rollout aggregation and nominal fallback before looking
-   at revised benchmark outcomes.
-2. Add deterministic tests proving an unstable high-clearance candidate cannot
-   outrank a repeatable stable candidate.
-3. Run a small confirmation smoke test.
-4. Rerun seeds `101–120` as a new gate without altering Gate 2.7 evidence.
+Gate 2.8 is complete. The next major stage must be reviewed with the owner
+before implementation. The recommended route is a judge-facing Gate 3:
+
+1. turn the verified Gate 2.7 → Gate 2.8 failure-and-recovery story into a
+   concise demo;
+2. visualize candidate trials, conservative confirmation, selection, execution,
+   and fallback without changing the benchmark;
+3. add bounded online execution monitoring/recovery only behind a new,
+   predeclared evaluation gate;
+4. keep simulation claims separate from any future physical-robot evidence.
 
 ## Working agreement
 
