@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import unittest
+from dataclasses import asdict
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -17,9 +18,20 @@ from guardian_sim.adversarial_benchmark import (
     validate_gate31_payload,
 )
 from guardian_sim.benchmark import BenchmarkEpisode, run_benchmark, summarize, write_report
-from guardian_sim.candidates import generate_grasp_candidates
+from guardian_sim.candidates import (
+    generate_grasp_candidates,
+    generate_obstacle_aware_candidates,
+)
 from guardian_sim.evaluator import evaluate_candidates
 from guardian_sim.failure import diagnose_outcome
+from guardian_sim.gate32_benchmark import (
+    aggregate_repeatable_executions,
+    gate32_protocol_payload,
+    generate_gate32_scenarios,
+    safe_stop_aggregate,
+    summarize_gate32,
+    validate_gate32_payload,
+)
 from guardian_sim.genesis_adapter import GenesisCandidateEvaluator, GenesisRolloutMeasurement
 from guardian_sim.models import (
     CandidateMetrics,
@@ -29,13 +41,6 @@ from guardian_sim.models import (
     RecoveryAction,
 )
 from guardian_sim.planner import execute_ranked_plan
-from guardian_sim.reference_backend import (
-    EntityPose,
-    EpisodeSnapshot,
-    GenesisSceneDriver,
-    ReferenceSceneRolloutBackend,
-)
-from guardian_sim.reference_motion import candidate_grasp_pose
 from guardian_sim.real_benchmark import (
     execution_succeeded,
     perturb_snapshot,
@@ -43,13 +48,23 @@ from guardian_sim.real_benchmark import (
     validate_resume_payload,
 )
 from guardian_sim.recovery import choose_recovery
+from guardian_sim.reference_backend import (
+    EntityPose,
+    EpisodeSnapshot,
+    GenesisSceneDriver,
+    ReferenceSceneRolloutBackend,
+)
+from guardian_sim.reference_motion import candidate_grasp_pose
+from guardian_sim.robust_selection import (
+    select_robust_candidate,
+    select_safety_first_candidate,
+)
 from guardian_sim.rollout_metrics import (
     RolloutTrace,
     aabb_clearance,
     aabb_overlap_depth,
     measure_rollout,
 )
-from guardian_sim.robust_selection import select_robust_candidate
 from guardian_sim.scoring import rank_candidates, score_candidate
 from guardian_sim.serialization import json_default
 
@@ -63,6 +78,36 @@ class CandidateTests(unittest.TestCase):
             {candidate.lateral_offset_m for candidate in candidates},
             {-0.02, 0.0, 0.02},
         )
+
+    def test_obstacle_aware_candidates_expand_yaw_and_retreat_from_clutter(
+        self,
+    ) -> None:
+        target = (0.40, 0.10, 0.77)
+        obstacle = (0.40, 0.16, 0.77)
+
+        candidates = generate_obstacle_aware_candidates(target, obstacle)
+
+        self.assertEqual(len(candidates), 18)
+        self.assertEqual(len({item.candidate_id for item in candidates}), 18)
+        nominal = next(
+            item
+            for item in candidates
+            if item.candidate_id == "yaw_+00.0_offset_+0.000"
+        )
+        self.assertEqual(nominal.target_offset_xy_m, (0.0, 0.0))
+        self.assertEqual(nominal.approach_height_m, 0.10)
+        self.assertEqual(
+            {item.yaw_degrees for item in candidates},
+            {-90.0, -67.5, -45.0, -22.5, 0.0, 22.5, 45.0, 67.5, 90.0},
+        )
+        retreating = [
+            item for item in candidates if item.target_offset_xy_m != (0.0, 0.0)
+        ]
+        self.assertEqual(len(retreating), 9)
+        for item in retreating:
+            self.assertAlmostEqual(item.target_offset_xy_m[0], 0.0)
+            self.assertAlmostEqual(item.target_offset_xy_m[1], -0.025)
+            self.assertEqual(item.approach_height_m, 0.14)
 
     def test_generates_cartesian_candidate_set(self) -> None:
         candidates = generate_grasp_candidates(
@@ -407,6 +452,23 @@ class RolloutMeasurementTests(unittest.TestCase):
         self.assertAlmostEqual(position[2], 0.77)
         self.assertEqual(yaw_degrees, 90.0)
 
+    def test_applies_obstacle_retreat_before_gripper_local_offset(self) -> None:
+        candidate = generate_obstacle_aware_candidates(
+            (0.50, 0.10, 0.77),
+            (0.50, 0.16, 0.77),
+            yaw_degrees=(0.0,),
+        )[1]
+
+        position, yaw_degrees = candidate_grasp_pose(
+            candidate,
+            object_yaw_degrees=0.0,
+        )
+
+        self.assertAlmostEqual(position[0], 0.50)
+        self.assertAlmostEqual(position[1], 0.075)
+        self.assertAlmostEqual(position[2], 0.77)
+        self.assertEqual(yaw_degrees, 0.0)
+
 
 class BenchmarkTests(unittest.TestCase):
     def test_fixed_seed_snapshot_jitter_is_deterministic(self) -> None:
@@ -428,6 +490,31 @@ class BenchmarkTests(unittest.TestCase):
         self.assertEqual(first, repeated)
         self.assertNotEqual(first.object_poses, changed.object_poses)
         self.assertEqual(first.robot_qpos, snapshot.robot_qpos)
+
+    def test_gate32_requires_all_three_executions_to_be_safe(self) -> None:
+        safe = classify_gate31_execution(
+            CandidateMetrics(0.03, 1.0, 0.95, 0.85, 0.4, 0.05)
+        )
+        unstable = classify_gate31_execution(
+            CandidateMetrics(0.03, 1.0, 0.95, 0.0, 0.4, 0.05)
+        )
+
+        aggregate = aggregate_repeatable_executions((safe, safe, unstable))
+
+        self.assertEqual(aggregate.execution_count, 3)
+        self.assertEqual(aggregate.task_success_count, 2)
+        self.assertEqual(aggregate.safe_completion_count, 2)
+        self.assertFalse(aggregate.repeatable_task_success)
+        self.assertFalse(aggregate.repeatable_safe_completion)
+        self.assertEqual(aggregate.failure_type, "unstable_lift")
+
+    def test_gate32_safe_stop_records_no_physical_execution(self) -> None:
+        aggregate = safe_stop_aggregate()
+
+        self.assertEqual(aggregate.execution_count, 0)
+        self.assertEqual(aggregate.safe_completion_count, 0)
+        self.assertFalse(aggregate.repeatable_safe_completion)
+        self.assertEqual(aggregate.failure_type, "safe_stop")
 
     def test_real_execution_requires_lift_and_no_clutter_overlap(self) -> None:
         safe = CandidateMetrics(0.06, 1.0, 1.0, 0.75, 0.4, 0.05)
@@ -605,6 +692,23 @@ class AdversarialBenchmarkTests(unittest.TestCase):
         self.assertEqual(len(protocol["scenario_matrix_sha256"]), 64)
         self.assertEqual(len(protocol["protocol_sha256"]), 64)
 
+    def test_gate32_protocol_uses_unseen_seeds_and_repeatable_execution(self) -> None:
+        scenarios = generate_gate32_scenarios()
+        protocol = gate32_protocol_payload()
+
+        self.assertEqual(len(scenarios), 30)
+        self.assertEqual([item.seed for item in scenarios], list(range(401, 431)))
+        self.assertEqual(protocol["execution_repeats_per_strategy"], 3)
+        self.assertEqual(protocol["minimum_stability"], 0.70)
+        self.assertEqual(protocol["minimum_safe_clearance_m"], 0.010)
+        self.assertEqual(protocol["candidate_count"], 18)
+        self.assertEqual(
+            protocol["primary_endpoint"],
+            "paired_repeatable_safe_completion_rate",
+        )
+        self.assertEqual(len(protocol["scenario_matrix_sha256"]), 64)
+        self.assertEqual(len(protocol["protocol_sha256"]), 64)
+
     def test_close_clutter_layout_preserves_declared_gap(self) -> None:
         radii = {
             "011_banana": 0.1054,
@@ -721,6 +825,208 @@ class AdversarialBenchmarkTests(unittest.TestCase):
         self.assertEqual(summary["absolute_safe_completion_rate_lift"], 0.5)
         self.assertIn("011_banana/lateral_clutter", summary["cells"])
 
+    def test_gate32_summary_separates_repeatable_outcomes_and_safe_stops(
+        self,
+    ) -> None:
+        safe_classification = classify_gate31_execution(
+            CandidateMetrics(0.03, 1.0, 0.95, 0.85, 0.4, 0.05),
+            minimum_stability=0.70,
+        )
+        safe_execution = {
+            "execution_metrics": {
+                "predicted_stability": 0.85,
+                "collision_margin_m": 0.03,
+            },
+            "classification": asdict(safe_classification),
+        }
+        safe_strategy = {
+            "candidate": {"candidate_id": "safe"},
+            "safe_stopped": False,
+            "executions": [safe_execution, safe_execution, safe_execution],
+            "aggregate": asdict(
+                aggregate_repeatable_executions(
+                    (safe_classification,) * 3
+                )
+            ),
+        }
+        stopped_strategy = {
+            "candidate": None,
+            "safe_stopped": True,
+            "executions": [],
+            "aggregate": asdict(safe_stop_aggregate()),
+        }
+        episodes = [
+            {
+                "pick_object": "011_banana",
+                "layout": "lateral_clutter",
+                "baseline": safe_strategy,
+                "guardiansim": safe_strategy,
+            },
+            {
+                "pick_object": "011_banana",
+                "layout": "lateral_clutter",
+                "baseline": safe_strategy,
+                "guardiansim": stopped_strategy,
+            },
+        ]
+
+        summary = summarize_gate32(episodes)
+
+        self.assertEqual(
+            summary["baseline"]["repeatable_safe_completion_rate"],
+            1.0,
+        )
+        self.assertEqual(
+            summary["guardiansim"]["repeatable_safe_completion_rate"],
+            0.5,
+        )
+        self.assertEqual(summary["guardiansim"]["safe_stop_count"], 1)
+        self.assertEqual(
+            summary["absolute_repeatable_safe_completion_rate_lift"],
+            -0.5,
+        )
+
+    def test_gate32_validator_accepts_safe_stop_and_rejects_scenario_drift(
+        self,
+    ) -> None:
+        scenario = generate_gate32_scenarios()[0]
+        safe_metrics = CandidateMetrics(0.03, 1.0, 0.95, 0.85, 0.4, 0.05)
+        safe_classification = classify_gate31_execution(
+            safe_metrics,
+            minimum_stability=0.70,
+        )
+        executions = [
+            {
+                "repeat_index": repeat_index,
+                "execution_metrics": asdict(safe_metrics),
+                "classification": asdict(safe_classification),
+            }
+            for repeat_index in range(3)
+        ]
+        baseline = {
+            "candidate": {"candidate_id": "yaw_+00.0_offset_+0.000"},
+            "safe_stopped": False,
+            "executions": executions,
+            "aggregate": asdict(
+                aggregate_repeatable_executions(
+                    (safe_classification,) * 3
+                )
+            ),
+        }
+        guardian = {
+            "candidate": None,
+            "safe_stopped": True,
+            "executions": [],
+            "aggregate": asdict(safe_stop_aggregate()),
+        }
+        candidate_ids = {
+            candidate.candidate_id
+            for candidate in generate_obstacle_aware_candidates(
+                (0.50, 0.00, 0.77),
+                (0.50, 0.10, 0.77),
+            )
+        }
+        nominal_id = "yaw_+00.0_offset_+0.000"
+        initial_metrics = {
+            candidate_id: asdict(safe_metrics)
+            for candidate_id in candidate_ids
+        }
+        episode = {
+            "episode_index": 0,
+            "seed": scenario.seed,
+            "scenario_id": scenario.scenario_id,
+            "pick_object": scenario.pick_object,
+            "layout": scenario.layout,
+            "primary_obstacle": PRIMARY_OBSTACLE_BY_PICK[scenario.pick_object],
+            "scenario": scenario_asdict(scenario),
+            "snapshot_fingerprint": "gate32-fingerprint",
+            "timing": {
+                "planning_wall_seconds": 1.0,
+                "baseline_execution_wall_seconds": [1.0, 1.0, 1.0],
+                "guardiansim_execution_wall_seconds": [],
+            },
+            "selection": {
+                "decision": "safe_stop",
+                "selected_candidate_id": None,
+                "initial_metrics_by_id": initial_metrics,
+                "confirmed_candidate_ids": [nominal_id],
+                "observations_by_id": {
+                    nominal_id: [
+                        initial_metrics[nominal_id],
+                        initial_metrics[nominal_id],
+                        initial_metrics[nominal_id],
+                        initial_metrics[nominal_id],
+                    ]
+                },
+            },
+            "baseline": baseline,
+            "guardiansim": guardian,
+        }
+        payload = {
+            "schema_version": 5,
+            "protocol": gate32_protocol_payload(),
+            "requested_episode_count": 30,
+            "completed_episode_count": 1,
+            "seed_start": 401,
+            "episodes": [episode],
+            "summary": summarize_gate32([episode]),
+        }
+        round_tripped = json.loads(json.dumps(payload))
+
+        self.assertEqual(
+            validate_gate32_payload(round_tripped, require_complete=False),
+            round_tripped["episodes"],
+        )
+        with self.assertRaisesRegex(ValueError, "identity mismatch"):
+            validate_gate32_payload(
+                {
+                    **round_tripped,
+                    "episodes": [
+                        {
+                            **round_tripped["episodes"][0],
+                            "seed": 999,
+                        }
+                    ],
+                },
+                require_complete=False,
+            )
+        incomplete_initial_metrics = json.loads(json.dumps(round_tripped))
+        incomplete_initial_metrics["episodes"][0]["selection"][
+            "initial_metrics_by_id"
+        ].pop(next(iter(candidate_ids - {nominal_id})))
+        with self.assertRaisesRegex(ValueError, "18 initial"):
+            validate_gate32_payload(
+                incomplete_initial_metrics,
+                require_complete=False,
+            )
+        incomplete_confirmations = json.loads(json.dumps(round_tripped))
+        incomplete_confirmations["episodes"][0]["selection"][
+            "observations_by_id"
+        ][nominal_id].pop()
+        with self.assertRaisesRegex(ValueError, "4 observations"):
+            validate_gate32_payload(
+                incomplete_confirmations,
+                require_complete=False,
+            )
+        duplicate_repeat = json.loads(json.dumps(round_tripped))
+        duplicate_repeat["episodes"][0]["baseline"]["executions"][2][
+            "repeat_index"
+        ] = 1
+        with self.assertRaisesRegex(ValueError, "repeat indices"):
+            validate_gate32_payload(
+                duplicate_repeat,
+                require_complete=False,
+            )
+        wrong_completed_count = {
+            **round_tripped,
+            "completed_episode_count": 2,
+        }
+        with self.assertRaisesRegex(ValueError, "completed episode count"):
+            validate_gate32_payload(
+                wrong_completed_count,
+                require_complete=False,
+            )
+
     def test_report_validator_rejects_protocol_or_scenario_drift(self) -> None:
         scenario = generate_gate31_scenarios()[0]
         record = {
@@ -789,6 +1095,89 @@ class AdversarialBenchmarkTests(unittest.TestCase):
 
 
 class RobustSelectionTests(unittest.TestCase):
+    def test_safety_first_selection_never_falls_back_to_an_unsafe_nominal(
+        self,
+    ) -> None:
+        alternative, nominal = generate_grasp_candidates(
+            (0.5, 0.0, 0.77),
+            yaw_degrees=(-22.5, 0.0),
+            lateral_offsets_m=(0.0,),
+        )
+        overlap = ClearanceDiagnostic(
+            sample_index=1,
+            step_index=5,
+            link_name="hand",
+            obstacle_name="018_plum",
+            clearance_m=0.0,
+            overlaps=True,
+            overlap_depth_m=0.002,
+            support_surface=False,
+        )
+        metrics = {
+            alternative.candidate_id: CandidateMetrics(
+                0.011, 1.0, 0.90, 0.75, 0.5, 0.05
+            ),
+            nominal.candidate_id: CandidateMetrics(
+                0.0,
+                1.0,
+                1.0,
+                0.95,
+                0.4,
+                0.05,
+                clearance_diagnostic=overlap,
+            ),
+        }
+
+        class RepeatableEvaluator:
+            def evaluate(self, candidate):
+                return metrics[candidate.candidate_id]
+
+        result = select_safety_first_candidate(
+            (alternative, nominal),
+            metrics,
+            RepeatableEvaluator(),
+            nominal_candidate_id=nominal.candidate_id,
+            shortlist_size=2,
+            confirmation_rollouts=3,
+            minimum_stability=0.70,
+            minimum_clearance_m=0.010,
+            minimum_success_margin=0.02,
+        )
+
+        self.assertEqual(result.selected.candidate, alternative)
+        self.assertEqual(result.decision, "unsafe_nominal_replaced")
+
+    def test_safety_first_selection_safe_stops_when_every_action_is_unsafe(
+        self,
+    ) -> None:
+        candidates = tuple(
+            generate_grasp_candidates(
+                (0.5, 0.0, 0.77),
+                yaw_degrees=(-22.5, 0.0),
+                lateral_offsets_m=(0.0,),
+            )
+        )
+        unsafe = {
+            item.candidate_id: CandidateMetrics(
+                0.0, 1.0, 0.95, 0.90, 0.4, 0.05
+            )
+            for item in candidates
+        }
+
+        class UnsafeEvaluator:
+            def evaluate(self, candidate):
+                return unsafe[candidate.candidate_id]
+
+        result = select_safety_first_candidate(
+            candidates,
+            unsafe,
+            UnsafeEvaluator(),
+            nominal_candidate_id="yaw_+00.0_offset_+0.000",
+        )
+
+        self.assertIsNone(result.selected)
+        self.assertEqual(result.decision, "safe_stop")
+
     def test_lucky_high_clearance_candidate_cannot_beat_repeatable_stable_candidate(self) -> None:
         candidates = tuple(
             generate_grasp_candidates(

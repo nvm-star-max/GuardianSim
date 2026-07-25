@@ -25,6 +25,7 @@ python3 -m unittest discover -s tests -v
 python3 -m guardian_sim.cli
 python3 -m guardian_sim.benchmark_cli --episodes 100
 python3 scripts/run_gate31_adversarial_benchmark.py --help
+python3 scripts/run_gate32_benchmark.py --help
 ./scripts/run_showcase.sh
 ```
 
@@ -42,6 +43,7 @@ Project documents:
 - [`docs/GPU_BUDGET.md`](docs/GPU_BUDGET.md)
 - [`docs/RESUME_SHOWCASE_ZH.md`](docs/RESUME_SHOWCASE_ZH.md)
 - [`docs/GATE_3_1_PROTOCOL.md`](docs/GATE_3_1_PROTOCOL.md)
+- [`docs/GATE_3_2_PROTOCOL.md`](docs/GATE_3_2_PROTOCOL.md)
 - [`docs/evidence/session-a/README.md`](docs/evidence/session-a/README.md)
 - [`docs/evidence/gate-2-8/README.md`](docs/evidence/gate-2-8/README.md)
 - [`docs/evidence/gate-3-1/README.md`](docs/evidence/gate-3-1/README.md)

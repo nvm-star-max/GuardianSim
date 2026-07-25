@@ -485,3 +485,42 @@ Gate decision:
   later gate; do not retune Gate 3.1.
 - Raw evidence:
   [`evidence/gate-3-1/README.md`](evidence/gate-3-1/README.md).
+
+## 2026-07-26 — Gate 3.2 protocol and implementation frozen locally
+
+- Diagnosed Gate 3.1 from raw episode evidence before designing a new gate:
+  - some lemon/lateral alternatives were collision-free, but the old selector
+    could still fall back to an overlapping nominal candidate;
+  - the confirmed plum/lateral shortlist contained no safe candidate;
+  - two GuardianSim-only unstable final executions occurred despite stable
+    counterfactual observations.
+- Declared a fresh 30-scenario matrix on unseen seeds `401–430`; Gate 3.1 seeds
+  are not reused for the formal result.
+- Added an 18-action obstacle-aware family:
+  - nine yaws from `-90°` to `90°`;
+  - centered and `0.025 m` global obstacle-retreating targets;
+  - `0.14 m` non-nominal approach height.
+- Added a safety-first selector:
+  - hard safety filter before ranking;
+  - top-five plus nominal, with three confirmation rollouts;
+  - stability floor `0.70`, clearance floor `0.010 m`;
+  - unsafe nominal must be replaced by a safe alternative or produce
+    `safe_stop`.
+- Added three independent final executions per strategy. Repeatable safe
+  completion requires 3/3 safe executions; safe-stop is recorded as neither
+  task success nor safe completion.
+- Added schema-5 resumable runner, summary, and validator with full initial,
+  confirmation, execution, safe-stop, timing, and fingerprint evidence.
+- Every resumable checkpoint is validated before write. Validation rejects
+  incomplete 18-candidate initial evidence, missing four-observation
+  confirmations, duplicate execution-repeat indices, decision/action
+  contradictions, and aggregate or summary drift.
+- Protocol SHA-256:
+  `8f23247001e05f39817225ed13f028321fbb9b9c694aaacd5b987fe61ee1fb3c`.
+- Scenario-matrix SHA-256:
+  `69f87994b87f2def788cd944ad75210cdeddeafcaa3d0a3844fef04efca9cb03`.
+- Local verification: 39/39 tests passed; compilation and whitespace checks
+  passed.
+- No Gate 3.2 cloud outcome has been inspected.
+- Protocol:
+  [`GATE_3_2_PROTOCOL.md`](GATE_3_2_PROTOCOL.md).

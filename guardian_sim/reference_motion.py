@@ -20,8 +20,8 @@ def candidate_grasp_pose(
     lateral_y = cos(yaw_radians) * candidate.lateral_offset_m
     return (
         (
-            candidate.target_xyz[0] + lateral_x,
-            candidate.target_xyz[1] + lateral_y,
+            candidate.target_xyz[0] + candidate.target_offset_xy_m[0] + lateral_x,
+            candidate.target_xyz[1] + candidate.target_offset_xy_m[1] + lateral_y,
             candidate.target_xyz[2],
         ),
         grasp_yaw,

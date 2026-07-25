@@ -272,6 +272,31 @@ predeclared Gate 3.2 that expands the candidate action space with obstacle-aware
 approach direction/height and strengthens execution-repeatability checks. Gate
 3.1 must remain unchanged as negative evidence.
 
+**Gate 3.2 is now implemented and predeclared locally; no Gate 3.2 Radeon
+Cloud outcome has been inspected.**
+
+- New untouched seeds: `401–430`.
+- Frozen 18-action family: nine yaws from `-90°` to `90°`, with centered and
+  `0.025 m` obstacle-retreating targets.
+- Non-nominal pregrasp height: `0.14 m`.
+- Safety-first shortlist hard-filters overlap, clearance below `0.010 m`,
+  stability below `0.70`, and unreachable actions before ranking.
+- Unsafe nominal cannot be used as fallback; choose a safe alternative or
+  explicit safe-stop.
+- Baseline and GuardianSim each receive three independent final executions;
+  repeatable safe completion requires 3/3.
+- Protocol SHA:
+  `8f23247001e05f39817225ed13f028321fbb9b9c694aaacd5b987fe61ee1fb3c`.
+- Matrix SHA:
+  `69f87994b87f2def788cd944ad75210cdeddeafcaa3d0a3844fef04efca9cb03`.
+- Formal protocol:
+  [`GATE_3_2_PROTOCOL.md`](GATE_3_2_PROTOCOL.md).
+
+Next gate: owner review of the frozen local design, followed by a two-scenario
+cloud engineering smoke prefix. Do not start the full Gate 3.2 run until the
+prefix passes schema-5 validation and the owner reviews its engineering
+quality.
+
 ## Working agreement
 
 - Maintain [`WORKLOG.md`](WORKLOG.md) as an append-only experiment log.

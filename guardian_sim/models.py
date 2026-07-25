@@ -16,6 +16,7 @@ class ActionCandidate:
     lateral_offset_m: float
     approach_height_m: float
     gripper_width_m: float
+    target_offset_xy_m: tuple[float, float] = (0.0, 0.0)
 
 
 @dataclass(frozen=True, slots=True)
