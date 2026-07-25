@@ -392,3 +392,38 @@ Gate decision:
 - Sites version 1 deployed successfully with owner-only access:
   <https://guardiansim-proof.dghcdtddgh.chatgpt.site>.
 - Public access was not enabled without explicit owner approval.
+
+## 2026-07-25 — Gate 3.1 adversarial protocol declared locally
+
+- Reviewed the official Track 3 scoring rubric and the two currently public
+  Track 3 submissions. The largest GuardianSim evidence gaps are difficult-task
+  capability, measured AMD performance, and upstream contribution.
+- Declared a balanced 30-episode Genesis challenge before inspecting any cloud
+  outcome:
+  - three pick objects: banana, lemon, and plum;
+  - lateral and radial close-clutter layouts;
+  - five repetitions per object/layout cell;
+  - contiguous seeds `301–330`.
+- Protocol SHA-256:
+  `472bb6ea13984dff02124c091ac8d94c67154bbe68858bb782aed8014d2afbba`.
+- Exact scenario-matrix SHA-256:
+  `b3ba08b367a0c634f66ddbba8670311c9b449aaa4ad7ee55d418bca7c2147936`.
+- Added deterministic target XY/yaw, shared friction, and target-mass
+  perturbations.
+- Close clutter uses conservative mesh footprint radii plus a fixed `0.012 m`
+  initial gap. Non-participating entities are parked away from the challenge
+  pair to avoid initial-overlap artifacts.
+- Split outcomes into:
+  - ordinary task success;
+  - margin-aware safe completion with a predeclared `0.010 m` minimum clutter
+    clearance;
+  - actual clutter contact and failure taxonomy.
+- Retained the Gate 2.8 selection policy without threshold changes.
+- Added schema-4 report generation, per-phase wall timing, resumable smoke
+  prefixes, and a validator that rejects protocol drift, scenario reordering,
+  duplicate fingerprints, missing independent evidence, and summary mismatch.
+- Local verification: 30/30 unit tests passed; compilation and whitespace
+  checks passed.
+- No Gate 3.1 Radeon Cloud result has been run or inspected.
+- Protocol:
+  [`GATE_3_1_PROTOCOL.md`](GATE_3_1_PROTOCOL.md).

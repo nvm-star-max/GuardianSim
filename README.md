@@ -17,6 +17,7 @@ confirmation observations in a schema-3 report.
 python3 -m unittest discover -s tests -v
 python3 -m guardian_sim.cli
 python3 -m guardian_sim.benchmark_cli --episodes 100
+python3 scripts/run_gate31_adversarial_benchmark.py --help
 ./scripts/run_showcase.sh
 ```
 
@@ -33,6 +34,7 @@ Project documents:
 - [`docs/RADEON_CLOUD.md`](docs/RADEON_CLOUD.md)
 - [`docs/GPU_BUDGET.md`](docs/GPU_BUDGET.md)
 - [`docs/RESUME_SHOWCASE_ZH.md`](docs/RESUME_SHOWCASE_ZH.md)
+- [`docs/GATE_3_1_PROTOCOL.md`](docs/GATE_3_1_PROTOCOL.md)
 - [`docs/evidence/session-a/README.md`](docs/evidence/session-a/README.md)
 - [`docs/evidence/gate-2-8/README.md`](docs/evidence/gate-2-8/README.md)
 - [`showcase/README.md`](showcase/README.md)

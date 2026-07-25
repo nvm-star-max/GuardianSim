@@ -5,6 +5,17 @@ import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from guardian_sim.adversarial_benchmark import (
+    GATE31_MINIMUM_SAFE_CLEARANCE_M,
+    PRIMARY_OBSTACLE_BY_PICK,
+    apply_gate31_scenario,
+    classify_gate31_execution,
+    gate31_protocol_payload,
+    generate_gate31_scenarios,
+    scenario_asdict,
+    summarize_gate31,
+    validate_gate31_payload,
+)
 from guardian_sim.benchmark import BenchmarkEpisode, run_benchmark, summarize, write_report
 from guardian_sim.candidates import generate_grasp_candidates
 from guardian_sim.evaluator import evaluate_candidates
@@ -540,6 +551,233 @@ class BenchmarkTests(unittest.TestCase):
             csv_path, json_path = write_report(rows, directory, metadata={"data_source": "unit_test"})
             self.assertTrue(Path(csv_path).read_text(encoding="utf-8").startswith("episode_id,strategy"))
             self.assertIn('"data_source": "unit_test"', Path(json_path).read_text(encoding="utf-8"))
+
+
+class AdversarialBenchmarkTests(unittest.TestCase):
+    @staticmethod
+    def _base_snapshot() -> EpisodeSnapshot:
+        return EpisodeSnapshot(
+            seed=1,
+            robot_qpos=(0.0, -0.3, 0.0),
+            object_poses={
+                "011_banana": EntityPose(
+                    (0.31, 0.22, 0.77),
+                    (1.0, 0.0, 0.0, 0.0),
+                ),
+                "014_lemon": EntityPose(
+                    (0.34, -0.08, 0.78),
+                    (1.0, 0.0, 0.0, 0.0),
+                ),
+                "018_plum": EntityPose(
+                    (0.44, 0.08, 0.78),
+                    (1.0, 0.0, 0.0, 0.0),
+                ),
+                "024_bowl": EntityPose(
+                    (0.50, -0.10, 0.78),
+                    (1.0, 0.0, 0.0, 0.0),
+                ),
+            },
+        )
+
+    def test_protocol_freezes_balanced_thirty_episode_matrix(self) -> None:
+        scenarios = generate_gate31_scenarios()
+        repeated = generate_gate31_scenarios()
+
+        self.assertEqual(len(scenarios), 30)
+        self.assertEqual(scenarios, repeated)
+        self.assertEqual([scenario.seed for scenario in scenarios], list(range(301, 331)))
+        cells = {
+            (scenario.pick_object, scenario.layout) for scenario in scenarios
+        }
+        self.assertEqual(len(cells), 6)
+        self.assertTrue(
+            all(
+                sum(
+                    scenario.pick_object == pick and scenario.layout == layout
+                    for scenario in scenarios
+                )
+                == 5
+                for pick, layout in cells
+            )
+        )
+        protocol = gate31_protocol_payload()
+        self.assertEqual(protocol["scenario_count"], 30)
+        self.assertEqual(len(protocol["scenario_matrix_sha256"]), 64)
+        self.assertEqual(len(protocol["protocol_sha256"]), 64)
+
+    def test_close_clutter_layout_preserves_declared_gap(self) -> None:
+        radii = {
+            "011_banana": 0.1054,
+            "014_lemon": 0.0428,
+            "018_plum": 0.0392,
+            "024_bowl": 0.1148,
+        }
+        scenario = generate_gate31_scenarios()[0]
+        snapshot = apply_gate31_scenario(
+            self._base_snapshot(),
+            scenario,
+            footprint_radii_m=radii,
+        )
+        target = snapshot.object_poses[scenario.pick_object].position
+        obstacle_name = PRIMARY_OBSTACLE_BY_PICK[scenario.pick_object]
+        obstacle = snapshot.object_poses[obstacle_name].position
+        center_distance = (
+            (target[0] - obstacle[0]) ** 2 + (target[1] - obstacle[1]) ** 2
+        ) ** 0.5
+
+        self.assertAlmostEqual(
+            center_distance,
+            radii[scenario.pick_object] + radii[obstacle_name] + 0.012,
+        )
+        self.assertEqual(snapshot.seed, scenario.seed)
+        self.assertNotEqual(
+            snapshot.object_poses[scenario.pick_object].quaternion,
+            self._base_snapshot().object_poses[scenario.pick_object].quaternion,
+        )
+
+    def test_all_declared_scenarios_start_without_footprint_overlap(self) -> None:
+        radii = {
+            "011_banana": 0.1054,
+            "014_lemon": 0.0428,
+            "018_plum": 0.0392,
+            "024_bowl": 0.1148,
+        }
+        names = tuple(radii)
+
+        for scenario in generate_gate31_scenarios():
+            snapshot = apply_gate31_scenario(
+                self._base_snapshot(),
+                scenario,
+                footprint_radii_m=radii,
+            )
+            for left_index, left_name in enumerate(names):
+                for right_name in names[left_index + 1 :]:
+                    left = snapshot.object_poses[left_name].position
+                    right = snapshot.object_poses[right_name].position
+                    center_distance = (
+                        (left[0] - right[0]) ** 2
+                        + (left[1] - right[1]) ** 2
+                    ) ** 0.5
+                    self.assertGreaterEqual(
+                        center_distance + 1e-12,
+                        radii[left_name] + radii[right_name],
+                        msg=(
+                            f"{scenario.scenario_id} overlaps "
+                            f"{left_name}/{right_name}"
+                        ),
+                    )
+
+    def test_classifies_task_success_and_safe_completion_separately(self) -> None:
+        near_miss = CandidateMetrics(
+            GATE31_MINIMUM_SAFE_CLEARANCE_M / 2,
+            1.0,
+            1.0,
+            0.85,
+            0.4,
+            0.05,
+        )
+        classification = classify_gate31_execution(near_miss)
+
+        self.assertTrue(classification.task_succeeded)
+        self.assertFalse(classification.safe_completion)
+        self.assertEqual(classification.failure_type, "clearance_violation")
+
+    def test_gate31_summary_reports_primary_lift_and_failure_types(self) -> None:
+        candidate = {"candidate_id": "yaw_+00.0_offset_+0.000"}
+        metrics = {"predicted_stability": 0.85, "collision_margin_m": 0.02}
+
+        def record(*, safe: bool, failure_type: str) -> dict[str, object]:
+            return {
+                "candidate": candidate,
+                "execution_metrics": metrics,
+                "classification": {
+                    "task_succeeded": True,
+                    "safe_completion": safe,
+                    "failure_type": failure_type,
+                    "clutter_contact": failure_type == "clutter_contact",
+                    "clearance_violation": failure_type == "clearance_violation",
+                },
+            }
+
+        episodes = [
+            {
+                "pick_object": "011_banana",
+                "layout": "lateral_clutter",
+                "baseline": record(safe=False, failure_type="clearance_violation"),
+                "guardiansim": record(safe=True, failure_type="safe_success"),
+            },
+            {
+                "pick_object": "011_banana",
+                "layout": "lateral_clutter",
+                "baseline": record(safe=True, failure_type="safe_success"),
+                "guardiansim": record(safe=True, failure_type="safe_success"),
+            },
+        ]
+
+        summary = summarize_gate31(episodes)
+
+        self.assertEqual(summary["baseline"]["safe_completion_rate"], 0.5)
+        self.assertEqual(summary["guardiansim"]["safe_completion_rate"], 1.0)
+        self.assertEqual(summary["absolute_safe_completion_rate_lift"], 0.5)
+        self.assertIn("011_banana/lateral_clutter", summary["cells"])
+
+    def test_report_validator_rejects_protocol_or_scenario_drift(self) -> None:
+        scenario = generate_gate31_scenarios()[0]
+        record = {
+            "candidate": {"candidate_id": "yaw_+00.0_offset_+0.000"},
+            "execution_metrics": {
+                "predicted_stability": 0.85,
+                "collision_margin_m": 0.02,
+            },
+            "classification": {
+                "task_succeeded": True,
+                "safe_completion": True,
+                "failure_type": "safe_success",
+                "clutter_contact": False,
+                "clearance_violation": False,
+            },
+        }
+        episode = {
+            "episode_index": 0,
+            "seed": scenario.seed,
+            "scenario_id": scenario.scenario_id,
+            "pick_object": scenario.pick_object,
+            "layout": scenario.layout,
+            "primary_obstacle": PRIMARY_OBSTACLE_BY_PICK[scenario.pick_object],
+            "scenario": scenario_asdict(scenario),
+            "snapshot_fingerprint": "unique-fingerprint",
+            "baseline": record,
+            "guardiansim": record,
+        }
+        payload = {
+            "schema_version": 4,
+            "protocol": gate31_protocol_payload(),
+            "episodes": [episode],
+        }
+
+        self.assertEqual(
+            validate_gate31_payload(payload, require_complete=False),
+            [episode],
+        )
+        with self.assertRaisesRegex(ValueError, "protocol"):
+            validate_gate31_payload(
+                {
+                    **payload,
+                    "protocol": {
+                        **gate31_protocol_payload(),
+                        "minimum_safe_clearance_m": 0.0,
+                    },
+                },
+                require_complete=False,
+            )
+        with self.assertRaisesRegex(ValueError, "identity mismatch"):
+            validate_gate31_payload(
+                {
+                    **payload,
+                    "episodes": [{**episode, "layout": "easier-layout"}],
+                },
+                require_complete=False,
+            )
 
 
 class RobustSelectionTests(unittest.TestCase):

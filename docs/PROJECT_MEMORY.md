@@ -204,14 +204,29 @@ to avoid a NumPy 2 ABI mismatch.
 
 ## Current execution route
 
-Gate 3 packaging is implemented. The next technical gate must be reviewed with
-the owner before implementation. Recommended next choices:
+Gate 3 packaging is implemented. The owner reviewed the competitive gap and
+authorized Gate 3.1: a multi-object adversarial safety benchmark.
 
-1. prioritize competition submission assets: narration, screen recording, and
-   concise architecture slides;
-2. add bounded online execution monitoring/recovery only behind a new,
-   predeclared evaluation gate;
-3. keep simulation claims separate from any future physical-robot evidence.
+**Gate 3.1 is implemented and predeclared locally; cloud outcomes have not been
+inspected.**
+
+- Frozen protocol hash:
+  `472bb6ea13984dff02124c091ac8d94c67154bbe68858bb782aed8014d2afbba`.
+- Frozen scenario-matrix hash:
+  `b3ba08b367a0c634f66ddbba8670311c9b449aaa4ad7ee55d418bca7c2147936`.
+- Matrix: three pick objects x two close-clutter layouts x five repeats = 30
+  paired episodes, seeds `301–330`.
+- Physical variation includes target XY/yaw, shared friction, and target mass.
+- Primary endpoint is safe completion, requiring ordinary task success plus at
+  least `0.010 m` sampled non-support clutter clearance.
+- Ordinary task success, actual clutter contact, stability, clearance, failure
+  type, and wall time remain separate secondary evidence.
+- The Gate 2.8 robust-selection thresholds remain unchanged.
+- Formal protocol:
+  [`GATE_3_1_PROTOCOL.md`](GATE_3_1_PROTOCOL.md).
+
+Next gate: review the frozen protocol with the owner, then run only a bounded
+cloud smoke prefix before authorizing the formal 30-episode run.
 
 ## Working agreement
 
