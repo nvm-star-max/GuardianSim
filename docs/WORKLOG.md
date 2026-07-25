@@ -427,3 +427,28 @@ Gate decision:
 - No Gate 3.1 Radeon Cloud result has been run or inspected.
 - Protocol:
   [`GATE_3_1_PROTOCOL.md`](GATE_3_1_PROTOCOL.md).
+
+## 2026-07-25 — Gate 3.1 two-episode Radeon Cloud smoke gate
+
+- Ran the first two frozen scenarios on Radeon Cloud instance
+  `u-13907-735d71cb` without changing any protocol value or selection
+  threshold.
+- Cloud verification after deployment: 30/30 unit tests passed.
+- Found and fixed a validator-only JSON representation defect:
+  `dataclasses.asdict` retained a tuple in memory while persisted JSON restored
+  it as a list. Canonical scenario serialization now makes validation stable
+  across a JSON round trip; the scenario values and protocol hashes are
+  unchanged.
+- Partial schema-4 validation passed for `2/30` episodes after the fix.
+- Preliminary smoke outcomes, not a formal performance claim:
+  - task success: baseline `2/2`, GuardianSim `2/2`;
+  - safe completion: baseline `1/2`, GuardianSim `2/2`;
+  - the baseline miss was a `clearance_violation`, not clutter contact;
+  - mean clutter clearance: baseline `0.03207 m`, GuardianSim `0.08251 m`;
+  - mean stability: baseline `0.90082`, GuardianSim `0.89674`;
+  - planning wall time: `176.53 s` and `172.81 s`.
+- Raw report and cloud log:
+  [`evidence/gate-3-1-smoke/README.md`](evidence/gate-3-1-smoke/README.md).
+- Validator fix commit: `e68753a`.
+- Major-stage decision boundary reached: do not start the remaining 28 episodes
+  until the owner reviews smoke quality, runtime, and the formal-run route.

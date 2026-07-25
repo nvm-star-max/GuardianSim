@@ -207,8 +207,9 @@ to avoid a NumPy 2 ABI mismatch.
 Gate 3 packaging is implemented. The owner reviewed the competitive gap and
 authorized Gate 3.1: a multi-object adversarial safety benchmark.
 
-**Gate 3.1 is implemented and predeclared locally; cloud outcomes have not been
-inspected.**
+**Gate 3.1 is implemented and frozen. A two-episode Radeon Cloud smoke prefix
+has passed schema-4 validation; the remaining 28 formal episodes have not
+started.**
 
 - Frozen protocol hash:
   `472bb6ea13984dff02124c091ac8d94c67154bbe68858bb782aed8014d2afbba`.
@@ -222,11 +223,22 @@ inspected.**
 - Ordinary task success, actual clutter contact, stability, clearance, failure
   type, and wall time remain separate secondary evidence.
 - The Gate 2.8 robust-selection thresholds remain unchanged.
+- Smoke prefix status:
+  - completed seeds `301–302` (`2/30`);
+  - baseline task success `2/2`, safe completion `1/2`;
+  - GuardianSim task success `2/2`, safe completion `2/2`;
+  - these values are preliminary engineering evidence and are not a formal
+    benchmark claim.
+- The JSON round-trip validator mismatch was fixed in commit `e68753a`; protocol
+  and scenario-matrix hashes did not change.
+- Raw smoke evidence:
+  [`evidence/gate-3-1-smoke/README.md`](evidence/gate-3-1-smoke/README.md).
 - Formal protocol:
   [`GATE_3_1_PROTOCOL.md`](GATE_3_1_PROTOCOL.md).
 
-Next gate: review the frozen protocol with the owner, then run only a bounded
-cloud smoke prefix before authorizing the formal 30-episode run.
+Next gate: review the verified smoke prefix with the owner, then either resume
+the unchanged report for the remaining 28 episodes or stop Gate 3.1. Do not
+retune the benchmark from these two partial outcomes.
 
 ## Working agreement
 
