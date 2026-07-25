@@ -372,3 +372,20 @@ Gate decision:
 - Raw evidence:
   [`evidence/gate-2-8/README.md`](evidence/gate-2-8/README.md).
 - Evidence and resume-showcase commit: `2b3ffe1`.
+
+## 2026-07-25 — Gate 3 judge-facing evidence showcase
+
+- Built a standalone interactive presentation from frozen Gate 2.7 and Gate 2.8
+  evidence; the site does not rerun Genesis or consume cloud GPU time.
+- The first viewport leads with verified 20/20 paired success, `+63.93%` mean
+  clutter clearance, and 240 confirmation observations.
+- Added an interactive failure → policy → proof narrative, benchmark comparison,
+  candidate-selection distribution, recovered failure-seed table, and system
+  architecture.
+- Added a 90-second presenter mode and direct downloads for the schema-3 report
+  and cloud exit screenshot.
+- Added an explicit simulation-only claim boundary throughout the site.
+- Generated and validated a project-specific social preview card.
+- Production build passed; rendered-content and evidence-integrity tests passed
+  2/2.
+- Local launch command: `./scripts/run_showcase.sh`.

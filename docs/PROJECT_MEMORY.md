@@ -140,6 +140,22 @@ to 20/20 and mean stability improved by `0.13315`.
 Evidence:
 [`evidence/gate-2-8/README.md`](evidence/gate-2-8/README.md)
 
+**Gate 3 — Judge-facing evidence showcase implemented locally.**
+
+The showcase turns the preserved Gate 2.7 failure and Gate 2.8 recovery into an
+interactive presentation without rerunning Genesis:
+
+- evidence-first hero with 20/20 success and `+63.93%` mean clutter clearance;
+- switchable failure → policy → proof narrative;
+- verified benchmark cards, selection distribution, and recovered failure seeds;
+- 90-second presenter mode;
+- downloadable schema-3 report and cloud exit screenshot;
+- explicit simulation-only claim boundary.
+
+The standalone production build and rendered-content tests pass. The site is
+contained in [`../showcase`](../showcase) and launches from the repository root
+with `./scripts/run_showcase.sh`.
+
 ## Verified environment
 
 - Cloud template: Radeon Cloud Blank OpenCode Workspace
@@ -184,16 +200,14 @@ to avoid a NumPy 2 ABI mismatch.
 
 ## Current execution route
 
-Gate 2.8 is complete. The next major stage must be reviewed with the owner
-before implementation. The recommended route is a judge-facing Gate 3:
+Gate 3 packaging is implemented. The next technical gate must be reviewed with
+the owner before implementation. Recommended next choices:
 
-1. turn the verified Gate 2.7 → Gate 2.8 failure-and-recovery story into a
-   concise demo;
-2. visualize candidate trials, conservative confirmation, selection, execution,
-   and fallback without changing the benchmark;
-3. add bounded online execution monitoring/recovery only behind a new,
+1. prioritize competition submission assets: narration, screen recording, and
+   concise architecture slides;
+2. add bounded online execution monitoring/recovery only behind a new,
    predeclared evaluation gate;
-4. keep simulation claims separate from any future physical-robot evidence.
+3. keep simulation claims separate from any future physical-robot evidence.
 
 ## Working agreement
 
