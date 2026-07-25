@@ -323,3 +323,23 @@ Gate decision:
   confirmation, conservative aggregation, and a nominal stability fallback.
 - Raw evidence:
   [`evidence/gate-2-7/README.md`](evidence/gate-2-7/README.md).
+
+## 2026-07-25 — Gate 2.8 robust-selection policy declared
+
+- Added repeatability-aware candidate selection as a separate decision module.
+- Initial scoring still covers all 15 candidates.
+- The top-three shortlist plus nominal receives two additional confirmation
+  rollouts per candidate.
+- Repeated metrics are aggregated pessimistically: minimum reachability,
+  alignment, stability, and clearance; maximum path length and uncertainty.
+- Alternatives require worst-observed stability `>= 0.60` and robust predicted
+  success at least `0.02` above nominal; otherwise the planner falls back.
+- Evidence schema 3 records all confirmation observations and fallback state.
+- TDD behavior coverage proves:
+  - a lucky high-clearance candidate cannot beat a repeatably stable action;
+  - marginal improvements fall back to nominal;
+  - a repeatably superior alternative can still be selected.
+- Local verification: 24/24 tests passed, compilation and whitespace checks
+  passed.
+- Cloud gate: rerun seeds 104, 107, and 120 independently before authorizing
+  another 20-seed benchmark.

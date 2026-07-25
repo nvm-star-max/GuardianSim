@@ -119,6 +119,18 @@ Gate 2.7 unchanged as negative evidence.
 Evidence:
 [`evidence/gate-2-7/README.md`](evidence/gate-2-7/README.md)
 
+**Gate 2.8 — Robust-selection policy implemented locally.**
+
+The fixed policy confirms the top-three initial candidates plus nominal with
+two additional rollouts, aggregates metrics pessimistically, requires minimum
+stability `0.60`, and requires a `0.02` robust-success advantage over nominal.
+Otherwise it executes nominal. Schema 3 records every confirmation observation.
+Local verification passes 24/24 tests.
+
+Cloud authorization is limited to independent one-episode reruns for seeds
+104, 107, and 120. A full rerun is allowed only if all three GuardianSim
+independent executions succeed with complete confirmation evidence.
+
 ## Verified environment
 
 - Cloud template: Radeon Cloud Blank OpenCode Workspace

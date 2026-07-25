@@ -38,6 +38,7 @@ from guardian_sim.rollout_metrics import (
     aabb_overlap_depth,
     measure_rollout,
 )
+from guardian_sim.robust_selection import select_robust_candidate
 from guardian_sim.scoring import rank_candidates, score_candidate
 from guardian_sim.serialization import json_default
 
@@ -539,6 +540,130 @@ class BenchmarkTests(unittest.TestCase):
             csv_path, json_path = write_report(rows, directory, metadata={"data_source": "unit_test"})
             self.assertTrue(Path(csv_path).read_text(encoding="utf-8").startswith("episode_id,strategy"))
             self.assertIn('"data_source": "unit_test"', Path(json_path).read_text(encoding="utf-8"))
+
+
+class RobustSelectionTests(unittest.TestCase):
+    def test_lucky_high_clearance_candidate_cannot_beat_repeatable_stable_candidate(self) -> None:
+        candidates = tuple(
+            generate_grasp_candidates(
+                (0.5, 0.0, 0.77),
+                yaw_degrees=(-22.5, 0.0),
+                lateral_offsets_m=(-0.02, 0.0),
+            )
+        )
+        lucky = next(
+            candidate
+            for candidate in candidates
+            if candidate.candidate_id == "yaw_-22.5_offset_-0.020"
+        )
+        nominal = next(
+            candidate
+            for candidate in candidates
+            if candidate.candidate_id == "yaw_+00.0_offset_+0.000"
+        )
+        initial = {
+            candidate.candidate_id: CandidateMetrics(
+                0.09 if candidate is lucky else 0.045,
+                1.0,
+                0.95,
+                0.95 if candidate is lucky else 0.90,
+                0.4,
+                0.05,
+            )
+            for candidate in candidates
+        }
+
+        class ConfirmationEvaluator:
+            calls = 0
+
+            def evaluate(self, candidate):
+                self.calls += 1
+                if candidate is lucky:
+                    stability = 0.0 if self.calls % 2 else 0.95
+                    return CandidateMetrics(0.09, 1.0, 0.95, stability, 0.4, 0.05)
+                return CandidateMetrics(0.045, 1.0, 0.95, 0.90, 0.4, 0.05)
+
+        result = select_robust_candidate(
+            candidates,
+            initial,
+            ConfirmationEvaluator(),
+            nominal_candidate_id=nominal.candidate_id,
+            shortlist_size=4,
+            confirmation_rollouts=2,
+            minimum_stability=0.60,
+        )
+
+        self.assertNotEqual(result.selected.candidate, lucky)
+        self.assertGreaterEqual(result.selected.metrics.predicted_stability, 0.60)
+
+    def test_falls_back_to_nominal_without_a_repeatable_success_margin(self) -> None:
+        candidates = tuple(
+            generate_grasp_candidates(
+                (0.5, 0.0, 0.77),
+                yaw_degrees=(-22.5, 0.0),
+                lateral_offsets_m=(0.0,),
+            )
+        )
+        alternative, nominal = candidates
+        nominal_metrics = CandidateMetrics(0.05, 1.0, 0.95, 0.90, 0.4, 0.05)
+        alternative_metrics = CandidateMetrics(0.052, 1.0, 0.95, 0.90, 0.4, 0.05)
+        initial = {
+            alternative.candidate_id: alternative_metrics,
+            nominal.candidate_id: nominal_metrics,
+        }
+
+        class StableEvaluator:
+            def evaluate(self, candidate):
+                return initial[candidate.candidate_id]
+
+        result = select_robust_candidate(
+            candidates,
+            initial,
+            StableEvaluator(),
+            nominal_candidate_id=nominal.candidate_id,
+            shortlist_size=2,
+            confirmation_rollouts=2,
+            minimum_success_margin=0.02,
+        )
+
+        self.assertEqual(result.selected.candidate, nominal)
+        self.assertTrue(result.fallback_used)
+
+    def test_selects_alternative_that_repeatedly_clears_the_success_margin(self) -> None:
+        candidates = tuple(
+            generate_grasp_candidates(
+                (0.5, 0.0, 0.77),
+                yaw_degrees=(-22.5, 0.0),
+                lateral_offsets_m=(0.0,),
+            )
+        )
+        alternative, nominal = candidates
+        observations = {
+            alternative.candidate_id: CandidateMetrics(
+                0.08, 1.0, 0.95, 0.92, 0.4, 0.05
+            ),
+            nominal.candidate_id: CandidateMetrics(
+                0.04, 1.0, 0.95, 0.90, 0.4, 0.05
+            ),
+        }
+
+        class RepeatableEvaluator:
+            def evaluate(self, candidate):
+                return observations[candidate.candidate_id]
+
+        result = select_robust_candidate(
+            candidates,
+            observations,
+            RepeatableEvaluator(),
+            nominal_candidate_id=nominal.candidate_id,
+            shortlist_size=2,
+            confirmation_rollouts=2,
+            minimum_success_margin=0.02,
+        )
+
+        self.assertEqual(result.selected.candidate, alternative)
+        self.assertFalse(result.fallback_used)
+        self.assertEqual(len(result.observations_by_id[alternative.candidate_id]), 3)
 
 
 if __name__ == "__main__":

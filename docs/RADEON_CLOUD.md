@@ -121,3 +121,31 @@ to GitHub frequently. Destroy the active instance when work stops because it con
 consume credits.
 
 The full ten-credit allocation is planned in [`GPU_BUDGET.md`](GPU_BUDGET.md).
+
+## Gate 2.8 robust-selection validation
+
+Gate 2.8 policy is fixed before cloud outcomes are inspected:
+
+- initial rollout for all 15 candidates;
+- top-three shortlist plus nominal;
+- two additional confirmation rollouts per shortlisted candidate;
+- conservative aggregation uses minimum reachability, alignment, stability,
+  and clearance plus maximum path length and uncertainty;
+- candidates require worst-observed stability of at least `0.60`;
+- an alternative must exceed nominal robust success by at least `0.02`;
+- otherwise the planner executes nominal.
+
+First rerun the three Gate 2.7 failure seeds independently:
+
+```bash
+for seed in 104 107 120; do
+  PYTHONUNBUFFERED=1 /opt/venv/bin/python scripts/run_fixed_seed_benchmark.py \
+    --episodes 1 \
+    --seed-start "$seed" \
+    --output "outputs/gate-2-8/failure-seed-${seed}.json" \
+    2>&1 | tee "outputs/gate-2-8/failure-seed-${seed}.log"
+done
+```
+
+Do not begin a full rerun unless all three reports complete, GuardianSim
+independent execution succeeds, and confirmation evidence is present.

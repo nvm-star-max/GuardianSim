@@ -27,7 +27,7 @@ from guardian_sim.reference_backend import (
     GenesisSceneDriver,
     ReferenceSceneRolloutBackend,
 )
-from guardian_sim.scoring import rank_candidates, score_candidate
+from guardian_sim.robust_selection import select_robust_candidate
 from guardian_sim.serialization import json_default
 
 NOMINAL_CANDIDATE_ID = "yaw_+00.0_offset_+0.000"
@@ -42,6 +42,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--xy-jitter-m", type=float, default=0.015)
     parser.add_argument("--settle-steps", type=int, default=30)
     parser.add_argument("--minimum-stability", type=float, default=0.60)
+    parser.add_argument("--shortlist-size", type=int, default=3)
+    parser.add_argument("--confirmation-rollouts", type=int, default=2)
+    parser.add_argument("--minimum-success-margin", type=float, default=0.02)
     parser.add_argument("--output", default="outputs/fixed_seed_benchmark/report.json")
     parser.add_argument(
         "--fresh",
@@ -57,7 +60,7 @@ def _report_configuration(
     base_snapshot_fingerprint: str,
 ) -> dict[str, object]:
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "data_source": "independent_genesis_execution",
         "pick_object": args.pick,
         "requested_episode_count": args.episodes,
@@ -65,6 +68,9 @@ def _report_configuration(
         "xy_jitter_m": args.xy_jitter_m,
         "settle_steps": args.settle_steps,
         "minimum_stability": args.minimum_stability,
+        "shortlist_size": args.shortlist_size,
+        "confirmation_rollouts": args.confirmation_rollouts,
+        "minimum_success_margin": args.minimum_success_margin,
         "base_snapshot_fingerprint": base_snapshot_fingerprint,
     }
 
@@ -117,6 +123,14 @@ def main() -> None:
         raise ValueError("episodes must be positive")
     if args.settle_steps < 0:
         raise ValueError("settle_steps cannot be negative")
+    if args.shortlist_size < 1:
+        raise ValueError("shortlist_size must be positive")
+    if args.confirmation_rollouts < 1:
+        raise ValueError("confirmation_rollouts must be positive")
+    if not 0.0 <= args.minimum_stability <= 1.0:
+        raise ValueError("minimum_stability must be in [0, 1]")
+    if not 0.0 <= args.minimum_success_margin <= 1.0:
+        raise ValueError("minimum_success_margin must be in [0, 1]")
 
     gs.init(backend=gs.cpu if args.cpu else gs.gpu)
     bundle = build_scene(
@@ -169,24 +183,43 @@ def main() -> None:
         backend = ReferenceSceneRolloutBackend(driver, episode_snapshot)
         evaluator = GenesisCandidateEvaluator(backend)
         metrics_by_id = evaluate_candidates(evaluator, candidates)
-        ranked = rank_candidates(candidates, metrics_by_id)
         nominal = next(
             candidate
             for candidate in candidates
             if candidate.candidate_id == NOMINAL_CANDIDATE_ID
         )
-        guardian = ranked[0].candidate
+        selection = select_robust_candidate(
+            candidates,
+            metrics_by_id,
+            evaluator,
+            nominal_candidate_id=nominal.candidate_id,
+            shortlist_size=args.shortlist_size,
+            confirmation_rollouts=args.confirmation_rollouts,
+            minimum_stability=args.minimum_stability,
+            minimum_success_margin=args.minimum_success_margin,
+        )
+        guardian = selection.selected.candidate
 
         baseline_execution = evaluator.evaluate(nominal)
         guardian_execution = evaluator.evaluate(guardian)
-        baseline_score = score_candidate(nominal, metrics_by_id[nominal.candidate_id])
-        guardian_score = ranked[0]
+        baseline_score = selection.nominal
+        guardian_score = selection.selected
 
         episode = {
             "episode_index": episode_index,
             "seed": seed,
             "snapshot_fingerprint": episode_snapshot.fingerprint(),
             "target_xyz": target_xyz,
+            "selection": {
+                "fallback_used": selection.fallback_used,
+                "confirmed_candidate_ids": sorted(selection.observations_by_id),
+                "observations_by_id": {
+                    candidate_id: [asdict(metrics) for metrics in observations]
+                    for candidate_id, observations in sorted(
+                        selection.observations_by_id.items()
+                    )
+                },
+            },
             "baseline": {
                 "candidate": asdict(nominal),
                 "counterfactual_score": {
