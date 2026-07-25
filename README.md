@@ -13,6 +13,13 @@ baseline and GuardianSim. GuardianSim increased mean non-support clutter
 clearance from `0.04399 m` to `0.07212 m` (`+63.93%`) while recording all
 confirmation observations in a schema-3 report.
 
+The broader predeclared Gate 3.1 stress test is also complete. Across 30 paired
+banana, lemon, and plum close-clutter episodes, GuardianSim increased mean
+clearance by `43.67%` but achieved 18/30 safe completions versus the nominal
+baseline's 19/30. This negative result is preserved: the current candidate
+family did not generalize to two lateral-clutter cells, and clearance
+improvement alone did not produce a safety-rate improvement.
+
 ```bash
 python3 -m unittest discover -s tests -v
 python3 -m guardian_sim.cli
@@ -37,6 +44,7 @@ Project documents:
 - [`docs/GATE_3_1_PROTOCOL.md`](docs/GATE_3_1_PROTOCOL.md)
 - [`docs/evidence/session-a/README.md`](docs/evidence/session-a/README.md)
 - [`docs/evidence/gate-2-8/README.md`](docs/evidence/gate-2-8/README.md)
+- [`docs/evidence/gate-3-1/README.md`](docs/evidence/gate-3-1/README.md)
 - [`showcase/README.md`](showcase/README.md)
 
 ## Upstream reference

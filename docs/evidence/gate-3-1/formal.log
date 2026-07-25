@@ -1,0 +1,435 @@
+nohup: ignoring input
+Gate 3.1 protocol=472bb6ea13984dff02124c091ac8d94c67154bbe68858bb782aed8014d2afbba scenarios=30
+[38;5;159m[Genesis] [17:57:20] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [17:57:20] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [17:57:20] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [17:57:21] [INFO] Running on [38;5;121m[4m[AMD Radeon Graphics][0m[38;5;159m with backend [38;5;121m[4mgs.amdgpu[0m[38;5;159m. Device memory: [38;5;121m[4m47.98[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [17:57:21] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m1.2.3[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [17:57:22] [INFO] Scene [38;5;121m[3m<5f1274c>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [17:57:22] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<0993f42>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Plane>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:22] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<ef23545>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:22] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m2[0m[38;5;159m, uid: [38;5;121m[3m<6eabb58>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:22] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m3[0m[38;5;159m, uid: [38;5;121m[3m<7aa4745>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:22] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m4[0m[38;5;159m, uid: [38;5;121m[3m<564db53>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:22] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m5[0m[38;5;159m, uid: [38;5;121m[3m<ef96ce6>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:22] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m6[0m[38;5;159m, uid: [38;5;121m[3m<7838535>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/011_banana/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:22] [INFO] Convex hull is not accurate enough for collision detection (0.547). Falling back to more expensive convex decomposition (see FileMorph options).[0m
+[38;5;159m[Genesis] [17:57:23] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m7[0m[38;5;159m, uid: [38;5;121m[3m<28d0f50>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/014_lemon/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:23] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m8[0m[38;5;159m, uid: [38;5;121m[3m<6ffa98a>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/018_plum/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:23] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m9[0m[38;5;159m, uid: [38;5;121m[3m<35b3200>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/024_bowl/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:57:23] [INFO] Convex hull is not accurate enough for collision detection (21.454). Falling back to more expensive convex decomposition (see FileMorph options).[0m
+[38;5;159m[Genesis] [17:57:23] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m10[0m[38;5;159m, uid: [38;5;121m[3m<dd574a7>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.MJCF(file='/workspace/GuardianSim/assets/robots/franka/panda.xml')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;226m[Genesis] [17:57:23] [WARNING] (MJCF) Approximating tendon by joint actuator for `finger_joint1`[0m
+[38;5;226m[Genesis] [17:57:23] [WARNING] (MJCF) Approximating tendon by joint actuator for `finger_joint2`[0m
+[38;5;159m[Genesis] [17:57:24] [INFO] Building scene [38;5;121m[3m<5f1274c>[0m[38;5;159m...[0m
+[38;5;226m[Genesis] [17:57:26] [WARNING] Neutral robot position (qpos0) exceeds joint limits.[0m
+[38;5;226m[Genesis] [17:57:26] [WARNING] Constraint solver time constant should be greater than 2*substep_dt. timeconst is changed from `0.005` to `0.01`). Decrease simulation timestep or increase timeconst to avoid altering the original value.[0m
+[38;5;226m[Genesis] [17:57:30] [WARNING] Filtered out geometry pairs causing self-collision for the neutral configuration (qpos0): (38, 43), (39, 43), (46, 53), (47, 52), (48, 55), (49, 54). Consider tuning Morph option 'decompose_robot_error_threshold' or specify dedicated collision meshes. This behavior can be disabled by setting Morph option 'enable_neutral_collision=True'.[0m
+[38;5;159m[Genesis] [17:57:33] [INFO] Compiling simulation kernels...[0m
+/opt/venv/lib/python3.12/site-packages/quadrants/lang/ast/ast_transformers/function_def_transformer.py:671: DeprecationWarning: ast.Str is deprecated and will be removed in Python 3.14; use ast.Constant instead
+  return index == 0 and isinstance(stmt, ast.Expr) and isinstance(stmt.value, (ast.Constant, ast.Str))
+[38;5;159m[Genesis] [17:58:57] [INFO] Building visualizer...[0m
+resuming 2/30 completed scenarios
+/opt/venv/lib/python3.12/site-packages/torch/utils/_device.py:103: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /app/pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
+  return func(*args, **kwargs)
+/opt/venv/lib/python3.12/site-packages/quadrants/_test_tools/warnings_helper.py:11: UserWarning: cannot create weak reference to 'tuple' object. Template mapper caching disabled.
+  warnings.warn(message)
+[38;5;159m[Genesis] [17:59:06] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [17:59:06] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [17:59:07] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [17:59:07] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [17:59:55] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [17:59:55] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:00:20] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:00:20] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:01:52] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:01:52] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=3/30 id=011_banana-lateral_clutter-r03-s303 baseline_safe=True guardian_safe=True selected=yaw_-22.5_offset_+0.020 planning_s=179.00
+[38;5;159m[Genesis] [18:02:17] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:02:17] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:03:50] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:03:50] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:04:11] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:04:11] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:04:13] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:04:13] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:04:23] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:04:23] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:04:42] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:04:42] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=4/30 id=011_banana-lateral_clutter-r04-s304 baseline_safe=True guardian_safe=True selected=yaw_-45.0_offset_+0.020 planning_s=203.18
+[38;5;159m[Genesis] [18:06:56] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:06:56] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:08:59] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:08:59] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:09:26] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:09:26] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:09:27] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:09:27] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=5/30 id=011_banana-lateral_clutter-r05-s305 baseline_safe=True guardian_safe=True selected=yaw_-22.5_offset_+0.000 planning_s=199.61
+[38;5;159m[Genesis] [18:09:36] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:09:36] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:09:37] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:09:37] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=6/30 id=011_banana-radial_clutter-r01-s306 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.020 planning_s=198.08
+[38;5;159m[Genesis] [18:13:19] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:13:19] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:13:38] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:13:38] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=7/30 id=011_banana-radial_clutter-r02-s307 baseline_safe=True guardian_safe=True selected=yaw_+22.5_offset_+0.020 planning_s=194.30
+[38;5;159m[Genesis] [18:17:03] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:17:03] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:17:04] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:17:04] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:17:12] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:17:12] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:18:49] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:18:49] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:19:47] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:19:47] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=8/30 id=011_banana-radial_clutter-r03-s308 baseline_safe=True guardian_safe=True selected=yaw_+45.0_offset_+0.020 planning_s=186.39
+[38;5;159m[Genesis] [18:20:28] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:20:28] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:20:53] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:20:53] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=9/30 id=011_banana-radial_clutter-r04-s309 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.020 planning_s=184.30
+[38;5;159m[Genesis] [18:24:53] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:24:53] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=10/30 id=011_banana-radial_clutter-r05-s310 baseline_safe=True guardian_safe=True selected=yaw_+22.5_offset_+0.020 planning_s=189.18
+[38;5;159m[Genesis] [18:26:52] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:26:52] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:27:01] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:27:01] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:29:37] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:29:37] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=11/30 id=014_lemon-lateral_clutter-r01-s311 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=183.88
+scenario=12/30 id=014_lemon-lateral_clutter-r02-s312 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=175.74
+[38;5;159m[Genesis] [18:33:26] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:33:26] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:33:27] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:33:27] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=13/30 id=014_lemon-lateral_clutter-r03-s313 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=174.78
+scenario=14/30 id=014_lemon-lateral_clutter-r04-s314 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=177.88
+scenario=15/30 id=014_lemon-lateral_clutter-r05-s315 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=177.37
+[38;5;159m[Genesis] [18:44:36] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:44:36] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=16/30 id=014_lemon-radial_clutter-r01-s316 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.000 planning_s=171.82
+scenario=17/30 id=014_lemon-radial_clutter-r02-s317 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.000 planning_s=172.88
+scenario=18/30 id=014_lemon-radial_clutter-r03-s318 baseline_safe=True guardian_safe=False selected=yaw_+22.5_offset_+0.020 planning_s=169.70
+[38;5;159m[Genesis] [18:55:30] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:55:30] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=19/30 id=014_lemon-radial_clutter-r04-s319 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.000 planning_s=173.45
+[38;5;159m[Genesis] [18:55:48] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:55:48] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [18:56:16] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:56:16] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=20/30 id=014_lemon-radial_clutter-r05-s320 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.000 planning_s=176.75
+[38;5;159m[Genesis] [18:59:27] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [18:59:27] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=21/30 id=018_plum-lateral_clutter-r01-s321 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=170.67
+scenario=22/30 id=018_plum-lateral_clutter-r02-s322 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=172.96
+scenario=23/30 id=018_plum-lateral_clutter-r03-s323 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=168.57
+[38;5;159m[Genesis] [19:09:39] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:09:39] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=24/30 id=018_plum-lateral_clutter-r04-s324 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=194.06
+scenario=25/30 id=018_plum-lateral_clutter-r05-s325 baseline_safe=False guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=194.28
+[38;5;159m[Genesis] [19:17:44] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:17:44] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [19:18:32] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:18:32] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [19:18:43] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:18:43] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [19:18:54] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:18:54] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [19:18:55] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:18:55] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=26/30 id=018_plum-radial_clutter-r01-s326 baseline_safe=True guardian_safe=False selected=yaw_+00.0_offset_+0.000 planning_s=199.84
+[38;5;159m[Genesis] [19:20:34] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:20:34] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [19:22:03] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:22:03] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [19:22:24] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:22:24] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [19:22:35] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:22:35] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=27/30 id=018_plum-radial_clutter-r02-s327 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.000 planning_s=208.74
+scenario=28/30 id=018_plum-radial_clutter-r03-s328 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.000 planning_s=197.24
+scenario=29/30 id=018_plum-radial_clutter-r04-s329 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.000 planning_s=197.86
+[38;5;159m[Genesis] [19:32:36] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [19:32:36] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=30/30 id=018_plum-radial_clutter-r05-s330 baseline_safe=True guardian_safe=True selected=yaw_+00.0_offset_+0.000 planning_s=203.47
+{
+  "absolute_safe_completion_rate_lift": -0.033333333333333326,
+  "baseline": {
+    "candidate_selections": {
+      "yaw_+00.0_offset_+0.000": 30
+    },
+    "clutter_contact_count": 10,
+    "clutter_contact_rate": 0.3333333333333333,
+    "episode_count": 30,
+    "failure_types": {
+      "clearance_violation": 1,
+      "clutter_contact": 10,
+      "safe_success": 19
+    },
+    "mean_clutter_clearance_m": 0.021570552378459514,
+    "mean_stability": 0.9084540605545044,
+    "safe_completion_count": 19,
+    "safe_completion_rate": 0.6333333333333333,
+    "task_success_count": 20,
+    "task_success_rate": 0.6666666666666666
+  },
+  "cells": {
+    "011_banana/lateral_clutter": {
+      "baseline": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 5
+        },
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 5,
+        "failure_types": {
+          "clearance_violation": 1,
+          "safe_success": 4
+        },
+        "mean_clutter_clearance_m": 0.04548328667879105,
+        "mean_stability": 0.9016193151473999,
+        "safe_completion_count": 4,
+        "safe_completion_rate": 0.8,
+        "task_success_count": 5,
+        "task_success_rate": 1.0
+      },
+      "guardiansim": {
+        "candidate_selections": {
+          "yaw_-22.5_offset_+0.000": 1,
+          "yaw_-22.5_offset_+0.020": 3,
+          "yaw_-45.0_offset_+0.020": 1
+        },
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 5,
+        "failure_types": {
+          "safe_success": 5
+        },
+        "mean_clutter_clearance_m": 0.08718283623456954,
+        "mean_stability": 0.8951648473739624,
+        "safe_completion_count": 5,
+        "safe_completion_rate": 1.0,
+        "task_success_count": 5,
+        "task_success_rate": 1.0
+      }
+    },
+    "011_banana/radial_clutter": {
+      "baseline": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 5
+        },
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 5,
+        "failure_types": {
+          "safe_success": 5
+        },
+        "mean_clutter_clearance_m": 0.02674046754837036,
+        "mean_stability": 0.9038246870040894,
+        "safe_completion_count": 5,
+        "safe_completion_rate": 1.0,
+        "task_success_count": 5,
+        "task_success_rate": 1.0
+      },
+      "guardiansim": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.020": 2,
+          "yaw_+22.5_offset_+0.020": 2,
+          "yaw_+45.0_offset_+0.020": 1
+        },
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 5,
+        "failure_types": {
+          "safe_success": 5
+        },
+        "mean_clutter_clearance_m": 0.045451437017318776,
+        "mean_stability": 0.9088183641433716,
+        "safe_completion_count": 5,
+        "safe_completion_rate": 1.0,
+        "task_success_count": 5,
+        "task_success_rate": 1.0
+      }
+    },
+    "014_lemon/lateral_clutter": {
+      "baseline": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 5
+        },
+        "clutter_contact_count": 5,
+        "clutter_contact_rate": 1.0,
+        "episode_count": 5,
+        "failure_types": {
+          "clutter_contact": 5
+        },
+        "mean_clutter_clearance_m": 0.0,
+        "mean_stability": 0.9137254953384399,
+        "safe_completion_count": 0,
+        "safe_completion_rate": 0.0,
+        "task_success_count": 0,
+        "task_success_rate": 0.0
+      },
+      "guardiansim": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 5
+        },
+        "clutter_contact_count": 5,
+        "clutter_contact_rate": 1.0,
+        "episode_count": 5,
+        "failure_types": {
+          "clutter_contact": 5
+        },
+        "mean_clutter_clearance_m": 0.0,
+        "mean_stability": 0.9369033575057983,
+        "safe_completion_count": 0,
+        "safe_completion_rate": 0.0,
+        "task_success_count": 0,
+        "task_success_rate": 0.0
+      }
+    },
+    "014_lemon/radial_clutter": {
+      "baseline": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 5
+        },
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 5,
+        "failure_types": {
+          "safe_success": 5
+        },
+        "mean_clutter_clearance_m": 0.03229282723762861,
+        "mean_stability": 0.9366574287414551,
+        "safe_completion_count": 5,
+        "safe_completion_rate": 1.0,
+        "task_success_count": 5,
+        "task_success_rate": 1.0
+      },
+      "guardiansim": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 4,
+          "yaw_+22.5_offset_+0.020": 1
+        },
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 5,
+        "failure_types": {
+          "safe_success": 4,
+          "unstable_lift": 1
+        },
+        "mean_clutter_clearance_m": 0.028753895891865666,
+        "mean_stability": 0.7494500875473022,
+        "safe_completion_count": 4,
+        "safe_completion_rate": 0.8,
+        "task_success_count": 4,
+        "task_success_rate": 0.8
+      }
+    },
+    "018_plum/lateral_clutter": {
+      "baseline": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 5
+        },
+        "clutter_contact_count": 5,
+        "clutter_contact_rate": 1.0,
+        "episode_count": 5,
+        "failure_types": {
+          "clutter_contact": 5
+        },
+        "mean_clutter_clearance_m": 0.0,
+        "mean_stability": 0.8985089063644409,
+        "safe_completion_count": 0,
+        "safe_completion_rate": 0.0,
+        "task_success_count": 0,
+        "task_success_rate": 0.0
+      },
+      "guardiansim": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 5
+        },
+        "clutter_contact_count": 5,
+        "clutter_contact_rate": 1.0,
+        "episode_count": 5,
+        "failure_types": {
+          "clutter_contact": 5
+        },
+        "mean_clutter_clearance_m": 0.0,
+        "mean_stability": 0.8985825777053833,
+        "safe_completion_count": 0,
+        "safe_completion_rate": 0.0,
+        "task_success_count": 0,
+        "task_success_rate": 0.0
+      }
+    },
+    "018_plum/radial_clutter": {
+      "baseline": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 5
+        },
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 5,
+        "failure_types": {
+          "safe_success": 5
+        },
+        "mean_clutter_clearance_m": 0.024906732805967065,
+        "mean_stability": 0.8963885307312012,
+        "safe_completion_count": 5,
+        "safe_completion_rate": 1.0,
+        "task_success_count": 5,
+        "task_success_rate": 1.0
+      },
+      "guardiansim": {
+        "candidate_selections": {
+          "yaw_+00.0_offset_+0.000": 5
+        },
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 5,
+        "failure_types": {
+          "safe_success": 4,
+          "unstable_lift": 1
+        },
+        "mean_clutter_clearance_m": 0.024547213315963747,
+        "mean_stability": 0.7165545225143433,
+        "safe_completion_count": 4,
+        "safe_completion_rate": 0.8,
+        "task_success_count": 4,
+        "task_success_rate": 0.8
+      }
+    }
+  },
+  "episode_count": 30,
+  "guardiansim": {
+    "candidate_selections": {
+      "yaw_+00.0_offset_+0.000": 19,
+      "yaw_+00.0_offset_+0.020": 2,
+      "yaw_+22.5_offset_+0.020": 3,
+      "yaw_+45.0_offset_+0.020": 1,
+      "yaw_-22.5_offset_+0.000": 1,
+      "yaw_-22.5_offset_+0.020": 3,
+      "yaw_-45.0_offset_+0.020": 1
+    },
+    "clutter_contact_count": 10,
+    "clutter_contact_rate": 0.3333333333333333,
+    "episode_count": 30,
+    "failure_types": {
+      "clutter_contact": 10,
+      "safe_success": 18,
+      "unstable_lift": 2
+    },
+    "mean_clutter_clearance_m": 0.030989230409952953,
+    "mean_stability": 0.8509122927983602,
+    "safe_completion_count": 18,
+    "safe_completion_rate": 0.6,
+    "task_success_count": 18,
+    "task_success_rate": 0.6
+  }
+}
+[38;5;159m[Genesis] [19:33:49] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

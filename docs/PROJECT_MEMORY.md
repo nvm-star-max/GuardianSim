@@ -1,6 +1,6 @@
 # GuardianSim Project Memory
 
-Last updated: 2026-07-25
+Last updated: 2026-07-26
 
 This file is the durable source of truth for continuing GuardianSim work across
 machines and agent sessions. Update it after every verified milestone, cloud
@@ -160,6 +160,34 @@ Sites version 1 is privately deployed at
 <https://guardiansim-proof.dghcdtddgh.chatgpt.site>. Public access has not been
 enabled; sharing it with judges requires an explicit owner decision.
 
+**Gate 3.1 — Multi-object adversarial benchmark complete; primary result
+negative.**
+
+The predeclared 30-episode schema-4 benchmark completed on Radeon Cloud without
+protocol or threshold changes. Baseline safe completion was 19/30; GuardianSim
+safe completion was 18/30, an absolute difference of `-3.33` percentage points.
+Ordinary task success was 20/30 versus 18/30.
+
+GuardianSim increased mean clutter clearance from `0.02157 m` to `0.03099 m`
+(`+43.67%`) but did not reduce clutter contact: both strategies contacted
+clutter in 10/30 episodes. Mean stability decreased from `0.90845` to `0.85091`.
+
+The failure is localized and actionable:
+
+- lemon/lateral and plum/lateral produced 5/5 clutter contacts for both
+  strategies, showing that the current yaw/lateral-offset action family cannot
+  resolve those geometries;
+- GuardianSim had unstable lifts on lemon/radial seed 318 and plum/radial seed
+  326;
+- nominal fallback activated in 19/30 episodes.
+
+Do not claim that Gate 3.1 improved safety. Its verified contribution is a
+reproducible generalization stress test demonstrating that average-clearance
+optimization is insufficient.
+
+Evidence:
+[`evidence/gate-3-1/README.md`](evidence/gate-3-1/README.md)
+
 ## Verified environment
 
 - Cloud template: Radeon Cloud Blank OpenCode Workspace
@@ -207,9 +235,9 @@ to avoid a NumPy 2 ABI mismatch.
 Gate 3 packaging is implemented. The owner reviewed the competitive gap and
 authorized Gate 3.1: a multi-object adversarial safety benchmark.
 
-**Gate 3.1 is implemented and frozen. A two-episode Radeon Cloud smoke prefix
-has passed schema-4 validation; the remaining 28 formal episodes have not
-started.**
+**Gate 3.1 is complete and fully validated. Its primary endpoint is negative,
+so the current selector must not be presented as a general safety
+improvement.**
 
 - Frozen protocol hash:
   `472bb6ea13984dff02124c091ac8d94c67154bbe68858bb782aed8014d2afbba`.
@@ -223,22 +251,22 @@ started.**
 - Ordinary task success, actual clutter contact, stability, clearance, failure
   type, and wall time remain separate secondary evidence.
 - The Gate 2.8 robust-selection thresholds remain unchanged.
-- Smoke prefix status:
-  - completed seeds `301–302` (`2/30`);
-  - baseline task success `2/2`, safe completion `1/2`;
-  - GuardianSim task success `2/2`, safe completion `2/2`;
-  - these values are preliminary engineering evidence and are not a formal
-    benchmark claim.
+- Formal result:
+  - baseline task success `20/30`, safe completion `19/30`;
+  - GuardianSim task success `18/30`, safe completion `18/30`;
+  - safe-completion difference `-3.33` percentage points;
+  - mean clearance increased `43.67%`, but contacts remained `10/30` for both.
 - The JSON round-trip validator mismatch was fixed in commit `e68753a`; protocol
   and scenario-matrix hashes did not change.
-- Raw smoke evidence:
-  [`evidence/gate-3-1-smoke/README.md`](evidence/gate-3-1-smoke/README.md).
+- Raw formal evidence:
+  [`evidence/gate-3-1/README.md`](evidence/gate-3-1/README.md).
 - Formal protocol:
   [`GATE_3_1_PROTOCOL.md`](GATE_3_1_PROTOCOL.md).
 
-Next gate: review the verified smoke prefix with the owner, then either resume
-the unchanged report for the remaining 28 episodes or stop Gate 3.1. Do not
-retune the benchmark from these two partial outcomes.
+Next gate requires owner review. The recommended route is a separately
+predeclared Gate 3.2 that expands the candidate action space with obstacle-aware
+approach direction/height and strengthens execution-repeatability checks. Gate
+3.1 must remain unchanged as negative evidence.
 
 ## Working agreement
 

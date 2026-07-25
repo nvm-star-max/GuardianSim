@@ -452,3 +452,36 @@ Gate decision:
 - Validator fix commit: `e68753a`.
 - Major-stage decision boundary reached: do not start the remaining 28 episodes
   until the owner reviews smoke quality, runtime, and the formal-run route.
+
+## 2026-07-26 — Gate 3.1 formal 30-episode Radeon Cloud benchmark
+
+- Resumed the validated schema-4 report at `2/30` and completed the frozen
+  seeds `301–330` without changing protocol values, policy thresholds, scenario
+  order, or prior evidence.
+- Full protocol validator exited `0`; cloud tests passed 30/30; the downloaded
+  report passed a second full local validation.
+- Primary endpoint was negative:
+  - baseline safe completion: `19/30` (`63.33%`);
+  - GuardianSim safe completion: `18/30` (`60.00%`);
+  - paired absolute difference: `-3.33` percentage points.
+- Secondary outcomes:
+  - ordinary task success: baseline `20/30`, GuardianSim `18/30`;
+  - clutter contact: both `10/30`;
+  - mean clutter clearance: baseline `0.02157 m`, GuardianSim `0.03099 m`
+    (`+43.67%`);
+  - mean stability: baseline `0.90845`, GuardianSim `0.85091`.
+- Paired safe outcomes: both safe 17, both unsafe 10, GuardianSim-only safe 1,
+  baseline-only safe 2.
+- The current candidate family failed structurally in lemon/lateral and
+  plum/lateral: both strategies contacted clutter in all five episodes of each
+  cell.
+- GuardianSim had two additional unstable lifts:
+  lemon/radial seed 318 and plum/radial seed 326.
+- Nominal fallback activated in 19/30 episodes.
+- Mean planning time was `184.84 s` per episode; baseline and GuardianSim
+  independent execution averaged `8.68 s` and `8.56 s`.
+- Interpretation: higher average clearance did not generalize into higher safe
+  completion. Preserve this result and redesign the action space before any
+  later gate; do not retune Gate 3.1.
+- Raw evidence:
+  [`evidence/gate-3-1/README.md`](evidence/gate-3-1/README.md).
