@@ -371,3 +371,4 @@ Gate decision:
 - The prior failure seeds 104, 107, and 120 all succeeded in the full run.
 - Raw evidence:
   [`evidence/gate-2-8/README.md`](evidence/gate-2-8/README.md).
+- Evidence and resume-showcase commit: `2b3ffe1`.

@@ -172,6 +172,7 @@ to avoid a NumPy 2 ABI mismatch.
   - `858a039` — Gate 2.5 Radeon Cloud evidence
   - `816cf9b` — Gate 2.7 benchmark evidence
   - `3c63236` — repeatability-aware robust selection
+  - `2b3ffe1` — Gate 2.8 benchmark evidence and resume showcase
 
 ## Architecture already implemented
 
