@@ -420,6 +420,9 @@ def validate_gate31_payload(
 
 
 def scenario_asdict(scenario: Gate31Scenario) -> dict[str, object]:
-    """Stable public serialization helper."""
+    """Return the stable JSON representation used by reports and validators."""
 
-    return asdict(scenario)
+    # ``dataclasses.asdict`` preserves tuples, while a persisted JSON report
+    # necessarily reads them back as lists. Canonicalize here so in-memory and
+    # round-tripped evidence use the same identity representation.
+    return json.loads(json.dumps(asdict(scenario), sort_keys=True))

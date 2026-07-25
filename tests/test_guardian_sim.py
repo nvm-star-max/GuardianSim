@@ -759,6 +759,14 @@ class AdversarialBenchmarkTests(unittest.TestCase):
             validate_gate31_payload(payload, require_complete=False),
             [episode],
         )
+        round_tripped_payload = json.loads(json.dumps(payload))
+        self.assertEqual(
+            validate_gate31_payload(
+                round_tripped_payload,
+                require_complete=False,
+            ),
+            round_tripped_payload["episodes"],
+        )
         with self.assertRaisesRegex(ValueError, "protocol"):
             validate_gate31_payload(
                 {
