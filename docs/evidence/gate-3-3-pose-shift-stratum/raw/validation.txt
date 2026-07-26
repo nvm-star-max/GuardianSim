@@ -1,0 +1,86 @@
+{
+  "evidence_status": "engineering_smoke_not_formal_performance_evidence",
+  "matrix_sha256": "c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983",
+  "protocol_sha256": "5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130",
+  "report": "outputs/gate-3-3-stratum/pose-shift-report.json",
+  "stop_reasons": [],
+  "summary": {
+    "absolute_safe_completion_rate_lift": 0.33333333333333337,
+    "baseline": {
+      "clutter_contact_count": 2,
+      "clutter_contact_rate": 0.3333333333333333,
+      "episode_count": 6,
+      "execution_count": 6,
+      "failure_types": {
+        "clutter_contact": 2,
+        "safe_success": 4
+      },
+      "mean_clutter_clearance_m": 0.026178076570487634,
+      "mean_stability": 0.908395250638326,
+      "safe_completion_count": 4,
+      "safe_completion_rate": 0.6666666666666666,
+      "safe_stop_count": 0,
+      "safe_stop_rate": 0.0,
+      "task_success_count": 4,
+      "task_success_rate": 0.6666666666666666
+    },
+    "episode_count": 6,
+    "guardiansim": {
+      "clutter_contact_count": 0,
+      "clutter_contact_rate": 0.0,
+      "episode_count": 6,
+      "execution_count": 6,
+      "failure_types": {
+        "safe_success": 6
+      },
+      "mean_clutter_clearance_m": 0.0428059349579544,
+      "mean_stability": 0.9052401781082153,
+      "safe_completion_count": 6,
+      "safe_completion_rate": 1.0,
+      "safe_stop_count": 0,
+      "safe_stop_rate": 0.0,
+      "task_success_count": 6,
+      "task_success_rate": 1.0
+    },
+    "strata": {
+      "pose_shift": {
+        "baseline": {
+          "clutter_contact_count": 2,
+          "clutter_contact_rate": 0.3333333333333333,
+          "episode_count": 6,
+          "execution_count": 6,
+          "failure_types": {
+            "clutter_contact": 2,
+            "safe_success": 4
+          },
+          "mean_clutter_clearance_m": 0.026178076570487634,
+          "mean_stability": 0.908395250638326,
+          "safe_completion_count": 4,
+          "safe_completion_rate": 0.6666666666666666,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0,
+          "task_success_count": 4,
+          "task_success_rate": 0.6666666666666666
+        },
+        "guardiansim": {
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 6,
+          "execution_count": 6,
+          "failure_types": {
+            "safe_success": 6
+          },
+          "mean_clutter_clearance_m": 0.0428059349579544,
+          "mean_stability": 0.9052401781082153,
+          "safe_completion_count": 6,
+          "safe_completion_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0,
+          "task_success_count": 6,
+          "task_success_rate": 1.0
+        }
+      }
+    }
+  },
+  "validated_episode_count": 6
+}

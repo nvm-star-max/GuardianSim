@@ -1,0 +1,7 @@
+0c40c6c64004fef1e78d2441ed7482cfba3bf6f30f250444cd0d8ca4dab142a2  outputs/gate-3-3-stratum/preflight.txt
+b04792582e38c0f899807edd279c48c3cd669ac1b1d1084d29f0e8bb8810f086  outputs/gate-3-3-stratum/pose-shift.pid
+740540e7117d89c5a83992929ad3ddd26446ab14165aeb653f264d739f3d1ef3  outputs/gate-3-3-stratum/pose-shift.log
+4b716814efae6f0fe659d5981a2538a6601c964a344b29aa3627b1d996c80413  outputs/gate-3-3-stratum/pose-shift-report.json
+6c6b56c56ed44ce08c3c691f076be4e4f6a70e5442c83bc02b95d9fed37f2ff2  outputs/gate-3-3-stratum/validation.txt
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  outputs/gate-3-3-stratum/validation.exit
+f23d43608549f2c5f41ee1603f9bbcc66b5f3ad2156cb80bd01e7136aed21eb5  outputs/gate-3-3-stratum/final-check.json

@@ -151,3 +151,13 @@ pre-write validator attempts that produced no report, is preserved at
 
 This record does not change the declaration above and is not a formal
 performance claim.
+
+The owner subsequently approved an independent run of the complete
+`pose_shift` stratum. Seeds 501–506 passed partial schema-6 validation with no
+stop reason. Baseline safe completion was 4/6 with two lateral-clutter
+contacts; GuardianSim safe completion was 6/6 with no clutter contact or safe
+stop. The raw evidence is preserved at
+[`evidence/gate-3-3-pose-shift-stratum/README.md`](evidence/gate-3-3-pose-shift-stratum/README.md).
+
+This post-declaration record does not alter the frozen protocol, matrix,
+thresholds, or engineering-only claim boundary.

@@ -796,3 +796,36 @@ Gate decision:
   [`evidence/gate-3-3-smoke/README.md`](evidence/gate-3-3-smoke/README.md).
 - This remains engineering smoke evidence and is excluded from formal
   performance claims.
+
+## 2026-07-27 — Gate 3.3 complete pose-shift stratum
+
+- Owner approved the next major stage after reviewing the two-scenario smoke.
+- Synchronized Radeon Cloud instance `u-13907-735d71cb` to commit `dac822a`.
+- Started a new independent report rather than resuming the two-scenario
+  process across a changed Genesis base-snapshot fingerprint.
+- Ran the first complete frozen stratum, seeds 501–506, in one process:
+  three objects × two clutter layouts.
+- The process completed normally and wrote six atomic schema-6 episodes.
+- Cloud and local strict partial validators both passed 6/6.
+- Frozen protocol and matrix hashes matched the declaration exactly.
+- Frozen stop-reason list was empty.
+- Verified engineering outcomes:
+  - baseline safe completion: `4/6`;
+  - GuardianSim safe completion: `6/6`;
+  - baseline clutter contacts: `2/6`, both in lateral-clutter scenes;
+  - GuardianSim clutter contacts: `0/6`;
+  - GuardianSim safe stops: `0/6`;
+  - mean clearance: baseline `0.026178 m`, GuardianSim `0.042806 m`;
+  - mean stability: baseline `0.908395`, GuardianSim `0.905240`;
+  - mean planning wall time: `230.48 s`.
+- The selector replaced the unsafe nominal action for lateral lemon seed 503
+  and lateral plum seed 505, converting both baseline contacts into safe task
+  completions.
+- Automatic browser download did not create a local file. Transferred the
+  31,184-byte archive as 14 bounded base64 chunks and reconstructed it locally.
+- Cloud and local archive SHA-256 matched:
+  `fba1e73b1bce8da0079547a312b90389f14ce3f41ee631e99b3571f4ceae780c`.
+- Every file in the cloud manifest passed local SHA-256 verification.
+- Evidence:
+  [`evidence/gate-3-3-pose-shift-stratum/README.md`](evidence/gate-3-3-pose-shift-stratum/README.md).
+- Stop before seeds 507–524 for the agreed major-stage direction review.

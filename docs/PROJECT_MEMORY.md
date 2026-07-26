@@ -424,6 +424,28 @@ been inspected.**
   `f2040a53f4fbf2172a94df1003feac1137bcf4684bc9281d60f8991780da83ea`.
 - Preserved evidence:
   [`evidence/gate-3-3-smoke/README.md`](evidence/gate-3-3-smoke/README.md).
+- The owner then approved an independent, one-process run of the complete
+  `pose_shift` stratum rather than attempting a cross-process resume.
+- Cloud commit `dac822a` completed frozen seeds 501–506:
+  - strict partial schema-6 validation passed 6/6;
+  - frozen stop-reason list was empty;
+  - baseline safe completion was 4/6 with clutter contact on the lateral lemon
+    and lateral plum scenes;
+  - GuardianSim safe completion was 6/6 with zero clutter contacts and zero
+    safe stops;
+  - absolute safe-completion lift was `+33.33` percentage points;
+  - mean clearance was `0.026178 m` baseline versus `0.042806 m`
+    GuardianSim;
+  - mean stability was `0.908395` baseline versus `0.905240` GuardianSim;
+  - the selector replaced the unsafe nominal action in both baseline-contact
+    cases;
+  - mean planning time was `230.48 s` per scenario.
+- The cloud evidence archive and locally reconstructed archive matched:
+  `fba1e73b1bce8da0079547a312b90389f14ce3f41ee631e99b3571f4ceae780c`.
+- Evidence:
+  [`evidence/gate-3-3-pose-shift-stratum/README.md`](evidence/gate-3-3-pose-shift-stratum/README.md).
+- This is complete-stratum engineering evidence, not a robustness-rate claim.
+  Seeds 507–524 remain unexecuted pending the next major-stage review.
 
 ## Working agreement
 

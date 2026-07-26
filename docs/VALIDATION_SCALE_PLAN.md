@@ -101,6 +101,13 @@ Implementation status:
 - Seeds 501–502 passed the engineering prefix and strict partial validator with
   no stop reason. Evidence:
   [`evidence/gate-3-3-smoke/README.md`](evidence/gate-3-3-smoke/README.md).
+- The independent complete `pose_shift` stratum (seeds 501–506) passed strict
+  partial schema-6 validation with no stop reason. Baseline safe completion was
+  4/6 with two lateral-clutter contacts; GuardianSim completed 6/6 with zero
+  contacts and zero safe stops. Evidence:
+  [`evidence/gate-3-3-pose-shift-stratum/README.md`](evidence/gate-3-3-pose-shift-stratum/README.md).
+- The remaining three strata have not run. Stop for owner review before
+  spending compute on seeds 507–524.
 
 ### Stage 2 — Hackathon robustness gate
 
