@@ -1,0 +1,184 @@
+# GuardianSim Validation Scale Plan
+
+Status: proposal for owner review after Gate 3.2. This document does not alter
+the frozen Gate 3.2 protocol, thresholds, scenario order, report, or claims.
+
+## Decision
+
+Gate 3.2 is sufficient as a hackathon proof on its frozen test matrix, but it
+is not sufficient for a broad generalization claim.
+
+- The primary sample size is 30 paired scenarios, not 90 independent samples.
+  The three executions per strategy are nested repeatability checks inside
+  each scenario.
+- GuardianSim improved 12 paired scenarios and regressed on none. The exact
+  two-sided McNemar p-value is `0.000488`.
+- A 30/30 rate still has a Wilson 95% confidence interval of approximately
+  `88.65%–100%`. It does not prove a population success rate of 100%.
+- The conclusion must remain: GuardianSim achieved 30/30 repeatable safe
+  completion on the predeclared Gate 3.2 matrix in Genesis simulation on an AMD
+  Radeon GPU.
+
+## External scale references
+
+- LIBERO implementations commonly evaluate 10 tasks with 50 rollouts per task,
+  or 500 rollouts in total:
+  [UniVLA](https://github.com/OpenDriveLab/UniVLA) and
+  [LightVLA](https://github.com/LiAutoAD/LightVLA/blob/main/LIBERO.md).
+- RoboCasa evaluates each task across 50 trials over five fixed scenes:
+  [RoboCasa RSS 2024 paper](https://robocasa.ai/assets/robocasa_rss24.pdf).
+  Its current leaderboard spans 50 tasks and three evaluation splits:
+  [RoboCasa leaderboard](https://robocasa.ai/leaderboard.html).
+- A ManiSkill real-robot PickCube demonstration reports 18/20:
+  [ManiSkill demo gallery](https://maniskill.readthedocs.io/en/latest/user_guide/demos/gallery.html).
+  This supports using 20–30 trials for a focused demonstration, not for a
+  benchmark-wide claim.
+- Recent benchmark analysis cautions that fixed-suite improvements can be
+  statistically fragile or exploit benchmark shortcuts:
+  [What Are We Actually Benchmarking in Robot Manipulation?](https://arxiv.org/abs/2606.04233).
+
+## Staged validation plan
+
+### Stage 0 — Visual proof now
+
+Purpose: let judges and the owner inspect the physical behavior before more
+compute is spent.
+
+- Replay a verified Gate 3.2 recovery case from a fresh scene process.
+- Show the nominal baseline and GuardianSim side by side from the same initial
+  snapshot.
+- Overlay the selected action, clearance, stability, and final safety class.
+- Preserve an MP4 and JSON sidecar.
+- Label it as a visual replay, not as additional formal benchmark evidence.
+
+Exit criteria:
+
+- video decodes successfully;
+- baseline and GuardianSim panels use the frozen scenario configuration;
+- GuardianSim uses the candidate recorded in the formal report;
+- replay metadata and file checksum are preserved.
+
+### Stage 1 — Breadth smoke
+
+Purpose: cheaply detect whether the current action family collapses outside the
+Gate 3.2 geometry before launching a formal run.
+
+- 24 engineering-only scenarios.
+- New seeds and no overlap with Gate 3.1 or Gate 3.2.
+- Stratify four perturbation families:
+  1. target-position and yaw shifts;
+  2. tighter/wider clutter gaps and changed obstacle bearing;
+  3. friction and target-mass extremes;
+  4. perception noise and pose bias.
+- Use one execution per strategy during smoke; do not report these outcomes as
+  final performance.
+- Freeze the Stage 2 matrix only after implementation defects found by this
+  smoke are resolved.
+
+Stop conditions:
+
+- any snapshot mismatch or validator failure;
+- more than 25% GuardianSim task failures;
+- any unexplained collision regression;
+- more than 20% scenarios with no representable hard-safe candidate.
+
+Expected compute:
+
+- approximately 2–4 GPU hours after reusing cached/static action analysis;
+- do not proceed automatically to Stage 2.
+
+### Stage 2 — Hackathon robustness gate
+
+Purpose: support a defensible robustness claim while remaining feasible on the
+available cloud instance.
+
+- 120 new paired scenario units:
+  - 3 target objects;
+  - 2 clutter-layout families;
+  - 4 perturbation strata;
+  - 5 new seeds per cell.
+- Three independent final executions per strategy:
+  360 baseline and 360 GuardianSim executions.
+- One predeclared formal run with a new immutable protocol hash and matrix hash.
+- Keep all Gate 3.2 data out of the Stage 2 estimator.
+
+Primary endpoint:
+
+- paired difference in scenario-level repeatable safe completion.
+
+Secondary endpoints:
+
+- clutter-contact executions;
+- repeatable task completion;
+- safe-stop frequency and correctness;
+- 10th percentile, median, and mean clearance;
+- retained-lift stability;
+- planning and execution latency;
+- results split by object, layout, and perturbation stratum.
+
+Predeclared pass criteria:
+
+- at least `+15` percentage points absolute repeatable-safe-completion lift;
+- lower bound of the paired 95% confidence interval above zero;
+- at least 50% fewer clutter-contact executions;
+- GuardianSim repeatable task completion no more than 5 percentage points below
+  baseline;
+- no hidden threshold or scenario edits after the first formal outcome is
+  observed.
+
+Compute warning:
+
+- Gate 3.2 planning averaged `264.95 s` per scenario.
+- A naive 120-scenario run would require about 8.8 hours for planning alone,
+  before final executions and validation.
+- Stage 2 therefore requires profiling and a correctness-preserving cache or
+  batched rollout design before launch. Speed changes must be validated against
+  the original selector on a predeclared parity set.
+
+### Stage 3 — Public-benchmark adapter
+
+Purpose: make the result comparable with work outside this repository.
+
+Preferred order:
+
+1. ManiSkill manipulation task subset for the fastest integration;
+2. LIBERO subset with 5–10 tasks and 50 rollouts per task;
+3. RoboCasa only after the policy interface and compute budget are stable.
+
+Minimum target:
+
+- 5 held-out tasks × 50 rollouts = 250 task trials;
+- report per-task means, confidence intervals, and aggregate results;
+- preserve benchmark-native success criteria alongside GuardianSim safety
+  metrics.
+
+This stage is separate from the hackathon submission and should not block the
+current demo.
+
+### Stage 4 — Real-robot evidence
+
+Purpose: test the simulator-to-reality claim.
+
+- 2–3 tasks;
+- 20–30 uncut trials per task;
+- fixed camera and safety observer;
+- report interventions, contacts, task success, and safe stops;
+- publish failures and full-length representative videos.
+
+No real-robot claim is permitted before this stage.
+
+## Submission claim boundary
+
+Allowed:
+
+> On a predeclared 30-scenario adversarial Genesis matrix, GuardianSim improved
+> repeatable safe completion from 18/30 to 30/30 and reduced clutter-contact
+> executions from 30 to 0 on an AMD Radeon GPU.
+
+Not allowed:
+
+- “100% safe in general”;
+- “solves robotic grasping”;
+- “validated in the real world”;
+- treating 90 nested executions as 90 independent scenarios;
+- merging visual replay outcomes into the frozen formal report.

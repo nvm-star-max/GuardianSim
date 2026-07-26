@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import Callable
 from math import inf
 
 import numpy as np
@@ -47,20 +48,22 @@ def _aabb_tuple(entity) -> tuple[tuple[float, float, float], tuple[float, float,
 
 
 class _RolloutRecorder:
-    def __init__(self, bundle, *, pick_object: str, sample_every: int = 5) -> None:
+    def __init__(
+        self,
+        bundle,
+        *,
+        pick_object: str,
+        sample_every: int = 5,
+        frame_callback: Callable[[int], None] | None = None,
+    ) -> None:
         self._bundle = bundle
         self._sample_every = max(1, sample_every)
+        self._frame_callback = frame_callback
         self._step = 0
         self._sample_index = 0
         self._hand = bundle.franka.get_link("hand")
-        self._links = [
-            (name, bundle.franka.get_link(name)) for name in _CLEARANCE_LINK_NAMES
-        ]
-        self._obstacles = [
-            (name, entity, False)
-            for name, entity in sorted(bundle.ycb.items())
-            if name != pick_object
-        ]
+        self._links = [(name, bundle.franka.get_link(name)) for name in _CLEARANCE_LINK_NAMES]
+        self._obstacles = [(name, entity, False) for name, entity in sorted(bundle.ycb.items()) if name != pick_object]
         if bundle.table:
             self._obstacles.append(("table_top", bundle.table[0], True))
         self.end_effector_positions: list[tuple[float, float, float]] = []
@@ -70,6 +73,8 @@ class _RolloutRecorder:
 
     def on_step(self, _action) -> None:
         self._step += 1
+        if self._frame_callback is not None:
+            self._frame_callback(self._step)
         if self._step % self._sample_every == 0:
             self.sample()
 
@@ -129,6 +134,7 @@ def run_grasp_candidate(
     *,
     pick_object: str = "011_banana",
     perception_uncertainty: float = 0.05,
+    frame_callback: Callable[[int], None] | None = None,
 ) -> GenesisRolloutMeasurement:
     """Execute approach, grasp, and retained lift for one candidate."""
 
@@ -149,7 +155,11 @@ def run_grasp_candidate(
     )
     grasp_quat = _topdown_quat(grasp_yaw)
     finger_open = min(GRIPPER_OPEN, candidate.gripper_width_m / 2.0)
-    recorder = _RolloutRecorder(bundle, pick_object=pick_object)
+    recorder = _RolloutRecorder(
+        bundle,
+        pick_object=pick_object,
+        frame_callback=frame_callback,
+    )
     reachable = True
 
     try:
