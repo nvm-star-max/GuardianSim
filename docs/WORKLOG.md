@@ -702,3 +702,30 @@ Gate decision:
 - Recommended presentation asset:
   [`demo/gate-3-2-seed-411-explained-v2.mp4`](demo/gate-3-2-seed-411-explained-v2.mp4).
 - Gate 3.2 formal results and thresholds remain unchanged.
+
+## 2026-07-27 — Gate 3.3 multi-factor breadth protocol implemented
+
+- Owner judged the improved visual replay understandable but still visually
+  and technically simple, and authorized the next development stage.
+- Audited the Gate 3.2 architecture and preserved its frozen report,
+  thresholds, protocol hash, and matrix hash.
+- Implemented a new 24-scenario engineering-only matrix on seeds `501–524`,
+  balanced across:
+  - target XY/yaw shifts;
+  - tighter/wider clutter gaps and ±35° obstacle-bearing changes;
+  - friction and target-mass extremes;
+  - deterministic target/obstacle perception bias.
+- Separated true physical positions from perceived planning positions.
+- Added a conservative risk certificate that subtracts the declared
+  target-plus-obstacle position-error bound from measured clearance and records
+  explicit failed safety gates.
+- Added a Genesis smoke runner, schema-6 strict validator, per-stratum stop
+  rules, and seven focused unit tests.
+- Protocol SHA-256:
+  `5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130`.
+- Scenario-matrix SHA-256:
+  `c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983`.
+- Focused Gate 3.3 tests passed 7/7, the full local suite passed 47/47, and all
+  new Python files compiled.
+- No Gate 3.3 cloud outcome has been inspected. Cloud execution is paused for
+  the agreed major-stage route review.

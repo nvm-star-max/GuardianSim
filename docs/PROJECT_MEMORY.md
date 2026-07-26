@@ -377,6 +377,27 @@ Its sidecar records that physics was not re-executed and no statistical trial
 was added. A separate fresh rerender produced only `4.26 mm` Guardian clearance
 and was rejected rather than substituted, preserving the evidence boundary.
 
+**Gate 3.3 is implemented locally and predeclared, but no cloud outcome has
+been inspected.**
+
+- Purpose: turn the single close-clutter demo into a multi-factor embodied
+  safety system without changing Gate 3.2.
+- Matrix: 24 new engineering-only scenarios, seeds `501–524`, covering pose
+  shifts, gap/bearing changes, dynamics extremes, and perception bias.
+- Every stratum covers three objects × two layouts.
+- Planning uses biased perceived poses; Genesis execution uses the true scene.
+- A per-candidate risk certificate subtracts the frozen target-plus-obstacle
+  position-error bound from measured clearance before the existing safety
+  selector may execute an action.
+- Protocol SHA:
+  `5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130`.
+- Matrix SHA:
+  `c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983`.
+- Protocol:
+  [`GATE_3_3_PROTOCOL.md`](GATE_3_3_PROTOCOL.md).
+- No Gate 3.3 cloud run may start until the owner reviews the route, expected
+  visual effect, stop rules, and compute cost.
+
 ## Working agreement
 
 - Maintain [`WORKLOG.md`](WORKLOG.md) as an append-only experiment log.

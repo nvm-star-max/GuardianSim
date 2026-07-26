@@ -1,7 +1,8 @@
 # GuardianSim Validation Scale Plan
 
-Status: proposal for owner review after Gate 3.2. This document does not alter
-the frozen Gate 3.2 protocol, thresholds, scenario order, report, or claims.
+Status: Stage 1 protocol implemented and awaiting owner review before cloud
+execution. This document does not alter the frozen Gate 3.2 protocol,
+thresholds, scenario order, report, or claims.
 
 ## Decision
 
@@ -86,6 +87,17 @@ Expected compute:
 
 - approximately 2–4 GPU hours after reusing cached/static action analysis;
 - do not proceed automatically to Stage 2.
+
+Implementation status:
+
+- Frozen as Gate 3.3 schema 6 in
+  [`GATE_3_3_PROTOCOL.md`](GATE_3_3_PROTOCOL.md).
+- Protocol SHA-256:
+  `5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130`.
+- Matrix SHA-256:
+  `c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983`.
+- Adds true/perceived-pose separation and a per-candidate uncertainty
+  certificate; no cloud outcome has been inspected.
 
 ### Stage 2 — Hackathon robustness gate
 
