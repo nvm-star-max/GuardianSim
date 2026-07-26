@@ -344,6 +344,24 @@ Next gate: owner review of the deployed presentation, followed by competition
 submission copy and a short demo video plan. Do not start another cloud
 benchmark or retune Gate 3.2 before that review.
 
+The first judge-facing visual replay is now complete for Gate 3.2 seed 411.
+It shows the nominal baseline and GuardianSim side by side from the same fresh
+snapshot. Baseline contacted the plum obstacle at zero measured clearance;
+GuardianSim executed the action recorded in the formal report and completed
+safely with `0.017094 m` clearance. The replay is explicitly separate from the
+formal statistical evidence. Its MP4 SHA-256 is
+`a6b8fa20b924268955c7c40e002faf3b048f5de534f3c19a2ba071f0c7a4e3be`,
+and the files are preserved under [`demo/README.md`](demo/README.md).
+
+Gate 3.2's 30 paired scenarios are sufficient for the current frozen-matrix
+hackathon proof, not a broad generalization claim. The primary sample size is
+30 scenarios; three executions per strategy are nested repeatability checks.
+The proposed next validation route is documented in
+[`VALIDATION_SCALE_PLAN.md`](VALIDATION_SCALE_PLAN.md): owner review of the
+video first, then a 24-scenario breadth smoke, followed only if justified by a
+predeclared 120-scenario robustness gate. Do not start that next gate until the
+owner reviews the actual replay and plan.
+
 ## Working agreement
 
 - Maintain [`WORKLOG.md`](WORKLOG.md) as an append-only experiment log.

@@ -636,3 +636,40 @@ Gate decision:
 - Showcase production build, two rendered-HTML tests, and ESLint all passed.
 - Saved and privately deployed Sites production version 2:
   <https://guardiansim-proof.dghcdtddgh.chatgpt.site>.
+
+## 2026-07-26 — Gate 3.2 visual replay and validation-scale review
+
+- Reviewed external evaluation scales before proposing more GPU work:
+  - LIBERO implementations commonly use 50 rollouts per task;
+  - RoboCasa evaluates each task across 50 trials;
+  - 20-run results appear in focused real-robot demonstrations, but do not
+    establish broad benchmark generalization.
+- Recorded the statistical boundary of Gate 3.2:
+  - 30 paired scenarios are the primary sample, while the 90 executions per
+    strategy are nested repeatability checks;
+  - paired discordance is 12 improvements and 0 regressions;
+  - exact two-sided McNemar p-value is `0.000488`;
+  - the 30/30 Wilson 95% interval is approximately `88.65%–100%`.
+- Added [`VALIDATION_SCALE_PLAN.md`](VALIDATION_SCALE_PLAN.md) with staged
+  visual proof, 24-scenario breadth smoke, 120-scenario robustness gate,
+  public-benchmark adapter, and real-robot validation route.
+- Added a frame callback that does not change default formal-run behavior and a
+  side-by-side visual-replay recorder.
+- The first replay attempt exposed an interface mismatch between raw Genesis
+  measurements and normalized candidate metrics. Preserved the cloud failure
+  log, extracted the shared normalization function, and added a regression
+  test.
+- Local tests passed 40/40 after the fix.
+- Replayed Gate 3.2 seed 411 on Radeon Cloud without modifying the formal
+  report:
+  - nominal baseline: clutter contact, `0.000000 m` clearance, `0.936245`
+    stability;
+  - GuardianSim: safe completion, `0.017094 m` clearance, `0.948657`
+    stability.
+- Downloaded the generated MP4 through the browser's native video control and
+  verified its local SHA-256 matched the cloud value:
+  `a6b8fa20b924268955c7c40e002faf3b048f5de534f3c19a2ba071f0c7a4e3be`.
+- Preserved video, sidecar, preview, and claim boundary under
+  [`demo/README.md`](demo/README.md).
+- No new formal benchmark was started; the Radeon Cloud instance remains
+  running.
