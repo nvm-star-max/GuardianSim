@@ -634,3 +634,5 @@ Gate decision:
 - Updated the repository landing page to make Gate 3.2 the current result while
   preserving Gate 3.1 as negative evidence.
 - Showcase production build, two rendered-HTML tests, and ESLint all passed.
+- Saved and privately deployed Sites production version 2:
+  <https://guardiansim-proof.dghcdtddgh.chatgpt.site>.

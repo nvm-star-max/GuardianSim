@@ -337,7 +337,8 @@ The judge-facing showcase and Chinese resume/interview package now use the
 verified Gate 3.2 result. The interactive site presents the preserved Gate 3.1
 failure, frozen Gate 3.2 method, formal outcome, explainable decision taxonomy,
 recovered adversarial cells, and immutable evidence links. Its build, rendered
-HTML tests, and lint checks pass.
+HTML tests, and lint checks pass. Private production version 2 is deployed at
+<https://guardiansim-proof.dghcdtddgh.chatgpt.site>.
 
 Next gate: owner review of the deployed presentation, followed by competition
 submission copy and a short demo video plan. Do not start another cloud
