@@ -403,6 +403,10 @@ been inspected.**
 - The validator fix accepts numerically equivalent pre-serialization tuples
   and real-number scalars while retaining strict JSON validation. Protocol and
   matrix hashes remain unchanged.
+- A second launch reached the same pre-write certificate comparison and exposed
+  `numpy.bool_` normalization missing from that internal comparison. It also
+  produced no report. The project-wide `json_default` adapter is now used for
+  both pre-write and round-tripped certificate validation.
 
 ## Working agreement
 

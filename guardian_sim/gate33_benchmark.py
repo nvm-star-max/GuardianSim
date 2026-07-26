@@ -37,6 +37,7 @@ from guardian_sim.gate32_benchmark import (
 )
 from guardian_sim.models import CandidateMetrics, ClearanceDiagnostic
 from guardian_sim.reference_backend import EntityPose, EpisodeSnapshot
+from guardian_sim.serialization import json_default
 
 GATE33_SCHEMA_VERSION = 6
 GATE33_PROTOCOL_NAME = "gate-3.3-multifactor-uncertainty-breadth-smoke"
@@ -688,16 +689,32 @@ def validate_gate33_payload(
                 ),
             )
             expected_certified_payload = json.loads(
-                json.dumps(asdict(expected_certified), sort_keys=True)
+                json.dumps(
+                    asdict(expected_certified),
+                    default=json_default,
+                    sort_keys=True,
+                )
             )
             expected_certificate_payload = json.loads(
-                json.dumps(asdict(expected_certificate), sort_keys=True)
+                json.dumps(
+                    asdict(expected_certificate),
+                    default=json_default,
+                    sort_keys=True,
+                )
             )
             certified_payload = json.loads(
-                json.dumps(certified, sort_keys=True)
+                json.dumps(
+                    certified,
+                    default=json_default,
+                    sort_keys=True,
+                )
             )
             certificate_payload = json.loads(
-                json.dumps(certificate, sort_keys=True)
+                json.dumps(
+                    certificate,
+                    default=json_default,
+                    sort_keys=True,
+                )
             )
             if (
                 certified_payload != expected_certified_payload

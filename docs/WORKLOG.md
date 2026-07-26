@@ -753,3 +753,16 @@ Gate decision:
   threshold, selector, protocol payload, or matrix.
 - Local tests passed 47/47 after the fix.
 - Protocol and matrix hashes remained exactly unchanged.
+
+- The first fix was deployed as commit `27e6970`; cloud tests again passed
+  47/47.
+- A second physical launch reached certificate normalization but stopped before
+  report writing with:
+  `TypeError: Object of type bool is not JSON serializable`.
+- The value was a NumPy boolean inside the raw clearance diagnostic. The
+  project already had a tested NumPy-aware `json_default` adapter, but the new
+  validator's internal canonical comparison had not used it.
+- Added a NumPy-style boolean regression fixture and routed all internal
+  certificate normalization through `json_default`.
+- Both failed launches remain non-results and their logs are preserved
+  separately. No scenario, threshold, policy, or protocol payload changed.

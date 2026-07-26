@@ -25,6 +25,7 @@ from guardian_sim.gate33_benchmark import (
 )
 from guardian_sim.models import CandidateMetrics, ClearanceDiagnostic
 from guardian_sim.reference_backend import EntityPose, EpisodeSnapshot
+from guardian_sim.serialization import json_default
 
 
 class Gate33Tests(unittest.TestCase):
@@ -189,6 +190,13 @@ class Gate33Tests(unittest.TestCase):
     def test_validator_accepts_partial_report_and_rejects_certificate_drift(
         self,
     ) -> None:
+        class NumpyBoolLike:
+            def item(self) -> bool:
+                return False
+
+            def __bool__(self) -> bool:
+                return self.item()
+
         scenario = generate_gate33_scenarios()[0]
         candidates = generate_gate33_candidates(
             scenario,
@@ -208,7 +216,7 @@ class Gate33Tests(unittest.TestCase):
                 link_name="hand",
                 obstacle_name="018_plum",
                 clearance_m=0.030,
-                overlaps=False,
+                overlaps=NumpyBoolLike(),
                 overlap_depth_m=0.0,
                 support_surface=False,
             ),
@@ -296,7 +304,7 @@ class Gate33Tests(unittest.TestCase):
             "stop_reasons": [],
             "summary": summarize_gate33([episode]),
         }
-        round_tripped = json.loads(json.dumps(payload))
+        round_tripped = json.loads(json.dumps(payload, default=json_default))
 
         self.assertEqual(
             validate_gate33_payload(payload, require_complete=False),
