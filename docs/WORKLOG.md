@@ -766,3 +766,33 @@ Gate decision:
   certificate normalization through `json_default`.
 - Both failed launches remain non-results and their logs are preserved
   separately. No scenario, threshold, policy, or protocol payload changed.
+
+## 2026-07-27 — Gate 3.3 two-scenario cloud smoke complete
+
+- Deployed commit `5ec31f3` after preserving both failed-launch logs.
+- Cloud tests passed 47/47 for the third time.
+- Ran only frozen seeds 501–502 with `--max-new-scenarios 2`.
+- Both atomic checkpoints passed pre-write schema-6 validation.
+- Independent partial validator exited `0` after completion.
+- Verified engineering outcomes:
+  - baseline safe completion: `2/2`;
+  - GuardianSim safe completion: `2/2`;
+  - clutter contacts: zero for both;
+  - safe stops: zero;
+  - mean clearance: baseline `0.062413 m`, GuardianSim `0.090384 m`;
+  - mean stability: baseline `0.881576`, GuardianSim `0.879571`;
+  - both GuardianSim decisions were `higher_margin_alternative`;
+  - selected certified clearances were `0.090467 m` and `0.087469 m` after
+    the frozen 4 mm relative-position uncertainty deduction;
+  - planning wall time was `246.96 s` and `292.70 s`;
+  - no frozen stop condition triggered.
+- Downloaded the 17.2 KB cloud evidence archive through Jupyter.
+- Archive SHA-256 matched cloud and local:
+  `f2040a53f4fbf2172a94df1003feac1137bcf4684bc9281d60f8991780da83ea`.
+- All nine files in the cloud-generated manifest passed locally.
+- Local partial schema-6 validation reproduced the exact cloud summary,
+  protocol hash, matrix hash, completed count, and empty stop-reason list.
+- Evidence:
+  [`evidence/gate-3-3-smoke/README.md`](evidence/gate-3-3-smoke/README.md).
+- This remains engineering smoke evidence and is excluded from formal
+  performance claims.

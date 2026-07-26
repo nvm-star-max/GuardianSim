@@ -407,6 +407,23 @@ been inspected.**
   `numpy.bool_` normalization missing from that internal comparison. It also
   produced no report. The project-wide `json_default` adapter is now used for
   both pre-write and round-tripped certificate validation.
+- The third launch on commit `5ec31f3` completed frozen seeds 501–502:
+  - strict partial schema-6 validation passed 2/2;
+  - baseline and GuardianSim both achieved 2/2 safe completion;
+  - zero clutter contacts and no safe stops;
+  - GuardianSim chose a higher-margin alternative twice;
+  - mean clearance was `0.062413 m` baseline versus `0.090384 m`
+    GuardianSim;
+  - mean stability was `0.881576` baseline versus `0.879571` GuardianSim;
+  - selected certified clearances after the frozen 4 mm uncertainty deduction
+    were `0.090467 m` and `0.087469 m`;
+  - no stop rule triggered.
+- These are engineering-only outcomes and cannot be used as a robustness-rate
+  claim.
+- Downloaded evidence archive SHA-256:
+  `f2040a53f4fbf2172a94df1003feac1137bcf4684bc9281d60f8991780da83ea`.
+- Preserved evidence:
+  [`evidence/gate-3-3-smoke/README.md`](evidence/gate-3-3-smoke/README.md).
 
 ## Working agreement
 

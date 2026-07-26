@@ -1,0 +1,120 @@
+nohup: ignoring input
+Gate 3.3 protocol=5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130 matrix=c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983 scenarios=24
+[38;5;159m[Genesis] [17:36:28] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [17:36:28] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [17:36:28] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [17:36:28] [INFO] Running on [38;5;121m[4m[AMD Radeon Graphics][0m[38;5;159m with backend [38;5;121m[4mgs.amdgpu[0m[38;5;159m. Device memory: [38;5;121m[4m47.98[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [17:36:28] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m1.2.3[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Scene [38;5;121m[3m<1e92a7b>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<7982d64>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Plane>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<f98d530>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m2[0m[38;5;159m, uid: [38;5;121m[3m<fc27871>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m3[0m[38;5;159m, uid: [38;5;121m[3m<18887d3>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m4[0m[38;5;159m, uid: [38;5;121m[3m<f01b3a4>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m5[0m[38;5;159m, uid: [38;5;121m[3m<4ff9905>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m6[0m[38;5;159m, uid: [38;5;121m[3m<96fbec6>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/011_banana/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Convex hull is not accurate enough for collision detection (0.547). Falling back to more expensive convex decomposition (see FileMorph options).[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m7[0m[38;5;159m, uid: [38;5;121m[3m<1b30211>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/014_lemon/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:30] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m8[0m[38;5;159m, uid: [38;5;121m[3m<c36c8ab>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/018_plum/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:31] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m9[0m[38;5;159m, uid: [38;5;121m[3m<35e5523>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/workspace/GuardianSim/assets/ycb/024_bowl/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [17:36:31] [INFO] Convex hull is not accurate enough for collision detection (21.454). Falling back to more expensive convex decomposition (see FileMorph options).[0m
+[38;5;159m[Genesis] [17:36:31] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m10[0m[38;5;159m, uid: [38;5;121m[3m<3603404>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.MJCF(file='/workspace/GuardianSim/assets/robots/franka/panda.xml')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;226m[Genesis] [17:36:31] [WARNING] (MJCF) Approximating tendon by joint actuator for `finger_joint1`[0m
+[38;5;226m[Genesis] [17:36:31] [WARNING] (MJCF) Approximating tendon by joint actuator for `finger_joint2`[0m
+[38;5;159m[Genesis] [17:36:31] [INFO] Building scene [38;5;121m[3m<1e92a7b>[0m[38;5;159m...[0m
+[38;5;226m[Genesis] [17:36:32] [WARNING] Neutral robot position (qpos0) exceeds joint limits.[0m
+[38;5;226m[Genesis] [17:36:32] [WARNING] Constraint solver time constant should be greater than 2*substep_dt. timeconst is changed from `0.005` to `0.01`). Decrease simulation timestep or increase timeconst to avoid altering the original value.[0m
+[38;5;226m[Genesis] [17:36:34] [WARNING] Filtered out geometry pairs causing self-collision for the neutral configuration (qpos0): (38, 43), (39, 43), (46, 53), (47, 52), (48, 55), (49, 54). Consider tuning Morph option 'decompose_robot_error_threshold' or specify dedicated collision meshes. This behavior can be disabled by setting Morph option 'enable_neutral_collision=True'.[0m
+[38;5;159m[Genesis] [17:36:36] [INFO] Compiling simulation kernels...[0m
+[38;5;159m[Genesis] [17:36:49] [INFO] Building visualizer...[0m
+/opt/venv/lib/python3.12/site-packages/torch/utils/_device.py:103: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /app/pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
+  return func(*args, **kwargs)
+/opt/venv/lib/python3.12/site-packages/quadrants/_test_tools/warnings_helper.py:11: UserWarning: cannot create weak reference to 'tuple' object. Template mapper caching disabled.
+  warnings.warn(message)
+[38;5;159m[Genesis] [17:37:54] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [17:37:54] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=1/24 stratum=pose_shift id=pose_shift-011_banana-lateral_clutter-s501 decision=higher_margin_alternative baseline_safe=True guardian_safe=True planning_s=246.96
+[38;5;159m[Genesis] [17:42:20] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [17:42:20] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [17:43:21] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [17:43:21] [INFO] Planning failed. Retrying for 1 environments...[0m
+[38;5;159m[Genesis] [17:45:06] [INFO] RRTConnect planning failed in 1 environments[0m
+[38;5;159m[Genesis] [17:45:06] [INFO] Planning failed. Retrying for 1 environments...[0m
+scenario=2/24 stratum=pose_shift id=pose_shift-011_banana-radial_clutter-s502 decision=higher_margin_alternative baseline_safe=True guardian_safe=True planning_s=292.70
+{
+  "absolute_safe_completion_rate_lift": 0.0,
+  "baseline": {
+    "clutter_contact_count": 0,
+    "clutter_contact_rate": 0.0,
+    "episode_count": 2,
+    "execution_count": 2,
+    "failure_types": {
+      "safe_success": 2
+    },
+    "mean_clutter_clearance_m": 0.06241346150636673,
+    "mean_stability": 0.8815762400627136,
+    "safe_completion_count": 2,
+    "safe_completion_rate": 1.0,
+    "safe_stop_count": 0,
+    "safe_stop_rate": 0.0,
+    "task_success_count": 2,
+    "task_success_rate": 1.0
+  },
+  "episode_count": 2,
+  "guardiansim": {
+    "clutter_contact_count": 0,
+    "clutter_contact_rate": 0.0,
+    "episode_count": 2,
+    "execution_count": 2,
+    "failure_types": {
+      "safe_success": 2
+    },
+    "mean_clutter_clearance_m": 0.09038447804787678,
+    "mean_stability": 0.8795705437660217,
+    "safe_completion_count": 2,
+    "safe_completion_rate": 1.0,
+    "safe_stop_count": 0,
+    "safe_stop_rate": 0.0,
+    "task_success_count": 2,
+    "task_success_rate": 1.0
+  },
+  "strata": {
+    "pose_shift": {
+      "baseline": {
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 2,
+        "execution_count": 2,
+        "failure_types": {
+          "safe_success": 2
+        },
+        "mean_clutter_clearance_m": 0.06241346150636673,
+        "mean_stability": 0.8815762400627136,
+        "safe_completion_count": 2,
+        "safe_completion_rate": 1.0,
+        "safe_stop_count": 0,
+        "safe_stop_rate": 0.0,
+        "task_success_count": 2,
+        "task_success_rate": 1.0
+      },
+      "guardiansim": {
+        "clutter_contact_count": 0,
+        "clutter_contact_rate": 0.0,
+        "episode_count": 2,
+        "execution_count": 2,
+        "failure_types": {
+          "safe_success": 2
+        },
+        "mean_clutter_clearance_m": 0.09038447804787678,
+        "mean_stability": 0.8795705437660217,
+        "safe_completion_count": 2,
+        "safe_completion_rate": 1.0,
+        "safe_stop_count": 0,
+        "safe_stop_rate": 0.0,
+        "task_success_count": 2,
+        "task_success_rate": 1.0
+      }
+    }
+  }
+}
+[38;5;159m[Genesis] [17:46:22] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

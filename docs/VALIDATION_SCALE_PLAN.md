@@ -1,8 +1,8 @@
 # GuardianSim Validation Scale Plan
 
-Status: Stage 1 protocol implemented and awaiting owner review before cloud
-execution. This document does not alter the frozen Gate 3.2 protocol,
-thresholds, scenario order, report, or claims.
+Status: Stage 1 two-scenario engineering prefix complete; full 24-scenario
+smoke awaits owner direction. This document does not alter the frozen Gate 3.2
+protocol, thresholds, scenario order, report, or claims.
 
 ## Decision
 
@@ -97,7 +97,10 @@ Implementation status:
 - Matrix SHA-256:
   `c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983`.
 - Adds true/perceived-pose separation and a per-candidate uncertainty
-  certificate; no cloud outcome has been inspected.
+  certificate.
+- Seeds 501–502 passed the engineering prefix and strict partial validator with
+  no stop reason. Evidence:
+  [`evidence/gate-3-3-smoke/README.md`](evidence/gate-3-3-smoke/README.md).
 
 ### Stage 2 — Hackathon robustness gate
 

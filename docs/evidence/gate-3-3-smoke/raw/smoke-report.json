@@ -1,0 +1,4151 @@
+{
+  "base_snapshot_fingerprint": "6eb3f1cae54a95adbbfc0ed8bacd047fdcc0cba752e423228851589a8b1acf76",
+  "completed_episode_count": 2,
+  "data_source": "independent_genesis_engineering_smoke",
+  "episodes": [
+    {
+      "baseline": {
+        "candidate": {
+          "approach_height_m": 0.1,
+          "candidate_id": "yaw_+00.0_offset_+0.000",
+          "gripper_width_m": 0.06,
+          "lateral_offset_m": 0.0,
+          "target_offset_xy_m": [
+            0.0,
+            0.0
+          ],
+          "target_xyz": [
+            0.30358266830444336,
+            0.23124346137046814,
+            0.7701273560523987
+          ],
+          "yaw_degrees": 0.0
+        },
+        "execution": {
+          "classification": {
+            "clearance_violation": false,
+            "clutter_contact": false,
+            "failure_type": "safe_success",
+            "safe_completion": true,
+            "task_succeeded": true
+          },
+          "execution_metrics": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.06960923969745636,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 47,
+              "step_index": 235,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06960923969745636,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.6525830089082482,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.904201865196228,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011132359504699707,
+              "overlaps": true,
+              "sample_index": 57,
+              "step_index": 285,
+              "support_surface": true
+            }
+          }
+        },
+        "safe_stopped": false
+      },
+      "episode_index": 0,
+      "guardiansim": {
+        "candidate": {
+          "approach_height_m": 0.14,
+          "candidate_id": "yaw_+00.0_retreat_+0.025_approach_+0.140",
+          "gripper_width_m": 0.06,
+          "lateral_offset_m": 0.0,
+          "target_offset_xy_m": [
+            1.5422931483044522e-06,
+            0.02500000037252903
+          ],
+          "target_xyz": [
+            0.30358266830444336,
+            0.23124346137046814,
+            0.7701273560523987
+          ],
+          "yaw_degrees": 0.0
+        },
+        "execution": {
+          "classification": {
+            "clearance_violation": false,
+            "clutter_contact": false,
+            "failure_type": "safe_success",
+            "safe_completion": true,
+            "task_succeeded": true
+          },
+          "execution_metrics": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0944635197520256,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0944635197520256,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.6924788784462141,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8633369207382202,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0010892748832702637,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          }
+        },
+        "safe_stopped": false
+      },
+      "layout": "lateral_clutter",
+      "obstacle_xyz": [
+        0.3035731017589569,
+        0.07617329806089401,
+        0.7763350009918213
+      ],
+      "perceived_obstacle_xyz": [
+        0.3035731017589569,
+        0.07617329806089401,
+        0.7763350009918213
+      ],
+      "perceived_target_xyz": [
+        0.30358266830444336,
+        0.23124346137046814,
+        0.7701273560523987
+      ],
+      "pick_object": "011_banana",
+      "primary_obstacle": "018_plum",
+      "relative_position_uncertainty_bound_m": 0.004,
+      "scenario": {
+        "clutter_gap_m": 0.012,
+        "friction_ratio": 0.9113581110953202,
+        "layout": "lateral_clutter",
+        "obstacle_bearing_offset_deg": 0.0,
+        "obstacle_perception_bound_m": 0.002,
+        "obstacle_pose_bias_m": [
+          0.0,
+          0.0
+        ],
+        "pick_object": "011_banana",
+        "scenario_id": "pose_shift-011_banana-lateral_clutter-s501",
+        "seed": 501,
+        "stratum": "pose_shift",
+        "target_mass_ratio": 1.017758782845955,
+        "target_perception_bound_m": 0.002,
+        "target_pose_bias_m": [
+          0.0,
+          0.0
+        ],
+        "target_xy_jitter_m": [
+          -0.006804959039514138,
+          0.010901026554940671
+        ],
+        "target_yaw_jitter_deg": -10.375700879402086
+      },
+      "scenario_id": "pose_shift-011_banana-lateral_clutter-s501",
+      "seed": 501,
+      "selection": {
+        "confirmed_candidate_ids": [
+          "yaw_+00.0_offset_+0.000",
+          "yaw_+00.0_retreat_+0.025_approach_+0.140",
+          "yaw_-22.5_retreat_+0.000_approach_+0.140",
+          "yaw_-22.5_retreat_+0.025_approach_+0.140",
+          "yaw_-45.0_retreat_+0.025_approach_+0.140"
+        ],
+        "decision": "higher_margin_alternative",
+        "initial_certified_metrics_by_id": {
+          "yaw_+00.0_offset_+0.000": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.06961338222026825,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 47,
+              "step_index": 235,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06561338222026825,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.7099185647568554,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8992278575897217,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011113882064819336,
+              "overlaps": true,
+              "sample_index": 57,
+              "step_index": 285,
+              "support_surface": true
+            }
+          },
+          "yaw_+00.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.09446663409471512,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.09046663409471511,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.6846351973230057,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8627885580062866,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0010889768600463867,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_+22.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.04240728169679642,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.038407281696796414,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7649021424945052,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.9030276536941528,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011049509048461914,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_+22.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.05215941882669901,
+              "link_name": "right_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 30,
+              "step_index": 150,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.04815941882669901,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7741355736064176,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8870029449462891,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0010717511177062988,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_+45.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.02736494690179825,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.023364946901798248,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.7294762943849004,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.9015035629272461,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013875961303710938,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+45.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.053192317485809326,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 49,
+              "step_index": 245,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.04919231748580932,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.7097226179951587,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8818471431732178,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013744831085205078,
+              "overlaps": true,
+              "sample_index": 57,
+              "step_index": 285,
+              "support_surface": true
+            }
+          },
+          "yaw_+67.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.022758912241392676,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 47,
+              "step_index": 235,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.018758912241392676,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.7367718631926048,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.756118893623352,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001181185245513916,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_+67.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0495675653219223,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 50,
+              "step_index": 250,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0455675653219223,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.7276207155487374,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001176595687866211,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_+90.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03515672776786892,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 76,
+              "step_index": 380,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.03115672776786892,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.7563161033189465,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 9.5367431640625e-06,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013952255249023438,
+              "overlaps": true,
+              "sample_index": 52,
+              "step_index": 260,
+              "support_surface": true
+            }
+          },
+          "yaw_+90.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.04292557807012757,
+              "link_name": "right_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 30,
+              "step_index": 150,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.03892557807012757,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.6981412549360657,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "left_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0009610652923583984,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_-22.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.09508562833070755,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.09108562833070755,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.6553377073748479,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.9007716178894043,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.00143510103225708,
+              "overlaps": true,
+              "sample_index": 60,
+              "step_index": 300,
+              "support_surface": true
+            }
+          },
+          "yaw_-22.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07193526113139595,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 28,
+              "step_index": 140,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06793526113139595,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7045798052870211,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8220422267913818,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001390993595123291,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_-45.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07295645773410797,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06895645773410797,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.7059864693343296,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8907294273376465,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011165142059326172,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_-45.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.09796975553035736,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 49,
+              "step_index": 245,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.09396975553035736,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.6827377264418396,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.7093721628189087,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0010831356048583984,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_-67.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.05121396159479834,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 76,
+              "step_index": 380,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.047213961594798334,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.7083488384135292,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 5.960464477539062e-07,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0007687211036682129,
+              "overlaps": true,
+              "sample_index": 60,
+              "step_index": 300,
+              "support_surface": true
+            }
+          },
+          "yaw_-67.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07165117561817169,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 49,
+              "step_index": 245,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06765117561817169,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.681249728857661,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0009728670120239258,
+              "overlaps": true,
+              "sample_index": 53,
+              "step_index": 265,
+              "support_surface": true
+            }
+          },
+          "yaw_-90.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0331750363111496,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 75,
+              "step_index": 375,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.029175036311149597,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.701195388231041,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "left_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011120438575744629,
+              "overlaps": true,
+              "sample_index": 53,
+              "step_index": 265,
+              "support_surface": true
+            }
+          },
+          "yaw_-90.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.05390340834856033,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 49,
+              "step_index": 245,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.04990340834856033,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.694770415963365,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0009382367134094238,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          }
+        },
+        "initial_raw_metrics_by_id": {
+          "yaw_+00.0_offset_+0.000": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.06961338222026825,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 47,
+              "step_index": 235,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06961338222026825,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.7099185647568554,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8992278575897217,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011113882064819336,
+              "overlaps": true,
+              "sample_index": 57,
+              "step_index": 285,
+              "support_surface": true
+            }
+          },
+          "yaw_+00.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.09446663409471512,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.09446663409471512,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.6846351973230057,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8627885580062866,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0010889768600463867,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_+22.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.04240728169679642,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.04240728169679642,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7649021424945052,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.9030276536941528,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011049509048461914,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_+22.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.05215941882669901,
+              "link_name": "right_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 30,
+              "step_index": 150,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.05215941882669901,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7741355736064176,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8870029449462891,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0010717511177062988,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_+45.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.02736494690179825,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.02736494690179825,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.7294762943849004,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.9015035629272461,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013875961303710938,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+45.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.053192317485809326,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 49,
+              "step_index": 245,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.053192317485809326,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.7097226179951587,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8818471431732178,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013744831085205078,
+              "overlaps": true,
+              "sample_index": 57,
+              "step_index": 285,
+              "support_surface": true
+            }
+          },
+          "yaw_+67.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.022758912241392676,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 47,
+              "step_index": 235,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.022758912241392676,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.7367718631926048,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.756118893623352,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001181185245513916,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_+67.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0495675653219223,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 50,
+              "step_index": 250,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0495675653219223,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.7276207155487374,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001176595687866211,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_+90.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03515672776786892,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 76,
+              "step_index": 380,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.03515672776786892,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.7563161033189465,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 9.5367431640625e-06,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013952255249023438,
+              "overlaps": true,
+              "sample_index": 52,
+              "step_index": 260,
+              "support_surface": true
+            }
+          },
+          "yaw_+90.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.04292557807012757,
+              "link_name": "right_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 30,
+              "step_index": 150,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.04292557807012757,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.6981412549360657,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "left_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0009610652923583984,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_-22.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.09508562833070755,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.09508562833070755,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.6553377073748479,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.9007716178894043,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.00143510103225708,
+              "overlaps": true,
+              "sample_index": 60,
+              "step_index": 300,
+              "support_surface": true
+            }
+          },
+          "yaw_-22.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07193526113139595,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 28,
+              "step_index": 140,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.07193526113139595,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7045798052870211,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8220422267913818,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001390993595123291,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_-45.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07295645773410797,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 48,
+              "step_index": 240,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.07295645773410797,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.7059864693343296,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8907294273376465,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011165142059326172,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_-45.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.09796975553035736,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 49,
+              "step_index": 245,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.09796975553035736,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.6827377264418396,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.7093721628189087,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0010831356048583984,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          },
+          "yaw_-67.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.05121396159479834,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 76,
+              "step_index": 380,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.05121396159479834,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.7083488384135292,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 5.960464477539062e-07,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0007687211036682129,
+              "overlaps": true,
+              "sample_index": 60,
+              "step_index": 300,
+              "support_surface": true
+            }
+          },
+          "yaw_-67.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07165117561817169,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 49,
+              "step_index": 245,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.07165117561817169,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.681249728857661,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0009728670120239258,
+              "overlaps": true,
+              "sample_index": 53,
+              "step_index": 265,
+              "support_surface": true
+            }
+          },
+          "yaw_-90.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0331750363111496,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 75,
+              "step_index": 375,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0331750363111496,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.701195388231041,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "left_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011120438575744629,
+              "overlaps": true,
+              "sample_index": 53,
+              "step_index": 265,
+              "support_surface": true
+            }
+          },
+          "yaw_-90.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.05390340834856033,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 49,
+              "step_index": 245,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.05390340834856033,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.694770415963365,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0009382367134094238,
+              "overlaps": true,
+              "sample_index": 55,
+              "step_index": 275,
+              "support_surface": true
+            }
+          }
+        },
+        "initial_risk_certificates_by_id": {
+          "yaw_+00.0_offset_+0.000": {
+            "certified_clearance_lower_bound_m": 0.06561338222026825,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.06961338222026825,
+            "observed_stability": 0.8992278575897217,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+00.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.09046663409471511,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.09446663409471512,
+            "observed_stability": 0.8627885580062866,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+22.5_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.038407281696796414,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.04240728169679642,
+            "observed_stability": 0.9030276536941528,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+22.5_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.04815941882669901,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.05215941882669901,
+            "observed_stability": 0.8870029449462891,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+45.0_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.023364946901798248,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.02736494690179825,
+            "observed_stability": 0.9015035629272461,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+45.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.04919231748580932,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.053192317485809326,
+            "observed_stability": 0.8818471431732178,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+67.5_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.018758912241392676,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.022758912241392676,
+            "observed_stability": 0.756118893623352,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+67.5_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.0455675653219223,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.0495675653219223,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+90.0_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.03115672776786892,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.03515672776786892,
+            "observed_stability": 9.5367431640625e-06,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+90.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.03892557807012757,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.04292557807012757,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-22.5_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.09108562833070755,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.09508562833070755,
+            "observed_stability": 0.9007716178894043,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-22.5_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.06793526113139595,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.07193526113139595,
+            "observed_stability": 0.8220422267913818,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-45.0_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.06895645773410797,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.07295645773410797,
+            "observed_stability": 0.8907294273376465,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-45.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.09396975553035736,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.09796975553035736,
+            "observed_stability": 0.7093721628189087,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-67.5_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.047213961594798334,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.05121396159479834,
+            "observed_stability": 5.960464477539062e-07,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-67.5_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.06765117561817169,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.07165117561817169,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-90.0_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.029175036311149597,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.0331750363111496,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-90.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.04990340834856033,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.05390340834856033,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          }
+        },
+        "observations_by_id": {
+          "yaw_+00.0_offset_+0.000": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.06961338222026825,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 47,
+                "step_index": 235,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.06561338222026825,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.7099185647568554,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8992278575897217,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0011113882064819336,
+                "overlaps": true,
+                "sample_index": 57,
+                "step_index": 285,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.06960955262184143,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 47,
+                "step_index": 235,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.06560955262184143,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.7613402129048794,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9047514200210571,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0011127591133117676,
+                "overlaps": true,
+                "sample_index": 57,
+                "step_index": 285,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.06960711628198624,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 47,
+                "step_index": 235,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.06560711628198623,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6525903494353431,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9054207801818848,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0011140704154968262,
+                "overlaps": true,
+                "sample_index": 57,
+                "step_index": 285,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.06960833817720413,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 47,
+                "step_index": 235,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.06560833817720413,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6602286111144802,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9043866395950317,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0011142492294311523,
+                "overlaps": true,
+                "sample_index": 57,
+                "step_index": 285,
+                "support_surface": true
+              }
+            }
+          ],
+          "yaw_+00.0_retreat_+0.025_approach_+0.140": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09446663409471512,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 48,
+                "step_index": 240,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09046663409471511,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6846351973230057,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8627885580062866,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0010889768600463867,
+                "overlaps": true,
+                "sample_index": 58,
+                "step_index": 290,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09447155147790909,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 48,
+                "step_index": 240,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09047155147790908,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.7285209566366522,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8599561452865601,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0010892152786254883,
+                "overlaps": true,
+                "sample_index": 58,
+                "step_index": 290,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09447027742862701,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 48,
+                "step_index": 240,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09047027742862701,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6861995789238007,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8574247360229492,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0010898709297180176,
+                "overlaps": true,
+                "sample_index": 58,
+                "step_index": 290,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09447139501571655,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 48,
+                "step_index": 240,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09047139501571655,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.7338864221515453,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.861283540725708,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0010895729064941406,
+                "overlaps": true,
+                "sample_index": 58,
+                "step_index": 290,
+                "support_surface": true
+              }
+            }
+          ],
+          "yaw_-22.5_retreat_+0.000_approach_+0.140": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09508562833070755,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 48,
+                "step_index": 240,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09108562833070755,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.6553377073748479,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9007716178894043,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.00143510103225708,
+                "overlaps": true,
+                "sample_index": 60,
+                "step_index": 300,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09508442133665085,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 48,
+                "step_index": 240,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09108442133665084,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.6597871759920884,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9000718593597412,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014371871948242188,
+                "overlaps": true,
+                "sample_index": 59,
+                "step_index": 295,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09508605301380157,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 48,
+                "step_index": 240,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09108605301380157,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.657340905208898,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8999806642532349,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.001437544822692871,
+                "overlaps": true,
+                "sample_index": 59,
+                "step_index": 295,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09508828818798065,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 48,
+                "step_index": 240,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09108828818798065,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.7754488658375753,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9023171663284302,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014363527297973633,
+                "overlaps": true,
+                "sample_index": 59,
+                "step_index": 295,
+                "support_surface": true
+              }
+            }
+          ],
+          "yaw_-22.5_retreat_+0.025_approach_+0.140": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.07193526113139595,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 28,
+                "step_index": 140,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.06793526113139595,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.7045798052870211,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8220422267913818,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.001390993595123291,
+                "overlaps": true,
+                "sample_index": 58,
+                "step_index": 290,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.11378079590541239,
+                "link_name": "link5",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 73,
+                "step_index": 365,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.10978079590541238,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.6797728211468168,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8386749029159546,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0013898015022277832,
+                "overlaps": true,
+                "sample_index": 58,
+                "step_index": 290,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.11374467508217269,
+                "link_name": "link5",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 73,
+                "step_index": 365,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.10974467508217269,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.6663310843762551,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8381015062332153,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0013909339904785156,
+                "overlaps": true,
+                "sample_index": 58,
+                "step_index": 290,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.11371255113881562,
+                "link_name": "link5",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 73,
+                "step_index": 365,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.10971255113881562,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.684458316942199,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8223432302474976,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0013915300369262695,
+                "overlaps": true,
+                "sample_index": 58,
+                "step_index": 290,
+                "support_surface": true
+              }
+            }
+          ],
+          "yaw_-45.0_retreat_+0.025_approach_+0.140": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09796975553035736,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 49,
+                "step_index": 245,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09396975553035736,
+              "grasp_alignment": 0.5,
+              "path_length_m": 0.6827377264418396,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.7093721628189087,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0010831356048583984,
+                "overlaps": true,
+                "sample_index": 55,
+                "step_index": 275,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09798626601696014,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 49,
+                "step_index": 245,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09398626601696014,
+              "grasp_alignment": 0.5,
+              "path_length_m": 0.7277476565141474,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.7380831241607666,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0010840892791748047,
+                "overlaps": true,
+                "sample_index": 55,
+                "step_index": 275,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09803642332553864,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 48,
+                "step_index": 240,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09403642332553863,
+              "grasp_alignment": 0.5,
+              "path_length_m": 0.6789932985028413,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.709342360496521,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0010823607444763184,
+                "overlaps": true,
+                "sample_index": 55,
+                "step_index": 275,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.09594669474659243,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 29,
+                "step_index": 145,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.09194669474659242,
+              "grasp_alignment": 0.5,
+              "path_length_m": 0.670092187317534,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.7404047250747681,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.001082301139831543,
+                "overlaps": true,
+                "sample_index": 55,
+                "step_index": 275,
+                "support_surface": true
+              }
+            }
+          ]
+        },
+        "selected_candidate_id": "yaw_+00.0_retreat_+0.025_approach_+0.140"
+      },
+      "snapshot_fingerprint": "e166071df6a76b272b69035ae3d3bbd829f725d2f7b21e9f372bb671765fe963",
+      "stratum": "pose_shift",
+      "target_xyz": [
+        0.30358266830444336,
+        0.23124346137046814,
+        0.7701273560523987
+      ],
+      "timing": {
+        "baseline_execution_wall_seconds": 7.274575954768807,
+        "guardiansim_execution_wall_seconds": 7.559249094221741,
+        "planning_wall_seconds": 246.96468273131177
+      }
+    },
+    {
+      "baseline": {
+        "candidate": {
+          "approach_height_m": 0.1,
+          "candidate_id": "yaw_+00.0_offset_+0.000",
+          "gripper_width_m": 0.06,
+          "lateral_offset_m": 0.0,
+          "target_offset_xy_m": [
+            0.0,
+            0.0
+          ],
+          "target_xyz": [
+            0.2938675582408905,
+            0.23965299129486084,
+            0.7701265215873718
+          ],
+          "yaw_degrees": 0.0
+        },
+        "execution": {
+          "classification": {
+            "clearance_violation": false,
+            "clutter_contact": false,
+            "failure_type": "safe_success",
+            "safe_completion": true,
+            "task_succeeded": true
+          },
+          "execution_metrics": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0552176833152771,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0552176833152771,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.8107776010042207,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8589506149291992,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0014162659645080566,
+              "overlaps": true,
+              "sample_index": 60,
+              "step_index": 300,
+              "support_surface": true
+            }
+          }
+        },
+        "safe_stopped": false
+      },
+      "episode_index": 1,
+      "guardiansim": {
+        "candidate": {
+          "approach_height_m": 0.14,
+          "candidate_id": "yaw_+22.5_retreat_+0.025_approach_+0.140",
+          "gripper_width_m": 0.06,
+          "lateral_offset_m": 0.0,
+          "target_offset_xy_m": [
+            -0.02500000037252903,
+            -3.0219719064916717e-06
+          ],
+          "target_xyz": [
+            0.2938675582408905,
+            0.23965299129486084,
+            0.7701265215873718
+          ],
+          "yaw_degrees": 22.5
+        },
+        "execution": {
+          "classification": {
+            "clearance_violation": false,
+            "clutter_contact": false,
+            "failure_type": "safe_success",
+            "safe_completion": true,
+            "task_succeeded": true
+          },
+          "execution_metrics": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.08630543634372796,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 31,
+              "step_index": 155,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.08630543634372796,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7020493061127271,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8958041667938232,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0014330744743347168,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          }
+        },
+        "safe_stopped": false
+      },
+      "layout": "radial_clutter",
+      "obstacle_xyz": [
+        0.4489456117153168,
+        0.2396717369556427,
+        0.7763350009918213
+      ],
+      "perceived_obstacle_xyz": [
+        0.4489456117153168,
+        0.2396717369556427,
+        0.7763350009918213
+      ],
+      "perceived_target_xyz": [
+        0.2938675582408905,
+        0.23965299129486084,
+        0.7701265215873718
+      ],
+      "pick_object": "011_banana",
+      "primary_obstacle": "018_plum",
+      "relative_position_uncertainty_bound_m": 0.004,
+      "scenario": {
+        "clutter_gap_m": 0.012,
+        "friction_ratio": 0.911434056959564,
+        "layout": "radial_clutter",
+        "obstacle_bearing_offset_deg": 0.0,
+        "obstacle_perception_bound_m": 0.002,
+        "obstacle_pose_bias_m": [
+          0.0,
+          0.0
+        ],
+        "pick_object": "011_banana",
+        "scenario_id": "pose_shift-011_banana-radial_clutter-s502",
+        "seed": 502,
+        "stratum": "pose_shift",
+        "target_mass_ratio": 1.144214766759925,
+        "target_perception_bound_m": 0.002,
+        "target_pose_bias_m": [
+          0.0,
+          0.0
+        ],
+        "target_xy_jitter_m": [
+          -0.01651309432130553,
+          0.019318872849175973
+        ],
+        "target_yaw_jitter_deg": 25.282410008678703
+      },
+      "scenario_id": "pose_shift-011_banana-radial_clutter-s502",
+      "seed": 502,
+      "selection": {
+        "confirmed_candidate_ids": [
+          "yaw_+00.0_offset_+0.000",
+          "yaw_+00.0_retreat_+0.025_approach_+0.140",
+          "yaw_+22.5_retreat_+0.000_approach_+0.140",
+          "yaw_+22.5_retreat_+0.025_approach_+0.140",
+          "yaw_+45.0_retreat_+0.000_approach_+0.140"
+        ],
+        "decision": "higher_margin_alternative",
+        "initial_certified_metrics_by_id": {
+          "yaw_+00.0_offset_+0.000": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.05521589517593384,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.051215895175933834,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.6889036406324126,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.9045290946960449,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.00141066312789917,
+              "overlaps": true,
+              "sample_index": 60,
+              "step_index": 300,
+              "support_surface": true
+            }
+          },
+          "yaw_+00.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07290684972860409,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 28,
+              "step_index": 140,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06890684972860409,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.6796330489159033,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8852314949035645,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0014758706092834473,
+              "overlaps": true,
+              "sample_index": 65,
+              "step_index": 325,
+              "support_surface": true
+            }
+          },
+          "yaw_+22.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.06721266878348284,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 30,
+              "step_index": 150,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06321266878348283,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7608623528826263,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.902521014213562,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013489723205566406,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+22.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0914688765966269,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 28,
+              "step_index": 140,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0874688765966269,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.6892508896356145,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8958059549331665,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001432955265045166,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+45.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07121621998045387,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 31,
+              "step_index": 155,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06721621998045386,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.9276480528688231,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.9181594848632812,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.00126570463180542,
+              "overlaps": true,
+              "sample_index": 59,
+              "step_index": 295,
+              "support_surface": true
+            }
+          },
+          "yaw_+45.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.030601162490761846,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 27,
+              "step_index": 135,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.026601162490761845,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.7782702387249874,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.9009039402008057,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001063525676727295,
+              "overlaps": true,
+              "sample_index": 57,
+              "step_index": 285,
+              "support_surface": true
+            }
+          },
+          "yaw_+67.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0039324164390563965,
+              "overlaps": true,
+              "sample_index": 28,
+              "step_index": 140,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.9062781923416978,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.6307148933410645,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.000998079776763916,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+67.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03510184281845289,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 23,
+              "step_index": 115,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.03110184281845289,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.9430542101995478,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0008892416954040527,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+90.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0007487237453460693,
+              "overlaps": true,
+              "sample_index": 53,
+              "step_index": 265,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.9851811712391934,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "left_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013564229011535645,
+              "overlaps": true,
+              "sample_index": 72,
+              "step_index": 360,
+              "support_surface": true
+            }
+          },
+          "yaw_+90.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03175734184319926,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.027757341843199262,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.724454937823988,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "left_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0007215142250061035,
+              "overlaps": true,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": true
+            }
+          },
+          "yaw_-22.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03185811638832092,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.027858116388320923,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7799263691167911,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.9074544906616211,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011116266250610352,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_-22.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.056801050901412964,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.05280105090141296,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.6794845886949064,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8961665630340576,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011578798294067383,
+              "overlaps": true,
+              "sample_index": 59,
+              "step_index": 295,
+              "support_surface": true
+            }
+          },
+          "yaw_-45.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.021300435066223145,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.017300435066223144,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.6841161135177656,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8359795808792114,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013520121574401855,
+              "overlaps": true,
+              "sample_index": 59,
+              "step_index": 295,
+              "support_surface": true
+            }
+          },
+          "yaw_-45.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.036400875341156186,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 30,
+              "step_index": 150,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.03240087534115618,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.697070684581745,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8853334188461304,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0015174150466918945,
+              "overlaps": true,
+              "sample_index": 63,
+              "step_index": 315,
+              "support_surface": true
+            }
+          },
+          "yaw_-67.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.007256232656757917,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 67,
+              "step_index": 335,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0032562326567579167,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.7319578911247037,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001071631908416748,
+              "overlaps": true,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": true
+            }
+          },
+          "yaw_-67.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.04582813382148743,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.04182813382148742,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.67751809928057,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.8894681930541992,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013880729675292969,
+              "overlaps": true,
+              "sample_index": 72,
+              "step_index": 360,
+              "support_surface": true
+            }
+          },
+          "yaw_-90.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.01304347843968201,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 51,
+              "step_index": 255,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.00904347843968201,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.6762021700622559,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0007489919662475586,
+              "overlaps": true,
+              "sample_index": 66,
+              "step_index": 330,
+              "support_surface": true
+            }
+          },
+          "yaw_-90.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03022582958846469,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.02622582958846469,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.7278842987779947,
+            "perception_uncertainty": 0.08,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.000739753246307373,
+              "overlaps": true,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": true
+            }
+          }
+        },
+        "initial_raw_metrics_by_id": {
+          "yaw_+00.0_offset_+0.000": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.05521589517593384,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.05521589517593384,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.6889036406324126,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.9045290946960449,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.00141066312789917,
+              "overlaps": true,
+              "sample_index": 60,
+              "step_index": 300,
+              "support_surface": true
+            }
+          },
+          "yaw_+00.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07290684972860409,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 28,
+              "step_index": 140,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.07290684972860409,
+            "grasp_alignment": 1.0,
+            "path_length_m": 0.6796330489159033,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8852314949035645,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0014758706092834473,
+              "overlaps": true,
+              "sample_index": 65,
+              "step_index": 325,
+              "support_surface": true
+            }
+          },
+          "yaw_+22.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.06721266878348284,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 30,
+              "step_index": 150,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.06721266878348284,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7608623528826263,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.902521014213562,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013489723205566406,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+22.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0914688765966269,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 28,
+              "step_index": 140,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0914688765966269,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.6892508896356145,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8958059549331665,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001432955265045166,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+45.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.07121621998045387,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 31,
+              "step_index": 155,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.07121621998045387,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.9276480528688231,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.9181594848632812,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.00126570463180542,
+              "overlaps": true,
+              "sample_index": 59,
+              "step_index": 295,
+              "support_surface": true
+            }
+          },
+          "yaw_+45.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.030601162490761846,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 27,
+              "step_index": 135,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.030601162490761846,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.7782702387249874,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.9009039402008057,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001063525676727295,
+              "overlaps": true,
+              "sample_index": 57,
+              "step_index": 285,
+              "support_surface": true
+            }
+          },
+          "yaw_+67.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0039324164390563965,
+              "overlaps": true,
+              "sample_index": 28,
+              "step_index": 140,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.9062781923416978,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.6307148933410645,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.000998079776763916,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+67.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03510184281845289,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 23,
+              "step_index": 115,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.03510184281845289,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.9430542101995478,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0008892416954040527,
+              "overlaps": true,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": true
+            }
+          },
+          "yaw_+90.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0007487237453460693,
+              "overlaps": true,
+              "sample_index": 53,
+              "step_index": 265,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.0,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.9851811712391934,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "left_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013564229011535645,
+              "overlaps": true,
+              "sample_index": 72,
+              "step_index": 360,
+              "support_surface": true
+            }
+          },
+          "yaw_+90.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03175734184319926,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.03175734184319926,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.724454937823988,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "left_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0007215142250061035,
+              "overlaps": true,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": true
+            }
+          },
+          "yaw_-22.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03185811638832092,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.03185811638832092,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.7799263691167911,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.9074544906616211,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011116266250610352,
+              "overlaps": true,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": true
+            }
+          },
+          "yaw_-22.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.056801050901412964,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.056801050901412964,
+            "grasp_alignment": 0.75,
+            "path_length_m": 0.6794845886949064,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8961665630340576,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0011578798294067383,
+              "overlaps": true,
+              "sample_index": 59,
+              "step_index": 295,
+              "support_surface": true
+            }
+          },
+          "yaw_-45.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.021300435066223145,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 58,
+              "step_index": 290,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.021300435066223145,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.6841161135177656,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8359795808792114,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013520121574401855,
+              "overlaps": true,
+              "sample_index": 59,
+              "step_index": 295,
+              "support_surface": true
+            }
+          },
+          "yaw_-45.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.036400875341156186,
+              "link_name": "left_finger",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 30,
+              "step_index": 150,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.036400875341156186,
+            "grasp_alignment": 0.5,
+            "path_length_m": 0.697070684581745,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8853334188461304,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0015174150466918945,
+              "overlaps": true,
+              "sample_index": 63,
+              "step_index": 315,
+              "support_surface": true
+            }
+          },
+          "yaw_-67.5_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.007256232656757917,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 67,
+              "step_index": 335,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.007256232656757917,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.7319578911247037,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.001071631908416748,
+              "overlaps": true,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": true
+            }
+          },
+          "yaw_-67.5_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.04582813382148743,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.04582813382148743,
+            "grasp_alignment": 0.25,
+            "path_length_m": 0.67751809928057,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.8894681930541992,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0013880729675292969,
+              "overlaps": true,
+              "sample_index": 72,
+              "step_index": 360,
+              "support_surface": true
+            }
+          },
+          "yaw_-90.0_retreat_+0.000_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.01304347843968201,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 51,
+              "step_index": 255,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.01304347843968201,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.6762021700622559,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.0007489919662475586,
+              "overlaps": true,
+              "sample_index": 66,
+              "step_index": 330,
+              "support_surface": true
+            }
+          },
+          "yaw_-90.0_retreat_+0.025_approach_+0.140": {
+            "clearance_diagnostic": {
+              "clearance_m": 0.03022582958846469,
+              "link_name": "hand",
+              "obstacle_name": "018_plum",
+              "overlap_depth_m": 0.0,
+              "overlaps": false,
+              "sample_index": 56,
+              "step_index": 280,
+              "support_surface": false
+            },
+            "collision_margin_m": 0.03022582958846469,
+            "grasp_alignment": 0.0,
+            "path_length_m": 0.7278842987779947,
+            "perception_uncertainty": 0.05,
+            "predicted_stability": 0.0,
+            "reachability": 1.0,
+            "support_contact_diagnostic": {
+              "clearance_m": 0.0,
+              "link_name": "right_finger",
+              "obstacle_name": "table_top",
+              "overlap_depth_m": 0.000739753246307373,
+              "overlaps": true,
+              "sample_index": 73,
+              "step_index": 365,
+              "support_surface": true
+            }
+          }
+        },
+        "initial_risk_certificates_by_id": {
+          "yaw_+00.0_offset_+0.000": {
+            "certified_clearance_lower_bound_m": 0.051215895175933834,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.05521589517593384,
+            "observed_stability": 0.9045290946960449,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+00.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.06890684972860409,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.07290684972860409,
+            "observed_stability": 0.8852314949035645,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+22.5_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.06321266878348283,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.06721266878348284,
+            "observed_stability": 0.902521014213562,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+22.5_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.0874688765966269,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.0914688765966269,
+            "observed_stability": 0.8958059549331665,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+45.0_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.06721621998045386,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.07121621998045387,
+            "observed_stability": 0.9181594848632812,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+45.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.026601162490761845,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.030601162490761846,
+            "observed_stability": 0.9009039402008057,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+67.5_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": -0.004,
+            "failed_gates": [
+              "stability_below_minimum",
+              "physical_overlap",
+              "certified_clearance_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.0,
+            "observed_stability": 0.6307148933410645,
+            "physical_overlap": true,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+67.5_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.03110184281845289,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.03510184281845289,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+90.0_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": -0.004,
+            "failed_gates": [
+              "stability_below_minimum",
+              "physical_overlap",
+              "certified_clearance_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.0,
+            "observed_stability": 0.0,
+            "physical_overlap": true,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_+90.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.027757341843199262,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.03175734184319926,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-22.5_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.027858116388320923,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.03185811638832092,
+            "observed_stability": 0.9074544906616211,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-22.5_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.05280105090141296,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.056801050901412964,
+            "observed_stability": 0.8961665630340576,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-45.0_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.017300435066223144,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.021300435066223145,
+            "observed_stability": 0.8359795808792114,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-45.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.03240087534115618,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.036400875341156186,
+            "observed_stability": 0.8853334188461304,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-67.5_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.0032562326567579167,
+            "failed_gates": [
+              "stability_below_minimum",
+              "certified_clearance_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.007256232656757917,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-67.5_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.04182813382148742,
+            "failed_gates": [],
+            "hard_safe": true,
+            "observed_clearance_m": 0.04582813382148743,
+            "observed_stability": 0.8894681930541992,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-90.0_retreat_+0.000_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.00904347843968201,
+            "failed_gates": [
+              "stability_below_minimum",
+              "certified_clearance_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.01304347843968201,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          },
+          "yaw_-90.0_retreat_+0.025_approach_+0.140": {
+            "certified_clearance_lower_bound_m": 0.02622582958846469,
+            "failed_gates": [
+              "stability_below_minimum"
+            ],
+            "hard_safe": false,
+            "observed_clearance_m": 0.03022582958846469,
+            "observed_stability": 0.0,
+            "physical_overlap": false,
+            "reachable": true,
+            "relative_position_uncertainty_bound_m": 0.004,
+            "required_clearance_m": 0.01,
+            "required_stability": 0.7
+          }
+        },
+        "observations_by_id": {
+          "yaw_+00.0_offset_+0.000": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.05521589517593384,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 73,
+                "step_index": 365,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.051215895175933834,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6889036406324126,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9045290946960449,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.00141066312789917,
+                "overlaps": true,
+                "sample_index": 60,
+                "step_index": 300,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.04766502188302868,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 31,
+                "step_index": 155,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.043665021883028676,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.8568074898042123,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9044122695922852,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014142394065856934,
+                "overlaps": true,
+                "sample_index": 61,
+                "step_index": 305,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.04716463760592409,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 28,
+                "step_index": 140,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.043164637605924094,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6742440001531472,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9043234586715698,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014160871505737305,
+                "overlaps": true,
+                "sample_index": 60,
+                "step_index": 300,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.05113795268948665,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 30,
+                "step_index": 150,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.047137952689486645,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6787130257551793,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.904884934425354,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014151930809020996,
+                "overlaps": true,
+                "sample_index": 61,
+                "step_index": 305,
+                "support_surface": true
+              }
+            }
+          ],
+          "yaw_+00.0_retreat_+0.025_approach_+0.140": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.07290684972860409,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 28,
+                "step_index": 140,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.06890684972860409,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6796330489159033,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8852314949035645,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014758706092834473,
+                "overlaps": true,
+                "sample_index": 65,
+                "step_index": 325,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.050305904387177205,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 30,
+                "step_index": 150,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.0463059043871772,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6874115229400444,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8846008777618408,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014759302139282227,
+                "overlaps": true,
+                "sample_index": 65,
+                "step_index": 325,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.05391813662072795,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 27,
+                "step_index": 135,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.04991813662072794,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.6974833435229135,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8852392435073853,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014753937721252441,
+                "overlaps": true,
+                "sample_index": 65,
+                "step_index": 325,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.08005210757255554,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 73,
+                "step_index": 365,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.07605210757255554,
+              "grasp_alignment": 1.0,
+              "path_length_m": 0.7134669088547582,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8878356218338013,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014750957489013672,
+                "overlaps": true,
+                "sample_index": 65,
+                "step_index": 325,
+                "support_surface": true
+              }
+            }
+          ],
+          "yaw_+22.5_retreat_+0.000_approach_+0.140": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.06721266878348284,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 30,
+                "step_index": 150,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.06321266878348283,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.7608623528826263,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.902521014213562,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0013489723205566406,
+                "overlaps": true,
+                "sample_index": 56,
+                "step_index": 280,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.08528172881300974,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 31,
+                "step_index": 155,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.08128172881300974,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.7540518354718164,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9019851684570312,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0013553500175476074,
+                "overlaps": true,
+                "sample_index": 56,
+                "step_index": 280,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.08583647012710571,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 73,
+                "step_index": 365,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.08183647012710571,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.7119363051583485,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9023737907409668,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0013546943664550781,
+                "overlaps": true,
+                "sample_index": 56,
+                "step_index": 280,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.06217269385788241,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 27,
+                "step_index": 135,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.058172693857882415,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.6928200405917955,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9023904800415039,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0013536810874938965,
+                "overlaps": true,
+                "sample_index": 56,
+                "step_index": 280,
+                "support_surface": true
+              }
+            }
+          ],
+          "yaw_+22.5_retreat_+0.025_approach_+0.140": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.0914688765966269,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 28,
+                "step_index": 140,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.0874688765966269,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.6892508896356145,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8958059549331665,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.001432955265045166,
+                "overlaps": true,
+                "sample_index": 56,
+                "step_index": 280,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.11076468229293823,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 73,
+                "step_index": 365,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.10676468229293823,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.9077428760043195,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8957338333129883,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.001432657241821289,
+                "overlaps": true,
+                "sample_index": 56,
+                "step_index": 280,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.07410072019358821,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 30,
+                "step_index": 150,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.0701007201935882,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.9617670527350003,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.89607834815979,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014340877532958984,
+                "overlaps": true,
+                "sample_index": 56,
+                "step_index": 280,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.0787777612153514,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 26,
+                "step_index": 130,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.0747777612153514,
+              "grasp_alignment": 0.75,
+              "path_length_m": 0.6712415859267916,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.8957839012145996,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0014327764511108398,
+                "overlaps": true,
+                "sample_index": 56,
+                "step_index": 280,
+                "support_surface": true
+              }
+            }
+          ],
+          "yaw_+45.0_retreat_+0.000_approach_+0.140": [
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.07121621998045387,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 31,
+                "step_index": 155,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.06721621998045386,
+              "grasp_alignment": 0.5,
+              "path_length_m": 0.9276480528688231,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9181594848632812,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.00126570463180542,
+                "overlaps": true,
+                "sample_index": 59,
+                "step_index": 295,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.0780843198299408,
+                "link_name": "hand",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 73,
+                "step_index": 365,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.07408431982994079,
+              "grasp_alignment": 0.5,
+              "path_length_m": 0.6947817305017424,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9357672929763794,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.001097261905670166,
+                "overlaps": true,
+                "sample_index": 57,
+                "step_index": 285,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.06563618367143292,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 31,
+                "step_index": 155,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.06163618367143292,
+              "grasp_alignment": 0.5,
+              "path_length_m": 0.8660874146353805,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9115827083587646,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.0012587904930114746,
+                "overlaps": true,
+                "sample_index": 57,
+                "step_index": 285,
+                "support_surface": true
+              }
+            },
+            {
+              "clearance_diagnostic": {
+                "clearance_m": 0.05913423232889914,
+                "link_name": "left_finger",
+                "obstacle_name": "018_plum",
+                "overlap_depth_m": 0.0,
+                "overlaps": false,
+                "sample_index": 24,
+                "step_index": 120,
+                "support_surface": false
+              },
+              "collision_margin_m": 0.055134232328899135,
+              "grasp_alignment": 0.5,
+              "path_length_m": 0.6670662397037148,
+              "perception_uncertainty": 0.08,
+              "predicted_stability": 0.9066015481948853,
+              "reachability": 1.0,
+              "support_contact_diagnostic": {
+                "clearance_m": 0.0,
+                "link_name": "right_finger",
+                "obstacle_name": "table_top",
+                "overlap_depth_m": 0.001043081283569336,
+                "overlaps": true,
+                "sample_index": 56,
+                "step_index": 280,
+                "support_surface": true
+              }
+            }
+          ]
+        },
+        "selected_candidate_id": "yaw_+22.5_retreat_+0.025_approach_+0.140"
+      },
+      "snapshot_fingerprint": "c5b18f142a00c2dc913b4ec08ec451e35ab8db2bf9814d66c526594ce61cd7c8",
+      "stratum": "pose_shift",
+      "target_xyz": [
+        0.2938675582408905,
+        0.23965299129486084,
+        0.7701265215873718
+      ],
+      "timing": {
+        "baseline_execution_wall_seconds": 8.343673466704786,
+        "guardiansim_execution_wall_seconds": 8.684187225066125,
+        "planning_wall_seconds": 292.70366219291463
+      }
+    }
+  ],
+  "protocol": {
+    "approach_height_m": 0.14,
+    "candidate_count": 18,
+    "candidate_yaws_degrees": [
+      -90.0,
+      -67.5,
+      -45.0,
+      -22.5,
+      0.0,
+      22.5,
+      45.0,
+      67.5,
+      90.0
+    ],
+    "confirmation_rollouts": 3,
+    "execution_repeats_per_strategy": 1,
+    "layouts": [
+      "lateral_clutter",
+      "radial_clutter"
+    ],
+    "minimum_physical_clearance_m": 0.01,
+    "minimum_stability": 0.7,
+    "minimum_success_margin": 0.02,
+    "not_a_claim": "outcomes may find implementation defects but are excluded from formal performance claims",
+    "obstacle_retreat_distance_m": 0.025,
+    "perturbation_strata": [
+      "pose_shift",
+      "gap_bearing",
+      "dynamics_extreme",
+      "perception_bias"
+    ],
+    "pick_objects": [
+      "011_banana",
+      "014_lemon",
+      "018_plum"
+    ],
+    "primary_diagnostic": "engineering_safe_completion_rate",
+    "protocol_name": "gate-3.3-multifactor-uncertainty-breadth-smoke",
+    "protocol_sha256": "5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130",
+    "scenario_count": 24,
+    "scenario_matrix_sha256": "c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983",
+    "scenarios_per_stratum": 6,
+    "schema_version": 6,
+    "seed_start": 501,
+    "shortlist_size": 5,
+    "status": "engineering_smoke_not_formal_performance_evidence",
+    "stop_conditions": {
+      "evaluate_after_each_completed_stratum": 6,
+      "guardian_task_failure_rate_above": 0.25,
+      "no_hard_safe_candidate_rate_above": 0.2,
+      "snapshot_or_validator_failure": true,
+      "unexplained_collision_regression": true
+    },
+    "uncertainty_policy": "subtract_sum_of_target_and_obstacle_position_error_bounds",
+    "unsafe_policy": "replace_or_safe_stop"
+  },
+  "requested_episode_count": 24,
+  "schema_version": 6,
+  "seed_start": 501,
+  "stop_reasons": [],
+  "summary": {
+    "absolute_safe_completion_rate_lift": 0.0,
+    "baseline": {
+      "clutter_contact_count": 0,
+      "clutter_contact_rate": 0.0,
+      "episode_count": 2,
+      "execution_count": 2,
+      "failure_types": {
+        "safe_success": 2
+      },
+      "mean_clutter_clearance_m": 0.06241346150636673,
+      "mean_stability": 0.8815762400627136,
+      "safe_completion_count": 2,
+      "safe_completion_rate": 1.0,
+      "safe_stop_count": 0,
+      "safe_stop_rate": 0.0,
+      "task_success_count": 2,
+      "task_success_rate": 1.0
+    },
+    "episode_count": 2,
+    "guardiansim": {
+      "clutter_contact_count": 0,
+      "clutter_contact_rate": 0.0,
+      "episode_count": 2,
+      "execution_count": 2,
+      "failure_types": {
+        "safe_success": 2
+      },
+      "mean_clutter_clearance_m": 0.09038447804787678,
+      "mean_stability": 0.8795705437660217,
+      "safe_completion_count": 2,
+      "safe_completion_rate": 1.0,
+      "safe_stop_count": 0,
+      "safe_stop_rate": 0.0,
+      "task_success_count": 2,
+      "task_success_rate": 1.0
+    },
+    "strata": {
+      "pose_shift": {
+        "baseline": {
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 2,
+          "execution_count": 2,
+          "failure_types": {
+            "safe_success": 2
+          },
+          "mean_clutter_clearance_m": 0.06241346150636673,
+          "mean_stability": 0.8815762400627136,
+          "safe_completion_count": 2,
+          "safe_completion_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0,
+          "task_success_count": 2,
+          "task_success_rate": 1.0
+        },
+        "guardiansim": {
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 2,
+          "execution_count": 2,
+          "failure_types": {
+            "safe_success": 2
+          },
+          "mean_clutter_clearance_m": 0.09038447804787678,
+          "mean_stability": 0.8795705437660217,
+          "safe_completion_count": 2,
+          "safe_completion_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0,
+          "task_success_count": 2,
+          "task_success_rate": 1.0
+        }
+      }
+    }
+  }
+}

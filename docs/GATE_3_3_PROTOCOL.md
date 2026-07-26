@@ -1,7 +1,7 @@
 # Gate 3.3 — Multi-factor Uncertainty Breadth Smoke
 
-Status: **predeclared locally; no Gate 3.3 Radeon Cloud outcome has been
-inspected**
+Status: **frozen before cloud execution; two-scenario engineering smoke now
+complete**
 
 Protocol SHA-256:
 `5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130`
@@ -140,3 +140,14 @@ stored-stop-reason drift.
 - Do not change this protocol after inspecting any Gate 3.3 cloud outcome.
 - All results remain Genesis simulation evidence on an AMD Radeon GPU.
 - Do not proceed automatically to the 120-scenario Stage 2 gate.
+
+## Post-declaration smoke record
+
+After this protocol and its hashes were committed, the owner approved a
+two-scenario engineering prefix. Seeds 501–502 passed partial schema-6
+validation with no stop reason. The raw evidence, including two failed
+pre-write validator attempts that produced no report, is preserved at
+[`evidence/gate-3-3-smoke/README.md`](evidence/gate-3-3-smoke/README.md).
+
+This record does not change the declaration above and is not a formal
+performance claim.
