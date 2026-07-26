@@ -663,24 +663,28 @@ a {
   background: #e8ebee;
 }
 
-.stability-values {
+.stability-values,
+.contact-values {
   display: grid;
   gap: 1.1rem;
   margin-top: 2rem;
 }
 
-.stability-values div {
+.stability-values div,
+.contact-values div {
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(0,0,0,.13);
 }
 
-.stability-values span {
+.stability-values span,
+.contact-values span {
   display: block;
   color: var(--muted);
   font-size: 0.68rem;
 }
 
-.stability-values strong {
+.stability-values strong,
+.contact-values strong {
   font-size: 1.7rem;
   letter-spacing: -0.04em;
 }
@@ -753,6 +757,20 @@ a {
 
 .seed-row strong {
   font-size: 0.85rem;
+}
+
+.recovery-row {
+  grid-template-columns: minmax(150px, 1fr) auto auto auto;
+}
+
+.recovery-row span:nth-child(2) {
+  color: #b94a38;
+  font-weight: 700;
+}
+
+.recovery-row span:last-child {
+  color: #47721d;
+  font-weight: 700;
 }
 
 .architecture-grid {

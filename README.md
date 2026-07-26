@@ -5,20 +5,24 @@ Hackathon. It adds counterfactual action evaluation, explainable risk scoring,
 post-condition monitoring, and bounded failure recovery to a Franka Panda
 manipulation pipeline on Genesis, LeRobot, AMD Radeon GPUs, and ROCm.
 
-The current milestone provides a simulator-independent decision core, a
+The completed system provides a simulator-independent decision core, a
 snapshot-safe Genesis rollout backend, physical candidate measurements, and a
-repeatability-aware robust selector. On Radeon Cloud, the fixed Gate 2.8 policy
-completed 20 paired Genesis episodes with 20/20 success for both the nominal
-baseline and GuardianSim. GuardianSim increased mean non-support clutter
-clearance from `0.04399 m` to `0.07212 m` (`+63.93%`) while recording all
-confirmation observations in a schema-3 report.
+repeatability-aware safety-first selector. The final frozen Gate 3.2 benchmark
+evaluated 30 unseen banana, lemon, and plum clutter scenarios on an AMD Radeon
+GPU. Each strategy received three independent physical executions per
+scenario.
 
-The broader predeclared Gate 3.1 stress test is also complete. Across 30 paired
-banana, lemon, and plum close-clutter episodes, GuardianSim increased mean
-clearance by `43.67%` but achieved 18/30 safe completions versus the nominal
-baseline's 19/30. This negative result is preserved: the current candidate
-family did not generalize to two lateral-clutter cells, and clearance
-improvement alone did not produce a safety-rate improvement.
+GuardianSim achieved 30/30 repeatable safe completions versus 18/30 for the
+nominal baseline (`+40.00` percentage points), improved independent safe
+executions from 58/90 to 90/90, and reduced clutter contacts from 30 to zero.
+Mean clutter clearance increased from `0.023191 m` to `0.046003 m`
+(`+98.36%`). The complete schema-5 report, logs, environment, checksums, and
+failed cross-process resume audit trail are preserved in the repository.
+
+The earlier Gate 3.1 negative result remains part of the evidence. It showed
+that improving clearance alone did not improve safety rate, motivating the
+frozen Gate 3.2 action-space expansion, unsafe-nominal replacement, and
+three-execution repeatability requirement.
 
 ```bash
 python3 -m unittest discover -s tests -v
@@ -47,6 +51,7 @@ Project documents:
 - [`docs/evidence/session-a/README.md`](docs/evidence/session-a/README.md)
 - [`docs/evidence/gate-2-8/README.md`](docs/evidence/gate-2-8/README.md)
 - [`docs/evidence/gate-3-1/README.md`](docs/evidence/gate-3-1/README.md)
+- [`docs/evidence/gate-3-2/README.md`](docs/evidence/gate-3-2/README.md)
 - [`showcase/README.md`](showcase/README.md)
 
 ## Upstream reference

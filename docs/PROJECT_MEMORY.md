@@ -333,9 +333,15 @@ approach direction/height and strengthens execution-repeatability checks. Gate
 - Preserved formal evidence:
   [`evidence/gate-3-2/README.md`](evidence/gate-3-2/README.md).
 
-Next gate: owner review of the verified formal result and preparation of the
-competition submission, demo, and resume presentation. Do not start another
-cloud benchmark or retune Gate 3.2 before that review.
+The judge-facing showcase and Chinese resume/interview package now use the
+verified Gate 3.2 result. The interactive site presents the preserved Gate 3.1
+failure, frozen Gate 3.2 method, formal outcome, explainable decision taxonomy,
+recovered adversarial cells, and immutable evidence links. Its build, rendered
+HTML tests, and lint checks pass.
+
+Next gate: owner review of the deployed presentation, followed by competition
+submission copy and a short demo video plan. Do not start another cloud
+benchmark or retune Gate 3.2 before that review.
 
 ## Working agreement
 

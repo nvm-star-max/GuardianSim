@@ -613,3 +613,24 @@ Gate decision:
   resume audit trail, and smoke/formal separation rationale:
   [`evidence/gate-3-2/README.md`](evidence/gate-3-2/README.md).
 - The Radeon Cloud instance remains running per the owner's instruction.
+
+## 2026-07-26 — Gate 3.2 judge showcase and resume package
+
+- Reworked the existing judge-facing site from the earlier Gate 2.7/2.8 story
+  to the final Gate 3.1 failure → Gate 3.2 frozen fix → formal proof narrative.
+- The first viewport now leads with only verified claims:
+  - repeatable safe completion `18/30` → `30/30`;
+  - absolute lift `+40.00` percentage points;
+  - clutter-contact executions `30` → `0`;
+  - mean clearance `+98.36%`.
+- Updated the interactive 90-second presenter mode, decision taxonomy,
+  adversarial-cell recovery table, architecture explanation, immutable raw
+  evidence links, and explicit simulation-only claim boundary.
+- Replaced the social preview with a project-specific 1200×630 card containing
+  the verified Gate 3.2 metrics.
+- Rewrote `RESUME_SHOWCASE_ZH.md` with one-line, three-bullet, 30-second,
+  90-second, technical architecture, interview Q&A, and claim-boundary
+  variants.
+- Updated the repository landing page to make Gate 3.2 the current result while
+  preserving Gate 3.1 as negative evidence.
+- Showcase production build, two rendered-HTML tests, and ESLint all passed.

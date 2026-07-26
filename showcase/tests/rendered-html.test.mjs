@@ -31,44 +31,33 @@ test("server-renders the GuardianSim evidence story", async () => {
   const html = await response.text();
   assert.match(
     html,
-    /<title>GuardianSim · Repeatability-aware Physical AI<\/title>/i,
+    /<title>GuardianSim · Auditable safety for Physical AI<\/title>/i,
   );
-  assert.match(html, /Simulate twice\./);
-  assert.match(html, /Fail safely\./);
-  assert.match(html, /20\/20/);
-  assert.match(html, /\+63\.93%/);
-  assert.match(html, /240/);
-  assert.match(html, /Gate 2\.7 is not hidden/);
+  assert.match(html, /Choose safer\./);
+  assert.match(html, /Prove it\./);
+  assert.match(html, /30\/30/);
+  assert.match(html, /\+98\.36%/);
+  assert.match(html, /30 to 0 clutter contacts/);
+  assert.match(html, /Failure became protocol/);
   assert.match(html, /No physical-robot deployment claim/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
-test("ships audit evidence and finished site metadata", async () => {
-  const [page, client, layout, packageJson, report] = await Promise.all([
+test("ships audit links and finished site metadata", async () => {
+  const [page, client, layout, packageJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ShowcaseClient.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readFile(
-      new URL("../public/evidence/gate-2-8-report.json", import.meta.url),
-      "utf8",
-    ),
   ]);
 
   assert.match(page, /<ShowcaseClient \/>/);
-  assert.match(client, /gate-2-8-report\.json/);
+  assert.match(client, /formal-report\.json/);
+  assert.match(client, /Gate 3\.2 evidence frozen/);
   assert.match(client, /90s presenter mode/);
   assert.match(layout, /summary_large_image/);
   assert.match(layout, /\/og\.png/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 
-  const evidence = JSON.parse(report);
-  assert.equal(evidence.schema_version, 3);
-  assert.equal(evidence.completed_episode_count, 20);
-  assert.equal(evidence.summary.guardiansim.success_count, 20);
-
   await access(new URL("../public/og.png", import.meta.url));
-  await access(
-    new URL("../public/evidence/gate-2-8-terminal.png", import.meta.url),
-  );
 });
