@@ -1,0 +1,27 @@
+{
+  "baseline": {
+    "clearance_m": 0.0,
+    "failure_type": "clutter_contact",
+    "overlap_depth_m": 0.0014190673828125,
+    "stability": 0.9362447261810303
+  },
+  "guardiansim": {
+    "clearance_m": 0.017094284296035767,
+    "failure_type": "safe_success",
+    "overlap_depth_m": 0.0,
+    "stability": 0.9486573934555054
+  },
+  "kind": "gate32_annotated_presentation_from_verified_replay",
+  "output_fps": 10,
+  "output_video": "outputs/demo/gate-3-2-seed-411-explained-v2.mp4",
+  "output_video_sha256": "2092b9604fa7d37ab9a67bfc9299258e74eb8d2362e9132e38b4e5d65573b6d7",
+  "physics_reexecuted": false,
+  "scenario_id": "014_lemon-lateral_clutter-r01-s411",
+  "seed": 411,
+  "source_frame_count": 111,
+  "source_sidecar": "docs/demo/gate-3-2-seed-411.json",
+  "source_sidecar_sha256": "3df4e90db91b100b8dfb16100c3968c7ed1dd1917f6f3d065c0b9001a04928da",
+  "source_video": "docs/demo/gate-3-2-seed-411.mp4",
+  "source_video_sha256": "a6b8fa20b924268955c7c40e002faf3b048f5de534f3c19a2ba071f0c7a4e3be",
+  "statistical_trial_added": false
+}

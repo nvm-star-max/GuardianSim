@@ -673,3 +673,32 @@ Gate decision:
   [`demo/README.md`](demo/README.md).
 - No new formal benchmark was started; the Radeon Cloud instance remains
   running.
+
+## 2026-07-27 — Judge-readable replay revision
+
+- Owner review correctly found that the first five-second replay made the
+  physical difference too difficult to see:
+  - labels were too small;
+  - the plum obstacle was not identified;
+  - the contact event was not paused;
+  - both strategies lifted the lemon, masking the safety distinction.
+- Tested a fresh high-frame-density rerender. It was rejected as presentation
+  evidence because the Guardian action produced a `0.004260 m` clearance
+  violation in that new process, versus `0.017094 m` in the verified source
+  replay. This diagnostic confirms that a new visual rerun must not silently
+  replace the preserved replay.
+- Implemented presentation-only post-processing of the verified source MP4:
+  - no Genesis initialization or physics execution;
+  - no additional statistical trial;
+  - source MP4 SHA-256 remains
+    `a6b8fa20b924268955c7c40e002faf3b048f5de534f3c19a2ba071f0c7a4e3be`;
+  - output is 2560×1080, 10 FPS, and 18.1 seconds.
+- Added large left/right labels, red/green borders, a projected plum-obstacle
+  marker, action descriptions, phase labels, a two-second contact-frame pause,
+  and a three-second result card.
+- Verified the output in the browser and downloaded it locally.
+- Explained MP4 SHA-256:
+  `2092b9604fa7d37ab9a67bfc9299258e74eb8d2362e9132e38b4e5d65573b6d7`.
+- Recommended presentation asset:
+  [`demo/gate-3-2-seed-411-explained-v2.mp4`](demo/gate-3-2-seed-411-explained-v2.mp4).
+- Gate 3.2 formal results and thresholds remain unchanged.

@@ -362,6 +362,21 @@ video first, then a 24-scenario breadth smoke, followed only if justified by a
 predeclared 120-scenario robustness gate. Do not start that next gate until the
 owner reviews the actual replay and plan.
 
+The recommended judge-facing video is now
+[`demo/gate-3-2-seed-411-explained-v2.mp4`](demo/gate-3-2-seed-411-explained-v2.mp4),
+not the original five-second MP4. It is an 18.1-second, 2560×1080 annotated
+presentation derived only from the verified source replay. It marks the plum
+obstacle, pauses the contact event, and explicitly contrasts:
+
+- baseline: `0°` direct approach, `1.42 mm` overlap, `0 mm` clearance;
+- GuardianSim: `+67.5°` rotated approach, no overlap, `17.09 mm` clearance.
+
+The explained-video SHA-256 is
+`2092b9604fa7d37ab9a67bfc9299258e74eb8d2362e9132e38b4e5d65573b6d7`.
+Its sidecar records that physics was not re-executed and no statistical trial
+was added. A separate fresh rerender produced only `4.26 mm` Guardian clearance
+and was rejected rather than substituted, preserving the evidence boundary.
+
 ## Working agreement
 
 - Maintain [`WORKLOG.md`](WORKLOG.md) as an append-only experiment log.
