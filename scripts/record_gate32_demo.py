@@ -22,7 +22,12 @@ from run_gate31_adversarial_benchmark import RuntimeDynamicsController
 from franka_fruit_pick.build_scene import build_scene
 from franka_fruit_pick.grasp_demo import _settle, _to_numpy
 from franka_fruit_pick.guardian_rollout import run_grasp_candidate
-from franka_fruit_pick.scene_config import get_ycb_assets
+from franka_fruit_pick.scene_config import (
+    VIDEO_CAM_FOV,
+    VIDEO_CAM_LOOKAT,
+    VIDEO_CAM_POS,
+    get_ycb_assets,
+)
 from guardian_sim.adversarial_benchmark import (
     PRIMARY_OBSTACLE_BY_PICK,
     apply_gate31_scenario,
@@ -55,11 +60,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--output",
         default="outputs/demo/gate-3-2-seed-411.mp4",
     )
-    parser.add_argument("--fps", type=int, default=20)
+    parser.add_argument("--fps", type=int, default=12)
     parser.add_argument(
         "--capture-every",
         type=int,
-        default=4,
+        default=2,
         help="capture one rendered frame every N simulator control steps",
     )
     return parser
@@ -93,75 +98,329 @@ class CameraFrameRecorder:
         self.frames.append(_as_rgb_uint8(rendered))
 
 
-def _status_text(classification) -> tuple[str, tuple[int, int, int]]:
-    if classification.safe_completion:
-        return "SAFE", (216, 255, 95)
-    return classification.failure_type.replace("_", " ").upper(), (255, 118, 92)
+def _project_world_to_pixel(
+    point_xyz: tuple[float, float, float],
+    *,
+    width: int,
+    height: int,
+) -> tuple[int, int]:
+    position = np.asarray(VIDEO_CAM_POS, dtype=float)
+    lookat = np.asarray(VIDEO_CAM_LOOKAT, dtype=float)
+    point = np.asarray(point_xyz, dtype=float)
+    forward = lookat - position
+    forward /= np.linalg.norm(forward)
+    right = np.cross(forward, np.asarray((0.0, 0.0, 1.0)))
+    right /= np.linalg.norm(right)
+    camera_up = np.cross(right, forward)
+    relative = point - position
+    depth = max(float(np.dot(relative, forward)), 1e-6)
+    focal = height / (2.0 * np.tan(np.deg2rad(VIDEO_CAM_FOV) / 2.0))
+    x = width / 2.0 + focal * float(np.dot(relative, right)) / depth
+    y = height / 2.0 - focal * float(np.dot(relative, camera_up)) / depth
+    return int(np.clip(x, 0, width - 1)), int(np.clip(y, 0, height - 1))
 
 
-def _panel(
+def _annotate_obstacle(
     frame: np.ndarray,
     *,
-    title: str,
-    candidate_id: str,
-    classification,
-    metrics,
+    obstacle_pixel: tuple[int, int],
+    color: tuple[int, int, int],
+    event_active: bool,
 ) -> np.ndarray:
-    height, width = frame.shape[:2]
-    canvas = np.full((height + 108, width, 3), 13, dtype=np.uint8)
-    canvas[76 : 76 + height] = frame
-    status, status_color = _status_text(classification)
+    annotated = frame.copy()
+    x, y = obstacle_pixel
+    radius = 58 if event_active else 42
+    thickness = 8 if event_active else 5
+    cv2.circle(annotated, (x, y), radius, color, thickness, cv2.LINE_AA)
+    label_x = int(np.clip(x + 70, 24, frame.shape[1] - 330))
+    label_y = int(np.clip(y - 70, 50, frame.shape[0] - 24))
+    cv2.arrowedLine(
+        annotated,
+        (label_x, label_y + 10),
+        (x + 28, y - 28),
+        color,
+        5,
+        cv2.LINE_AA,
+        tipLength=0.18,
+    )
+    cv2.putText(
+        annotated,
+        "PLUM OBSTACLE",
+        (label_x, label_y),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.72,
+        color,
+        3,
+        cv2.LINE_AA,
+    )
+    return annotated
+
+
+def _draw_panel_header(
+    canvas: np.ndarray,
+    *,
+    x_offset: int,
+    width: int,
+    title: str,
+    subtitle: str,
+    color: tuple[int, int, int],
+) -> None:
+    cv2.rectangle(canvas, (x_offset, 160), (x_offset + width, 168), color, -1)
     cv2.putText(
         canvas,
         title,
-        (20, 31),
+        (x_offset + 28, 119),
         cv2.FONT_HERSHEY_SIMPLEX,
-        0.78,
+        1.06,
+        (250, 250, 250),
+        3,
+        cv2.LINE_AA,
+    )
+    cv2.putText(
+        canvas,
+        subtitle,
+        (x_offset + 30, 151),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.65,
+        color,
+        2,
+        cv2.LINE_AA,
+    )
+
+
+def _draw_footer(
+    canvas: np.ndarray,
+    *,
+    x_offset: int,
+    width: int,
+    y_offset: int,
+    outcome: str,
+    metric_line: str,
+    action_line: str,
+    color: tuple[int, int, int],
+) -> None:
+    cv2.putText(
+        canvas,
+        outcome,
+        (x_offset + 28, y_offset + 66),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        1.18,
+        color,
+        4,
+        cv2.LINE_AA,
+    )
+    cv2.putText(
+        canvas,
+        metric_line,
+        (x_offset + 30, y_offset + 112),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.82,
         (245, 245, 245),
         2,
         cv2.LINE_AA,
     )
     cv2.putText(
         canvas,
-        status,
-        (20, 61),
+        action_line,
+        (x_offset + 30, y_offset + 154),
         cv2.FONT_HERSHEY_SIMPLEX,
-        0.62,
-        status_color,
+        0.70,
+        (185, 192, 204),
         2,
         cv2.LINE_AA,
     )
-    detail = f"{candidate_id}  clearance={metrics.collision_margin_m:.3f}m  stability={metrics.predicted_stability:.3f}"
-    cv2.putText(
+    cv2.rectangle(
         canvas,
-        detail,
-        (20, height + 99),
-        cv2.FONT_HERSHEY_SIMPLEX,
-        0.42,
-        (205, 210, 218),
-        1,
-        cv2.LINE_AA,
+        (x_offset + 4, y_offset + 8),
+        (x_offset + width - 4, y_offset + 174),
+        color,
+        4,
     )
-    return canvas
+
+
+def _phase_label(index: int, frame_count: int) -> str:
+    ratio = index / max(frame_count - 1, 1)
+    if ratio < 0.12:
+        return "SAME INITIAL STATE"
+    if ratio < 0.56:
+        return "APPROACH"
+    if ratio < 0.78:
+        return "GRASP"
+    return "LIFT + SAFETY CHECK"
 
 
 def _compose_video(
     *,
     baseline_frames: list[np.ndarray],
     guardian_frames: list[np.ndarray],
-    baseline_candidate_id: str,
-    guardian_candidate_id: str,
-    baseline_classification,
-    guardian_classification,
     baseline_metrics,
     guardian_metrics,
     scenario_label: str,
+    obstacle_xyz: tuple[float, float, float],
+    capture_every: int,
+    baseline_yaw_degrees: float,
+    guardian_yaw_degrees: float,
     output_path: Path,
     fps: int,
 ) -> None:
     if not baseline_frames or not guardian_frames:
         raise RuntimeError("both strategies must produce rendered frames")
     frame_count = max(len(baseline_frames), len(guardian_frames))
+    height, width = baseline_frames[0].shape[:2]
+    if guardian_frames[0].shape[:2] != (height, width):
+        raise RuntimeError("both panels must use the same camera resolution")
+    obstacle_pixel = _project_world_to_pixel(
+        obstacle_xyz,
+        width=width,
+        height=height,
+    )
+    header_height = 170
+    footer_height = 190
+    output_height = header_height + height + footer_height
+    output_width = width * 2
+    baseline_event_step = (
+        baseline_metrics.clearance_diagnostic.step_index
+        if baseline_metrics.clearance_diagnostic is not None
+        else frame_count * capture_every
+    )
+    guardian_event_step = (
+        guardian_metrics.clearance_diagnostic.step_index
+        if guardian_metrics.clearance_diagnostic is not None
+        else frame_count * capture_every
+    )
+    baseline_event_index = min(frame_count - 1, baseline_event_step // capture_every)
+    guardian_event_index = min(frame_count - 1, guardian_event_step // capture_every)
+    red = (82, 92, 255)
+    green = (95, 255, 144)
+
+    def compose(index: int, *, freeze_label: str | None = None) -> np.ndarray:
+        baseline_frame = baseline_frames[min(index, len(baseline_frames) - 1)]
+        guardian_frame = guardian_frames[min(index, len(guardian_frames) - 1)]
+        baseline_active = index >= baseline_event_index
+        guardian_active = index >= guardian_event_index
+        baseline_panel = _annotate_obstacle(
+            baseline_frame,
+            obstacle_pixel=obstacle_pixel,
+            color=red,
+            event_active=baseline_active,
+        )
+        guardian_panel = _annotate_obstacle(
+            guardian_frame,
+            obstacle_pixel=obstacle_pixel,
+            color=green,
+            event_active=guardian_active,
+        )
+        combined = np.full((output_height, output_width, 3), 12, dtype=np.uint8)
+        combined[header_height : header_height + height, :width] = baseline_panel
+        combined[header_height : header_height + height, width:] = guardian_panel
+        cv2.rectangle(
+            combined,
+            (0, header_height),
+            (width - 1, header_height + height - 1),
+            red if baseline_active else (80, 80, 90),
+            10,
+        )
+        cv2.rectangle(
+            combined,
+            (width, header_height),
+            (output_width - 1, header_height + height - 1),
+            green if guardian_active else (80, 80, 90),
+            10,
+        )
+        cv2.line(
+            combined,
+            (width, 0),
+            (width, output_height),
+            (240, 240, 240),
+            4,
+        )
+        cv2.putText(
+            combined,
+            "SAME SCENE. SAME START. DIFFERENT GRASP.",
+            (34, 48),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            1.18,
+            (245, 245, 245),
+            4,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            combined,
+            scenario_label,
+            (36, 88),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.67,
+            (182, 190, 205),
+            2,
+            cv2.LINE_AA,
+        )
+        phase = freeze_label or _phase_label(index, frame_count)
+        phase_width = cv2.getTextSize(
+            phase,
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.86,
+            3,
+        )[0][0]
+        cv2.putText(
+            combined,
+            phase,
+            (output_width - phase_width - 34, 58),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.86,
+            (255, 220, 104),
+            3,
+            cv2.LINE_AA,
+        )
+        _draw_panel_header(
+            combined,
+            x_offset=0,
+            width=width,
+            title="LEFT  |  NOMINAL BASELINE",
+            subtitle="Straight-down grasp",
+            color=red,
+        )
+        _draw_panel_header(
+            combined,
+            x_offset=width,
+            width=width,
+            title="RIGHT  |  GUARDIANSIM",
+            subtitle="Obstacle-aware rotated grasp",
+            color=green,
+        )
+        footer_y = header_height + height
+        overlap_mm = (
+            baseline_metrics.clearance_diagnostic.overlap_depth_m * 1000.0
+            if baseline_metrics.clearance_diagnostic is not None
+            else 0.0
+        )
+        _draw_footer(
+            combined,
+            x_offset=0,
+            width=width,
+            y_offset=footer_y,
+            outcome="CONTACT / COLLISION",
+            metric_line=(
+                f"Clearance 0.0 mm  |  overlap {overlap_mm:.2f} mm  |  "
+                f"stability {baseline_metrics.predicted_stability:.3f}"
+            ),
+            action_line=f"Action: yaw {baseline_yaw_degrees:+.1f} deg, direct approach",
+            color=red,
+        )
+        _draw_footer(
+            combined,
+            x_offset=width,
+            width=width,
+            y_offset=footer_y,
+            outcome="SAFE CLEARANCE",
+            metric_line=(
+                f"Clearance {guardian_metrics.collision_margin_m * 1000.0:.1f} mm  |  "
+                f"no overlap  |  stability {guardian_metrics.predicted_stability:.3f}"
+            ),
+            action_line=f"Action: yaw {guardian_yaw_degrees:+.1f} deg, raised approach",
+            color=green,
+        )
+        return combined
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with imageio.get_writer(
         output_path,
@@ -173,35 +432,18 @@ def _compose_video(
         pixelformat="yuv420p",
         macro_block_size=2,
     ) as writer:
+        first_frame = compose(0, freeze_label="WATCH THE PLUM OBSTACLE")
+        for _ in range(fps * 2):
+            writer.append_data(first_frame)
         for index in range(frame_count):
-            baseline_frame = baseline_frames[min(index, len(baseline_frames) - 1)]
-            guardian_frame = guardian_frames[min(index, len(guardian_frames) - 1)]
-            baseline_panel = _panel(
-                baseline_frame,
-                title="NOMINAL BASELINE",
-                candidate_id=baseline_candidate_id,
-                classification=baseline_classification,
-                metrics=baseline_metrics,
-            )
-            guardian_panel = _panel(
-                guardian_frame,
-                title="GUARDIANSIM",
-                candidate_id=guardian_candidate_id,
-                classification=guardian_classification,
-                metrics=guardian_metrics,
-            )
-            combined = np.concatenate([baseline_panel, guardian_panel], axis=1)
-            cv2.putText(
-                combined,
-                scenario_label,
-                (combined.shape[1] // 2 - 210, 31),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.52,
-                (216, 255, 95),
-                1,
-                cv2.LINE_AA,
-            )
-            writer.append_data(combined)
+            writer.append_data(compose(index))
+            if index == baseline_event_index:
+                freeze = compose(index, freeze_label="PAUSE: LEFT HAND CONTACTS PLUM")
+                for _ in range(fps * 2):
+                    writer.append_data(freeze)
+        final_frame = compose(frame_count - 1, freeze_label="RESULT: CONTACT vs SAFE")
+        for _ in range(fps * 3):
+            writer.append_data(final_frame)
 
 
 def main() -> None:
@@ -306,13 +548,13 @@ def main() -> None:
     _compose_video(
         baseline_frames=baseline_recorder.frames,
         guardian_frames=guardian_recorder.frames,
-        baseline_candidate_id=nominal.candidate_id,
-        guardian_candidate_id=guardian.candidate_id,
-        baseline_classification=baseline_classification,
-        guardian_classification=guardian_classification,
         baseline_metrics=baseline_metrics,
         guardian_metrics=guardian_metrics,
         scenario_label=(f"VISUAL REPLAY · seed {scenario.seed} · {scenario.pick_object} · {scenario.layout}"),
+        obstacle_xyz=obstacle_xyz,
+        capture_every=args.capture_every,
+        baseline_yaw_degrees=nominal.yaw_degrees,
+        guardian_yaw_degrees=guardian.yaw_degrees,
         output_path=output_path,
         fps=args.fps,
     )
