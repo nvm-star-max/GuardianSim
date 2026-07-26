@@ -395,8 +395,14 @@ been inspected.**
   `c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983`.
 - Protocol:
   [`GATE_3_3_PROTOCOL.md`](GATE_3_3_PROTOCOL.md).
-- No Gate 3.3 cloud run may start until the owner reviews the route, expected
-  visual effect, stop rules, and compute cost.
+- Owner approved the two-scenario cloud smoke after reviewing the route.
+- The first launch executed scenario 501 physically but the schema-6 validator
+  rejected the pre-serialization in-memory tuple/NumPy pose representation
+  before writing any report. This is an engineering interface defect, not a
+  physical outcome; the failure log must be preserved.
+- The validator fix accepts numerically equivalent pre-serialization tuples
+  and real-number scalars while retaining strict JSON validation. Protocol and
+  matrix hashes remain unchanged.
 
 ## Working agreement
 

@@ -729,3 +729,27 @@ Gate decision:
   new Python files compiled.
 - No Gate 3.3 cloud outcome has been inspected. Cloud execution is paused for
   the agreed major-stage route review.
+
+## 2026-07-27 — Gate 3.3 first cloud launch exposed write-boundary defect
+
+- Owner approved the two-scenario engineering smoke.
+- Radeon Cloud preflight confirmed:
+  - instance `u-13907-735d71cb` remained ready;
+  - AMD Radeon GPU was visible;
+  - cloud repository had no local changes.
+- Switched the detached cloud checkout from `c9d3cd1` to frozen Gate 3.3
+  commit `2edd268`.
+- Cloud tests passed 47/47 before launch.
+- The first process completed the physical work for scenario 501 but exited
+  before the first atomic report write:
+  `ValueError: Gate 3.3 episode 0 has malformed pose evidence`.
+- Root cause: the strict validator accepted only JSON-round-tripped
+  list/native-float poses, while the writer validates the equivalent in-memory
+  tuple/NumPy-real representation before serialization.
+- No report or outcome claim was produced. The raw `smoke.log` is retained on
+  the cloud instance.
+- Added a pre-serialization regression assertion and normalized equivalent
+  tuple/list containers during validation. The fix changes no scenario,
+  threshold, selector, protocol payload, or matrix.
+- Local tests passed 47/47 after the fix.
+- Protocol and matrix hashes remained exactly unchanged.

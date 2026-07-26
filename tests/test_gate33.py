@@ -257,10 +257,10 @@ class Gate33Tests(unittest.TestCase):
             "primary_obstacle": PRIMARY_OBSTACLE_BY_PICK[scenario.pick_object],
             "scenario": gate33_scenario_asdict(scenario),
             "snapshot_fingerprint": "gate33-fingerprint",
-            "target_xyz": [0.50, 0.0, 0.77],
-            "obstacle_xyz": [0.50, 0.10, 0.77],
-            "perceived_target_xyz": [0.50, 0.0, 0.77],
-            "perceived_obstacle_xyz": [0.50, 0.10, 0.77],
+            "target_xyz": (0.50, 0.0, 0.77),
+            "obstacle_xyz": (0.50, 0.10, 0.77),
+            "perceived_target_xyz": (0.50, 0.0, 0.77),
+            "perceived_obstacle_xyz": (0.50, 0.10, 0.77),
             "relative_position_uncertainty_bound_m": (
                 scenario.relative_position_uncertainty_bound_m
             ),
@@ -298,6 +298,10 @@ class Gate33Tests(unittest.TestCase):
         }
         round_tripped = json.loads(json.dumps(payload))
 
+        self.assertEqual(
+            validate_gate33_payload(payload, require_complete=False),
+            payload["episodes"],
+        )
         self.assertEqual(
             validate_gate33_payload(round_tripped, require_complete=False),
             round_tripped["episodes"],

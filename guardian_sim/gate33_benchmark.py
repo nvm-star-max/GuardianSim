@@ -9,6 +9,7 @@ import random
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass, fields, replace
+from numbers import Real
 from statistics import fmean
 
 from guardian_sim.adversarial_benchmark import (
@@ -612,9 +613,9 @@ def validate_gate33_payload(
             "perceived_obstacle_xyz",
         )
         if any(
-            not isinstance(episode.get(key), list)
+            not isinstance(episode.get(key), (list, tuple))
             or len(episode[key]) != 3
-            or not all(isinstance(value, (int, float)) for value in episode[key])
+            or not all(isinstance(value, Real) for value in episode[key])
             for key in position_fields
         ):
             raise ValueError(
@@ -692,9 +693,15 @@ def validate_gate33_payload(
             expected_certificate_payload = json.loads(
                 json.dumps(asdict(expected_certificate), sort_keys=True)
             )
+            certified_payload = json.loads(
+                json.dumps(certified, sort_keys=True)
+            )
+            certificate_payload = json.loads(
+                json.dumps(certificate, sort_keys=True)
+            )
             if (
-                certified != expected_certified_payload
-                or certificate != expected_certificate_payload
+                certified_payload != expected_certified_payload
+                or certificate_payload != expected_certificate_payload
             ):
                 raise ValueError(
                     f"Gate 3.3 episode {index} certificate/metric mismatch"
