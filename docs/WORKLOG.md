@@ -558,3 +558,16 @@ Gate decision:
 - Automatic browser download was blocked by browser security policy. The
   archive remains visible in the Jupyter file browser for one manual owner
   download; no formal run has started.
+
+## 2026-07-26 — Gate 3.2 smoke evidence retrieved and verified locally
+
+- Downloaded the 14 KB cloud archive through the owner-controlled Jupyter UI.
+- Archive SHA-256:
+  `f2545cfe89708e2626976d357eb7aabab0b68c0b45913005a23675878b2a61dd`.
+- All four raw files passed the cloud-generated SHA-256 manifest locally.
+- The local schema-5 validator reproduced the cloud protocol SHA, completed
+  episode count `2`, and complete stored summary exactly.
+- Local tests passed 39/39.
+- Raw and local validation evidence:
+  [`evidence/gate-3-2-smoke/README.md`](evidence/gate-3-2-smoke/README.md).
+- No formal Gate 3.2 scenario beyond the two engineering smoke seeds has run.

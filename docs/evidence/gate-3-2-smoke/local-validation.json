@@ -1,0 +1,111 @@
+{
+  "protocol_sha256": "8f23247001e05f39817225ed13f028321fbb9b9c694aaacd5b987fe61ee1fb3c",
+  "report": "smoke-report.json",
+  "summary": {
+    "absolute_repeatable_safe_completion_rate_lift": 0.0,
+    "baseline": {
+      "candidate_selections": {
+        "yaw_+00.0_offset_+0.000": 2
+      },
+      "clutter_contact_count": 0,
+      "clutter_contact_rate": 0.0,
+      "episode_count": 2,
+      "execution_count": 6,
+      "execution_safe_completion_count": 6,
+      "execution_safe_completion_rate": 1.0,
+      "execution_task_success_count": 6,
+      "execution_task_success_rate": 1.0,
+      "failure_types": {
+        "safe_success": 2
+      },
+      "mean_clutter_clearance_m": 0.04797320564587911,
+      "mean_stability": 0.9020318587621053,
+      "repeatable_safe_completion_count": 2,
+      "repeatable_safe_completion_rate": 1.0,
+      "repeatable_task_success_count": 2,
+      "repeatable_task_success_rate": 1.0,
+      "safe_stop_count": 0,
+      "safe_stop_rate": 0.0
+    },
+    "cells": {
+      "011_banana/lateral_clutter": {
+        "baseline": {
+          "candidate_selections": {
+            "yaw_+00.0_offset_+0.000": 2
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 2,
+          "execution_count": 6,
+          "execution_safe_completion_count": 6,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 6,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 2
+          },
+          "mean_clutter_clearance_m": 0.04797320564587911,
+          "mean_stability": 0.9020318587621053,
+          "repeatable_safe_completion_count": 2,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 2,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        },
+        "guardiansim": {
+          "candidate_selections": {
+            "yaw_-22.5_retreat_+0.025_approach_+0.140": 1,
+            "yaw_-45.0_retreat_+0.000_approach_+0.140": 1
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 2,
+          "execution_count": 6,
+          "execution_safe_completion_count": 6,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 6,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 2
+          },
+          "mean_clutter_clearance_m": 0.09271644196321947,
+          "mean_stability": 0.8607384562492371,
+          "repeatable_safe_completion_count": 2,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 2,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        }
+      }
+    },
+    "episode_count": 2,
+    "guardiansim": {
+      "candidate_selections": {
+        "yaw_-22.5_retreat_+0.025_approach_+0.140": 1,
+        "yaw_-45.0_retreat_+0.000_approach_+0.140": 1
+      },
+      "clutter_contact_count": 0,
+      "clutter_contact_rate": 0.0,
+      "episode_count": 2,
+      "execution_count": 6,
+      "execution_safe_completion_count": 6,
+      "execution_safe_completion_rate": 1.0,
+      "execution_task_success_count": 6,
+      "execution_task_success_rate": 1.0,
+      "failure_types": {
+        "safe_success": 2
+      },
+      "mean_clutter_clearance_m": 0.09271644196321947,
+      "mean_stability": 0.8607384562492371,
+      "repeatable_safe_completion_count": 2,
+      "repeatable_safe_completion_rate": 1.0,
+      "repeatable_task_success_count": 2,
+      "repeatable_task_success_rate": 1.0,
+      "safe_stop_count": 0,
+      "safe_stop_rate": 0.0
+    }
+  },
+  "validated_episode_count": 2
+}

@@ -306,13 +306,14 @@ result has been run or inspected.**
     three final executions per strategy passed the partial schema-5 validator.
 - These two smoke episodes are an engineering check only and must not be used
   as a competition performance claim.
-- The raw cloud bundle is
-  `outputs/gate-3-2/gate-3-2-smoke-evidence.tar.gz` on instance
-  `u-13907-735d71cb`. Browser download requires one manual owner action before
-  the raw files can be committed locally.
+- The raw cloud bundle was downloaded and its four-file SHA-256 manifest passed
+  locally. The local schema-5 validator reproduced the cloud protocol,
+  completed count, and full summary exactly; local tests passed 39/39.
+- Preserved evidence:
+  [`evidence/gate-3-2-smoke/README.md`](evidence/gate-3-2-smoke/README.md).
 
-Next gate: retrieve and verify the smoke evidence bundle locally, then owner
-review. Do not start the full Gate 3.2 run until both are complete.
+Next gate: owner review of smoke quality and formal-run economics. Do not start
+the full Gate 3.2 run until that review is complete.
 
 ## Working agreement
 

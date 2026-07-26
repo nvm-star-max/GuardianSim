@@ -1,7 +1,7 @@
 # Gate 3.2 Radeon Cloud Engineering Smoke
 
-Status: two-scenario prefix complete and schema-5-valid; raw archive retrieval
-pending one manual browser download.
+Status: two-scenario prefix complete, raw evidence preserved, and independently
+schema-5-validated on both Radeon Cloud and local macOS.
 
 This smoke used frozen seeds `401–402` and commit `67d3235` on Radeon Cloud
 instance `u-13907-735d71cb`. It is an engineering check only, not competition
@@ -22,17 +22,27 @@ four observations per confirmed candidate, three final executions per
 executed strategy, protocol identity, scenario order, timing, fingerprints,
 aggregates, and stored summary.
 
-The raw cloud archive is currently:
+The downloaded cloud archive SHA-256 is:
 
-`/workspace/GuardianSim/outputs/gate-3-2/gate-3-2-smoke-evidence.tar.gz`
+`f2545cfe89708e2626976d357eb7aabab0b68c0b45913005a23675878b2a61dd`
 
-It contains:
+Preserved raw files:
 
-- `smoke-report.json`;
-- `smoke.log`;
-- `smoke-validation.json`;
-- `cloud-tests.log`;
-- `smoke-sha256.txt`.
+- `smoke-report.json`:
+  `8ec01ff4b2bc19ee5512796f1609fb8e86b6df082dade728713c1560b2f9ac23`;
+- `smoke.log`:
+  `49832528b2d0340b3292d845af1c1cd2566d59cb45f2d3eaae85ddc4cabd39c5`;
+- `smoke-validation.json`:
+  `cf390121e3c62ac9d6fa4daa6eae67b648888aea6d9d06fada1401d6eb2f204b`;
+- `cloud-tests.log`:
+  `dd79d9a7a28e84e5038e23be17f8bb20c8679ceb9b5f21ee5fe0eaea68779353`;
+- `smoke-sha256.txt`, the cloud-generated manifest.
 
-After manual download, extract these files into this directory, verify the
-manifest locally, and replace this pending note with the verified file hashes.
+Local verification artifacts:
+
+- `local-validation.json`, generated from the raw report with the same frozen
+  validator;
+- `local-tests.log`, recording 39/39 passing tests.
+
+The local validator confirmed the same protocol SHA, completed episode count,
+and complete stored summary as the cloud validator.
