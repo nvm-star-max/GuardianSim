@@ -60,11 +60,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--output",
         default="outputs/demo/gate-3-2-seed-411.mp4",
     )
-    parser.add_argument("--fps", type=int, default=12)
+    parser.add_argument("--fps", type=int, default=20)
     parser.add_argument(
         "--capture-every",
         type=int,
-        default=2,
+        default=4,
         help="capture one rendered frame every N simulator control steps",
     )
     return parser
@@ -290,7 +290,7 @@ def _compose_video(
     )
     baseline_event_index = min(frame_count - 1, baseline_event_step // capture_every)
     guardian_event_index = min(frame_count - 1, guardian_event_step // capture_every)
-    red = (82, 92, 255)
+    red = (255, 92, 82)
     green = (95, 255, 144)
 
     def compose(index: int, *, freeze_label: str | None = None) -> np.ndarray:
