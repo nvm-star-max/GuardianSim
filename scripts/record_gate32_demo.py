@@ -35,6 +35,7 @@ from guardian_sim.gate32_benchmark import (
     generate_gate32_scenarios,
     validate_gate32_payload,
 )
+from guardian_sim.genesis_adapter import candidate_metrics_from_measurement
 from guardian_sim.reference_backend import EpisodeSnapshot, GenesisSceneDriver
 from guardian_sim.serialization import json_default
 
@@ -267,12 +268,13 @@ def main() -> None:
         capture_every=args.capture_every,
     )
     baseline_recorder.capture()
-    baseline_metrics = run_grasp_candidate(
+    baseline_measurement = run_grasp_candidate(
         bundle,
         nominal,
         pick_object=scenario.pick_object,
         frame_callback=baseline_recorder,
     )
+    baseline_metrics = candidate_metrics_from_measurement(baseline_measurement)
     baseline_recorder.capture()
     baseline_classification = classify_gate31_execution(
         baseline_metrics,
@@ -286,12 +288,13 @@ def main() -> None:
         capture_every=args.capture_every,
     )
     guardian_recorder.capture()
-    guardian_metrics = run_grasp_candidate(
+    guardian_measurement = run_grasp_candidate(
         bundle,
         guardian,
         pick_object=scenario.pick_object,
         frame_callback=guardian_recorder,
     )
+    guardian_metrics = candidate_metrics_from_measurement(guardian_measurement)
     guardian_recorder.capture()
     guardian_classification = classify_gate31_execution(
         guardian_metrics,

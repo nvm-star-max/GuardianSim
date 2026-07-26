@@ -32,7 +32,11 @@ from guardian_sim.gate32_benchmark import (
     summarize_gate32,
     validate_gate32_payload,
 )
-from guardian_sim.genesis_adapter import GenesisCandidateEvaluator, GenesisRolloutMeasurement
+from guardian_sim.genesis_adapter import (
+    GenesisCandidateEvaluator,
+    GenesisRolloutMeasurement,
+    candidate_metrics_from_measurement,
+)
 from guardian_sim.models import (
     CandidateMetrics,
     ClearanceDiagnostic,
@@ -89,20 +93,14 @@ class CandidateTests(unittest.TestCase):
 
         self.assertEqual(len(candidates), 18)
         self.assertEqual(len({item.candidate_id for item in candidates}), 18)
-        nominal = next(
-            item
-            for item in candidates
-            if item.candidate_id == "yaw_+00.0_offset_+0.000"
-        )
+        nominal = next(item for item in candidates if item.candidate_id == "yaw_+00.0_offset_+0.000")
         self.assertEqual(nominal.target_offset_xy_m, (0.0, 0.0))
         self.assertEqual(nominal.approach_height_m, 0.10)
         self.assertEqual(
             {item.yaw_degrees for item in candidates},
             {-90.0, -67.5, -45.0, -22.5, 0.0, 22.5, 45.0, 67.5, 90.0},
         )
-        retreating = [
-            item for item in candidates if item.target_offset_xy_m != (0.0, 0.0)
-        ]
+        retreating = [item for item in candidates if item.target_offset_xy_m != (0.0, 0.0)]
         self.assertEqual(len(retreating), 9)
         for item in retreating:
             self.assertAlmostEqual(item.target_offset_xy_m[0], 0.0)
@@ -207,8 +205,7 @@ class PlannerTests(unittest.TestCase):
             lateral_offsets_m=(-0.01, 0.01),
         )
         metrics = {
-            candidate.candidate_id: CandidateMetrics(0.08, 0.95, 0.95, 0.90, 0.4, 0.05)
-            for candidate in candidates
+            candidate.candidate_id: CandidateMetrics(0.08, 0.95, 0.95, 0.90, 0.4, 0.05) for candidate in candidates
         }
         outcomes = iter(
             [
@@ -224,6 +221,24 @@ class PlannerTests(unittest.TestCase):
 
 
 class EvaluatorTests(unittest.TestCase):
+    def test_normalizes_an_already_executed_measurement(self) -> None:
+        measurement = GenesisRolloutMeasurement(
+            minimum_clearance_m=0.021,
+            reachable=True,
+            alignment_error_degrees=18.0,
+            retained_lift_height_m=0.08,
+            requested_lift_height_m=0.10,
+            path_length_m=0.42,
+            perception_uncertainty=0.06,
+        )
+
+        metrics = candidate_metrics_from_measurement(measurement)
+
+        self.assertEqual(metrics.collision_margin_m, 0.021)
+        self.assertEqual(metrics.reachability, 1.0)
+        self.assertAlmostEqual(metrics.grasp_alignment, 0.8)
+        self.assertAlmostEqual(metrics.predicted_stability, 0.8)
+
     def test_genesis_adapter_restores_state_for_every_candidate(self) -> None:
         clutter_diagnostic = ClearanceDiagnostic(
             sample_index=4,
@@ -492,12 +507,8 @@ class BenchmarkTests(unittest.TestCase):
         self.assertEqual(first.robot_qpos, snapshot.robot_qpos)
 
     def test_gate32_requires_all_three_executions_to_be_safe(self) -> None:
-        safe = classify_gate31_execution(
-            CandidateMetrics(0.03, 1.0, 0.95, 0.85, 0.4, 0.05)
-        )
-        unstable = classify_gate31_execution(
-            CandidateMetrics(0.03, 1.0, 0.95, 0.0, 0.4, 0.05)
-        )
+        safe = classify_gate31_execution(CandidateMetrics(0.03, 1.0, 0.95, 0.85, 0.4, 0.05))
+        unstable = classify_gate31_execution(CandidateMetrics(0.03, 1.0, 0.95, 0.0, 0.4, 0.05))
 
         aggregate = aggregate_repeatable_executions((safe, safe, unstable))
 
@@ -673,17 +684,11 @@ class AdversarialBenchmarkTests(unittest.TestCase):
         self.assertEqual(len(scenarios), 30)
         self.assertEqual(scenarios, repeated)
         self.assertEqual([scenario.seed for scenario in scenarios], list(range(301, 331)))
-        cells = {
-            (scenario.pick_object, scenario.layout) for scenario in scenarios
-        }
+        cells = {(scenario.pick_object, scenario.layout) for scenario in scenarios}
         self.assertEqual(len(cells), 6)
         self.assertTrue(
             all(
-                sum(
-                    scenario.pick_object == pick and scenario.layout == layout
-                    for scenario in scenarios
-                )
-                == 5
+                sum(scenario.pick_object == pick and scenario.layout == layout for scenario in scenarios) == 5
                 for pick, layout in cells
             )
         )
@@ -725,9 +730,7 @@ class AdversarialBenchmarkTests(unittest.TestCase):
         target = snapshot.object_poses[scenario.pick_object].position
         obstacle_name = PRIMARY_OBSTACLE_BY_PICK[scenario.pick_object]
         obstacle = snapshot.object_poses[obstacle_name].position
-        center_distance = (
-            (target[0] - obstacle[0]) ** 2 + (target[1] - obstacle[1]) ** 2
-        ) ** 0.5
+        center_distance = ((target[0] - obstacle[0]) ** 2 + (target[1] - obstacle[1]) ** 2) ** 0.5
 
         self.assertAlmostEqual(
             center_distance,
@@ -758,17 +761,11 @@ class AdversarialBenchmarkTests(unittest.TestCase):
                 for right_name in names[left_index + 1 :]:
                     left = snapshot.object_poses[left_name].position
                     right = snapshot.object_poses[right_name].position
-                    center_distance = (
-                        (left[0] - right[0]) ** 2
-                        + (left[1] - right[1]) ** 2
-                    ) ** 0.5
+                    center_distance = ((left[0] - right[0]) ** 2 + (left[1] - right[1]) ** 2) ** 0.5
                     self.assertGreaterEqual(
                         center_distance + 1e-12,
                         radii[left_name] + radii[right_name],
-                        msg=(
-                            f"{scenario.scenario_id} overlaps "
-                            f"{left_name}/{right_name}"
-                        ),
+                        msg=(f"{scenario.scenario_id} overlaps {left_name}/{right_name}"),
                     )
 
     def test_classifies_task_success_and_safe_completion_separately(self) -> None:
@@ -843,11 +840,7 @@ class AdversarialBenchmarkTests(unittest.TestCase):
             "candidate": {"candidate_id": "safe"},
             "safe_stopped": False,
             "executions": [safe_execution, safe_execution, safe_execution],
-            "aggregate": asdict(
-                aggregate_repeatable_executions(
-                    (safe_classification,) * 3
-                )
-            ),
+            "aggregate": asdict(aggregate_repeatable_executions((safe_classification,) * 3)),
         }
         stopped_strategy = {
             "candidate": None,
@@ -907,11 +900,7 @@ class AdversarialBenchmarkTests(unittest.TestCase):
             "candidate": {"candidate_id": "yaw_+00.0_offset_+0.000"},
             "safe_stopped": False,
             "executions": executions,
-            "aggregate": asdict(
-                aggregate_repeatable_executions(
-                    (safe_classification,) * 3
-                )
-            ),
+            "aggregate": asdict(aggregate_repeatable_executions((safe_classification,) * 3)),
         }
         guardian = {
             "candidate": None,
@@ -927,10 +916,7 @@ class AdversarialBenchmarkTests(unittest.TestCase):
             )
         }
         nominal_id = "yaw_+00.0_offset_+0.000"
-        initial_metrics = {
-            candidate_id: asdict(safe_metrics)
-            for candidate_id in candidate_ids
-        }
+        initial_metrics = {candidate_id: asdict(safe_metrics) for candidate_id in candidate_ids}
         episode = {
             "episode_index": 0,
             "seed": scenario.seed,
@@ -991,27 +977,23 @@ class AdversarialBenchmarkTests(unittest.TestCase):
                 require_complete=False,
             )
         incomplete_initial_metrics = json.loads(json.dumps(round_tripped))
-        incomplete_initial_metrics["episodes"][0]["selection"][
-            "initial_metrics_by_id"
-        ].pop(next(iter(candidate_ids - {nominal_id})))
+        incomplete_initial_metrics["episodes"][0]["selection"]["initial_metrics_by_id"].pop(
+            next(iter(candidate_ids - {nominal_id}))
+        )
         with self.assertRaisesRegex(ValueError, "18 initial"):
             validate_gate32_payload(
                 incomplete_initial_metrics,
                 require_complete=False,
             )
         incomplete_confirmations = json.loads(json.dumps(round_tripped))
-        incomplete_confirmations["episodes"][0]["selection"][
-            "observations_by_id"
-        ][nominal_id].pop()
+        incomplete_confirmations["episodes"][0]["selection"]["observations_by_id"][nominal_id].pop()
         with self.assertRaisesRegex(ValueError, "4 observations"):
             validate_gate32_payload(
                 incomplete_confirmations,
                 require_complete=False,
             )
         duplicate_repeat = json.loads(json.dumps(round_tripped))
-        duplicate_repeat["episodes"][0]["baseline"]["executions"][2][
-            "repeat_index"
-        ] = 1
+        duplicate_repeat["episodes"][0]["baseline"]["executions"][2]["repeat_index"] = 1
         with self.assertRaisesRegex(ValueError, "repeat indices"):
             validate_gate32_payload(
                 duplicate_repeat,
@@ -1114,9 +1096,7 @@ class RobustSelectionTests(unittest.TestCase):
             support_surface=False,
         )
         metrics = {
-            alternative.candidate_id: CandidateMetrics(
-                0.011, 1.0, 0.90, 0.75, 0.5, 0.05
-            ),
+            alternative.candidate_id: CandidateMetrics(0.011, 1.0, 0.90, 0.75, 0.5, 0.05),
             nominal.candidate_id: CandidateMetrics(
                 0.0,
                 1.0,
@@ -1157,12 +1137,7 @@ class RobustSelectionTests(unittest.TestCase):
                 lateral_offsets_m=(0.0,),
             )
         )
-        unsafe = {
-            item.candidate_id: CandidateMetrics(
-                0.0, 1.0, 0.95, 0.90, 0.4, 0.05
-            )
-            for item in candidates
-        }
+        unsafe = {item.candidate_id: CandidateMetrics(0.0, 1.0, 0.95, 0.90, 0.4, 0.05) for item in candidates}
 
         class UnsafeEvaluator:
             def evaluate(self, candidate):
@@ -1186,16 +1161,8 @@ class RobustSelectionTests(unittest.TestCase):
                 lateral_offsets_m=(-0.02, 0.0),
             )
         )
-        lucky = next(
-            candidate
-            for candidate in candidates
-            if candidate.candidate_id == "yaw_-22.5_offset_-0.020"
-        )
-        nominal = next(
-            candidate
-            for candidate in candidates
-            if candidate.candidate_id == "yaw_+00.0_offset_+0.000"
-        )
+        lucky = next(candidate for candidate in candidates if candidate.candidate_id == "yaw_-22.5_offset_-0.020")
+        nominal = next(candidate for candidate in candidates if candidate.candidate_id == "yaw_+00.0_offset_+0.000")
         initial = {
             candidate.candidate_id: CandidateMetrics(
                 0.09 if candidate is lucky else 0.045,
@@ -1274,12 +1241,8 @@ class RobustSelectionTests(unittest.TestCase):
         )
         alternative, nominal = candidates
         observations = {
-            alternative.candidate_id: CandidateMetrics(
-                0.08, 1.0, 0.95, 0.92, 0.4, 0.05
-            ),
-            nominal.candidate_id: CandidateMetrics(
-                0.04, 1.0, 0.95, 0.90, 0.4, 0.05
-            ),
+            alternative.candidate_id: CandidateMetrics(0.08, 1.0, 0.95, 0.92, 0.4, 0.05),
+            nominal.candidate_id: CandidateMetrics(0.04, 1.0, 0.95, 0.90, 0.4, 0.05),
         }
 
         class RepeatableEvaluator:

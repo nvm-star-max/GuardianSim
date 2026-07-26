@@ -42,6 +42,24 @@ class GenesisRolloutBackend(Protocol):
         """Run a candidate in simulation and return measured safety signals."""
 
 
+def candidate_metrics_from_measurement(
+    measurement: GenesisRolloutMeasurement,
+) -> CandidateMetrics:
+    """Normalize one already-executed Genesis rollout measurement."""
+
+    lift_denominator = max(measurement.requested_lift_height_m, 1e-6)
+    return CandidateMetrics(
+        collision_margin_m=measurement.minimum_clearance_m,
+        reachability=1.0 if measurement.reachable else 0.0,
+        grasp_alignment=_clamp(1.0 - abs(measurement.alignment_error_degrees) / 90.0),
+        predicted_stability=_clamp(measurement.retained_lift_height_m / lift_denominator),
+        path_length_m=max(0.0, measurement.path_length_m),
+        perception_uncertainty=_clamp(measurement.perception_uncertainty),
+        clearance_diagnostic=measurement.clearance_diagnostic,
+        support_contact_diagnostic=measurement.support_contact_diagnostic,
+    )
+
+
 class GenesisCandidateEvaluator:
     """Convert raw Genesis rollout measurements to normalized planner metrics."""
 
@@ -51,17 +69,7 @@ class GenesisCandidateEvaluator:
     def evaluate(self, candidate: ActionCandidate) -> CandidateMetrics:
         self._backend.restore_reference_state()
         measurement = self._backend.rollout(candidate)
-        lift_denominator = max(measurement.requested_lift_height_m, 1e-6)
-        return CandidateMetrics(
-            collision_margin_m=measurement.minimum_clearance_m,
-            reachability=1.0 if measurement.reachable else 0.0,
-            grasp_alignment=_clamp(1.0 - abs(measurement.alignment_error_degrees) / 90.0),
-            predicted_stability=_clamp(measurement.retained_lift_height_m / lift_denominator),
-            path_length_m=max(0.0, measurement.path_length_m),
-            perception_uncertainty=_clamp(measurement.perception_uncertainty),
-            clearance_diagnostic=measurement.clearance_diagnostic,
-            support_contact_diagnostic=measurement.support_contact_diagnostic,
-        )
+        return candidate_metrics_from_measurement(measurement)
 
 
 def build_reference_scene(*, n_envs: int = 1):
