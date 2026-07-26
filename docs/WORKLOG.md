@@ -571,3 +571,45 @@ Gate decision:
 - Raw and local validation evidence:
   [`evidence/gate-3-2-smoke/README.md`](evidence/gate-3-2-smoke/README.md).
 - No formal Gate 3.2 scenario beyond the two engineering smoke seeds has run.
+
+## 2026-07-26 — Gate 3.2 formal Radeon Cloud benchmark complete
+
+- The owner approved the formal run after reviewing the two-scenario
+  engineering smoke.
+- The original `smoke-report.json` remained unchanged at 2/30 with SHA-256
+  `8ec01ff4b2bc19ee5512796f1609fb8e86b6df082dade728713c1560b2f9ac23`.
+- Two attempts to append the smoke prefix from a new Genesis process were
+  rejected by the frozen strict resume validator because the captured
+  base-scene snapshot fingerprint differed. Both rejection logs were
+  preserved; no `--fresh` flag was used.
+- To avoid combining evidence from different base snapshots, launched
+  `formal-report.json` as a separate output and ran all 30 frozen scenarios in
+  one process on the AMD Radeon GPU.
+- Protocol and scenario order were not changed:
+  - protocol SHA-256:
+    `8f23247001e05f39817225ed13f028321fbb9b9c694aaacd5b987fe61ee1fb3c`;
+  - scenario-matrix SHA-256:
+    `69f87994b87f2def788cd944ad75210cdeddeafcaa3d0a3844fef04efca9cb03`.
+- Strict complete schema-5 validation passed 30/30 episodes.
+- Verified primary endpoint:
+  - baseline repeatable safe completion: `18/30` (`60%`);
+  - GuardianSim repeatable safe completion: `30/30` (`100%`);
+  - paired absolute lift: `+40.00` percentage points.
+- Verified secondary outcomes:
+  - independent safe executions: baseline `58/90`, GuardianSim `90/90`;
+  - clutter-contact executions: baseline `30`, GuardianSim `0`;
+  - mean clearance: baseline `0.023191 m`, GuardianSim `0.046003 m`;
+  - mean stability: baseline `0.892762`, GuardianSim `0.905099`;
+  - GuardianSim decisions: 11 `higher_margin_alternative`, 10
+    `unsafe_nominal_replaced`, and 9 `eligible_nominal_fallback`;
+  - mean planning wall time: `264.95 s` per scenario;
+  - mean independent execution wall time: baseline `9.08 s`, GuardianSim
+    `8.94 s`.
+- Cloud evidence was validated, archived, downloaded through the Jupyter
+  Download action, and rehashed locally.
+- Evidence archive SHA-256:
+  `57b53cda9d4352cb2d99ae9da01e1051840705725002a9e32e4076493b7b84ad`.
+- Raw report, logs, validator output, environment record, manifests, failed
+  resume audit trail, and smoke/formal separation rationale:
+  [`evidence/gate-3-2/README.md`](evidence/gate-3-2/README.md).
+- The Radeon Cloud instance remains running per the owner's instruction.

@@ -1,0 +1,4 @@
+smoke report preserved unchanged at smoke-report.json
+formal report isolated because Genesis base snapshot fingerprint changes across fresh process initialization
+no --fresh used; frozen protocol and matrix unchanged
+67d3235c9e48f100d3785f78157ff9c31404b662

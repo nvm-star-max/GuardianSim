@@ -1,0 +1,380 @@
+{
+  "protocol_sha256": "8f23247001e05f39817225ed13f028321fbb9b9c694aaacd5b987fe61ee1fb3c",
+  "report": "outputs/gate-3-2/formal-report.json",
+  "summary": {
+    "absolute_repeatable_safe_completion_rate_lift": 0.4,
+    "baseline": {
+      "candidate_selections": {
+        "yaw_+00.0_offset_+0.000": 30
+      },
+      "clutter_contact_count": 30,
+      "clutter_contact_rate": 0.3333333333333333,
+      "episode_count": 30,
+      "execution_count": 90,
+      "execution_safe_completion_count": 58,
+      "execution_safe_completion_rate": 0.6444444444444445,
+      "execution_task_success_count": 58,
+      "execution_task_success_rate": 0.6444444444444445,
+      "failure_types": {
+        "clutter_contact": 10,
+        "safe_success": 18,
+        "unstable_lift": 2
+      },
+      "mean_clutter_clearance_m": 0.023191136782063384,
+      "mean_stability": 0.8927615880966187,
+      "repeatable_safe_completion_count": 18,
+      "repeatable_safe_completion_rate": 0.6,
+      "repeatable_task_success_count": 18,
+      "repeatable_task_success_rate": 0.6,
+      "safe_stop_count": 0,
+      "safe_stop_rate": 0.0
+    },
+    "cells": {
+      "011_banana/lateral_clutter": {
+        "baseline": {
+          "candidate_selections": {
+            "yaw_+00.0_offset_+0.000": 5
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 15,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 15,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 5
+          },
+          "mean_clutter_clearance_m": 0.053331731756528215,
+          "mean_stability": 0.9032483100891113,
+          "repeatable_safe_completion_count": 5,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 5,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        },
+        "guardiansim": {
+          "candidate_selections": {
+            "yaw_+00.0_retreat_+0.025_approach_+0.140": 1,
+            "yaw_-22.5_retreat_+0.000_approach_+0.140": 1,
+            "yaw_-22.5_retreat_+0.025_approach_+0.140": 3
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 15,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 15,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 5
+          },
+          "mean_clutter_clearance_m": 0.09674961715936661,
+          "mean_stability": 0.8504900137583414,
+          "repeatable_safe_completion_count": 5,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 5,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        }
+      },
+      "011_banana/radial_clutter": {
+        "baseline": {
+          "candidate_selections": {
+            "yaw_+00.0_offset_+0.000": 5
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 15,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 15,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 5
+          },
+          "mean_clutter_clearance_m": 0.03024214506149292,
+          "mean_stability": 0.9017370541890463,
+          "repeatable_safe_completion_count": 5,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 5,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        },
+        "guardiansim": {
+          "candidate_selections": {
+            "yaw_+00.0_retreat_+0.025_approach_+0.140": 1,
+            "yaw_+22.5_retreat_+0.025_approach_+0.140": 4
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 15,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 15,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 5
+          },
+          "mean_clutter_clearance_m": 0.06914485174939093,
+          "mean_stability": 0.9011286099751791,
+          "repeatable_safe_completion_count": 5,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 5,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        }
+      },
+      "014_lemon/lateral_clutter": {
+        "baseline": {
+          "candidate_selections": {
+            "yaw_+00.0_offset_+0.000": 5
+          },
+          "clutter_contact_count": 15,
+          "clutter_contact_rate": 1.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 0,
+          "execution_safe_completion_rate": 0.0,
+          "execution_task_success_count": 0,
+          "execution_task_success_rate": 0.0,
+          "failure_types": {
+            "clutter_contact": 5
+          },
+          "mean_clutter_clearance_m": 0.0,
+          "mean_stability": 0.93488081296285,
+          "repeatable_safe_completion_count": 0,
+          "repeatable_safe_completion_rate": 0.0,
+          "repeatable_task_success_count": 0,
+          "repeatable_task_success_rate": 0.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        },
+        "guardiansim": {
+          "candidate_selections": {
+            "yaw_+67.5_retreat_+0.000_approach_+0.140": 2,
+            "yaw_-67.5_retreat_+0.000_approach_+0.140": 2,
+            "yaw_-90.0_retreat_+0.000_approach_+0.140": 1
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 15,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 15,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 5
+          },
+          "mean_clutter_clearance_m": 0.027821333619131704,
+          "mean_stability": 0.9393192132314047,
+          "repeatable_safe_completion_count": 5,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 5,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        }
+      },
+      "014_lemon/radial_clutter": {
+        "baseline": {
+          "candidate_selections": {
+            "yaw_+00.0_offset_+0.000": 5
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 14,
+          "execution_safe_completion_rate": 0.9333333333333333,
+          "execution_task_success_count": 14,
+          "execution_task_success_rate": 0.9333333333333333,
+          "failure_types": {
+            "safe_success": 4,
+            "unstable_lift": 1
+          },
+          "mean_clutter_clearance_m": 0.03330109623458942,
+          "mean_stability": 0.8781067927678426,
+          "repeatable_safe_completion_count": 4,
+          "repeatable_safe_completion_rate": 0.8,
+          "repeatable_task_success_count": 4,
+          "repeatable_task_success_rate": 0.8,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        },
+        "guardiansim": {
+          "candidate_selections": {
+            "yaw_+00.0_offset_+0.000": 5
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 15,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 15,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 5
+          },
+          "mean_clutter_clearance_m": 0.0317382977545958,
+          "mean_stability": 0.9415033658345541,
+          "repeatable_safe_completion_count": 5,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 5,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        }
+      },
+      "018_plum/lateral_clutter": {
+        "baseline": {
+          "candidate_selections": {
+            "yaw_+00.0_offset_+0.000": 5
+          },
+          "clutter_contact_count": 15,
+          "clutter_contact_rate": 1.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 0,
+          "execution_safe_completion_rate": 0.0,
+          "execution_task_success_count": 0,
+          "execution_task_success_rate": 0.0,
+          "failure_types": {
+            "clutter_contact": 5
+          },
+          "mean_clutter_clearance_m": 0.0,
+          "mean_stability": 0.8982000748316447,
+          "repeatable_safe_completion_count": 0,
+          "repeatable_safe_completion_rate": 0.0,
+          "repeatable_task_success_count": 0,
+          "repeatable_task_success_rate": 0.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        },
+        "guardiansim": {
+          "candidate_selections": {
+            "yaw_+67.5_retreat_+0.000_approach_+0.140": 2,
+            "yaw_+90.0_retreat_+0.000_approach_+0.140": 2,
+            "yaw_-67.5_retreat_+0.000_approach_+0.140": 1
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 15,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 15,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 5
+          },
+          "mean_clutter_clearance_m": 0.025464225991168554,
+          "mean_stability": 0.8992812633514404,
+          "repeatable_safe_completion_count": 5,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 5,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        }
+      },
+      "018_plum/radial_clutter": {
+        "baseline": {
+          "candidate_selections": {
+            "yaw_+00.0_offset_+0.000": 5
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 14,
+          "execution_safe_completion_rate": 0.9333333333333333,
+          "execution_task_success_count": 14,
+          "execution_task_success_rate": 0.9333333333333333,
+          "failure_types": {
+            "safe_success": 4,
+            "unstable_lift": 1
+          },
+          "mean_clutter_clearance_m": 0.022271847639769755,
+          "mean_stability": 0.8403964837392172,
+          "repeatable_safe_completion_count": 4,
+          "repeatable_safe_completion_rate": 0.8,
+          "repeatable_task_success_count": 4,
+          "repeatable_task_success_rate": 0.8,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        },
+        "guardiansim": {
+          "candidate_selections": {
+            "yaw_+00.0_offset_+0.000": 4,
+            "yaw_+22.5_retreat_+0.000_approach_+0.140": 1
+          },
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 5,
+          "execution_count": 15,
+          "execution_safe_completion_count": 15,
+          "execution_safe_completion_rate": 1.0,
+          "execution_task_success_count": 15,
+          "execution_task_success_rate": 1.0,
+          "failure_types": {
+            "safe_success": 5
+          },
+          "mean_clutter_clearance_m": 0.02509912997512058,
+          "mean_stability": 0.8988729317982992,
+          "repeatable_safe_completion_count": 5,
+          "repeatable_safe_completion_rate": 1.0,
+          "repeatable_task_success_count": 5,
+          "repeatable_task_success_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0
+        }
+      }
+    },
+    "episode_count": 30,
+    "guardiansim": {
+      "candidate_selections": {
+        "yaw_+00.0_offset_+0.000": 9,
+        "yaw_+00.0_retreat_+0.025_approach_+0.140": 2,
+        "yaw_+22.5_retreat_+0.000_approach_+0.140": 1,
+        "yaw_+22.5_retreat_+0.025_approach_+0.140": 4,
+        "yaw_+67.5_retreat_+0.000_approach_+0.140": 4,
+        "yaw_+90.0_retreat_+0.000_approach_+0.140": 2,
+        "yaw_-22.5_retreat_+0.000_approach_+0.140": 1,
+        "yaw_-22.5_retreat_+0.025_approach_+0.140": 3,
+        "yaw_-67.5_retreat_+0.000_approach_+0.140": 3,
+        "yaw_-90.0_retreat_+0.000_approach_+0.140": 1
+      },
+      "clutter_contact_count": 0,
+      "clutter_contact_rate": 0.0,
+      "episode_count": 30,
+      "execution_count": 90,
+      "execution_safe_completion_count": 90,
+      "execution_safe_completion_rate": 1.0,
+      "execution_task_success_count": 90,
+      "execution_task_success_rate": 1.0,
+      "failure_types": {
+        "safe_success": 30
+      },
+      "mean_clutter_clearance_m": 0.04600290937479569,
+      "mean_stability": 0.9050992329915365,
+      "repeatable_safe_completion_count": 30,
+      "repeatable_safe_completion_rate": 1.0,
+      "repeatable_task_success_count": 30,
+      "repeatable_task_success_rate": 1.0,
+      "safe_stop_count": 0,
+      "safe_stop_rate": 0.0
+    }
+  },
+  "validated_episode_count": 30
+}

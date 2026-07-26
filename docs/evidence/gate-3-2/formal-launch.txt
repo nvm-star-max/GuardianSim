@@ -1,0 +1,23 @@
+From https://gh-proxy.org/https://github.com/nvm-star-max/GuardianSim
+ * branch            agent/gate-3-1-adversarial-benchmark -> FETCH_HEAD
+Updating 67d3235..3a1820f
+Fast-forward
+ docs/PROJECT_MEMORY.md                             |   34 +-
+ docs/WORKLOG.md                                    |   47 ++
+ docs/evidence/gate-3-2-smoke/README.md             |   48 ++
+ docs/evidence/gate-3-2-smoke/cloud-tests.log       |   44 ++
+ docs/evidence/gate-3-2-smoke/local-tests.log       |   44 ++
+ docs/evidence/gate-3-2-smoke/local-validation.json |  111 ++++
+ docs/evidence/gate-3-2-smoke/smoke-report.json     | 3139 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ docs/evidence/gate-3-2-smoke/smoke-sha256.txt      |    4 +
+ docs/evidence/gate-3-2-smoke/smoke-validation.json |  111 ++++
+ docs/evidence/gate-3-2-smoke/smoke.log             |  149 +++++
+ 10 files changed, 3723 insertions(+), 8 deletions(-)
+ create mode 100644 docs/evidence/gate-3-2-smoke/README.md
+ create mode 100644 docs/evidence/gate-3-2-smoke/cloud-tests.log
+ create mode 100644 docs/evidence/gate-3-2-smoke/local-tests.log
+ create mode 100644 docs/evidence/gate-3-2-smoke/local-validation.json
+ create mode 100644 docs/evidence/gate-3-2-smoke/smoke-report.json
+ create mode 100644 docs/evidence/gate-3-2-smoke/smoke-sha256.txt
+ create mode 100644 docs/evidence/gate-3-2-smoke/smoke-validation.json
+ create mode 100644 docs/evidence/gate-3-2-smoke/smoke.log

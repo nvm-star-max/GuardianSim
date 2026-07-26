@@ -276,9 +276,8 @@ predeclared Gate 3.2 that expands the candidate action space with obstacle-aware
 approach direction/height and strengthens execution-repeatability checks. Gate
 3.1 must remain unchanged as negative evidence.
 
-**Gate 3.2 is implemented and predeclared; its two-scenario Radeon Cloud
-engineering smoke prefix is complete and schema-5-valid. No formal Gate 3.2
-result has been run or inspected.**
+**Gate 3.2 is complete. Its separately preserved engineering smoke and full
+30-scenario Radeon Cloud formal report are schema-5-valid.**
 
 - New untouched seeds: `401–430`.
 - Frozen 18-action family: nine yaws from `-90°` to `90°`, with centered and
@@ -314,8 +313,29 @@ result has been run or inspected.**
 - Preserved evidence:
   [`evidence/gate-3-2-smoke/README.md`](evidence/gate-3-2-smoke/README.md).
 
-Next gate: owner review of smoke quality and formal-run economics. Do not start
-the full Gate 3.2 run until that review is complete.
+- Formal seeds `401–430` completed in one Radeon Cloud process:
+  - baseline repeatable safe completion: `18/30` (`60%`);
+  - GuardianSim repeatable safe completion: `30/30` (`100%`);
+  - paired absolute lift: `+40.00` percentage points;
+  - baseline clutter-contact executions: `30`; GuardianSim: `0`;
+  - mean clearance: baseline `0.023191 m`, GuardianSim `0.046003 m`;
+  - mean stability: baseline `0.892762`, GuardianSim `0.905099`;
+  - GuardianSim decisions: 11 higher-margin alternatives, 10 unsafe-nominal
+    replacements, and 9 eligible nominal fallbacks.
+- The original smoke report was not appended across process initialization.
+  Strict resume validation correctly rejected two attempts because Genesis
+  produced a different base-scene snapshot fingerprint. Both rejection logs
+  are preserved. The full formal result therefore used a separate output and
+  ran all 30 scenarios in one process without `--fresh`.
+- Strict complete schema-5 validation passed 30/30.
+- Formal evidence archive SHA-256:
+  `57b53cda9d4352cb2d99ae9da01e1051840705725002a9e32e4076493b7b84ad`.
+- Preserved formal evidence:
+  [`evidence/gate-3-2/README.md`](evidence/gate-3-2/README.md).
+
+Next gate: owner review of the verified formal result and preparation of the
+competition submission, demo, and resume presentation. Do not start another
+cloud benchmark or retune Gate 3.2 before that review.
 
 ## Working agreement
 
