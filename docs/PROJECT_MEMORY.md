@@ -206,7 +206,7 @@ to avoid a NumPy 2 ABI mismatch.
 
 - Repository: <https://github.com/nvm-star-max/GuardianSim>
 - Active evidence branch: `agent/gate-3-1-adversarial-benchmark`
-- Latest verified implementation milestone commit: `0530454`
+- Latest verified evidence milestone commit: `5335f41`
 - Relevant commits:
   - `2119d0d` — Genesis evaluation and benchmark pipeline
   - `2283818` — compatible NumPy/scikit-image bounds
@@ -227,6 +227,8 @@ to avoid a NumPy 2 ABI mismatch.
   - `2d8ea2f` — Gate 3.1 formal benchmark evidence
   - `04e30c2` — Gate 3.1 durable memory update
   - `0530454` — predeclared Gate 3.2 repeatable-safety implementation
+  - `12b90a8` — Gate 3.2 cloud smoke milestone record
+  - `5335f41` — preserved and locally verified Gate 3.2 smoke evidence
 
 ## Architecture already implemented
 
