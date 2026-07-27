@@ -1267,3 +1267,24 @@ Gate decision:
   and China CNY conversion.
 - No organizer pull request was opened in this step because it is the final
   competition-entry action and carries the legal effects above.
+
+## 2026-07-28 — Public release and official-fork branch prepared
+
+- Fast-forwarded the GuardianSim default branch from its earlier baseline to
+  the validated submission payload and pushed public `main`.
+- Created annotated release tag `hackathon-2026-submission-v1` at payload
+  commit `1059d0d5af402a20fe01ea190951d3abb27faef8`.
+- Created `nvm-star-max/Radeon-hackathon-2026-07` as a fork of the official AMD
+  contest repository.
+- Added the self-contained package under the established
+  `submissions/Track3-Aegis-Motion-GuardianSim` convention on branch
+  `submission/track3-aegis-motion-guardiansim`.
+- Verified the copied README and report against `SHA256SUMS`.
+- Added a path-scoped binary attribute for the report PDF, changing the
+  organizer comparison from an incorrect text diff to a 19,435-byte binary
+  artifact.
+- Pushed organizer-fork branch commit
+  `abd0cfd72056eefe94298f513449e4f48842620b`.
+- Confirmed no pull request exists for this head branch. The final organizer
+  PR remains intentionally unsubmitted pending the owner's legal and personal
+  eligibility confirmation.

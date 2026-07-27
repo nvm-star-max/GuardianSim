@@ -879,3 +879,21 @@ Evidence and working material:
   perform that final action until the owner accepts the broad entry license,
   publicity/release provisions, possible winner forms, and tax obligations
   summarized in the rules review.
+
+## Public release and organizer-fork preparation — 2026-07-28
+
+- Fast-forwarded `nvm-star-max/GuardianSim` public `main` to release payload
+  commit `1059d0d5af402a20fe01ea190951d3abb27faef8`.
+- Created and pushed annotated tag `hackathon-2026-submission-v1` for the
+  frozen release payload.
+- Created the official contest fork:
+  <https://github.com/nvm-star-max/Radeon-hackathon-2026-07>.
+- Created and pushed branch
+  `submission/track3-aegis-motion-guardiansim` at
+  `abd0cfd72056eefe94298f513449e4f48842620b`.
+- Copied the prepared package to
+  `submissions/Track3-Aegis-Motion-GuardianSim`, verified both package
+  checksums, and added a path-scoped `.gitattributes` rule so the PDF is
+  represented as a binary artifact in the organizer diff.
+- No organizer pull request exists yet. The exact prepared PR title remains
+  `Track 3, Aegis Motion, GuardianSim`.
