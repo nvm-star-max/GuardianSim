@@ -1,0 +1,142 @@
+{
+  "kind": "guardiansim_submission_video_review_v1",
+  "team": "Aegis Motion",
+  "project": "GuardianSim",
+  "claim_boundary": "Presentation assembled from preserved evidence; no Genesis physics re-execution and no added benchmark trial. Simulation only.",
+  "language": "English",
+  "narration": {
+    "voice": "macOS Samantha",
+    "rate_words_per_minute": 165,
+    "human_narration_recommended_for_final": true,
+    "segments": [
+      {
+        "slug": "hook",
+        "title": "Success is not the same as safety",
+        "text": "A robot can complete a grasp and still take an unsafe path through clutter. In the same frozen Genesis scene, the nominal action contacts a neighboring object. GuardianSim evaluates counterfactual actions before execution, selects a safer eligible action, or refuses to move.",
+        "duration_seconds": 16.77315192743764,
+        "frame_count": 335
+      },
+      {
+        "slug": "amd-proof",
+        "title": "AMD Radeon execution proof",
+        "text": "GuardianSim is a Physical AI safety layer for Franka fruit picking in Genesis. The preserved evaluator run used one AMD Radeon GPU with the gfx eleven hundred architecture, ROCm and HIP seven point two, PyTorch two point nine, and Genesis one point two point three. The physical counterfactual rollouts executed through the Genesis A M D GPU backend. These terminal values and camera probes are archived with checksums in the repository.",
+        "duration_seconds": 26.880997732426305,
+        "frame_count": 538
+      },
+      {
+        "slug": "architecture",
+        "title": "How GuardianSim works",
+        "text": "The robot policy first proposes a nominal grasp. GuardianSim generates a bounded set of yaw, obstacle-retreat, and approach alternatives. Every candidate begins from the same fingerprinted scene snapshot. Radeon GPU rollouts then measure reachability, retained-lift stability, sampled path length, uncertainty, and clearance from non-target clutter. Hard safety gates determine eligibility before utility ranking. The selected candidate is confirmed across repeated rollouts and then executed independently. If no candidate passes every frozen gate, GuardianSim does not silently return to an unsafe nominal action. It produces an explicit safe stop.",
+        "duration_seconds": 40.10131519274376,
+        "frame_count": 802
+      },
+      {
+        "slug": "smoke",
+        "title": "Reproducibility workflow",
+        "text": "A new evaluator can run one documented smoke command from a clean checkout. The command verifies source identity and Radeon readiness, runs the unit tests, strictly validates the preserved thirty-scenario report, builds the real Franka scene, records world and wrist probes, restores one fingerprinted snapshot, and evaluates three bounded counterfactual candidates. The resulting candidate report also passes strict validation. This smoke proves that the documented execution path works. It is deliberately small and is not used as the source of the performance claim.",
+        "duration_seconds": 33.8049433106576,
+        "frame_count": 676
+      },
+      {
+        "slug": "physical-proof",
+        "title": "The physical difference",
+        "text": "Now consider formal Seed four hundred and eleven. The baseline uses a zero-degree fixed approach and overlaps the neighboring clutter object by one point four two millimeters in the accepted visual replay. GuardianSim rejects that nominal geometry and selects a plus sixty-seven point five degree orientation with a raised approach. The accepted replay measures seventeen point one millimeters of clearance. In the formal report, the baseline is unsafe in all three independent executions for this scenario, while GuardianSim is safe in all three. The candidate identity, decision reason, report hash, and video hash are bound by a strict presentation validator.",
+        "duration_seconds": 38.29632653061225,
+        "frame_count": 766
+      },
+      {
+        "slug": "formal-results",
+        "title": "Formal Gate 3.2 evidence",
+        "text": "The primary benchmark contains thirty frozen scenarios and three independent physical executions per strategy and scenario. Repeatable safe completion improves from eighteen of thirty for the baseline to thirty of thirty for GuardianSim. Independent safe executions improve from fifty-eight of ninety to ninety of ninety. Sampled clutter contacts decrease from thirty to zero. Mean sampled clearance increases from twenty-three point one nine one millimeters to forty-six point zero zero three millimeters, an increase of ninety-eight point three six percent. These are Genesis simulation measurements, not claims about a physical robot.",
+        "duration_seconds": 35.55020408163265,
+        "frame_count": 711
+      },
+      {
+        "slug": "safe-stop",
+        "title": "Limitation and safe stop",
+        "text": "GuardianSim does not guarantee completion for arbitrary geometry. A separate twelve-case engineering breadth run tested pose shifts and harder obstacle gaps and bearings. In the six gap-and-bearing cases, four GuardianSim actions executed safely. In two lateral lemon and plum scenes, no candidate in the frozen action family passed every hard gate, so the system stopped before physical execution. There were zero unsafe GuardianSim executions in that stratum. The two safe stops are intended fail-safe behavior, but they also expose a real limitation: the current bounded action space needs broader geometric coverage. This engineering result is shown separately and is not mixed into the formal benchmark.",
+        "duration_seconds": 41.335419501133785,
+        "frame_count": 827
+      },
+      {
+        "slug": "close",
+        "title": "Open evidence, inspectable decisions",
+        "text": "GuardianSim turns a policy-proposed manipulation action into an explainable, uncertainty-aware execute-or-stop decision on an AMD Radeon GPU. The source code, reproduction command, frozen reports, validators, and checksums are available in the public repository. GuardianSim is evaluated in Genesis simulation and has not yet been validated on a physical robot.",
+        "duration_seconds": 22.66657596371882,
+        "frame_count": 453
+      }
+    ]
+  },
+  "output": {
+    "path": "docs/submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4",
+    "sha256": "5abebe2ce3727a5404df70b814765b5d6978dea47b6b265816eb982ad6d0d262",
+    "duration_seconds": 255.4,
+    "fps": 20.0,
+    "frame_count": 5108,
+    "width": 1920,
+    "height": 1080
+  },
+  "sources": {
+    "hero_video": {
+      "path": "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4",
+      "sha256": "38e9adfb2a3f2d90719b60449d092e4caca53afaa2b2f71fe1ade136357dff86",
+      "validated": true
+    },
+    "hero_sidecar_sha256": "fda5cef90d2739a0439c02b201e68e8cc2839110467d20951891624de039f8a9",
+    "gate32_formal_report": {
+      "path": "docs/evidence/gate-3-2/formal-report.json",
+      "sha256": "d76ffbe518d4cb9499362379388a1453ec6cc7614ff312b9bcf764dbf822ffee",
+      "completed_episode_count": 30,
+      "schema_version": 5
+    },
+    "gate33_engineering_report": {
+      "path": "docs/evidence/gate-3-3-two-strata/raw/two-strata-report.json",
+      "sha256": "423310b02e96f17eb6ee813527b1c39270179dc2af14e3a75035eef13226b80e",
+      "completed_episode_count": 12,
+      "schema_version": 6
+    },
+    "smoke_candidates": {
+      "path": "docs/evidence/evaluator-smoke-58a76d4/raw/candidates.json",
+      "sha256": "91dc8f90dfa7f51968156e626e9e422ace4db091183ea4af09b5ef528131b089",
+      "candidate_count": 3
+    },
+    "environment_sha256": "b2e88650950cb14e31c292289ad64d77a61bd0b470abb3f85195cf882e5e04eb",
+    "world_probe_sha256": "3082e7bc1aae5ce3a3dfc9e785007e7ec9a728627b8e140f30213e3f44e04b35",
+    "wrist_probe_sha256": "959d6c3df18208db7182a4c49a31ed5b5872b2b3265fa5f968a3519a59f27216"
+  },
+  "verified_metrics": {
+    "gate32_repeatable_safe_completion": {
+      "baseline": 18,
+      "guardiansim": 30,
+      "total": 30
+    },
+    "gate32_independent_safe_executions": {
+      "baseline": 58,
+      "guardiansim": 90,
+      "total": 90
+    },
+    "gate32_clutter_contact_executions": {
+      "baseline": 30,
+      "guardiansim": 0
+    },
+    "gate32_mean_clearance_mm": {
+      "baseline": 23.191,
+      "guardiansim": 46.003
+    },
+    "gate32_clearance_increase_percent": 98.36,
+    "seed411_replay": {
+      "baseline_overlap_mm": 1.419067,
+      "guardiansim_clearance_mm": 17.094284,
+      "formal_baseline_safe": 0,
+      "formal_guardiansim_safe": 3,
+      "formal_execution_total": 3
+    },
+    "gate33_gap_bearing": {
+      "safe_executions": 4,
+      "safe_stops": 2,
+      "unsafe_executions": 0,
+      "scenario_total": 6,
+      "label": "engineering breadth evidence"
+    }
+  }
+}

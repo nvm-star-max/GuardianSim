@@ -98,7 +98,7 @@ environment must be reproducible. At minimum preserve:
 | Dependency/environment capture | Ready; real Blank OpenCode manifest and smoke archived | Re-run from the final submission commit before freeze |
 | Docker image or Dockerfile | Pinned complete-source Dockerfile present | Linux ROCm build/run still pending |
 | English technical report | V1 drafted; Aegis Motion attribution added | Confirm public member naming, review, and export final PDF |
-| 3–5 minute complete demo | Script plus strictly validated 17.55-second hero clip | Capture GPU/workflow footage and assemble narration around the accepted clip |
+| 3–5 minute complete demo | Strictly validated 4:15 English review cut complete | Owner content review; replace archived-terminal presentation with final-commit live capture if practical |
 | Supplementary deck/poster | Missing | Produce only after report/video reach review quality |
 | English official-repo PR | Missing | Fork, add submission entry/materials, open PR |
 | Luma Rules sign-off | Manual action pending | Owner reads full page and records extra requirements |
@@ -261,8 +261,8 @@ Exit criterion: no unfinished mandatory artifact remains.
 - [x] Reproducibility README passes a local clean-room clone test.
 - [x] AMD Radeon/ROCm environment manifest and real Genesis smoke are complete.
 - [ ] Docker image/Dockerfile is validated, or the supported fallback is clear.
-- [ ] 3–5 minute English demo video shows real execution and results.
-- [ ] Formal claims map to preserved evidence and checksums.
+- [ ] 3–5 minute English demo video approved as final; the 4:15 review cut already shows the validated real Genesis replay and results.
+- [x] Formal video claims map to preserved evidence and machine-checked source hashes.
 - [ ] Team members and contributions are present.
 - [ ] Supplementary material is complete if used.
 - [ ] Official repository is forked and the English PR is ready.
@@ -272,6 +272,7 @@ Working report and video-production sources:
 
 - [`submission/TECHNICAL_REPORT.md`](submission/TECHNICAL_REPORT.md)
 - [`submission/DEMO_VIDEO_SCRIPT.md`](submission/DEMO_VIDEO_SCRIPT.md)
+- [`submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4`](submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4)
 
 The accepted Radeon evaluator-smoke archive and expanded raw files are
 preserved under

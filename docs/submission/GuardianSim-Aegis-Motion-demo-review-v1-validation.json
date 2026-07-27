@@ -1,0 +1,15 @@
+{
+  "validated": true,
+  "kind": "guardiansim_submission_video_review_v1",
+  "video": "docs/submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4",
+  "sha256": "5abebe2ce3727a5404df70b814765b5d6978dea47b6b265816eb982ad6d0d262",
+  "duration_seconds": 255.4,
+  "fps": 20.0,
+  "width": 1920,
+  "height": 1080,
+  "decoded_sample_count": 7,
+  "full_audio_video_decode": true,
+  "source_hashes_verified": true,
+  "formal_claims_verified": true,
+  "claim_boundary_verified": true
+}

@@ -1105,3 +1105,44 @@ Gate decision:
 - No formal report, protocol, threshold, cloud instance, or GPU process was
   changed. No new statistical trial was added.
 - Local tests passed `58/58`.
+
+## 2026-07-27 — Narrated 4:15 Aegis Motion submission-video review cut
+
+- Audited the four-minute production script and available immutable evidence
+  before generating any new visual.
+- Added `scripts/build_submission_video.py`, which:
+  - asserts the expected Gate 3.2, Gate 3.3, evaluator-smoke, and hero-replay
+    identities before rendering;
+  - synthesizes eight English narration chapters locally with the macOS
+    Samantha voice;
+  - renders 1920×1080 presentation frames at 20 FPS;
+  - embeds the accepted real Genesis Seed 411 replay;
+  - renders the preserved Radeon environment and evaluator evidence as
+    explicitly archived evidence, not a false live capture;
+  - labels Gate 3.3 as separate engineering breadth evidence;
+  - produces an H.264/AAC MP4, preview sheet, and machine-readable source
+    sidecar.
+- The first narration attempt used compressed AIFF that Python's standard
+  reader could not parse. Changed the deterministic local narration format to
+  PCM WAV; no evidence or visual claim changed.
+- Generated the 4:15.4 review video with SHA-256
+  `5abebe2ce3727a5404df70b814765b5d6978dea47b6b265816eb982ad6d0d262`.
+- Added `scripts/validate_submission_video.py`. It strictly checked:
+  - the 3–5 minute duration rule;
+  - 1920×1080 dimensions and 20 FPS;
+  - complete video and audio decode;
+  - seven distributed frame decodes;
+  - source-report, smoke, and hero-video hashes;
+  - frozen formal metrics and separate engineering-evidence labeling;
+  - the no-rerun and simulation-only claim boundary.
+- Audio level inspection measured mean `-15.6 dB` and maximum `-1.2 dB`.
+- The compressed-video closing QR code decoded successfully to
+  `https://github.com/nvm-star-max/GuardianSim`.
+- Inspected the contact sheet and full-resolution architecture, smoke,
+  physical-replay, result, safe-stop, and closing frames.
+- The first review found that bottom captions obscured the replay's exact
+  overlap and clearance line. Moved captions to the upper information region
+  for the hook and physical-proof chapters, rebuilt the video, and repeated
+  strict validation.
+- No cloud command, protocol, threshold, report, or statistical trial changed.
+  Instance `u-13907-735d71cb` was not destroyed or modified.

@@ -11,6 +11,16 @@ submission. It is a working set, not yet the final uploaded package.
 - [`DEMO_VIDEO_SCRIPT.md`](DEMO_VIDEO_SCRIPT.md): a 4:00–4:30 production
   script designed to make the baseline/GuardianSim physical difference
   visually explicit.
+- [`GuardianSim-Aegis-Motion-demo-review-v1.mp4`](GuardianSim-Aegis-Motion-demo-review-v1.mp4):
+  a strictly validated 4:15 English-narrated review cut. It combines the
+  accepted formal replay with preserved Radeon environment, evaluator,
+  aggregate-result, and safe-stop evidence.
+- [`GuardianSim-Aegis-Motion-demo-review-v1.json`](GuardianSim-Aegis-Motion-demo-review-v1.json):
+  machine-readable narration, source hashes, timing, claim boundary, and
+  verified metrics for the review cut.
+- [`GuardianSim-Aegis-Motion-demo-review-v1-validation.json`](GuardianSim-Aegis-Motion-demo-review-v1-validation.json):
+  strict duration, decode, source-identity, metric, and claim-boundary
+  validation.
 - [`../../output/pdf/GuardianSim-Technical-Report-DRAFT.pdf`](../../output/pdf/GuardianSim-Technical-Report-DRAFT.pdf):
   visually reviewed six-page A4 draft for owner review. It is labeled as a
   draft and identifies the solo team as Aegis Motion.
@@ -28,6 +38,18 @@ python scripts/build_technical_report_pdf.py
 
 The build script is separate from the evaluator runtime. Install `reportlab`
 only on a documentation workstation if it is not already available.
+
+Rebuild and validate the narrated review video on macOS:
+
+```bash
+uv run --frozen --no-sync python scripts/build_submission_video.py
+uv run --frozen --no-sync python scripts/validate_submission_video.py \
+  --output docs/submission/GuardianSim-Aegis-Motion-demo-review-v1-validation.json
+```
+
+The generated narration uses the local macOS Samantha voice and is suitable
+for content review. A human narration take and a real-time final-commit Radeon
+terminal capture remain recommended before declaring the upload final.
 
 ## Blocking owner inputs
 

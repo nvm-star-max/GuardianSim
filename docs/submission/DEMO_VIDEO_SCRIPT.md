@@ -216,14 +216,14 @@ Open source · reproducible evidence · Genesis simulation
 - [ ] Live `rocm-smi` and compact environment JSON.
 - [ ] Terminal run of the final submission commit's evaluator smoke.
 - [ ] World and wrist probe frames.
-- [ ] Architecture animation.
+- [x] Architecture animation.
 - [x] One accepted Gate 3.2 formal comparison replay.
 - [x] Top-down action-geometry illustration.
 - [x] Contact freeze-frame annotation.
 - [x] Exact decision, yaw, overlap, and clearance.
 - [x] Formal result table.
-- [ ] Gate 3.3 safe-stop diagram.
-- [ ] Repository URL and QR code.
+- [x] Gate 3.3 safe-stop diagram.
+- [x] Repository URL and QR code.
 
 ## Hard exclusions
 
@@ -254,3 +254,22 @@ Verified presentation properties:
 - replay: 1.42 mm baseline overlap versus 17.1 mm GuardianSim clearance;
 - presentation-only post-processing: no physics re-execution and no added
   statistical trial.
+
+## Narrated review cut
+
+`docs/submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4` is the accepted
+content-review candidate:
+
+- 1920×1080, 20 FPS, 4 minutes 15.4 seconds;
+- English macOS Samantha narration plus burned-in English captions;
+- eight chapters: hook, Radeon proof, architecture, evaluator smoke, physical
+  replay, formal results, safe-stop limitation, and repository close;
+- formal performance claims exclusively from Gate 3.2;
+- Gate 3.3 labeled as separate engineering breadth evidence;
+- full audio/video decode, source hashes, claims, duration, and QR code
+  validated.
+
+It is not yet labeled final because the Radeon terminal section is a faithful
+presentation of preserved evidence rather than a live final-commit screen
+recording, and the synthetic voice should be reviewed against a possible human
+narration take.

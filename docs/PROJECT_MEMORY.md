@@ -206,7 +206,7 @@ to avoid a NumPy 2 ABI mismatch.
 
 - Repository: <https://github.com/nvm-star-max/GuardianSim>
 - Active evidence branch: `agent/gate-3-1-adversarial-benchmark`
-- Latest verified evidence milestone commit: `5335f41`
+- Latest accepted hero-video milestone commit: `25c6c37`
 - Relevant commits:
   - `2119d0d` — Genesis evaluation and benchmark pipeline
   - `2283818` — compatible NumPy/scikit-image bounds
@@ -737,3 +737,42 @@ Evidence and working material:
   video around this accepted clip, including final-commit Radeon proof,
   evaluator-smoke footage, architecture, narration, safe-stop limitation, and
   repository close.
+
+## Narrated 4:15 submission-video review cut — 2026-07-27
+
+- Generated
+  [`submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4`](submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4):
+  - 1920×1080, 20 FPS, 4 minutes 15.4 seconds;
+  - English Samantha narration and burned-in English captions;
+  - eight chapters covering the problem, AMD Radeon evidence, architecture,
+    evaluator smoke, accepted physical replay, Gate 3.2 formal result,
+    Gate 3.3 safe-stop limitation, and repository close;
+  - output SHA-256
+    `5abebe2ce3727a5404df70b814765b5d6978dea47b6b265816eb982ad6d0d262`.
+- The review cut is presentation-only. It does not re-run Genesis or add a
+  benchmark trial.
+- Formal claims remain exclusively bound to the complete Gate 3.2 schema-5
+  report: `18/30 → 30/30` repeatable safe scenarios, `58/90 → 90/90`
+  independent safe executions, `30 → 0` clutter-contact executions, and
+  `23.191 → 46.003 mm` mean sampled clearance.
+- The Seed 411 hero section retains the validated `1.419 mm` baseline overlap,
+  `17.094 mm` GuardianSim clearance, and formal `0/3 → 3/3` safe-execution
+  contrast.
+- Gate 3.3 appears only as separately labeled engineering breadth evidence:
+  four safe executions, two explicit safe stops, and zero unsafe executions
+  in the six-case gap/bearing stratum.
+- Strict validation passed:
+  - duration inside the required 3–5 minute range;
+  - 1920×1080 at 20 FPS;
+  - full H.264/AAC decode;
+  - seven time-distributed sample decodes;
+  - source SHA-256 identity;
+  - formal-metric and claim-boundary checks;
+  - QR decoding to the public GuardianSim repository.
+- High-resolution inspection found the real replay's bottom measurement line
+  was initially obstructed by subtitles. The replay subtitles were moved to
+  the top information area and the video was rebuilt and revalidated.
+- This is a review cut, not the final upload. Before final approval, the owner
+  should assess pacing, synthetic narration, and whether to replace the
+  archived Radeon-terminal presentation with a real-time final-commit screen
+  recording. The cloud instance remains untouched.
