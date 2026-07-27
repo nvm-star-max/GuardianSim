@@ -1146,3 +1146,46 @@ Gate decision:
   strict validation.
 - No cloud command, protocol, threshold, report, or statistical trial changed.
   Instance `u-13907-735d71cb` was not destroyed or modified.
+
+## 2026-07-28 — Qwen narration and fixed-caption V2 review cut
+
+- Reproduced the owner's two presentation issues:
+  - the long subtitle sentence changed word-by-word/sentence-by-sentence and
+    distracted from the evidence;
+  - the local Samantha narration sounded mechanical.
+- Compared current official Qwen TTS options and generated short `Ethan`,
+  `Eldric Sage`, and `Serena` Qwen3-TTS Instruct samples. Selected `Ethan` as
+  the default technical-demo voice while keeping the voice as a one-parameter
+  replacement.
+- Stored the provided Qwen credential only in the ignored `.env.local`, set
+  file mode `600`, and verified `git check-ignore`. No secret was printed or
+  added to tracked files.
+- Added `scripts/qwen_tts.py` with:
+  - official DashScope HTTP synthesis;
+  - English instruction control and instruction optimization;
+  - 520-character sentence-aware splitting;
+  - content-addressed cache keys;
+  - deterministic WAV concatenation and inter-chunk pauses;
+  - safe environment/local-secret loading.
+- Updated `scripts/build_submission_video.py`:
+  - V2 output paths preserve V1;
+  - fixed evidence captions change only once per chapter;
+  - Qwen narration metadata and per-segment audio hashes are recorded;
+  - local macOS TTS remains an explicit fallback;
+  - EBU-style loudness normalization targets `-16 LUFS`, `-1.5 dB` true peak.
+- Added three unit tests for narration splitting and WAV concatenation.
+- Generated the final V2 owner-review artifact:
+  - `281.5` seconds, inside the required 3–5 minute range;
+  - 1920×1080, 20 FPS, H.264/AAC;
+  - mean volume `-17.5 dB`, maximum `-1.2 dB`;
+  - output SHA-256
+    `e235a315cf4370ccd10cce5f50d317a7ec3376725940235482b530a641804888`.
+- Extended the strict validator to support both V1 and V2 while requiring the
+  exact V2 provider, model, voice, fixed-caption policy, and segment hashes.
+- Strict validation passed full A/V decode, seven distributed frame samples,
+  evidence hashes, formal metrics, duration, and claim boundaries.
+- The closing QR code decoded successfully to
+  `https://github.com/nvm-star-max/GuardianSim`.
+- Local tests passed `61/61`.
+- No Radeon Cloud action, Genesis execution, formal benchmark, threshold, or
+  immutable report changed.

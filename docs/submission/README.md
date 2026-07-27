@@ -21,6 +21,15 @@ submission. It is a working set, not yet the final uploaded package.
 - [`GuardianSim-Aegis-Motion-demo-review-v1-validation.json`](GuardianSim-Aegis-Motion-demo-review-v1-validation.json):
   strict duration, decode, source-identity, metric, and claim-boundary
   validation.
+- [`GuardianSim-Aegis-Motion-demo-review-v2.mp4`](GuardianSim-Aegis-Motion-demo-review-v2.mp4):
+  the 4:41 review cut with Qwen3-TTS Instruct narration, fixed per-chapter
+  captions, and normalized presentation loudness.
+- [`GuardianSim-Aegis-Motion-demo-review-v2.json`](GuardianSim-Aegis-Motion-demo-review-v2.json):
+  V2 narration model, voice, instructions, per-segment audio hashes, timing,
+  evidence bindings, and verified metrics.
+- [`GuardianSim-Aegis-Motion-demo-review-v2-validation.json`](GuardianSim-Aegis-Motion-demo-review-v2-validation.json):
+  strict V2 narration, caption-policy, duration, decode, source-identity,
+  metric, and claim-boundary validation.
 - [`../../output/pdf/GuardianSim-Technical-Report-DRAFT.pdf`](../../output/pdf/GuardianSim-Technical-Report-DRAFT.pdf):
   visually reviewed six-page A4 draft for owner review. It is labeled as a
   draft and identifies the solo team as Aegis Motion.
@@ -44,12 +53,20 @@ Rebuild and validate the narrated review video on macOS:
 ```bash
 uv run --frozen --no-sync python scripts/build_submission_video.py
 uv run --frozen --no-sync python scripts/validate_submission_video.py \
-  --output docs/submission/GuardianSim-Aegis-Motion-demo-review-v1-validation.json
+  --output docs/submission/GuardianSim-Aegis-Motion-demo-review-v2-validation.json
 ```
 
-The generated narration uses the local macOS Samantha voice and is suitable
-for content review. A human narration take and a real-time final-commit Radeon
-terminal capture remain recommended before declaring the upload final.
+The default V2 build uses
+`qwen3-tts-instruct-flash-2026-01-26` with the `Ethan` voice. Configure
+`DASHSCOPE_API_KEY` in the environment or in the Git-ignored `.env.local`
+file. Generated narration chunks are cached under `tmp/`, and no credential
+is written to the sidecar. Set `GUARDIANSIM_TTS_PROVIDER=macos` only when the
+offline Samantha review voice is explicitly desired.
+
+The owner must still review the complete V2 cut before it is declared final.
+A real-time final-commit Radeon terminal capture remains an optional
+presentation improvement; the current terminal section is clearly labeled
+archived evidence.
 
 ## Blocking owner inputs
 

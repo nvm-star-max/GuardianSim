@@ -776,3 +776,42 @@ Evidence and working material:
   should assess pacing, synthetic narration, and whether to replace the
   archived Radeon-terminal presentation with a real-time final-commit screen
   recording. The cloud instance remains untouched.
+
+## Qwen-narrated fixed-caption V2 review cut — 2026-07-28
+
+- The owner rejected the sentence-by-sentence changing captions and the
+  mechanical macOS Samantha narration in V1.
+- Added a dependency-free Qwen3-TTS client at `scripts/qwen_tts.py`:
+  - model `qwen3-tts-instruct-flash-2026-01-26`;
+  - built-in `Ethan` voice;
+  - English instruction control for a calm, warm, conversational robotics
+    engineer presentation;
+  - sentence-boundary splitting below the API character limit;
+  - content-addressed local chunk caching;
+  - PCM WAV concatenation with short natural pauses;
+  - credential loading only from `DASHSCOPE_API_KEY` or the Git-ignored
+    `.env.local`.
+- The user-supplied credential is stored locally with mode `600`; it is not in
+  source control, logs, sidecars, checksums, or generated documentation.
+  Rotate it after the submission-video work because it was originally shared
+  in chat.
+- Replaced dynamic narration captions with eight fixed evidence captions that
+  change only at chapter boundaries.
+- Generated
+  [`submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4`](submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4):
+  - 1920×1080, 20 FPS, 4 minutes 41.5 seconds;
+  - Qwen3-TTS Instruct English narration;
+  - H.264 video and AAC audio;
+  - loudness-normalized audio measured at mean `-17.5 dB`, maximum `-1.2 dB`;
+  - SHA-256
+    `e235a315cf4370ccd10cce5f50d317a7ec3376725940235482b530a641804888`.
+- Strict V2 validation passed full A/V decode, seven distributed frame
+  decodes, 3–5 minute duration, source identities, formal claims, simulation
+  boundary, narration provider/model/voice, fixed-caption policy, and
+  per-segment audio hashes. The closing QR code decoded to the public
+  GuardianSim repository.
+- Local tests pass `61/61`.
+- No cloud command, physics run, benchmark trial, protocol, threshold, formal
+  report, or Radeon Cloud instance changed.
+- V2 is the preferred owner-review candidate. Do not call it the final upload
+  until the owner watches the complete cut and approves pacing and voice.

@@ -10,18 +10,25 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-import re
+import os
 import subprocess
 import tempfile
 import wave
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable
 
 import cv2
 import imageio_ffmpeg
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+
+if __package__:
+    from scripts.qwen_tts import DEFAULT_INSTRUCTIONS as QWEN_INSTRUCTIONS
+    from scripts.qwen_tts import synthesize_text
+else:
+    from qwen_tts import DEFAULT_INSTRUCTIONS as QWEN_INSTRUCTIONS
+    from qwen_tts import synthesize_text
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,27 +54,17 @@ FONT_MONO = Path("/System/Library/Fonts/Supplemental/Courier New.ttf")
 
 HERO_PATH = ROOT / "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4"
 HERO_SIDECAR = ROOT / "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.json"
-HERO_VALIDATION = (
-    ROOT / "docs/demo/gate-3-2-seed-411-aegis-showcase-v3-validation.json"
-)
+HERO_VALIDATION = ROOT / "docs/demo/gate-3-2-seed-411-aegis-showcase-v3-validation.json"
 FORMAL_REPORT = ROOT / "docs/evidence/gate-3-2/formal-report.json"
 FORMAL_ENVIRONMENT = ROOT / "docs/evidence/gate-3-2/formal-environment.txt"
-SMOKE_WORLD = (
-    ROOT / "docs/evidence/evaluator-smoke-58a76d4/raw/genesis-probe/world.png"
-)
-SMOKE_WRIST = (
-    ROOT / "docs/evidence/evaluator-smoke-58a76d4/raw/genesis-probe/wrist.png"
-)
-SMOKE_CANDIDATES = (
-    ROOT / "docs/evidence/evaluator-smoke-58a76d4/raw/candidates.json"
-)
-GATE33_REPORT = (
-    ROOT / "docs/evidence/gate-3-3-two-strata/raw/two-strata-report.json"
-)
+SMOKE_WORLD = ROOT / "docs/evidence/evaluator-smoke-58a76d4/raw/genesis-probe/world.png"
+SMOKE_WRIST = ROOT / "docs/evidence/evaluator-smoke-58a76d4/raw/genesis-probe/wrist.png"
+SMOKE_CANDIDATES = ROOT / "docs/evidence/evaluator-smoke-58a76d4/raw/candidates.json"
+GATE33_REPORT = ROOT / "docs/evidence/gate-3-3-two-strata/raw/two-strata-report.json"
 
-OUTPUT = ROOT / "docs/submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4"
-SIDECAR = ROOT / "docs/submission/GuardianSim-Aegis-Motion-demo-review-v1.json"
-PREVIEW = ROOT / "docs/submission/GuardianSim-Aegis-Motion-demo-review-v1-preview.png"
+OUTPUT = ROOT / "docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4"
+SIDECAR = ROOT / "docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.json"
+PREVIEW = ROOT / "docs/submission/GuardianSim-Aegis-Motion-demo-review-v2-preview.png"
 
 
 @dataclass(frozen=True)
@@ -169,22 +166,16 @@ def base_frame(title: str, kicker: str, *, accent: tuple[int, int, int] = BLUE) 
     return image
 
 
-def current_sentence(text: str, t: float, duration: float) -> str:
-    sentences = [
-        sentence.strip()
-        for sentence in re.split(r"(?<=[.!?])\s+", text.strip())
-        if sentence.strip()
-    ]
-    if not sentences:
-        return ""
-    weights = [max(1, len(sentence.split())) for sentence in sentences]
-    target = min(max(t / max(duration, 0.001), 0.0), 0.9999) * sum(weights)
-    cursor = 0
-    for sentence, weight in zip(sentences, weights, strict=True):
-        cursor += weight
-        if target < cursor:
-            return sentence
-    return sentences[-1]
+FIXED_CAPTIONS = {
+    "hook": "NOMINAL CONTACT  ·  GUARDIANSIM SAFE",
+    "amd-proof": "AMD RADEON CLOUD  ·  ROCm/HIP 7.2  ·  GENESIS 1.2.3",
+    "architecture": "GENERATE  ·  ROLLOUT  ·  CERTIFY  ·  EXECUTE OR STOP",
+    "smoke": "ONE COMMAND  ·  REAL GENESIS  ·  STRICT VALIDATION",
+    "physical-proof": "1.42 mm OVERLAP  →  17.1 mm CLEARANCE",
+    "formal-results": "18/30  →  30/30 REPEATABLE SAFE SCENARIOS",
+    "safe-stop": "NO HARD-SAFE ACTION  →  SAFE STOP",
+    "close": "OPEN SOURCE  ·  REPRODUCIBLE  ·  SIMULATION ONLY",
+}
 
 
 def subtitle(image: Image.Image, text: str, *, position: str = "bottom") -> None:
@@ -285,7 +276,9 @@ def render_environment(t: float, duration: float) -> Image.Image:
     )
     draw = ImageDraw.Draw(image)
     rounded(draw, (72, 224, 1050, 830), fill=(7, 12, 19), outline=(46, 75, 92))
-    draw.text((110, 258), "$ rocm-smi && python scripts/evaluator_preflight.py", font=font(24, mono=True), fill=rgb(CYAN))
+    draw.text(
+        (110, 258), "$ rocm-smi && python scripts/evaluator_preflight.py", font=font(24, mono=True), fill=rgb(CYAN)
+    )
     lines = [
         "GPU[0]  AMD Radeon Graphics  ·  gfx1100",
         "ROCm/HIP  7.2.53211-e1a6bc5663",
@@ -407,7 +400,9 @@ def render_physical(t: float, duration: float) -> Image.Image:
     draw = ImageDraw.Draw(image)
     if t > duration * 0.76:
         rounded(draw, (520, 150, 1400, 315), fill=(5, 10, 17), outline=GREEN, width=3)
-        draw.text((575, 180), "SAME FROZEN SCENARIO · 3 INDEPENDENT EXECUTIONS", font=font(24, bold=True), fill=rgb(CYAN))
+        draw.text(
+            (575, 180), "SAME FROZEN SCENARIO · 3 INDEPENDENT EXECUTIONS", font=font(24, bold=True), fill=rgb(CYAN)
+        )
         draw.text((595, 232), "BASELINE 0/3 SAFE   →   GUARDIANSIM 3/3 SAFE", font=font(35, bold=True), fill=rgb(WHITE))
     return image
 
@@ -681,29 +676,60 @@ def audio_duration(path: Path) -> float:
         return handle.getnframes() / handle.getframerate()
 
 
-def make_narration(directory: Path) -> tuple[list[Path], list[float]]:
+def make_narration(
+    directory: Path,
+) -> tuple[list[Path], list[float], list[dict[str, object]]]:
     paths: list[Path] = []
     durations: list[float] = []
+    records: list[dict[str, object]] = []
+    provider = os.environ.get("GUARDIANSIM_TTS_PROVIDER", "qwen").lower()
+    cache_dir = ROOT / "tmp/qwen-narration"
     for index, segment in enumerate(SEGMENTS):
         path = directory / f"{index:02d}-{segment.slug}.wav"
-        subprocess.run(
-            [
-                "/usr/bin/say",
-                "-v",
-                "Samantha",
-                "-r",
-                "165",
-                "-o",
-                str(path),
-                "--file-format=WAVE",
-                "--data-format=LEI16@22050",
+        if provider == "qwen":
+            result = synthesize_text(
                 segment.narration,
-            ],
-            check=True,
-        )
+                path,
+                cache_dir=cache_dir / segment.slug,
+            )
+            record = {
+                "provider": "Alibaba Cloud Model Studio",
+                "model": result.model,
+                "voice": result.voice,
+                "instructions": QWEN_INSTRUCTIONS,
+                "chunks": result.chunks,
+                "characters": result.characters,
+            }
+        elif provider == "macos":
+            subprocess.run(
+                [
+                    "/usr/bin/say",
+                    "-v",
+                    "Samantha",
+                    "-r",
+                    "165",
+                    "-o",
+                    str(path),
+                    "--file-format=WAVE",
+                    "--data-format=LEI16@22050",
+                    segment.narration,
+                ],
+                check=True,
+            )
+            record = {
+                "provider": "macOS",
+                "model": "say",
+                "voice": "Samantha",
+                "rate_words_per_minute": 165,
+                "chunks": 1,
+                "characters": len(segment.narration),
+            }
+        else:
+            raise ValueError("GUARDIANSIM_TTS_PROVIDER must be 'qwen' or 'macos'")
         paths.append(path)
         durations.append(audio_duration(path))
-    return paths, durations
+        records.append(record)
+    return paths, durations, records
 
 
 def render_silent_video(path: Path, durations: list[float]) -> list[int]:
@@ -723,13 +749,11 @@ def render_silent_video(path: Path, durations: list[float]) -> list[int]:
             t = frame_index / FPS
             image = segment.renderer(t, duration)
             subtitle_position = "bottom"
-            if segment.slug == "physical-proof":
-                subtitle_position = "top"
-            elif segment.slug == "hook" and t >= duration * 0.25:
+            if segment.slug == "physical-proof" or (segment.slug == "hook" and t >= duration * 0.25):
                 subtitle_position = "top"
             subtitle(
                 image,
-                current_sentence(segment.narration, t, duration),
+                FIXED_CAPTIONS[segment.slug],
                 position=subtitle_position,
             )
             writer.write(cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR))
@@ -743,7 +767,7 @@ def mux(silent_video: Path, audio_paths: list[Path], output: Path) -> None:
     for path in audio_paths:
         command.extend(["-i", str(path)])
     audio_inputs = "".join(f"[{index}:a]" for index in range(1, len(audio_paths) + 1))
-    filter_complex = f"{audio_inputs}concat=n={len(audio_paths)}:v=0:a=1[a]"
+    filter_complex = f"{audio_inputs}concat=n={len(audio_paths)}:v=0:a=1[raw];[raw]loudnorm=I=-16:TP=-1.5:LRA=11[a]"
     command.extend(
         [
             "-filter_complex",
@@ -763,7 +787,7 @@ def mux(silent_video: Path, audio_paths: list[Path], output: Path) -> None:
             "-c:a",
             "aac",
             "-b:a",
-            "160k",
+            "128k",
             "-movflags",
             "+faststart",
             "-shortest",
@@ -797,10 +821,11 @@ def main() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="guardiansim-submission-video-") as temp:
         temp_dir = Path(temp)
-        audio_paths, durations = make_narration(temp_dir)
+        audio_paths, durations, narration_records = make_narration(temp_dir)
         silent_video = temp_dir / "silent.mp4"
         frame_counts = render_silent_video(silent_video, durations)
         mux(silent_video, audio_paths, OUTPUT)
+        audio_hashes = [sha256(path) for path in audio_paths]
 
     write_preview(OUTPUT, PREVIEW)
     capture = cv2.VideoCapture(str(OUTPUT))
@@ -811,7 +836,7 @@ def main() -> None:
     capture.release()
 
     payload = {
-        "kind": "guardiansim_submission_video_review_v1",
+        "kind": "guardiansim_submission_video_review_v2",
         "team": "Aegis Motion",
         "project": "GuardianSim",
         "claim_boundary": (
@@ -820,9 +845,12 @@ def main() -> None:
         ),
         "language": "English",
         "narration": {
-            "voice": "macOS Samantha",
-            "rate_words_per_minute": 165,
-            "human_narration_recommended_for_final": True,
+            "provider": narration_records[0]["provider"],
+            "model": narration_records[0]["model"],
+            "voice": narration_records[0]["voice"],
+            "instructions": narration_records[0].get("instructions"),
+            "fixed_chapter_captions": True,
+            "human_narration_recommended_for_final": False,
             "segments": [
                 {
                     "slug": segment.slug,
@@ -830,9 +858,16 @@ def main() -> None:
                     "text": segment.narration,
                     "duration_seconds": duration,
                     "frame_count": frame_count,
+                    "audio_sha256": audio_hash,
+                    "chunks": record["chunks"],
                 }
-                for segment, duration, frame_count in zip(
-                    SEGMENTS, durations, frame_counts, strict=True
+                for segment, duration, frame_count, audio_hash, record in zip(
+                    SEGMENTS,
+                    durations,
+                    frame_counts,
+                    audio_hashes,
+                    narration_records,
+                    strict=True,
                 )
             ],
         },

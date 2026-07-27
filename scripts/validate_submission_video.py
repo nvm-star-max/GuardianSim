@@ -12,7 +12,6 @@ from pathlib import Path
 import cv2
 import imageio_ffmpeg
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -37,8 +36,13 @@ def resolve_recorded_path(record: dict, key: str = "path") -> Path:
 
 def validate(sidecar_path: Path) -> dict:
     payload = json.loads(sidecar_path.read_text())
+    kind = payload.get("kind")
     require(
-        payload.get("kind") == "guardiansim_submission_video_review_v1",
+        kind
+        in {
+            "guardiansim_submission_video_review_v1",
+            "guardiansim_submission_video_review_v2",
+        },
         "Unexpected presentation kind",
     )
     require(payload.get("team") == "Aegis Motion", "Unexpected team identity")
@@ -82,13 +86,11 @@ def validate(sidecar_path: Path) -> dict:
 
     metrics = payload["verified_metrics"]
     require(
-        metrics["gate32_repeatable_safe_completion"]
-        == {"baseline": 18, "guardiansim": 30, "total": 30},
+        metrics["gate32_repeatable_safe_completion"] == {"baseline": 18, "guardiansim": 30, "total": 30},
         "Repeatable completion claim drift",
     )
     require(
-        metrics["gate32_independent_safe_executions"]
-        == {"baseline": 58, "guardiansim": 90, "total": 90},
+        metrics["gate32_independent_safe_executions"] == {"baseline": 58, "guardiansim": 90, "total": 90},
         "Independent execution claim drift",
     )
     require(
@@ -98,7 +100,36 @@ def validate(sidecar_path: Path) -> dict:
     require(metrics["gate33_gap_bearing"]["label"] == "engineering breadth evidence", "Gate 3.3 label drift")
     require(metrics["gate33_gap_bearing"]["unsafe_executions"] == 0, "Safe-stop claim drift")
     require(len(payload["narration"]["segments"]) == 8, "Expected eight narrated sections")
-    require(payload["narration"]["human_narration_recommended_for_final"] is True, "Review status drift")
+    if kind == "guardiansim_submission_video_review_v2":
+        narration = payload["narration"]
+        require(
+            narration["provider"] == "Alibaba Cloud Model Studio",
+            "Unexpected V2 narration provider",
+        )
+        require(
+            narration["model"] == "qwen3-tts-instruct-flash-2026-01-26",
+            "Unexpected V2 narration model",
+        )
+        require(narration["voice"] == "Ethan", "Unexpected V2 narration voice")
+        require(
+            narration["fixed_chapter_captions"] is True,
+            "V2 captions must remain fixed within each chapter",
+        )
+        require(
+            narration["human_narration_recommended_for_final"] is False,
+            "V2 review status drift",
+        )
+        for segment in narration["segments"]:
+            require(
+                len(segment["audio_sha256"]) == 64,
+                f"Missing narration hash for {segment['slug']}",
+            )
+            require(segment["chunks"] >= 1, "Invalid narration chunk count")
+    else:
+        require(
+            payload["narration"]["human_narration_recommended_for_final"] is True,
+            "V1 review status drift",
+        )
 
     ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
     decode = subprocess.run(
@@ -118,6 +149,7 @@ def validate(sidecar_path: Path) -> dict:
         ],
         text=True,
         capture_output=True,
+        check=False,
     )
     require(decode.returncode == 0, f"Full A/V decode failed: {decode.stderr}")
 
@@ -144,7 +176,7 @@ def main() -> None:
         "sidecar",
         nargs="?",
         type=Path,
-        default=ROOT / "docs/submission/GuardianSim-Aegis-Motion-demo-review-v1.json",
+        default=ROOT / "docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.json",
     )
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()

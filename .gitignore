@@ -12,6 +12,7 @@ build/
 dist/
 .venv/
 venv/
+.env.local
 .ipynb_checkpoints/
 
 # --- Tooling / OS / editor ---

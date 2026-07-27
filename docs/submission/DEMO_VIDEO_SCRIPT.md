@@ -255,10 +255,10 @@ Verified presentation properties:
 - presentation-only post-processing: no physics re-execution and no added
   statistical trial.
 
-## Narrated review cut
+## Narrated review cuts
 
 `docs/submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4` is the accepted
-content-review candidate:
+first content-review candidate:
 
 - 1920×1080, 20 FPS, 4 minutes 15.4 seconds;
 - English macOS Samantha narration plus burned-in English captions;
@@ -269,7 +269,21 @@ content-review candidate:
 - full audio/video decode, source hashes, claims, duration, and QR code
   validated.
 
-It is not yet labeled final because the Radeon terminal section is a faithful
-presentation of preserved evidence rather than a live final-commit screen
-recording, and the synthetic voice should be reviewed against a possible human
-narration take.
+`docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4` is the preferred
+owner-review candidate:
+
+- 1920×1080, 20 FPS, 4 minutes 41.5 seconds;
+- Qwen3-TTS Instruct `Ethan` narration with natural engineering-presentation
+  direction;
+- fixed per-chapter evidence captions instead of sentence-by-sentence text
+  changes;
+- normalized mean level `-17.5 dB` and maximum `-1.2 dB`;
+- the same eight chapters and immutable evidence boundaries as V1;
+- full audio/video decode, source hashes, claims, duration, narration
+  metadata, caption policy, and QR code validated;
+- output SHA-256
+  `e235a315cf4370ccd10cce5f50d317a7ec3376725940235482b530a641804888`.
+
+It is not yet labeled final because the owner must review the complete pacing
+and voice. The Radeon terminal section remains a faithful presentation of
+preserved evidence rather than a live final-commit screen recording.
