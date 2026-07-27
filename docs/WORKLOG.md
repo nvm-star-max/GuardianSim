@@ -1206,3 +1206,43 @@ Gate decision:
 - No media bytes, narration, captions, evidence, metrics, or cloud state
   changed in this approval step. Uploading to the organizer remains a separate
   external action.
+
+## 2026-07-28 — Final report and organizer-package assembly
+
+- Reconciled the project against the current official Track 3 submission
+  contract: English report, dedicated source repository, detailed
+  reproducibility instructions, preferred Docker packaging, a 3–5 minute
+  complete-workflow video, and an English pull request from a fork of the
+  official contest repository.
+- Converted `scripts/build_technical_report_pdf.py` into a final/draft-aware
+  builder and generated the final six-page English A4 PDF.
+- Rendered all six pages to images and inspected the complete contact sheet
+  plus the dense final page at full resolution. No clipping, overlap, missing
+  glyph, draft marker, or unreadable footer was found.
+- Final report SHA-256:
+  `d4d5596645c4f971280f779eb585d0e675b62695d5f114db72dbbbf398054a66`.
+- Tightened report wording so it does not imply a learned-policy statistical
+  holdout or claim that strict report validation re-executes 30 physics
+  episodes.
+- Prepared
+  `docs/submission/official-package/Track3-Aegis-Motion-GuardianSim` with an
+  English submission README, the final PDF, and package checksums.
+- Replaced placeholder links in `OFFICIAL_PR_DRAFT.md` with immutable source,
+  video, evidence, Docker, and reproduction links.
+- Verified both the source tree and frozen V2 video URLs at
+  `25e27aced13237b5af93fd91697d7abb12101a30` return HTTP 200.
+- Verified all package and top-level submission checksums.
+- Re-ran local acceptance:
+  - `ruff` passed for the report and video tooling;
+  - the full suite passed `61/61`;
+  - strict V2 validation reproduced the frozen video SHA-256 and decoded all
+    required audio/video samples;
+  - the PDF has six A4 pages, no draft marker, and all required Track 3 report
+    sections in extracted text;
+  - tracked-file secret-pattern scanning found zero hits.
+- Confirmed `origin/main` can fast-forward to the feature branch and is 36
+  commits behind. The official contest fork is still missing, so no public
+  organizer pull request was opened.
+- The Docker daemon was unavailable on this Mac; no unverified ROCm container
+  result was added. The supported native Radeon Cloud route remains the
+  reproduced path.

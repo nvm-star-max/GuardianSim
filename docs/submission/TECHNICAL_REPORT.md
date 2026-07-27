@@ -18,7 +18,7 @@ frozen reachability, stability, clearance, and repeatability requirements. If
 no candidate passes every hard gate, the system explicitly stops.
 
 In the primary frozen Gate 3.2 benchmark, GuardianSim achieved repeatable safe
-completion in 30 of 30 unseen clutter scenarios, compared with 18 of 30 for the
+completion in 30 of 30 declared clutter scenarios, compared with 18 of 30 for the
 nominal baseline. Across three independent physical executions per scenario,
 safe executions improved from 58/90 to 90/90, while sampled clutter contacts
 decreased from 30 to zero. Mean sampled clutter clearance increased from
@@ -153,8 +153,9 @@ external training dataset. The nominal action comes from the retained scripted
 Franka fruit-picking reference pipeline. The contribution is the
 counterfactual safety layer and its physical evaluation.
 
-The frozen Gate 3.2 evaluation matrix contains 30 procedurally declared,
-previously unseen scenarios:
+The frozen Gate 3.2 evaluation matrix contains 30 procedurally declared
+scenarios. The project does not use them as a statistical training holdout
+because the evaluated nominal policy is scripted rather than learned:
 
 - three target objects: banana, lemon, and plum;
 - lateral and radial clutter configurations;
@@ -270,8 +271,15 @@ Primary deliverables:
 - technical report and 3–5 minute video.
 
 The evaluator path is documented in the repository root
-`REPRODUCIBILITY.md`. The formal report validator must reproduce 30 episodes
-and the frozen protocol hash before any primary metric is accepted.
+`REPRODUCIBILITY.md`. The strict validator must accept the complete
+30-episode report and its frozen protocol hash before any primary metric is
+used.
+
+The owner-approved 4 minute 41.5 second English submission video is
+`docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4`, SHA-256
+`e235a315cf4370ccd10cce5f50d317a7ec3376725940235482b530a641804888`.
+It binds the accepted Seed 411 replay, aggregate Gate 3.2 results, separate
+Gate 3.3 limitation evidence, and simulation-only claim boundary.
 
 ## 9. Limitations and responsible claims
 

@@ -1,6 +1,6 @@
 # GuardianSim Hackathon Submission Plan
 
-Last updated: 2026-07-27
+Last updated: 2026-07-28
 
 This is the operational source of truth for turning GuardianSim into a valid
 Track 3 submission before the announced deadline. Experimental protocols and
@@ -87,20 +87,20 @@ environment must be reproducible. At minimum preserve:
 
 ## 2. Current readiness
 
-| Deliverable | State on 2026-07-27 | Required next proof |
+| Deliverable | State on 2026-07-28 | Required next proof |
 | --- | --- | --- |
 | Track and application direction | Ready | Keep Track 3 claim consistent everywhere |
 | AMD Radeon/ROCm execution | Strong evidence + preflight implemented | Re-run cleanly on Radeon before freeze |
-| Dedicated source repository | Ready | Prepare stable public submission branch/tag |
+| Dedicated source repository | Public feature branch ready | Merge/freeze the final public commit or tag |
 | Formal benchmark evidence | Strong Gate 3.2 evidence | Preserve claim boundary and checksums |
 | Breadth evidence | Two Gate 3.3 strata preserved | Do not expand before P0 submission work |
 | Reproducibility README | Ready; clean-room clone and real Radeon smoke passed | Re-run from the final submission commit |
 | Dependency/environment capture | Ready; real Blank OpenCode manifest and smoke archived | Re-run from the final submission commit before freeze |
-| Docker image or Dockerfile | Pinned complete-source Dockerfile present | Linux ROCm build/run still pending |
-| English technical report | V1 drafted; Aegis Motion attribution added | Confirm public member naming, review, and export final PDF |
-| 3–5 minute complete demo | Strictly validated 4:15 English review cut complete | Owner content review; replace archived-terminal presentation with final-commit live capture if practical |
-| Supplementary deck/poster | Missing | Produce only after report/video reach review quality |
-| English official-repo PR | Missing | Fork, add submission entry/materials, open PR |
+| Docker image or Dockerfile | Pinned complete-source Dockerfile and native Radeon fallback documented | Optional Linux ROCm container run remains unverified because the local Docker daemon is unavailable |
+| English technical report | Final six-page PDF generated and visually inspected | Keep its checksum bound to the official package |
+| 3–5 minute complete demo | Owner-approved, strictly validated 4:41.5 English V2 | Upload the frozen bytes without re-encoding |
+| Supplementary deck/poster | Intentionally omitted; optional | Keep scope on the mandatory report and video |
+| English official-repo PR | Local package and PR text ready; official fork missing | Fork, copy the prepared package, and open the English PR |
 | Luma Rules sign-off | Manual action pending | Owner reads full page and records extra requirements |
 
 ## 3. Winning MVP
@@ -254,25 +254,27 @@ Exit criterion: no unfinished mandatory artifact remains.
 ## 8. Final acceptance checklist
 
 - [ ] Luma rules manually reviewed and any extra requirements recorded.
-- [ ] Track 3 identity and English naming are consistent.
-- [ ] Public source commit/tag is fixed.
-- [x] English technical report V1 identifies Aegis Motion and the solo public contributor.
+- [x] Track 3 identity and English naming are consistent.
+- [x] Public source and evidence identity is fixed at immutable commit `25e27aced13237b5af93fd91697d7abb12101a30`.
+- [x] Final English technical-report PDF identifies Aegis Motion and the solo public contributor.
 - [ ] Owner confirms whether a legal name must appear in the public report.
 - [x] Reproducibility README passes a local clean-room clone test.
 - [x] AMD Radeon/ROCm environment manifest and real Genesis smoke are complete.
-- [ ] Docker image/Dockerfile is validated, or the supported fallback is clear.
+- [x] Pinned Dockerfile is present and the supported native Radeon Cloud fallback is clear; a local ROCm container run is not claimed.
 - [x] 3–5 minute English demo video approved by the owner: the 4:41.5 Qwen-narrated V2 cut shows the validated real Genesis replay, formal results, and safe-stop limitation.
 - [x] Formal video claims map to preserved evidence and machine-checked source hashes.
-- [ ] Team members and contributions are present.
-- [ ] Supplementary material is complete if used.
+- [x] Team members and contributions are present.
+- [x] Optional supplementary deck/poster is intentionally not used.
 - [ ] Official repository is forked and the English PR is ready.
 - [ ] Final Luma submission and PR evidence are archived.
 
 Working report and video-production sources:
 
 - [`submission/TECHNICAL_REPORT.md`](submission/TECHNICAL_REPORT.md)
+- [`submission/GuardianSim-Technical-Report.pdf`](submission/GuardianSim-Technical-Report.pdf)
 - [`submission/DEMO_VIDEO_SCRIPT.md`](submission/DEMO_VIDEO_SCRIPT.md)
-- [`submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4`](submission/GuardianSim-Aegis-Motion-demo-review-v1.mp4)
+- [`submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4`](submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4)
+- [`submission/official-package/Track3-Aegis-Motion-GuardianSim`](submission/official-package/Track3-Aegis-Motion-GuardianSim)
 
 The accepted Radeon evaluator-smoke archive and expanded raw files are
 preserved under

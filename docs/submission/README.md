@@ -5,9 +5,11 @@ submission. It is a working set, not yet the final uploaded package.
 
 ## Current artifacts
 
-- [`TECHNICAL_REPORT.md`](TECHNICAL_REPORT.md): complete technical-report V1,
+- [`TECHNICAL_REPORT.md`](TECHNICAL_REPORT.md): final technical-report source,
   aligned to the official Track 3 section list and limited to preserved
   metrics.
+- [`GuardianSim-Technical-Report.pdf`](GuardianSim-Technical-Report.pdf):
+  visually inspected six-page submission edition with no draft markings.
 - [`DEMO_VIDEO_SCRIPT.md`](DEMO_VIDEO_SCRIPT.md): a 4:00–4:30 production
   script designed to make the baseline/GuardianSim physical difference
   visually explicit.
@@ -38,11 +40,14 @@ submission. It is a working set, not yet the final uploaded package.
   evidence-backed competitive position.
 - [`OFFICIAL_PR_DRAFT.md`](OFFICIAL_PR_DRAFT.md): the English official-repo
   pull-request title and body draft.
+- [`official-package/Track3-Aegis-Motion-GuardianSim`](official-package/Track3-Aegis-Motion-GuardianSim):
+  self-contained directory prepared for the official contest fork.
 
-Rebuild the review PDF with ReportLab:
+Rebuild the final PDF with ReportLab:
 
 ```bash
-python scripts/build_technical_report_pdf.py
+python scripts/build_technical_report_pdf.py --final \
+  --output output/pdf/GuardianSim-Technical-Report.pdf
 ```
 
 The build script is separate from the evaluator runtime. Install `reportlab`

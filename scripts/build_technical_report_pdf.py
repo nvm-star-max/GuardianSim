@@ -18,7 +18,6 @@ from reportlab.platypus import (
     BaseDocTemplate,
     Flowable,
     Frame,
-    KeepTogether,
     PageBreak,
     PageTemplate,
     Paragraph,
@@ -84,24 +83,56 @@ def architecture_drawing(width: float) -> Drawing:
     for index, (label, color) in enumerate(labels):
         x = index * (box_width + gap)
         x_positions.append(x)
-        drawing.add(Rect(x, y_top, box_width, box_height, 3 * mm, 3 * mm,
-                         fillColor=colors.white, strokeColor=color,
-                         strokeWidth=1.5))
-        drawing.add(String(x + box_width / 2, y_top + 8.2 * mm, label,
-                           textAnchor="middle", fontName="Helvetica-Bold",
-                           fontSize=8, fillColor=INK))
+        drawing.add(
+            Rect(
+                x,
+                y_top,
+                box_width,
+                box_height,
+                3 * mm,
+                3 * mm,
+                fillColor=colors.white,
+                strokeColor=color,
+                strokeWidth=1.5,
+            )
+        )
+        drawing.add(
+            String(
+                x + box_width / 2,
+                y_top + 8.2 * mm,
+                label,
+                textAnchor="middle",
+                fontName="Helvetica-Bold",
+                fontSize=8,
+                fillColor=INK,
+            )
+        )
         if index < len(labels) - 1:
             x1 = x + box_width
             x2 = x + box_width + gap
-            drawing.add(Line(x1, y_top + box_height / 2, x2,
-                             y_top + box_height / 2,
-                             strokeColor=MUTED, strokeWidth=1.2))
-            drawing.add(Line(x2 - 2 * mm, y_top + box_height / 2 + 1.5 * mm,
-                             x2, y_top + box_height / 2,
-                             strokeColor=MUTED, strokeWidth=1.2))
-            drawing.add(Line(x2 - 2 * mm, y_top + box_height / 2 - 1.5 * mm,
-                             x2, y_top + box_height / 2,
-                             strokeColor=MUTED, strokeWidth=1.2))
+            drawing.add(
+                Line(x1, y_top + box_height / 2, x2, y_top + box_height / 2, strokeColor=MUTED, strokeWidth=1.2)
+            )
+            drawing.add(
+                Line(
+                    x2 - 2 * mm,
+                    y_top + box_height / 2 + 1.5 * mm,
+                    x2,
+                    y_top + box_height / 2,
+                    strokeColor=MUTED,
+                    strokeWidth=1.2,
+                )
+            )
+            drawing.add(
+                Line(
+                    x2 - 2 * mm,
+                    y_top + box_height / 2 - 1.5 * mm,
+                    x2,
+                    y_top + box_height / 2,
+                    strokeColor=MUTED,
+                    strokeWidth=1.2,
+                )
+            )
     lower_y = 1 * mm
     lower = [
         (x_positions[1], "Same snapshot"),
@@ -109,39 +140,60 @@ def architecture_drawing(width: float) -> Drawing:
         (x_positions[3], "Execute or safe-stop"),
     ]
     for x, label in lower:
-        drawing.add(Rect(x, lower_y, box_width, 11 * mm, 2 * mm, 2 * mm,
-                         fillColor=LIGHT, strokeColor=colors.HexColor("#B0B0B0")))
-        drawing.add(String(x + box_width / 2, lower_y + 6.3 * mm, label,
-                           textAnchor="middle", fontName="Helvetica",
-                           fontSize=7.5, fillColor=INK))
-    drawing.add(Line(x_positions[1] + box_width / 2, y_top,
-                     x_positions[1] + box_width / 2, lower_y + 11 * mm,
-                     strokeColor=MUTED))
-    drawing.add(Line(x_positions[2] + box_width / 2, y_top,
-                     x_positions[2] + box_width / 2, lower_y + 11 * mm,
-                     strokeColor=MUTED))
-    drawing.add(Line(x_positions[3] + box_width / 2, y_top,
-                     x_positions[3] + box_width / 2, lower_y + 11 * mm,
-                     strokeColor=MUTED))
+        drawing.add(
+            Rect(
+                x, lower_y, box_width, 11 * mm, 2 * mm, 2 * mm, fillColor=LIGHT, strokeColor=colors.HexColor("#B0B0B0")
+            )
+        )
+        drawing.add(
+            String(
+                x + box_width / 2,
+                lower_y + 6.3 * mm,
+                label,
+                textAnchor="middle",
+                fontName="Helvetica",
+                fontSize=7.5,
+                fillColor=INK,
+            )
+        )
+    drawing.add(
+        Line(
+            x_positions[1] + box_width / 2, y_top, x_positions[1] + box_width / 2, lower_y + 11 * mm, strokeColor=MUTED
+        )
+    )
+    drawing.add(
+        Line(
+            x_positions[2] + box_width / 2, y_top, x_positions[2] + box_width / 2, lower_y + 11 * mm, strokeColor=MUTED
+        )
+    )
+    drawing.add(
+        Line(
+            x_positions[3] + box_width / 2, y_top, x_positions[3] + box_width / 2, lower_y + 11 * mm, strokeColor=MUTED
+        )
+    )
     return drawing
 
 
-class DraftBanner(Flowable):
-    def __init__(self, width: float):
+class StatusBanner(Flowable):
+    def __init__(self, width: float, *, final: bool):
         super().__init__()
         self.width = width
         self.height = 11 * mm
+        self.final = final
 
     def draw(self) -> None:
-        self.canv.setFillColor(colors.HexColor("#FFF3E0"))
-        self.canv.roundRect(0, 0, self.width, self.height, 2 * mm, fill=1,
-                            stroke=0)
-        self.canv.setFillColor(ORANGE)
+        self.canv.setFillColor(colors.HexColor("#E8F5E9") if self.final else colors.HexColor("#FFF3E0"))
+        self.canv.roundRect(0, 0, self.width, self.height, 2 * mm, fill=1, stroke=0)
+        self.canv.setFillColor(GREEN if self.final else ORANGE)
         self.canv.setFont("Helvetica-Bold", 9)
         self.canv.drawCentredString(
             self.width / 2,
             3.7 * mm,
-            "REVIEW DRAFT - Luma rules sign-off and final video pending",
+            (
+                "SUBMISSION EDITION - VERIFIED SIMULATION EVIDENCE"
+                if self.final
+                else "REVIEW DRAFT - Luma rules sign-off and final video pending"
+            ),
         )
 
 
@@ -263,10 +315,7 @@ def parse_table(lines: list[str], style_map: dict[str, ParagraphStyle]) -> Table
             )
         else:
             cell_style = style_map["small"]
-        rows.append([
-            Paragraph(inline_markup(cell), cell_style)
-            for cell in cells
-        ])
+        rows.append([Paragraph(inline_markup(cell), cell_style) for cell in cells])
     column_count = len(rows[0])
     usable = 170 * mm
     if column_count == 4:
@@ -276,18 +325,22 @@ def parse_table(lines: list[str], style_map: dict[str, ParagraphStyle]) -> Table
     else:
         widths = [usable / column_count] * column_count
     table = Table(rows, colWidths=widths, repeatRows=1, hAlign="LEFT")
-    table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), INK),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ("GRID", (0, 0), (-1, -1), 0.35, colors.HexColor("#C8C8C8")),
-        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, LIGHT]),
-        ("LEFTPADDING", (0, 0), (-1, -1), 2.2 * mm),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 2.2 * mm),
-        ("TOPPADDING", (0, 0), (-1, -1), 1.8 * mm),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 1.8 * mm),
-    ]))
+    table.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), INK),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("GRID", (0, 0), (-1, -1), 0.35, colors.HexColor("#C8C8C8")),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, LIGHT]),
+                ("LEFTPADDING", (0, 0), (-1, -1), 2.2 * mm),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 2.2 * mm),
+                ("TOPPADDING", (0, 0), (-1, -1), 1.8 * mm),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 1.8 * mm),
+            ]
+        )
+    )
     return table
 
 
@@ -311,66 +364,79 @@ def bullet_row(
         firstLineIndent=0,
     )
     table = Table(
-        [[
-            Paragraph(html.escape(marker), marker_style),
-            Paragraph(inline_markup(text), text_style),
-        ]],
+        [
+            [
+                Paragraph(html.escape(marker), marker_style),
+                Paragraph(inline_markup(text), text_style),
+            ]
+        ],
         colWidths=[7 * mm, 163 * mm],
         hAlign="LEFT",
     )
-    table.setStyle(TableStyle([
-        ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 0),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
-        ("TOPPADDING", (0, 0), (-1, -1), 0),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
-    ]))
+    table.setStyle(
+        TableStyle(
+            [
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LEFTPADDING", (0, 0), (-1, -1), 0),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+                ("TOPPADDING", (0, 0), (-1, -1), 0),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+            ]
+        )
+    )
     return table
 
 
-def markdown_story(source: Path) -> list[Flowable]:
+def markdown_story(source: Path, *, final: bool) -> list[Flowable]:
     style_map = styles()
     lines = source.read_text(encoding="utf-8").splitlines()
     story: list[Flowable] = []
 
     title = ascii_text(lines[0].removeprefix("# ").strip())
-    story.extend([
-        Spacer(1, 18 * mm),
-        Paragraph("GUARDIANSIM", ParagraphStyle(
-            "Kicker", parent=style_map["subtitle"], textColor=AMD_RED,
-            fontName="Helvetica-Bold", fontSize=10, leading=12,
-        )),
-        Paragraph(html.escape(title), style_map["title"]),
-        Paragraph(
-            "Track 3 - Physical AI Challenge<br/>"
-            "AMD Radeon Cloud / ROCm / Genesis simulation",
-            style_map["subtitle"],
-        ),
-        Spacer(1, 12 * mm),
-        DraftBanner(170 * mm),
-        Spacer(1, 13 * mm),
-        Paragraph(
-            "<b>Project repository</b><br/>"
-            "github.com/nvm-star-max/GuardianSim",
-            style_map["body"],
-        ),
-        Paragraph(
-            "<b>Team attribution</b><br/>"
-            "Aegis Motion - solo developer<br/>"
-            "GitHub: @nvm-star-max",
-            style_map["body"],
-        ),
-        Spacer(1, 30 * mm),
-        Paragraph(
-            "Counterfactual safety certification for robot manipulation on "
-            "AMD Radeon GPUs",
-            ParagraphStyle(
-                "CoverStatement", parent=style_map["body"], fontSize=14,
-                leading=19, textColor=INK,
+    story.extend(
+        [
+            Spacer(1, 18 * mm),
+            Paragraph(
+                "GUARDIANSIM",
+                ParagraphStyle(
+                    "Kicker",
+                    parent=style_map["subtitle"],
+                    textColor=AMD_RED,
+                    fontName="Helvetica-Bold",
+                    fontSize=10,
+                    leading=12,
+                ),
             ),
-        ),
-        PageBreak(),
-    ])
+            Paragraph(html.escape(title), style_map["title"]),
+            Paragraph(
+                "Track 3 - Physical AI Challenge<br/>AMD Radeon Cloud / ROCm / Genesis simulation",
+                style_map["subtitle"],
+            ),
+            Spacer(1, 12 * mm),
+            StatusBanner(170 * mm, final=final),
+            Spacer(1, 13 * mm),
+            Paragraph(
+                "<b>Project repository</b><br/>github.com/nvm-star-max/GuardianSim",
+                style_map["body"],
+            ),
+            Paragraph(
+                "<b>Team attribution</b><br/>Aegis Motion - solo developer<br/>GitHub: @nvm-star-max",
+                style_map["body"],
+            ),
+            Spacer(1, 30 * mm),
+            Paragraph(
+                "Counterfactual safety certification for robot manipulation on AMD Radeon GPUs",
+                ParagraphStyle(
+                    "CoverStatement",
+                    parent=style_map["body"],
+                    fontSize=14,
+                    leading=19,
+                    textColor=INK,
+                ),
+            ),
+            PageBreak(),
+        ]
+    )
 
     index = 1
     paragraph_lines: list[str] = []
@@ -388,11 +454,13 @@ def markdown_story(source: Path) -> list[Flowable]:
             flush_paragraph()
             index += 1
             continue
-        if (
-            stripped.startswith("**Track:**")
-            or stripped.startswith("**Project repository:**")
-            or stripped.startswith("**Team:**")
-            or stripped.startswith("**Members:**")
+        if stripped.startswith(
+            (
+                "**Track:**",
+                "**Project repository:**",
+                "**Team:**",
+                "**Members:**",
+            )
         ):
             index += 1
             continue
@@ -407,10 +475,12 @@ def markdown_story(source: Path) -> list[Flowable]:
             if language == "mermaid":
                 story.append(architecture_drawing(170 * mm))
             else:
-                story.append(Paragraph(
-                    html.escape(ascii_text("\n".join(code_lines))).replace("\n", "<br/>"),
-                    style_map["code"],
-                ))
+                story.append(
+                    Paragraph(
+                        html.escape(ascii_text("\n".join(code_lines))).replace("\n", "<br/>"),
+                        style_map["code"],
+                    )
+                )
             index += 1
             continue
         if stripped.startswith("|") and index + 1 < len(lines):
@@ -447,11 +517,7 @@ def markdown_story(source: Path) -> list[Flowable]:
             marker, bullet_text = match.groups()
             index += 1
             continuation: list[str] = []
-            while (
-                index < len(lines)
-                and lines[index].strip()
-                and lines[index][0].isspace()
-            ):
+            while index < len(lines) and lines[index].strip() and lines[index][0].isspace():
                 continuation.append(lines[index].strip())
                 index += 1
             if continuation:
@@ -465,7 +531,7 @@ def markdown_story(source: Path) -> list[Flowable]:
     return story
 
 
-def page_header_footer(canvas, document) -> None:  # noqa: ANN001
+def page_header_footer(canvas, document) -> None:
     canvas.saveState()
     if document.page == 1:
         canvas.restoreState()
@@ -479,17 +545,18 @@ def page_header_footer(canvas, document) -> None:  # noqa: ANN001
     canvas.drawString(20 * mm, height - 10.5 * mm, "GUARDIANSIM")
     canvas.setFont("Helvetica", 7.5)
     canvas.setFillColor(MUTED)
-    canvas.drawRightString(width - 20 * mm, height - 10.5 * mm,
-                           "Track 3 Technical Report - Review Draft")
+    canvas.drawRightString(
+        width - 20 * mm,
+        height - 10.5 * mm,
+        document.report_header,
+    )
     canvas.line(20 * mm, 14 * mm, width - 20 * mm, 14 * mm)
-    canvas.drawString(20 * mm, 9.5 * mm,
-                      "Genesis simulation on AMD Radeon Cloud")
-    canvas.drawRightString(width - 20 * mm, 9.5 * mm,
-                           f"Page {document.page}")
+    canvas.drawString(20 * mm, 9.5 * mm, "Genesis simulation on AMD Radeon Cloud")
+    canvas.drawRightString(width - 20 * mm, 9.5 * mm, f"Page {document.page}")
     canvas.restoreState()
 
 
-def build(source: Path, destination: Path) -> None:
+def build(source: Path, destination: Path, *, final: bool = False) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     document = BaseDocTemplate(
         str(destination),
@@ -500,8 +567,13 @@ def build(source: Path, destination: Path) -> None:
         bottomMargin=19 * mm,
         title="GuardianSim Track 3 Technical Report",
         author="Aegis Motion",
-        subject="AMD Radeon Hackathon 2026 Track 3 submission review draft",
+        subject=(
+            "AMD Radeon Hackathon 2026 Track 3 submission"
+            if final
+            else "AMD Radeon Hackathon 2026 Track 3 submission review draft"
+        ),
     )
+    document.report_header = "Track 3 Technical Report" if final else "Track 3 Technical Report - Review Draft"
     frame = Frame(
         document.leftMargin,
         document.bottomMargin,
@@ -509,10 +581,8 @@ def build(source: Path, destination: Path) -> None:
         document.height,
         id="content",
     )
-    document.addPageTemplates([
-        PageTemplate(id="report", frames=[frame], onPage=page_header_footer)
-    ])
-    document.build(markdown_story(source))
+    document.addPageTemplates([PageTemplate(id="report", frames=[frame], onPage=page_header_footer)])
+    document.build(markdown_story(source, final=final))
 
 
 def main() -> None:
@@ -525,11 +595,16 @@ def main() -> None:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("output/pdf/GuardianSim-Technical-Report-DRAFT.pdf"),
     )
+    parser.add_argument("--final", action="store_true")
     args = parser.parse_args()
-    build(args.source, args.output)
-    print(args.output)
+    output = args.output or Path(
+        "output/pdf/GuardianSim-Technical-Report.pdf"
+        if args.final
+        else "output/pdf/GuardianSim-Technical-Report-DRAFT.pdf"
+    )
+    build(args.source, output, final=args.final)
+    print(output)
 
 
 if __name__ == "__main__":

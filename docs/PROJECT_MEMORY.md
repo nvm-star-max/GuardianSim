@@ -1,6 +1,6 @@
 # GuardianSim Project Memory
 
-Last updated: 2026-07-27
+Last updated: 2026-07-28
 
 This file is the durable source of truth for continuing GuardianSim work across
 machines and agent sessions. Update it after every verified milestone, cloud
@@ -818,3 +818,42 @@ Evidence and working material:
   its narration, fixed captions, timing, metrics, or evidence claims without a
   new explicit owner decision. Uploading/submitting it remains a separate
   external action.
+
+## Final technical report and official-repository package — 2026-07-28
+
+- Generated and visually inspected the final English six-page A4 report:
+  [`submission/GuardianSim-Technical-Report.pdf`](submission/GuardianSim-Technical-Report.pdf).
+  It covers the target application, architecture, evaluation matrix, Radeon
+  and ROCm use, innovation, deliverables, responsible limitations, and the
+  solo Aegis Motion contribution. SHA-256:
+  `d4d5596645c4f971280f779eb585d0e675b62695d5f114db72dbbbf398054a66`.
+- Corrected the report's statistical boundary: the declared scenarios are not
+  described as a learned-policy holdout because the wrapped nominal policy is
+  scripted. The strict validator is described as validating the complete
+  30-episode report and frozen protocol identity, not as re-running physics.
+- Prepared the English organizer-repository payload under
+  [`submission/official-package/Track3-Aegis-Motion-GuardianSim`](submission/official-package/Track3-Aegis-Motion-GuardianSim).
+  It contains the project entry, final PDF, and an internal checksum manifest.
+  The package README SHA-256 is
+  `f37cc735292d6f5502d2aeef778d97f16b68942701a467fd57967f11ef792ec4`.
+- Verified that the immutable source tree and frozen video URLs at commit
+  `25e27aced13237b5af93fd91697d7abb12101a30` both return HTTP 200. This commit
+  remains the evidence and video source identity used by the report and
+  official package.
+- The local Docker client is installed, but its daemon is unavailable and
+  macOS cannot provide the ROCm `/dev/kfd` device. Therefore no local
+  Radeon-container execution is claimed. The pinned complete-source
+  Dockerfile remains optional packaging, while the documented native Radeon
+  Cloud path is the verified reproduction route.
+- Final local acceptance passed: `ruff` reported no issues in the report/video
+  tooling, the full suite passed `61/61`, strict V2 video validation passed,
+  both checksum manifests passed, the two packaged PDF copies are byte
+  identical, and tracked-file secret-pattern scanning found zero hits.
+- Public-release boundary:
+  - `origin/main` is an ancestor of the feature branch and is 36 commits
+    behind it, so a fast-forward release is available;
+  - the owner's official contest fork
+    `nvm-star-max/Radeon-hackathon-2026-07` does not yet exist;
+  - do not merge the public default branch, create the official fork, or open
+    the organizer pull request until the owner confirms the final Luma
+    Rules & Conditions check and public-name requirement.

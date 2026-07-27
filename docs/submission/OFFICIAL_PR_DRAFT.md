@@ -45,12 +45,15 @@ Radeon GPU.
 ## Deliverables
 
 - Source and reproducibility instructions:
-  https://github.com/nvm-star-max/GuardianSim
-- Technical report: [FINAL PUBLIC URL]
-- 3–5 minute workflow demo: [FINAL VIDEO URL]
+  https://github.com/nvm-star-max/GuardianSim/tree/25e27aced13237b5af93fd91697d7abb12101a30
+- Technical report:
+  `submissions/Track3-Aegis-Motion-GuardianSim/GuardianSim-Technical-Report.pdf`
+- 3–5 minute workflow demo:
+  https://raw.githubusercontent.com/nvm-star-max/GuardianSim/25e27aced13237b5af93fd91697d7abb12101a30/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4
 - Immutable benchmark evidence and checksums:
-  https://github.com/nvm-star-max/GuardianSim/tree/[FINAL_COMMIT]/docs/evidence
-- Optional container artifact: [FINAL IMAGE OR DOCUMENTED FALLBACK]
+  https://github.com/nvm-star-max/GuardianSim/tree/25e27aced13237b5af93fd91697d7abb12101a30/docs/evidence
+- Container path and documented hardware requirement:
+  https://github.com/nvm-star-max/GuardianSim/blob/25e27aced13237b5af93fd91697d7abb12101a30/REPRODUCIBILITY.md#6-docker-path
 
 ## Reproduction
 
@@ -66,9 +69,9 @@ bounded action space, and non-real-time planning. Harder unsupported geometry
 can produce a deliberate safe stop.
 ```
 
-## Release-time replacements
+## Release-time checks
 
-- Replace every `[FINAL ...]` value with a public immutable URL.
-- Use the final source commit or tag in evidence links.
-- Add the exact video URL only after the complete workflow is reviewable.
+- Confirm every immutable URL remains publicly accessible.
+- Confirm the official-repository PDF path after copying the prepared package.
 - Confirm public member naming against the Luma rules.
+- Do not open the PR until the owner completes the Luma rules sign-off.
