@@ -1,6 +1,6 @@
 # GuardianSim Project Memory
 
-Last updated: 2026-07-26
+Last updated: 2026-07-27
 
 This file is the durable source of truth for continuing GuardianSim work across
 machines and agent sessions. Update it after every verified milestone, cloud
@@ -446,6 +446,69 @@ been inspected.**
   [`evidence/gate-3-3-pose-shift-stratum/README.md`](evidence/gate-3-3-pose-shift-stratum/README.md).
 - This is complete-stratum engineering evidence, not a robustness-rate claim.
   Seeds 507–524 remain unexecuted pending the next major-stage review.
+
+## Official submission contract and current deadline
+
+The organizer announcement received on 2026-07-27 states that the hackathon is
+open and submissions close on **2026-08-06 at 23:59**. Treat the working
+timezone as GMT+8 based on the previously displayed event calendar, but the
+owner must manually confirm the exact deadline and timezone on Luma before the
+internal freeze.
+
+The authoritative requirement order is:
+
+1. Luma Rules & Conditions:
+   <https://luma.com/amd-4dhi?utm_source=CN>
+2. Official contest repository:
+   <https://github.com/AMD-DEV-CONTEST/Radeon-hackathon-2026-07>
+3. Organizer announcements and live Q&A.
+4. Internal project documents.
+
+The official Track 3 README requires an English technical report, dedicated
+source repository, detailed reproduction README, and 3–5 minute complete
+workflow video. A Docker image with all source and runtime components is
+preferred. The final submission is made by forking the official contest
+repository and opening an English pull request titled like
+`Track 3, <Team Name>, GuardianSim`. All submission materials, descriptions,
+and pull-request text must be English.
+
+The live Radeon Cloud instance does not need to be submitted. Its environment
+does: exact OS/image, GPU/ROCm/HIP/PyTorch/Python/Genesis versions, dependency
+locks, setup scripts, assets/dataset provenance, preflight, execution commands,
+expected outputs, checksums, and troubleshooting must be sufficient for an
+evaluator to reproduce the result. The owner must still manually read the full
+Luma Rules & Conditions because the page was not programmatically accessible.
+
+The durable countdown and acceptance checklist are in
+[`HACKATHON_SUBMISSION_PLAN.md`](HACKATHON_SUBMISSION_PLAN.md). Internal code
+and evidence freeze is 2026-08-05 23:59 GMT+8, with a target submission time no
+later than 2026-08-06 18:00 GMT+8.
+
+## Active Gate 3.3 execution and priority decision
+
+The owner authorized one independent 12-scenario run covering the first two
+complete Gate 3.3 strata (`pose_shift` and `gap_bearing`). It runs on existing
+Radeon Cloud instance `u-13907-735d71cb` from zero in one process:
+
+- PID: `/workspace/GuardianSim/outputs/gate-3-3-two-strata/two-strata.pid`
+- log: `/workspace/GuardianSim/outputs/gate-3-3-two-strata/two-strata.log`
+- report:
+  `/workspace/GuardianSim/outputs/gate-3-3-two-strata/two-strata-report.json`
+- protocol SHA:
+  `5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130`
+- matrix SHA:
+  `c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983`
+
+Do not destroy the instance, splice the earlier 6-scenario report, use
+`--fresh`, or alter the frozen protocol, thresholds, or order. Outcomes from
+this active run are not recorded here until its report is complete and strictly
+validated.
+
+After the 12-scenario run is preserved, stop at the next major-stage gate.
+Submission engineering is now P0. Do not automatically continue to the
+remaining Gate 3.3 strata or the proposed 120-scenario validation. Additional
+cloud experiments are allowed only after clean-room reproduction, the English
+technical report, and the 3–5 minute demo are on schedule.
 
 ## Working agreement
 

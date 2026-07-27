@@ -829,3 +829,38 @@ Gate decision:
 - Evidence:
   [`evidence/gate-3-3-pose-shift-stratum/README.md`](evidence/gate-3-3-pose-shift-stratum/README.md).
 - Stop before seeds 507–524 for the agreed major-stage direction review.
+
+## 2026-07-27 — Official submission requirements and countdown recorded
+
+- Reviewed the organizer group announcement and screenshot:
+  - hackathon is officially open;
+  - announced deadline is 2026-08-06 23:59;
+  - participants were told to read the Luma Rules & Conditions carefully;
+  - organizers emphasized that evaluators must be able to reproduce the work;
+  - a technical Q&A was provisionally announced for Friday at 19:00.
+- Verified the official contest repository's Track 3 submission requirements:
+  - English technical report with application, architecture, dataset,
+    AMD-GPU usage, innovation, deliverables, and team contributions;
+  - dedicated source repository;
+  - detailed environment, dependency, usage, and step-by-step reproduction
+    instructions;
+  - complete Docker image preferred;
+  - 3–5 minute video of the complete command-line/GUI workflow and results;
+  - English fork/pull-request submission to the official repository.
+- Clarified the environment requirement: the live Radeon Cloud instance is not
+  submitted, but the exact configuration and reproducible setup must be.
+- Added [`HACKATHON_SUBMISSION_PLAN.md`](HACKATHON_SUBMISSION_PLAN.md) with:
+  - source-of-truth hierarchy;
+  - current readiness matrix;
+  - winning MVP workflow;
+  - P0/P1/P2 priorities;
+  - daily milestones through August 6;
+  - stop/go rules and final acceptance checklist.
+- Set internal code/evidence freeze to August 5 at 23:59 GMT+8 and target final
+  submission by August 6 at 18:00 GMT+8, subject to manual Luma confirmation.
+- The current 12-scenario Gate 3.3 two-strata run remains authorized and
+  unchanged. After preservation, no additional benchmark automatically starts;
+  clean-room reproduction, English report, and full demo video become P0.
+- Luma and the Feishu cloud guide were not programmatically readable. The owner
+  must manually review the full Luma text and record any additional condition
+  before submission.

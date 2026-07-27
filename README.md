@@ -41,6 +41,7 @@ results, not physical-robot deployment claims.
 Project documents:
 
 - [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md)
+- [`docs/HACKATHON_SUBMISSION_PLAN.md`](docs/HACKATHON_SUBMISSION_PLAN.md)
 - [`docs/PROJECT_MEMORY.md`](docs/PROJECT_MEMORY.md)
 - [`docs/WORKLOG.md`](docs/WORKLOG.md)
 - [`docs/RADEON_CLOUD.md`](docs/RADEON_CLOUD.md)

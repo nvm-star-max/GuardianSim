@@ -59,3 +59,10 @@ Generate labeled rollouts and train RiskNet to predict candidate success and fai
 
 Run the full benchmark, record the Radeon Cloud demo, publish an upstream contribution,
 and prepare the English submission.
+
+The date-driven Gate 4 execution plan, official Track 3 deliverables, readiness
+gaps, stop/go rules, and final checklist are maintained in
+[`HACKATHON_SUBMISSION_PLAN.md`](HACKATHON_SUBMISSION_PLAN.md). Submission
+engineering is now P0: after the currently authorized Gate 3.3 two-strata run,
+no additional benchmark may displace clean-room reproduction, the English
+technical report, or the 3–5 minute complete demo.
