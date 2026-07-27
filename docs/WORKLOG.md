@@ -1189,3 +1189,20 @@ Gate decision:
 - Local tests passed `61/61`.
 - No Radeon Cloud action, Genesis execution, formal benchmark, threshold, or
   immutable report changed.
+
+## 2026-07-28 — Owner approval and video freeze
+
+- The owner reviewed the Qwen-narrated fixed-caption V2 and approved it with
+  “就这个版本吧.”
+- Froze
+  `docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4` as the
+  submission-video artifact:
+  - SHA-256
+    `e235a315cf4370ccd10cce5f50d317a7ec3376725940235482b530a641804888`;
+  - 281.5 seconds, 1920×1080, 20 FPS;
+  - Qwen3-TTS Instruct `Ethan`;
+  - fixed per-chapter captions;
+  - strict validation already passed.
+- No media bytes, narration, captions, evidence, metrics, or cloud state
+  changed in this approval step. Uploading to the organizer remains a separate
+  external action.

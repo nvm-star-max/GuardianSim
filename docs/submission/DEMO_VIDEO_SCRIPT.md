@@ -269,8 +269,8 @@ first content-review candidate:
 - full audio/video decode, source hashes, claims, duration, and QR code
   validated.
 
-`docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4` is the preferred
-owner-review candidate:
+`docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4` is the
+owner-approved submission video:
 
 - 1920×1080, 20 FPS, 4 minutes 41.5 seconds;
 - Qwen3-TTS Instruct `Ethan` narration with natural engineering-presentation
@@ -284,6 +284,7 @@ owner-review candidate:
 - output SHA-256
   `e235a315cf4370ccd10cce5f50d317a7ec3376725940235482b530a641804888`.
 
-It is not yet labeled final because the owner must review the complete pacing
-and voice. The Radeon terminal section remains a faithful presentation of
-preserved evidence rather than a live final-commit screen recording.
+The owner approved this exact cut on 2026-07-28. Freeze its narration,
+captions, timing, and evidence claims. The Radeon terminal section remains a
+faithful presentation of preserved evidence rather than a live final-commit
+screen recording.

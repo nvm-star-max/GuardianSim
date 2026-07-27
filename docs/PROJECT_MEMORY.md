@@ -813,5 +813,8 @@ Evidence and working material:
 - Local tests pass `61/61`.
 - No cloud command, physics run, benchmark trial, protocol, threshold, formal
   report, or Radeon Cloud instance changed.
-- V2 is the preferred owner-review candidate. Do not call it the final upload
-  until the owner watches the complete cut and approves pacing and voice.
+- On 2026-07-28, the owner approved this exact V2 cut with the instruction
+  “就这个版本吧.” It is now the frozen submission-video artifact. Do not alter
+  its narration, fixed captions, timing, metrics, or evidence claims without a
+  new explicit owner decision. Uploading/submitting it remains a separate
+  external action.

@@ -63,10 +63,11 @@ file. Generated narration chunks are cached under `tmp/`, and no credential
 is written to the sidecar. Set `GUARDIANSIM_TTS_PROVIDER=macos` only when the
 offline Samantha review voice is explicitly desired.
 
-The owner must still review the complete V2 cut before it is declared final.
-A real-time final-commit Radeon terminal capture remains an optional
-presentation improvement; the current terminal section is clearly labeled
-archived evidence.
+The owner approved the complete V2 cut on 2026-07-28. It is the frozen video
+artifact for submission; do not change its narration, captions, timing, or
+evidence claims without a new explicit owner decision. A real-time
+final-commit Radeon terminal capture is no longer required for this version;
+the current terminal section is clearly labeled archived evidence.
 
 ## Blocking owner inputs
 

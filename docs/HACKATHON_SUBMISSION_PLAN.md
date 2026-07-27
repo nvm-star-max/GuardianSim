@@ -261,7 +261,7 @@ Exit criterion: no unfinished mandatory artifact remains.
 - [x] Reproducibility README passes a local clean-room clone test.
 - [x] AMD Radeon/ROCm environment manifest and real Genesis smoke are complete.
 - [ ] Docker image/Dockerfile is validated, or the supported fallback is clear.
-- [ ] 3–5 minute English demo video approved as final; the 4:15 review cut already shows the validated real Genesis replay and results.
+- [x] 3–5 minute English demo video approved by the owner: the 4:41.5 Qwen-narrated V2 cut shows the validated real Genesis replay, formal results, and safe-stop limitation.
 - [x] Formal video claims map to preserved evidence and machine-checked source hashes.
 - [ ] Team members and contributions are present.
 - [ ] Supplementary material is complete if used.
