@@ -706,3 +706,34 @@ Evidence and working material:
 - [`submission/OFFICIAL_PR_DRAFT.md`](submission/OFFICIAL_PR_DRAFT.md)
 - [`submission/TECHNICAL_REPORT.md`](submission/TECHNICAL_REPORT.md)
 - [`submission/DEMO_VIDEO_SCRIPT.md`](submission/DEMO_VIDEO_SCRIPT.md)
+
+## Accepted Gate 3.2 hero clip — 2026-07-27
+
+- The preserved Seed 411 source replay was accepted without another GPU run.
+  It is the frozen `014_lemon-lateral_clutter-r01-s411` scenario:
+  - formal baseline: three of three executions contacted clutter;
+  - formal GuardianSim: three of three executions were safe;
+  - replay baseline: `1.419 mm` measured plum overlap;
+  - replay GuardianSim: `17.094 mm` measured plum clearance.
+- Added an independent strict replay validator. It binds the complete schema-5
+  report, protocol SHA-256, scenario identity, formal/replay candidate IDs,
+  three-contact versus three-safe formal results, replay classifications,
+  source video, presentation sidecar, and presentation video by SHA-256.
+- Local tests now pass `58/58`.
+- Generated
+  [`demo/gate-3-2-seed-411-aegis-showcase-v3.mp4`](demo/gate-3-2-seed-411-aegis-showcase-v3.mp4):
+  - 1920×1080, 20 FPS, 17.55 seconds;
+  - branded Aegis Motion hook;
+  - explicitly labeled top-down action-geometry illustration;
+  - real Genesis side-by-side replay;
+  - measured contact-frame pause;
+  - single-replay and formal 30-scenario result cards;
+  - SHA-256
+    `38e9adfb2a3f2d90719b60449d092e4caca53afaa2b2f71fe1ade136357dff86`.
+- The clip is presentation-only post-processing. It does not re-execute
+  physics, add a statistical trial, or replace the immutable formal report.
+- Do not spend GPU time re-recording Seed 411 unless the owner rejects the
+  new visual. The next major stage is assembly of the complete 3–5 minute
+  video around this accepted clip, including final-commit Radeon proof,
+  evaluator-smoke footage, architecture, narration, safe-stop limitation, and
+  repository close.

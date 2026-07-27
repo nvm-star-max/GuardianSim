@@ -1,0 +1,43 @@
+{
+  "baseline_candidate_id": "yaw_+00.0_offset_+0.000",
+  "formal_baseline_contacts": 3,
+  "formal_guardian_safe_executions": 3,
+  "formal_report": {
+    "completed_episode_count": 30,
+    "path": "docs/evidence/gate-3-2/formal-report.json",
+    "sha256": "d76ffbe518d4cb9499362379388a1453ec6cc7614ff312b9bcf764dbf822ffee"
+  },
+  "guardian_candidate_id": "yaw_+67.5_retreat_+0.000_approach_+0.140",
+  "presentation_sidecar": {
+    "path": "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.json",
+    "sha256": "fda5cef90d2739a0439c02b201e68e8cc2839110467d20951891624de039f8a9"
+  },
+  "presentation_video": {
+    "duration_seconds": 17.55,
+    "fps": 20.0,
+    "frame_count": 351,
+    "height": 1080,
+    "path": "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4",
+    "sha256": "38e9adfb2a3f2d90719b60449d092e4caca53afaa2b2f71fe1ade136357dff86",
+    "width": 1920
+  },
+  "protocol_sha256": "8f23247001e05f39817225ed13f028321fbb9b9c694aaacd5b987fe61ee1fb3c",
+  "replay_baseline_overlap_mm": 1.4190673828125,
+  "replay_guardian_clearance_mm": 17.094284296035767,
+  "scenario_id": "014_lemon-lateral_clutter-r01-s411",
+  "seed": 411,
+  "source_sidecar": {
+    "path": "docs/demo/gate-3-2-seed-411.json",
+    "sha256": "3df4e90db91b100b8dfb16100c3968c7ed1dd1917f6f3d065c0b9001a04928da"
+  },
+  "source_video": {
+    "duration_seconds": 5.55,
+    "fps": 20.0,
+    "frame_count": 111,
+    "height": 828,
+    "path": "docs/demo/gate-3-2-seed-411.mp4",
+    "sha256": "a6b8fa20b924268955c7c40e002faf3b048f5de534f3c19a2ba071f0c7a4e3be",
+    "width": 2560
+  },
+  "validated": true
+}

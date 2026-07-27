@@ -1073,3 +1073,35 @@ Gate decision:
 - Local acceptance passed `uv lock --check`, 55/55 standard-library unit
   tests, PDF text/metadata assertions, Python compilation, whitespace checks,
   and a targeted credential/personal-email scan.
+
+## 2026-07-27 — Strict Gate 3.2 replay validation and Aegis Motion hero clip
+
+- Audited the preserved Seed 411 visual replay before consuming new GPU time.
+- Added a pure claim-boundary validator and standalone CLI that require:
+  - complete Gate 3.2 schema-5 validation;
+  - the frozen protocol SHA-256;
+  - exact scenario and formal candidate identities;
+  - three formal baseline contacts and three formal GuardianSim safe
+    executions;
+  - replayed contact-to-safe classifications;
+  - measured primary-obstacle overlap and at least 10 mm safe clearance;
+  - source and presentation SHA-256 identity plus decodable video metadata.
+- Strict validation accepted the existing source:
+  - scenario `014_lemon-lateral_clutter-r01-s411`;
+  - baseline candidate `yaw_+00.0_offset_+0.000`;
+  - Guardian candidate
+    `yaw_+67.5_retreat_+0.000_approach_+0.140`;
+  - baseline overlap `1.419 mm`;
+  - Guardian clearance `17.094 mm`;
+  - formal baseline `0/3` safe and GuardianSim `3/3` safe.
+- Generated the 1920×1080, 20 FPS, 17.55-second
+  `gate-3-2-seed-411-aegis-showcase-v3.mp4`.
+- Visually inspected six representative frames: branded title, plan-view
+  action geometry, initial state, contact pause, retained lift, and final
+  formal result card. Text, contrast, circles/arrows, numeric values, and
+  claim boundaries were legible without clipping.
+- Strictly revalidated the generated MP4 and sidecar. Showcase SHA-256:
+  `38e9adfb2a3f2d90719b60449d092e4caca53afaa2b2f71fe1ade136357dff86`.
+- No formal report, protocol, threshold, cloud instance, or GPU process was
+  changed. No new statistical trial was added.
+- Local tests passed `58/58`.

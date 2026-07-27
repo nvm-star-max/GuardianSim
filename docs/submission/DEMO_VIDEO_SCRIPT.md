@@ -10,7 +10,7 @@ smoke as reproducibility proof only.
 Do not rely on two similar robot views. Every comparison shot must contain all
 four signals:
 
-1. colored action-path overlays;
+1. colored action-geometry overlays that do not imply an unrecorded path;
 2. a freeze-frame circle/arrow at the baseline contact or clearance event;
 3. large labels for `CONTACT`, `SAFE`, or `SAFE STOP`;
 4. numeric minimum clearance in millimeters.
@@ -119,7 +119,7 @@ Bounded evaluator smoke — not a performance benchmark
 
 - Use a Gate 3.2 formal scenario whose recorded replay satisfies the
   claim-boundary validator.
-- Show top-down path overlays first.
+- Show the validated top-down action-geometry illustration first.
 - Then show synchronized side-by-side execution.
 - Pause at:
   1. baseline contact;
@@ -140,7 +140,8 @@ yaw +67.5° · raised approach
 SAFE · clearance XX.X mm
 ```
 
-Replace `XX.X` only with the exact value from the validated formal replay.
+The accepted Seed 411 replay value is `17.1 mm`; it is bound to the source
+video and formal report by `scripts/validate_gate32_demo.py`.
 
 **Narration**
 
@@ -216,11 +217,11 @@ Open source · reproducible evidence · Genesis simulation
 - [ ] Terminal run of the final submission commit's evaluator smoke.
 - [ ] World and wrist probe frames.
 - [ ] Architecture animation.
-- [ ] One accepted Gate 3.2 formal comparison replay.
-- [ ] Top-down action-path overlay.
-- [ ] Contact freeze-frame annotation.
-- [ ] Exact candidate ID, decision reason, and clearance.
-- [ ] Formal result table.
+- [x] One accepted Gate 3.2 formal comparison replay.
+- [x] Top-down action-geometry illustration.
+- [x] Contact freeze-frame annotation.
+- [x] Exact decision, yaw, overlap, and clearance.
+- [x] Formal result table.
 - [ ] Gate 3.3 safe-stop diagram.
 - [ ] Repository URL and QR code.
 
@@ -234,3 +235,22 @@ Open source · reproducible evidence · Genesis simulation
 - Do not hide Gate 3.1 negative evidence or Gate 3.3 safe stops.
 - Do not display personal email, cloud account details, tokens, or instance
   credentials.
+
+## Accepted hero clip
+
+The final video should embed:
+
+`docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4`
+
+Verified presentation properties:
+
+- 1920×1080, 20 FPS, 17.55 seconds;
+- source replay SHA-256
+  `a6b8fa20b924268955c7c40e002faf3b048f5de534f3c19a2ba071f0c7a4e3be`;
+- showcase SHA-256
+  `38e9adfb2a3f2d90719b60449d092e4caca53afaa2b2f71fe1ade136357dff86`;
+- formal report: complete schema-5, 30/30;
+- formal Seed 411 executions: baseline 0/3 safe, GuardianSim 3/3 safe;
+- replay: 1.42 mm baseline overlap versus 17.1 mm GuardianSim clearance;
+- presentation-only post-processing: no physics re-execution and no added
+  statistical trial.

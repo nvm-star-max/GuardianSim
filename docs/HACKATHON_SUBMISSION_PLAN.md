@@ -98,7 +98,7 @@ environment must be reproducible. At minimum preserve:
 | Dependency/environment capture | Ready; real Blank OpenCode manifest and smoke archived | Re-run from the final submission commit before freeze |
 | Docker image or Dockerfile | Pinned complete-source Dockerfile present | Linux ROCm build/run still pending |
 | English technical report | V1 drafted; Aegis Motion attribution added | Confirm public member naming, review, and export final PDF |
-| 3–5 minute complete demo | Script and shot list drafted | Record accepted formal replay, GPU proof, workflow, and results |
+| 3–5 minute complete demo | Script plus strictly validated 17.55-second hero clip | Capture GPU/workflow footage and assemble narration around the accepted clip |
 | Supplementary deck/poster | Missing | Produce only after report/video reach review quality |
 | English official-repo PR | Missing | Fork, add submission entry/materials, open PR |
 | Luma Rules sign-off | Manual action pending | Owner reads full page and records extra requirements |
