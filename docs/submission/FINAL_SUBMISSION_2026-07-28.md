@@ -57,4 +57,3 @@ Under the official process, accepted Luma registration establishes prize
 eligibility and the official-repository pull request is the project entry.
 No separate project-upload form was stated in the governing document or the
 official repository instructions.
-
