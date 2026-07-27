@@ -1,0 +1,82 @@
+{
+  "captured_at_utc": "2026-07-27T10:31:00.909636+00:00",
+  "checks": {
+    "exactly_one_visible_gpu": true,
+    "genesis_installed": true,
+    "linux": true,
+    "python_3_12": true,
+    "rocm_pytorch": true
+  },
+  "cloud": {
+    "instance_id": "u-13907-735d71cb",
+    "provider": "AMD Radeon Cloud",
+    "template": "Blank_OpenCode_Workspace"
+  },
+  "gpu_ready": true,
+  "host": {
+    "machine": "x86_64",
+    "os_release": {
+      "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+      "HOME_URL": "https://www.ubuntu.com/",
+      "ID": "ubuntu",
+      "ID_LIKE": "debian",
+      "LOGO": "ubuntu-logo",
+      "NAME": "Ubuntu",
+      "PRETTY_NAME": "Ubuntu 24.04.4 LTS",
+      "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+      "SUPPORT_URL": "https://help.ubuntu.com/",
+      "UBUNTU_CODENAME": "noble",
+      "VERSION": "24.04.4 LTS (Noble Numbat)",
+      "VERSION_CODENAME": "noble",
+      "VERSION_ID": "24.04"
+    },
+    "platform": "Linux-6.8.0-79-generic-x86_64-with-glibc2.39",
+    "processor": "x86_64"
+  },
+  "packages": {
+    "genesis-world": "1.2.3",
+    "imageio": "2.37.3",
+    "imageio-ffmpeg": "0.6.0",
+    "lerobot": null,
+    "numpy": "2.1.2",
+    "opencv-python": "5.0.0.93",
+    "scikit-image": "0.26.0",
+    "torch": "2.9.1+gitff65f5b",
+    "torchaudio": "2.9.0+eaa9e4e",
+    "torchvision": "0.24.1+d801a34",
+    "trimesh": "4.12.2",
+    "triton": "3.5.1"
+  },
+  "project": "GuardianSim",
+  "python": {
+    "executable": "/opt/venv/bin/python3",
+    "implementation": "CPython",
+    "version": "3.12.3"
+  },
+  "rocm_smi": {
+    "available": true,
+    "command": [
+      "rocm-smi",
+      "--showproductname"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "============================ ROCm System Management Interface ============================\n====================================== Product Info ======================================\nGPU[0]\t\t: Card Series: \t\tAMD Radeon Graphics\nGPU[0]\t\t: Card Model: \t\t0x744b\nGPU[0]\t\t: Card Vendor: \t\tAdvanced Micro Devices, Inc. [AMD/ATI]\nGPU[0]\t\t: Card SKU: \t\tD7070910\nGPU[0]\t\t: Subsystem ID: \t0x0e0c\nGPU[0]\t\t: Device Rev: \t\t0x00\nGPU[0]\t\t: Node ID: \t\t3\nGPU[0]\t\t: GUID: \t\t49884\nGPU[0]\t\t: GFX Version: \t\tgfx1100\n==========================================================================================\n================================== End of ROCm SMI Log ==================================="
+  },
+  "schema_version": 1,
+  "source": {
+    "git_commit": "58a76d407a255f11d57bc401ddecb2604eafaca8",
+    "git_dirty": false,
+    "repository": "https://github.com/nvm-star-max/GuardianSim"
+  },
+  "torch_runtime": {
+    "available": true,
+    "cuda_api_available": true,
+    "gpu_count": 1,
+    "gpu_names": [
+      "AMD Radeon Graphics"
+    ],
+    "hip": "7.2.53211-e1a6bc5663",
+    "version": "2.9.1+gitff65f5b"
+  }
+}

@@ -93,7 +93,7 @@ environment must be reproducible. At minimum preserve:
 | Formal benchmark evidence | Strong Gate 3.2 evidence | Preserve claim boundary and checksums |
 | Breadth evidence | Two Gate 3.3 strata preserved | Do not expand before P0 submission work |
 | Reproducibility README | Ready; clean-room clone and real Radeon smoke passed | Re-run from the final submission commit |
-| Dependency/environment capture | Ready; real Blank OpenCode manifest captured | Archive the 253 KB cloud evidence package locally |
+| Dependency/environment capture | Ready; real Blank OpenCode manifest and smoke archived | Re-run from the final submission commit before freeze |
 | Docker image or Dockerfile | Pinned complete-source Dockerfile present | Linux ROCm build/run still pending |
 | English technical report | V1 drafted | Add verified team details, review, and export final PDF |
 | 3–5 minute complete demo | Script and shot list drafted | Record accepted formal replay, GPU proof, workflow, and results |
@@ -269,5 +269,6 @@ Working report and video-production sources:
 - [`submission/TECHNICAL_REPORT.md`](submission/TECHNICAL_REPORT.md)
 - [`submission/DEMO_VIDEO_SCRIPT.md`](submission/DEMO_VIDEO_SCRIPT.md)
 
-The cloud evaluator-smoke archive must be downloaded through the Jupyter file
-browser and verified locally before its evidence item can be marked archived.
+The accepted Radeon evaluator-smoke archive and expanded raw files are
+preserved under
+[`evidence/evaluator-smoke-58a76d4`](evidence/evaluator-smoke-58a76d4).

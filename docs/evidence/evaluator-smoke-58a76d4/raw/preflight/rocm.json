@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "python": "3.12.3",
+  "platform": "Linux-6.8.0-79-generic-x86_64-with-glibc2.39",
+  "torch": "2.9.1+gitff65f5b",
+  "hip": "7.2.53211-e1a6bc5663",
+  "gpu_count": 1,
+  "gpu_name": "AMD Radeon Graphics"
+}

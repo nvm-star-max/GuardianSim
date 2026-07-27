@@ -1,0 +1,41 @@
+{
+  "project": "GuardianSim",
+  "seed": 7,
+  "succeeded": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "candidate": "yaw_-22.5_offset_+0.000",
+      "success_probability": 0.794,
+      "risk": 0.0433,
+      "diagnosis": "missed_grasp",
+      "recovery": "change_grasp_pose",
+      "outcome": {
+        "gripper_closed": false,
+        "object_lift_height_m": 0.0,
+        "target_distance_m": 0.3,
+        "max_contact_force_n": 2.0,
+        "object_slip_m": 0.0,
+        "collision": false,
+        "timed_out": false
+      }
+    },
+    {
+      "attempt": 2,
+      "candidate": "yaw_+22.5_offset_+0.000",
+      "success_probability": 0.7119,
+      "risk": 0.0986,
+      "diagnosis": "success",
+      "recovery": "finish",
+      "outcome": {
+        "gripper_closed": true,
+        "object_lift_height_m": 0.09,
+        "target_distance_m": 0.025,
+        "max_contact_force_n": 4.0,
+        "object_slip_m": 0.008,
+        "collision": false,
+        "timed_out": false
+      }
+    }
+  ]
+}

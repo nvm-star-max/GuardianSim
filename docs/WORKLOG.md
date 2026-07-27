@@ -1018,3 +1018,28 @@ Gate decision:
   - PDF generation, extraction, required-metric, and placeholder checks;
   - Python compilation, `git diff --check`, and targeted secret/personal-email
     scan.
+
+## 2026-07-27 — Evaluator smoke archive downloaded and verified
+
+- The owner downloaded `evaluator-smoke-58a76d4.tar.gz` through the normal
+  Jupyter file-browser action.
+- The local archive was 253 KB and matched SHA-256
+  `6457a20c7a1740eba2df5e62334a3f0c0bce55c4de4fface2675c9cd9861249c`.
+- Audited the tar path list before extraction; no absolute or parent-traversal
+  paths were present.
+- Extracted to an isolated temporary directory and verified every file against
+  the root `SHA256SUMS`; all 16 entries passed.
+- Rechecked the raw evidence:
+  - exact clean source commit
+    `58a76d407a255f11d57bc401dcecb2604eafaca8`;
+  - Ubuntu 24.04.4, Python 3.12.3, one gfx1100 Radeon GPU;
+  - PyTorch `2.9.1+gitff65f5b`, HIP `7.2.53211-e1a6bc5663`, Genesis 1.2.3;
+  - `gpu_ready: true`;
+  - scene probe `passed`;
+  - strict Gate 3.2 validation covered 30 episodes;
+  - three candidates shared snapshot fingerprint
+    `8a3692e8f016af7602ecb54e6f4db1cde765ce232138c9e72f8939ca2c8e2ee2`;
+  - candidate validation returned `true`.
+- Preserved the original archive, outer checksum, expanded raw JSON/log/image
+  evidence, and claim-boundary README under
+  `docs/evidence/evaluator-smoke-58a76d4`.

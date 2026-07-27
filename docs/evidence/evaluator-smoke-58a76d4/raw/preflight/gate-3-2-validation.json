@@ -1,0 +1,13 @@
+{
+  "protocol_sha256": "8f23247001e05f39817225ed13f028321fbb9b9c694aaacd5b987fe61ee1fb3c",
+  "report": "docs/evidence/gate-3-2/formal-report.json",
+  "validated_episode_count": 30,
+  "verified_metrics": {
+    "baseline_clutter_contacts": 30,
+    "baseline_independent_safe_executions": "58/90",
+    "baseline_repeatable_safe_completion": "18/30",
+    "guardiansim_clutter_contacts": 0,
+    "guardiansim_independent_safe_executions": "90/90",
+    "guardiansim_repeatable_safe_completion": "30/30"
+  }
+}

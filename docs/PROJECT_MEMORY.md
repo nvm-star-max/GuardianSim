@@ -652,10 +652,12 @@ replacing it:
   - top candidate `yaw_+00.0_offset_+0.000`.
 - All 15 files in the smoke evidence directory passed the cloud checksum
   manifest. This is an evaluator-path proof only, not a performance result.
-- A 253 KB cloud archive named `evaluator-smoke-58a76d4.tar.gz` was prepared.
-  Browser security correctly prevented automated download; local archival and
-  final archive-hash verification remain pending the owner's normal Jupyter
-  file-browser download.
+- The owner downloaded the 253 KB cloud archive through the normal Jupyter
+  file browser. Local path-safety checks passed, the outer SHA-256 was
+  `6457a20c7a1740eba2df5e62334a3f0c0bce55c4de4fface2675c9cd9861249c`,
+  and all 16 root-manifest entries passed after extraction. The archive and
+  expanded raw files are preserved under
+  [`evidence/evaluator-smoke-58a76d4`](evidence/evaluator-smoke-58a76d4).
 - Drafted the English Track 3 technical report and 4-minute demo-video script
   under [`submission`](submission). The report still requires verified team
   name, member names, and contributions. The video still requires one accepted
