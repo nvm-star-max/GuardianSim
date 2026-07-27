@@ -21,7 +21,7 @@ from record_gate32_demo import CameraFrameRecorder, _compose_video
 from run_gate31_adversarial_benchmark import RuntimeDynamicsController
 
 from franka_fruit_pick.build_scene import build_scene
-from franka_fruit_pick.grasp_demo import _settle, _to_numpy
+from franka_fruit_pick.grasp_demo import _settle
 from franka_fruit_pick.guardian_rollout import run_grasp_candidate
 from franka_fruit_pick.scene_config import get_ycb_assets
 from guardian_sim.adversarial_benchmark import (
@@ -35,12 +35,16 @@ from guardian_sim.gate32_benchmark import (
 )
 from guardian_sim.gate33_benchmark import (
     apply_gate33_scenario,
-    generate_gate33_candidates,
     generate_gate33_scenarios,
     validate_gate33_payload,
 )
 from guardian_sim.genesis_adapter import candidate_metrics_from_measurement
-from guardian_sim.reference_backend import EpisodeSnapshot, GenesisSceneDriver
+from guardian_sim.models import ActionCandidate
+from guardian_sim.reference_backend import (
+    EntityPose,
+    EpisodeSnapshot,
+    GenesisSceneDriver,
+)
 from guardian_sim.serialization import json_default
 
 NOMINAL_CANDIDATE_ID = "yaw_+00.0_offset_+0.000"
@@ -129,26 +133,39 @@ def main() -> None:
     )
     _settle(bundle, SETTLE_STEPS)
     settled_snapshot = driver.capture_snapshot()
+    formal_object_poses = dict(settled_snapshot.object_poses)
+    obstacle_name = PRIMARY_OBSTACLE_BY_PICK[scenario.pick_object]
+    for object_name, report_key in (
+        (scenario.pick_object, "target_xyz"),
+        (obstacle_name, "obstacle_xyz"),
+    ):
+        current_pose = formal_object_poses[object_name]
+        formal_object_poses[object_name] = EntityPose(
+            position=tuple(
+                float(value) for value in formal_episode[report_key]
+            ),
+            quaternion=current_pose.quaternion,
+        )
     episode_snapshot = EpisodeSnapshot(
         seed=scenario.seed,
         robot_qpos=settled_snapshot.robot_qpos,
-        object_poses=settled_snapshot.object_poses,
+        object_poses=formal_object_poses,
     )
 
-    obstacle_name = PRIMARY_OBSTACLE_BY_PICK[scenario.pick_object]
-    target_xyz = tuple(_to_numpy(bundle.ycb[scenario.pick_object].get_pos())[:3])
-    obstacle_xyz = tuple(_to_numpy(bundle.ycb[obstacle_name].get_pos())[:3])
-    candidates = generate_gate33_candidates(
-        scenario,
-        target_xyz,
-        obstacle_xyz,
+    driver.restore_snapshot(episode_snapshot)
+    target_xyz = tuple(
+        float(value) for value in formal_episode["target_xyz"]
     )
-    candidates_by_id = {
-        candidate.candidate_id: candidate for candidate in candidates
-    }
-    nominal = candidates_by_id[NOMINAL_CANDIDATE_ID]
+    obstacle_xyz = tuple(
+        float(value) for value in formal_episode["obstacle_xyz"]
+    )
+    nominal = ActionCandidate(**formal_episode["baseline"]["candidate"])
+    if nominal.candidate_id != NOMINAL_CANDIDATE_ID:
+        raise ValueError("formal baseline candidate is not the frozen nominal action")
     guardian_candidate_id = formal_episode["selection"]["selected_candidate_id"]
-    guardian = candidates_by_id[guardian_candidate_id]
+    guardian = ActionCandidate(**formal_episode["guardiansim"]["candidate"])
+    if guardian.candidate_id != guardian_candidate_id:
+        raise ValueError("formal GuardianSim action does not match the selector")
 
     driver.restore_snapshot(episode_snapshot)
     baseline_recorder = CameraFrameRecorder(
@@ -210,6 +227,7 @@ def main() -> None:
         "physics_reexecuted": True,
         "statistical_trial_added": False,
         "not_appended_to_gate33_report": True,
+        "formal_geometry_reconstructed_from_report": True,
         "formal_report": str(report_path),
         "formal_report_sha256": _sha256(report_path),
         "formal_protocol_sha256": report["protocol"]["protocol_sha256"],
