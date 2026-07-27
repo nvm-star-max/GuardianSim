@@ -141,7 +141,7 @@ class DraftBanner(Flowable):
         self.canv.drawCentredString(
             self.width / 2,
             3.7 * mm,
-            "REVIEW DRAFT - team attribution and Luma rules sign-off pending",
+            "REVIEW DRAFT - Luma rules sign-off and final video pending",
         )
 
 
@@ -263,14 +263,6 @@ def parse_table(lines: list[str], style_map: dict[str, ParagraphStyle]) -> Table
             )
         else:
             cell_style = style_map["small"]
-        cells = [
-            "Pending owner verification"
-            if "FULL NAME" in cell
-            else "To be completed before final export"
-            if "System design, implementation" in cell
-            else cell
-            for cell in cells
-        ]
         rows.append([
             Paragraph(inline_markup(cell), cell_style)
             for cell in cells
@@ -364,7 +356,8 @@ def markdown_story(source: Path) -> list[Flowable]:
         ),
         Paragraph(
             "<b>Team attribution</b><br/>"
-            "Pending owner verification before final export",
+            "Aegis Motion - solo developer<br/>"
+            "GitHub: @nvm-star-max",
             style_map["body"],
         ),
         Spacer(1, 30 * mm),
@@ -445,11 +438,6 @@ def markdown_story(source: Path) -> list[Flowable]:
                 quote_lines.append(lines[index].strip().removeprefix(">").strip())
                 index += 1
             quote = " ".join(quote_lines)
-            if quote.startswith("**Submission blocker:**"):
-                quote = (
-                    "Submission blocker: verified team names and contributions "
-                    "must be added before final export."
-                )
             story.append(Paragraph(inline_markup(quote), style_map["quote"]))
             continue
         if re.match(r"^\d+\.\s+", stripped) or stripped.startswith("- "):
@@ -511,7 +499,7 @@ def build(source: Path, destination: Path) -> None:
         topMargin=20 * mm,
         bottomMargin=19 * mm,
         title="GuardianSim Track 3 Technical Report",
-        author="GuardianSim team",
+        author="Aegis Motion",
         subject="AMD Radeon Hackathon 2026 Track 3 submission review draft",
     )
     frame = Frame(

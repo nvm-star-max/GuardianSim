@@ -2,8 +2,8 @@
 
 **Track:** Track 3 — Physical AI Challenge
 **Project repository:** <https://github.com/nvm-star-max/GuardianSim>
-**Team:** `[TEAM NAME — REQUIRED BEFORE SUBMISSION]`
-**Members:** `[FULL NAME(S) AND CONTRIBUTIONS — REQUIRED BEFORE SUBMISSION]`
+**Team:** Aegis Motion
+**Members:** Solo developer — GitHub: `@nvm-star-max`
 
 ## Abstract
 
@@ -293,12 +293,9 @@ hardware.
 
 ## 10. Team contributions
 
-> **Submission blocker:** replace every bracketed field below with verified
-> legal names and contributions before export.
-
 | Member | Contribution |
 | --- | --- |
-| `[FULL NAME]` | `[System design, implementation, experiments, documentation, video, or other verified work]` |
+| Solo developer — GitHub `@nvm-star-max` | Project direction, system design, implementation, Radeon Cloud experiments, evidence preservation, documentation, and demo production. |
 
 AI-assisted development tools were used for implementation and documentation
 support. The submitting team remains responsible for technical validation,

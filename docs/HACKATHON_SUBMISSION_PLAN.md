@@ -28,6 +28,8 @@ check before submission and record any requirement not already listed here.
 
 - Track: **Track 3 — Physical AI Challenge**
 - Project: **GuardianSim**
+- Team: **Aegis Motion**
+- Team structure: **solo developer** (`@nvm-star-max`)
 - Repository: <https://github.com/nvm-star-max/GuardianSim>
 - Core application: uncertainty-certified, counterfactual action selection for
   safer Franka fruit-picking in Genesis on AMD Radeon/ROCm.
@@ -95,7 +97,7 @@ environment must be reproducible. At minimum preserve:
 | Reproducibility README | Ready; clean-room clone and real Radeon smoke passed | Re-run from the final submission commit |
 | Dependency/environment capture | Ready; real Blank OpenCode manifest and smoke archived | Re-run from the final submission commit before freeze |
 | Docker image or Dockerfile | Pinned complete-source Dockerfile present | Linux ROCm build/run still pending |
-| English technical report | V1 drafted | Add verified team details, review, and export final PDF |
+| English technical report | V1 drafted; Aegis Motion attribution added | Confirm public member naming, review, and export final PDF |
 | 3–5 minute complete demo | Script and shot list drafted | Record accepted formal replay, GPU proof, workflow, and results |
 | Supplementary deck/poster | Missing | Produce only after report/video reach review quality |
 | English official-repo PR | Missing | Fork, add submission entry/materials, open PR |
@@ -241,7 +243,8 @@ Exit criterion: no unfinished mandatory artifact remains.
 
 - Owner:
   - manually read and accept Luma legal/rules text;
-  - provide final team name and member/contribution details;
+  - confirm whether the public report must show a legal name in addition to
+    the verified GitHub identity;
   - approve public visibility and final submission;
   - perform browser actions involving identity, acceptance, and final submit.
 - Codex:
@@ -253,7 +256,8 @@ Exit criterion: no unfinished mandatory artifact remains.
 - [ ] Luma rules manually reviewed and any extra requirements recorded.
 - [ ] Track 3 identity and English naming are consistent.
 - [ ] Public source commit/tag is fixed.
-- [ ] English technical report V1 has verified team details and is exported to PDF.
+- [x] English technical report V1 identifies Aegis Motion and the solo public contributor.
+- [ ] Owner confirms whether a legal name must appear in the public report.
 - [x] Reproducibility README passes a local clean-room clone test.
 - [x] AMD Radeon/ROCm environment manifest and real Genesis smoke are complete.
 - [ ] Docker image/Dockerfile is validated, or the supported fallback is clear.

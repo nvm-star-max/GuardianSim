@@ -1043,3 +1043,33 @@ Gate decision:
 - Preserved the original archive, outer checksum, expanded raw JSON/log/image
   evidence, and claim-boundary README under
   `docs/evidence/evaluator-smoke-58a76d4`.
+
+## 2026-07-27 — Aegis Motion identity and official-submission scan
+
+- Recorded the owner's selected solo-team name: **Aegis Motion**.
+- Updated the report, video close, submission plan, and PDF builder to use
+  `Aegis Motion` and the verified public contributor identity
+  `@nvm-star-max`; no legal identity was invented.
+- Queried all 37 pull requests in the official contest repository. At the
+  inspection time, 29 were open and 8 were closed. Four declared Track 3:
+  NaviSense AI, 1bit.systems real-time NPU inference, G1D-Organize-Table, and
+  the withdrawn-as-premature VisionPilot PR.
+- Added a dated competitor scan with direct official PR links, visible
+  strengths, limitations, and the resulting GuardianSim award strategy.
+- Fixed the public category: GuardianSim is a policy-agnostic
+  counterfactual-safety assurance layer, not another VLA, robot policy, or
+  inference engine.
+- Kept the verified `264.95 s/scenario` Gate 3.2 planning time as an explicit
+  limitation. The next P0 is a visually unambiguous accepted formal replay and
+  final 3–5 minute video, not a larger benchmark.
+- Drafted the English official-repository PR title and body. It remains
+  intentionally unopened until immutable release URLs, final video, final
+  report, and manual Luma rules sign-off exist.
+- Rebuilt the six-page A4 review PDF with Aegis Motion metadata and rendered
+  every page for visual inspection. Identity, tables, wrapping, clipping,
+  required metrics, claim boundaries, and page numbering passed. The cover
+  now lists only the real remaining draft blockers: Luma sign-off and the
+  final video.
+- Local acceptance passed `uv lock --check`, 55/55 standard-library unit
+  tests, PDF text/metadata assertions, Python compilation, whitespace checks,
+  and a targeted credential/personal-email scan.

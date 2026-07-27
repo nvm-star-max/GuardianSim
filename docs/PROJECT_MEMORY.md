@@ -659,14 +659,15 @@ replacing it:
   expanded raw files are preserved under
   [`evidence/evaluator-smoke-58a76d4`](evidence/evaluator-smoke-58a76d4).
 - Drafted the English Track 3 technical report and 4-minute demo-video script
-  under [`submission`](submission). The report still requires verified team
-  name, member names, and contributions. The video still requires one accepted
-  Gate 3.2 comparison replay with exact, report-backed clearance overlays.
+  under [`submission`](submission). The team-attribution item recorded at that
+  checkpoint was later resolved as Aegis Motion / solo `@nvm-star-max`. The
+  video still requires one accepted Gate 3.2 comparison replay with exact,
+  report-backed clearance overlays.
 - Generated a six-page A4 review PDF with a reproducible ReportLab builder.
   All six pages were visually inspected after rendering to PNG; table
   contrast, wrapping, clipping, page numbers, draft labeling, and required
-  Gate 3.2 metrics passed review. The PDF intentionally substitutes a neutral
-  pending-attribution notice for unverified team details.
+  Gate 3.2 metrics passed review. The original pending-attribution notice was
+  later replaced with the verified public Aegis Motion identity.
 - Final local acceptance for this batch passed shell syntax, `uv lock
   --check`, 55/55 unit tests, PDF compilation/text checks, whitespace checks,
   and a targeted secret/personal-email scan.
@@ -674,3 +675,34 @@ replacing it:
 Do not start a new formal benchmark before the submission report and video are
 reviewable. The next major stage is production of the accepted comparison
 replay and final report/video assets.
+
+## Submission identity and competitive position — 2026-07-27
+
+- The owner selected **Aegis Motion** as the public solo-team name.
+- The public contributor identity is GitHub `@nvm-star-max`. Do not invent a
+  legal name; confirm whether Luma requires one in the public report.
+- The intended official PR title is
+  `Track 3, Aegis Motion, GuardianSim`.
+- A same-day scan of all 37 official-repository PRs found four declared Track
+  3 projects: NaviSense AI, 1bit.systems real-time NPU inference,
+  G1D-Organize-Table, and the withdrawn-as-premature VisionPilot PR.
+- G1D-Organize-Table is the strongest direct visual competitor because it
+  demonstrates a real Unitree G1-D robot. VisionPilot may return with strong
+  dataset, model, and throughput evidence.
+- GuardianSim's defensible category is not another grasp policy or inference
+  engine. It is a policy-agnostic, counterfactual execute-or-safe-stop
+  assurance layer with frozen protocols, hard eligibility, independent
+  executions, preserved negative results, and checksum-backed evidence.
+- The largest remaining award risks are visual clarity and non-real-time
+  planning (verified Gate 3.2 mean: `264.95 s/scenario`), not lack of another
+  benchmark.
+- Do not start a broader formal run solely to increase scenario count. The next
+  P0 milestone is an accepted Gate 3.2 comparison replay followed by the final
+  3–5 minute video.
+
+Evidence and working material:
+
+- [`submission/COMPETITOR_SCAN_2026-07-27.md`](submission/COMPETITOR_SCAN_2026-07-27.md)
+- [`submission/OFFICIAL_PR_DRAFT.md`](submission/OFFICIAL_PR_DRAFT.md)
+- [`submission/TECHNICAL_REPORT.md`](submission/TECHNICAL_REPORT.md)
+- [`submission/DEMO_VIDEO_SCRIPT.md`](submission/DEMO_VIDEO_SCRIPT.md)

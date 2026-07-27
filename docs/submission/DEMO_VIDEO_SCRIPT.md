@@ -32,6 +32,7 @@ top-down inset when the wrist geometry is visually ambiguous.
 **On-screen**
 
 ```text
+AEGIS MOTION PRESENTS
 Same task. Same initial state.
 Baseline: CLUTTER CONTACT
 GuardianSim: SAFE COMPLETION
@@ -197,7 +198,7 @@ Replace `XX.X` only with the exact value from the validated formal replay.
 **On-screen**
 
 ```text
-GuardianSim
+Aegis Motion · GuardianSim
 Counterfactual action safety on AMD Radeon GPUs
 Open source · reproducible evidence · Genesis simulation
 ```

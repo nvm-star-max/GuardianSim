@@ -13,7 +13,12 @@ submission. It is a working set, not yet the final uploaded package.
   visually explicit.
 - [`../../output/pdf/GuardianSim-Technical-Report-DRAFT.pdf`](../../output/pdf/GuardianSim-Technical-Report-DRAFT.pdf):
   visually reviewed six-page A4 draft for owner review. It is labeled as a
-  draft and intentionally does not invent team attribution.
+  draft and identifies the solo team as Aegis Motion.
+- [`COMPETITOR_SCAN_2026-07-27.md`](COMPETITOR_SCAN_2026-07-27.md): a
+  time-stamped inventory of the official repository and GuardianSim's
+  evidence-backed competitive position.
+- [`OFFICIAL_PR_DRAFT.md`](OFFICIAL_PR_DRAFT.md): the English official-repo
+  pull-request title and body draft.
 
 Rebuild the review PDF with ReportLab:
 
@@ -28,10 +33,10 @@ only on a documentation workstation if it is not already available.
 
 Before exporting or submitting the report:
 
-1. replace the team-name placeholder;
-2. replace every member/contribution placeholder with verified details;
-3. manually review the complete Luma Rules & Conditions;
-4. approve the final public repository, video, report, and submission.
+1. confirm whether the organizer requires the owner's legal name in the public
+   report, rather than the verified public GitHub identity;
+2. manually review the complete Luma Rules & Conditions;
+3. approve the final public repository, video, report, and submission.
 
 Do not add private email addresses, identity documents, cloud-account details,
 tokens, or payment information to this directory.
