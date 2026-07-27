@@ -1240,9 +1240,9 @@ Gate decision:
   - the PDF has six A4 pages, no draft marker, and all required Track 3 report
     sections in extracted text;
   - tracked-file secret-pattern scanning found zero hits.
-- Confirmed `origin/main` can fast-forward to the feature branch and is 36
-  commits behind. The official contest fork is still missing, so no public
-  organizer pull request was opened.
+- Confirmed `origin/main` can fast-forward to the feature branch. The official
+  contest fork is still missing, so no public organizer pull request was
+  opened.
 - The Docker daemon was unavailable on this Mac; no unverified ROCm container
   result was added. The supported native Radeon Cloud route remains the
   reproduced path.

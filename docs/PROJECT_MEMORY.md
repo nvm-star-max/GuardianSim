@@ -850,8 +850,8 @@ Evidence and working material:
   both checksum manifests passed, the two packaged PDF copies are byte
   identical, and tracked-file secret-pattern scanning found zero hits.
 - Public-release boundary:
-  - `origin/main` is an ancestor of the feature branch and is 36 commits
-    behind it, so a fast-forward release is available;
+  - `origin/main` is an ancestor of the feature branch, so a fast-forward
+    release remains available;
   - the owner's official contest fork
     `nvm-star-max/Radeon-hackathon-2026-07` does not yet exist;
   - do not merge the public default branch, create the official fork, or open
