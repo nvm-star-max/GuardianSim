@@ -484,31 +484,54 @@ The durable countdown and acceptance checklist are in
 and evidence freeze is 2026-08-05 23:59 GMT+8, with a target submission time no
 later than 2026-08-06 18:00 GMT+8.
 
-## Active Gate 3.3 execution and priority decision
+## Gate 3.3 two-strata execution complete and priority decision
 
-The owner authorized one independent 12-scenario run covering the first two
-complete Gate 3.3 strata (`pose_shift` and `gap_bearing`). It runs on existing
-Radeon Cloud instance `u-13907-735d71cb` from zero in one process:
+The independent continuous run of the first two complete Gate 3.3 strata
+finished on Radeon Cloud instance `u-13907-735d71cb`. It ran seeds 501–512 from
+zero in one process and did not splice the earlier six-scenario report.
 
-- PID: `/workspace/GuardianSim/outputs/gate-3-3-two-strata/two-strata.pid`
-- log: `/workspace/GuardianSim/outputs/gate-3-3-two-strata/two-strata.log`
-- report:
-  `/workspace/GuardianSim/outputs/gate-3-3-two-strata/two-strata-report.json`
-- protocol SHA:
-  `5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130`
-- matrix SHA:
-  `c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983`
+- Strict cloud and local partial schema-6 validation passed 12/12.
+- Frozen protocol and matrix hashes matched exactly.
+- Stored and recomputed frozen `stop_reasons`: `[]`.
+- Baseline produced:
+  - 7 safe task completions from 12 executions;
+  - 4 clutter-contact classifications;
+  - 1 clearance violation;
+  - mean clearance `0.019033 m`.
+- GuardianSim produced:
+  - 10 physical executions, all safe task completions;
+  - 2 explicit safe stops;
+  - zero clutter contacts and zero clearance-violating executions;
+  - mean executed-action clearance `0.043547 m`.
+- `pose_shift`: GuardianSim completed 6/6 with no stop or contact, versus
+  baseline 4/6 with two contacts.
+- `gap_bearing`: GuardianSim executed 4/4 safely and safe-stopped 2/6, versus
+  baseline 3/6 safe completions, two contacts, and one clearance violation.
+- The lateral lemon and plum `gap_bearing` cases had no action satisfying every
+  frozen hard safety gate. Refusing execution is correct fail-safe behavior,
+  but the isolated 2/6 safe-stop/task-noncompletion rate is a material
+  action-space coverage limitation.
+- The frozen implementation evaluates stop rates over the cumulative prefix:
+  2/12 task noncompletions and 2/12 safe stops are each 16.67%, so the strict
+  report correctly preserves an empty stop-reason list. The isolated
+  `gap_bearing` diagnostic is recorded without rewriting the report.
+- Mean planning wall time was `221.53 s` per scenario.
 
-Do not destroy the instance, splice the earlier 6-scenario report, use
-`--fresh`, or alter the frozen protocol, thresholds, or order. Outcomes from
-this active run are not recorded here until its report is complete and strictly
-validated.
+Both Seed 503 visual replay attempts were rejected by the hard claim-boundary
+check. They reproduced the baseline contact but only `2.8406 mm` and
+`3.0122 mm` GuardianSim clearance versus `24.0836 mm` in the formal stratum
+report. Logs, PID files, and diagnostic JSON are preserved as replay
+diagnostics, not videos or performance evidence.
 
-After the 12-scenario run is preserved, stop at the next major-stage gate.
-Submission engineering is now P0. Do not automatically continue to the
-remaining Gate 3.3 strata or the proposed 120-scenario validation. Additional
-cloud experiments are allowed only after clean-room reproduction, the English
-technical report, and the 3–5 minute demo are on schedule.
+Cloud and local evidence-archive SHA-256 matched:
+`49ce9196de91f997f7233a4f4533e94292d0b502e8b2cc85fdbeac6173694595`.
+All 14 raw-file checksums and local schema validation passed. Evidence:
+[`evidence/gate-3-3-two-strata/README.md`](evidence/gate-3-3-two-strata/README.md).
+
+Stop at this major-stage boundary. Do not automatically run
+`dynamics_extreme`, `perception_bias`, or the proposed 120-scenario gate.
+Submission engineering is P0. A future geometry-coverage change must use a new
+declaration and cannot alter Gate 3.3.
 
 ## Working agreement
 

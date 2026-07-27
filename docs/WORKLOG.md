@@ -864,3 +864,52 @@ Gate decision:
 - Luma and the Feishu cloud guide were not programmatically readable. The owner
   must manually review the full Luma text and record any additional condition
   before submission.
+
+## 2026-07-27 — Gate 3.3 two-strata run complete and archived
+
+- Reconnected to the existing Radeon Cloud Jupyter session without destroying
+  instance `u-13907-735d71cb`.
+- The independent 12-scenario process had completed normally:
+  - report count `12/12`;
+  - process no longer running;
+  - one continuous report covering seeds 501–512;
+  - no `--fresh`, report splicing, protocol change, threshold change, or
+    scenario-order change.
+- Ran the cloud schema-6 validator with `--allow-partial`; exit status was `0`
+  and all 12 episodes passed.
+- Frozen identities matched:
+  - protocol
+    `5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130`;
+  - matrix
+    `c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983`.
+- Verified overall engineering outcomes:
+  - baseline: 7 safe completions, 4 clutter contacts, 1 clearance violation;
+  - GuardianSim: 10 safe physical executions, 2 safe stops, zero contacts and
+    zero clearance-violating executions;
+  - mean clearance: `0.019033 m` baseline versus `0.043547 m` GuardianSim;
+  - mean stability: `0.913322` baseline versus `0.916772` GuardianSim;
+  - mean planning wall time: `221.53 s`.
+- `pose_shift` reproduced the positive 6/6 GuardianSim result.
+- `gap_bearing` exposed the main limitation:
+  - GuardianSim completed all four actions it executed safely;
+  - lateral lemon and plum had no hard-safe action and safe-stopped;
+  - baseline had two contacts and one clearance violation in the stratum.
+- Strict stored `stop_reasons` remained empty because the frozen implementation
+  evaluates cumulative-prefix rates: 2/12 task noncompletions and 2/12 safe
+  stops are each 16.67%. The isolated `gap_bearing` rates are 2/6 = 33.33% and
+  are preserved as an action-space coverage warning, without changing the
+  frozen report.
+- Packaged preflight, report, log, PID, validation, final check, checksums,
+  boundary note, and both rejected Seed 503 replay attempts.
+- The two replay attempts reproduced baseline contact but not the formal
+  GuardianSim clearance, so the hard check rejected both. They are diagnostics,
+  not presentation videos or performance results.
+- Transferred the 59,479-byte archive as seven bounded base64 chunks.
+- Cloud and local archive SHA-256 matched:
+  `49ce9196de91f997f7233a4f4533e94292d0b502e8b2cc85fdbeac6173694595`.
+- All 14 cloud-manifest files passed local checksum verification, and the local
+  schema-6 validator reproduced the cloud result.
+- Evidence:
+  [`evidence/gate-3-3-two-strata/README.md`](evidence/gate-3-3-two-strata/README.md).
+- Major-stage decision: stop before the remaining two strata. Move to
+  reproducibility, English technical report, and complete 3–5 minute video.

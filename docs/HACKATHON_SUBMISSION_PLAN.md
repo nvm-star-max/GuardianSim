@@ -91,7 +91,7 @@ environment must be reproducible. At minimum preserve:
 | AMD Radeon/ROCm execution | Strong evidence | Add concise evaluator preflight |
 | Dedicated source repository | Ready | Prepare stable public submission branch/tag |
 | Formal benchmark evidence | Strong Gate 3.2 evidence | Preserve claim boundary and checksums |
-| Breadth evidence | Gate 3.3 in progress | Finish only the authorized 12-scenario run |
+| Breadth evidence | Two Gate 3.3 strata preserved | Do not expand before P0 submission work |
 | Reproducibility README | Partial | Clean-room reproduction from documented commands |
 | Dependency/environment capture | Partial | Add a complete manifest and exact setup path |
 | Docker image or Dockerfile | Missing | Produce and validate if feasible; document fallback |
@@ -147,7 +147,7 @@ experiments. The product story is:
 
 ### P2 — Optional evidence depth
 
-- Preserve the authorized Gate 3.3 12-scenario two-strata run.
+- Preserve the completed Gate 3.3 12-scenario two-strata run.
 - Run the remaining Gate 3.3 scenarios only if every P0 item is already on
   schedule.
 - Do not start the proposed 120-scenario robustness gate before submission
@@ -157,8 +157,8 @@ experiments. The product story is:
 
 ### July 27–28 — Freeze the MVP and capture reproducibility
 
-- Finish and preserve the authorized 12-scenario Gate 3.3 run without changing
-  its frozen protocol.
+- Preserve the completed 12-scenario Gate 3.3 evidence without changing its
+  frozen protocol or extending to the remaining strata.
 - Add the exact environment manifest and evaluator preflight.
 - Define one-command installation, smoke, demo, and report-validation paths.
 - Start the English technical-report skeleton and architecture figure.

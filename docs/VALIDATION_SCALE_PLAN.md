@@ -106,8 +106,19 @@ Implementation status:
   4/6 with two lateral-clutter contacts; GuardianSim completed 6/6 with zero
   contacts and zero safe stops. Evidence:
   [`evidence/gate-3-3-pose-shift-stratum/README.md`](evidence/gate-3-3-pose-shift-stratum/README.md).
-- The remaining three strata have not run. Stop for owner review before
-  spending compute on seeds 507–524.
+- A separate continuous 12-scenario run completed `pose_shift` and
+  `gap_bearing`, seeds 501–512. GuardianSim made ten safe task executions and
+  two explicit safe stops with zero contacts; baseline produced seven safe
+  completions, four contacts, and one clearance violation. Strict schema-6
+  validation passed and the cumulative frozen stop-reason list was empty.
+- The isolated `gap_bearing` stratum had two safe stops in six scenarios.
+  Its `33.33%` task-noncompletion and no-hard-safe-action rates expose an
+  action-space coverage limitation even though the cumulative 12-scenario
+  rates remain below the stored stop thresholds. Evidence:
+  [`evidence/gate-3-3-two-strata/README.md`](evidence/gate-3-3-two-strata/README.md).
+- Do not run the remaining `dynamics_extreme` or `perception_bias` strata
+  before the submission package is complete. Do not proceed to Stage 2 under
+  the current action family.
 
 ### Stage 2 — Hackathon robustness gate
 
@@ -156,6 +167,11 @@ Compute warning:
 - Stage 2 therefore requires profiling and a correctness-preserving cache or
   batched rollout design before launch. Speed changes must be validated against
   the original selector on a predeclared parity set.
+- The 12-scenario Gate 3.3 run averaged `221.53 s` of planning per scenario
+  and still exposed two no-hard-safe-action cases. Before any Stage 2 launch,
+  expand the representable approach family for tight lateral lemon/plum
+  geometry and preserve safe-stop semantics. This must be a new declaration,
+  not a retune of Gate 3.3.
 
 ### Stage 3 — Public-benchmark adapter
 

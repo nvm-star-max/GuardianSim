@@ -161,3 +161,21 @@ stop. The raw evidence is preserved at
 
 This post-declaration record does not alter the frozen protocol, matrix,
 thresholds, or engineering-only claim boundary.
+
+The owner then approved a separate continuous run of the first two complete
+strata, seeds 501–512. Strict partial schema-6 validation passed 12/12.
+GuardianSim executed ten safe task completions, safe-stopped twice, and
+produced no clutter contact; baseline produced seven safe completions, four
+clutter contacts, and one clearance violation. Both safe stops occurred in
+the lateral lemon/plum `gap_bearing` cases.
+
+The stored and recomputed stop-reason list is empty under the frozen
+cumulative-prefix implementation: two task noncompletions and two safe stops
+are each 16.67% across 12 scenarios. The isolated `gap_bearing` stratum has
+2/6 task noncompletions and 2/6 safe stops, so it is recorded as an
+action-space coverage warning and the remaining strata are not started.
+Evidence:
+[`evidence/gate-3-3-two-strata/README.md`](evidence/gate-3-3-two-strata/README.md).
+
+This post-declaration record changes no protocol field, threshold, matrix
+entry, report, or claim boundary.

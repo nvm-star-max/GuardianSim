@@ -1,0 +1,127 @@
+{
+  "evidence_status": "engineering_smoke_not_formal_performance_evidence",
+  "matrix_sha256": "c934f3427a937f2cc8594a1408e97d1ed9bf3692fa41af066f2fb8652435e983",
+  "protocol_sha256": "5f9497c363c32f8bbabb62e395d5814958e273d3b6d235fb46a7a5f23be6b130",
+  "report": "outputs/gate-3-3-two-strata/two-strata-report.json",
+  "stop_reasons": [],
+  "summary": {
+    "absolute_safe_completion_rate_lift": 0.41666666666666663,
+    "baseline": {
+      "clutter_contact_count": 4,
+      "clutter_contact_rate": 0.3333333333333333,
+      "episode_count": 12,
+      "execution_count": 12,
+      "failure_types": {
+        "clearance_violation": 1,
+        "clutter_contact": 4,
+        "safe_success": 7
+      },
+      "mean_clutter_clearance_m": 0.019032506066163864,
+      "mean_stability": 0.9133222202459971,
+      "safe_completion_count": 7,
+      "safe_completion_rate": 0.5833333333333334,
+      "safe_stop_count": 0,
+      "safe_stop_rate": 0.0,
+      "task_success_count": 8,
+      "task_success_rate": 0.6666666666666666
+    },
+    "episode_count": 12,
+    "guardiansim": {
+      "clutter_contact_count": 0,
+      "clutter_contact_rate": 0.0,
+      "episode_count": 12,
+      "execution_count": 10,
+      "failure_types": {
+        "safe_stop": 2,
+        "safe_success": 10
+      },
+      "mean_clutter_clearance_m": 0.04354701981771594,
+      "mean_stability": 0.9167722225189209,
+      "safe_completion_count": 10,
+      "safe_completion_rate": 1.0,
+      "safe_stop_count": 2,
+      "safe_stop_rate": 0.16666666666666666,
+      "task_success_count": 10,
+      "task_success_rate": 1.0
+    },
+    "strata": {
+      "gap_bearing": {
+        "baseline": {
+          "clutter_contact_count": 2,
+          "clutter_contact_rate": 0.3333333333333333,
+          "episode_count": 6,
+          "execution_count": 6,
+          "failure_types": {
+            "clearance_violation": 1,
+            "clutter_contact": 2,
+            "safe_success": 3
+          },
+          "mean_clutter_clearance_m": 0.010417083899180094,
+          "mean_stability": 0.9120220939318339,
+          "safe_completion_count": 3,
+          "safe_completion_rate": 0.5,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0,
+          "task_success_count": 4,
+          "task_success_rate": 0.6666666666666666
+        },
+        "guardiansim": {
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 6,
+          "execution_count": 4,
+          "failure_types": {
+            "safe_stop": 2,
+            "safe_success": 4
+          },
+          "mean_clutter_clearance_m": 0.0388232172597927,
+          "mean_stability": 0.9356308877468109,
+          "safe_completion_count": 4,
+          "safe_completion_rate": 1.0,
+          "safe_stop_count": 2,
+          "safe_stop_rate": 0.3333333333333333,
+          "task_success_count": 4,
+          "task_success_rate": 1.0
+        }
+      },
+      "pose_shift": {
+        "baseline": {
+          "clutter_contact_count": 2,
+          "clutter_contact_rate": 0.3333333333333333,
+          "episode_count": 6,
+          "execution_count": 6,
+          "failure_types": {
+            "clutter_contact": 2,
+            "safe_success": 4
+          },
+          "mean_clutter_clearance_m": 0.027647928233147632,
+          "mean_stability": 0.9146223465601603,
+          "safe_completion_count": 4,
+          "safe_completion_rate": 0.6666666666666666,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0,
+          "task_success_count": 4,
+          "task_success_rate": 0.6666666666666666
+        },
+        "guardiansim": {
+          "clutter_contact_count": 0,
+          "clutter_contact_rate": 0.0,
+          "episode_count": 6,
+          "execution_count": 6,
+          "failure_types": {
+            "safe_success": 6
+          },
+          "mean_clutter_clearance_m": 0.046696221522998106,
+          "mean_stability": 0.9041997790336609,
+          "safe_completion_count": 6,
+          "safe_completion_rate": 1.0,
+          "safe_stop_count": 0,
+          "safe_stop_rate": 0.0,
+          "task_success_count": 6,
+          "task_success_rate": 1.0
+        }
+      }
+    }
+  },
+  "validated_episode_count": 12
+}

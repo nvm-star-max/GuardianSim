@@ -1,0 +1,1 @@
+The two Seed 503 replay attempts were rejected by the hard claim-boundary check. Their logs, PID files, and diagnostic JSON are preserved only as replay diagnostics; they are not presentation videos or performance results.

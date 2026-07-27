@@ -53,6 +53,7 @@ Project documents:
 - [`docs/evidence/gate-2-8/README.md`](docs/evidence/gate-2-8/README.md)
 - [`docs/evidence/gate-3-1/README.md`](docs/evidence/gate-3-1/README.md)
 - [`docs/evidence/gate-3-2/README.md`](docs/evidence/gate-3-2/README.md)
+- [`docs/evidence/gate-3-3-two-strata/README.md`](docs/evidence/gate-3-3-two-strata/README.md)
 - [`showcase/README.md`](showcase/README.md)
 
 ## Upstream reference
