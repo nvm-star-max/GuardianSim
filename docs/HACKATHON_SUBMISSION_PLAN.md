@@ -102,8 +102,8 @@ environment must be reproducible. At minimum preserve:
 | English technical report | Final six-page PDF generated and visually inspected | Keep its checksum bound to the official package |
 | 3–5 minute complete demo | Owner-approved, strictly validated 4:41.5 English V2 | Upload the frozen bytes without re-encoding |
 | Supplementary deck/poster | Intentionally omitted; optional | Keep scope on the mandatory report and video |
-| English official-repo PR | Official fork and submission branch ready; PR intentionally unopened | Open only after the owner accepts the personal/legal terms |
-| Luma Rules sign-off | Rules reviewed; personal/legal attestations pending | Owner confirms registration identity, Discord/team-name consistency, eligibility, and legal acceptance |
+| English official-repo PR | Open as verified PR #39 | Monitor organizer review and respond without changing frozen claims |
+| Luma Rules sign-off | Rules reviewed and owner confirmation received | Preserve the final submission record |
 
 ## 3. Winning MVP
 
@@ -267,9 +267,9 @@ Exit criterion: no unfinished mandatory artifact remains.
 - [x] Formal video claims map to preserved evidence and machine-checked source hashes.
 - [x] Team members and contributions are present.
 - [x] Optional supplementary deck/poster is intentionally not used.
-- [x] Official repository is forked and the English submission branch is ready.
-- [ ] Final Luma submission and PR evidence are archived.
-- [ ] Owner confirms legal-name registration, Discord/team-name consistency,
+- [x] Official repository is forked and English submission PR #39 is open.
+- [x] Final official-repository PR evidence is archived; the rules specify no separate project-upload form beyond Luma registration and the PR.
+- [x] Owner confirmed legal-name registration, Discord/team-name consistency,
   personal eligibility, and acceptance of the entry-license/publicity terms.
 
 Working report and video-production sources:
@@ -277,6 +277,7 @@ Working report and video-production sources:
 - [`submission/TECHNICAL_REPORT.md`](submission/TECHNICAL_REPORT.md)
 - [`submission/GuardianSim-Technical-Report.pdf`](submission/GuardianSim-Technical-Report.pdf)
 - [`submission/RULES_REVIEW_2026-07-28.md`](submission/RULES_REVIEW_2026-07-28.md)
+- [`submission/FINAL_SUBMISSION_2026-07-28.md`](submission/FINAL_SUBMISSION_2026-07-28.md)
 - [`submission/DEMO_VIDEO_SCRIPT.md`](submission/DEMO_VIDEO_SCRIPT.md)
 - [`submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4`](submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4)
 - [`submission/official-package/Track3-Aegis-Motion-GuardianSim`](submission/official-package/Track3-Aegis-Motion-GuardianSim)

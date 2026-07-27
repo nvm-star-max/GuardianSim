@@ -897,3 +897,24 @@ Evidence and working material:
   represented as a binary artifact in the organizer diff.
 - No organizer pull request exists yet. The exact prepared PR title remains
   `Track 3, Aegis Motion, GuardianSim`.
+
+## Final organizer submission — 2026-07-28
+
+- The owner explicitly confirmed the personal eligibility and legal terms
+  summarized from the official Rules and Conditions and authorized final
+  submission.
+- Opened official pull request
+  <https://github.com/AMD-DEV-CONTEST/Radeon-hackathon-2026-07/pull/39>
+  with title `Track 3, Aegis Motion, GuardianSim`.
+- Verified the PR is open, non-draft, mergeable, targets official `main`, and
+  uses head branch `nvm-star-max:submission/track3-aegis-motion-guardiansim`
+  at `abd0cfd72056eefe94298f513449e4f48842620b`.
+- Verified the comparison contains exactly the path-scoped binary attribute,
+  English submission README, final technical-report PDF, and checksum
+  manifest.
+- Verified every immutable source, video, evidence, and Docker/reproduction
+  link in the PR body returned HTTP 200.
+- The durable non-private record is
+  [`submission/FINAL_SUBMISSION_2026-07-28.md`](submission/FINAL_SUBMISSION_2026-07-28.md).
+  Do not change the PR's frozen quantitative claims unless a factual
+  correction is required.

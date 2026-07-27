@@ -1288,3 +1288,22 @@ Gate decision:
 - Confirmed no pull request exists for this head branch. The final organizer
   PR remains intentionally unsubmitted pending the owner's legal and personal
   eligibility confirmation.
+
+## 2026-07-28 — Official hackathon entry submitted
+
+- Received the owner's explicit confirmation of the registration,
+  eligibility, entry-license, publicity/release, winner-form, and tax terms.
+- Opened
+  <https://github.com/AMD-DEV-CONTEST/Radeon-hackathon-2026-07/pull/39>
+  with the required title `Track 3, Aegis Motion, GuardianSim`.
+- Verified:
+  - state `OPEN`, non-draft, and `MERGEABLE`;
+  - base `main`;
+  - head `nvm-star-max:submission/track3-aegis-motion-guardiansim`;
+  - head commit `abd0cfd72056eefe94298f513449e4f48842620b`;
+  - exactly four intended files in the comparison;
+  - all external source, video, evidence, and reproduction links returned
+    HTTP 200;
+  - no required status checks were reported at submission time.
+- Added a durable non-private final submission record. No credentials, legal
+  names, private contact details, or payment information were recorded.

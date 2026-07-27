@@ -40,6 +40,9 @@ submission. It is a working set, not yet the final uploaded package.
   evidence-backed competitive position.
 - [`RULES_REVIEW_2026-07-28.md`](RULES_REVIEW_2026-07-28.md): a source-linked
   compliance review of the official 15-page Rules and Conditions document.
+- [`FINAL_SUBMISSION_2026-07-28.md`](FINAL_SUBMISSION_2026-07-28.md): the
+  verified organizer PR, commit, file list, checksums, and authorization
+  record without private identity data.
 - [`OFFICIAL_PR_DRAFT.md`](OFFICIAL_PR_DRAFT.md): the English official-repo
   pull-request title and body draft.
 - [`official-package/Track3-Aegis-Motion-GuardianSim`](official-package/Track3-Aegis-Motion-GuardianSim):
