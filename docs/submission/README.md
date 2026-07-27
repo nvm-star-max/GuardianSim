@@ -38,6 +38,8 @@ submission. It is a working set, not yet the final uploaded package.
 - [`COMPETITOR_SCAN_2026-07-27.md`](COMPETITOR_SCAN_2026-07-27.md): a
   time-stamped inventory of the official repository and GuardianSim's
   evidence-backed competitive position.
+- [`RULES_REVIEW_2026-07-28.md`](RULES_REVIEW_2026-07-28.md): a source-linked
+  compliance review of the official 15-page Rules and Conditions document.
 - [`OFFICIAL_PR_DRAFT.md`](OFFICIAL_PR_DRAFT.md): the English official-repo
   pull-request title and body draft.
 - [`official-package/Track3-Aegis-Motion-GuardianSim`](official-package/Track3-Aegis-Motion-GuardianSim):
@@ -76,12 +78,17 @@ the current terminal section is clearly labeled archived evidence.
 
 ## Blocking owner inputs
 
-Before exporting or submitting the report:
+Before opening the final organizer pull request, the owner must personally:
 
-1. confirm whether the organizer requires the owner's legal name in the public
-   report, rather than the verified public GitHub identity;
-2. manually review the complete Luma Rules & Conditions;
-3. approve the final public repository, video, report, and submission.
+1. confirm that the Luma registration contains the legal name and the intended
+   `Aegis Motion` team identity;
+2. confirm a valid Discord ID and the personal age, sanctions/export-control,
+   and employment eligibility facts;
+3. accept the entry-license, publicity, release, prize-form, and tax terms
+   summarized in the rules review.
+
+The rules do not require the legal name in the public report or pull request,
+so the public GitHub identity `@nvm-star-max` remains appropriate.
 
 Do not add private email addresses, identity documents, cloud-account details,
 tokens, or payment information to this directory.

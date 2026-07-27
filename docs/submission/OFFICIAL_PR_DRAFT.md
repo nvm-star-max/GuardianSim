@@ -1,7 +1,7 @@
 # Official Repository Pull Request Draft
 
 Do not open this pull request until the final report, video, source commit, and
-Luma rules sign-off are complete.
+the owner's personal eligibility and legal acceptance checks are complete.
 
 ## Title
 
@@ -73,5 +73,9 @@ can produce a deliberate safe stop.
 
 - Confirm every immutable URL remains publicly accessible.
 - Confirm the official-repository PDF path after copying the prepared package.
-- Confirm public member naming against the Luma rules.
-- Do not open the PR until the owner completes the Luma rules sign-off.
+- Confirm the private Luma registration uses the legal name and intended team
+  identity; public materials may use Aegis Motion / `@nvm-star-max`.
+- Confirm a valid Discord ID and personal eligibility.
+- Do not open the PR until the owner accepts the entry-license,
+  publicity/release, winner-form, and tax terms recorded in
+  `RULES_REVIEW_2026-07-28.md`.

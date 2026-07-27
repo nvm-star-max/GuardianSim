@@ -854,6 +854,28 @@ Evidence and working material:
     release remains available;
   - the owner's official contest fork
     `nvm-star-max/Radeon-hackathon-2026-07` does not yet exist;
-  - do not merge the public default branch, create the official fork, or open
-    the organizer pull request until the owner confirms the final Luma
-    Rules & Conditions check and public-name requirement.
+  - the owner authorized release preparation after the rules review, so the
+    public default branch and official fork may be prepared;
+  - do not open the organizer pull request until the owner accepts the
+    personal eligibility and legal terms recorded below.
+
+## Official Rules and Conditions review — 2026-07-28
+
+- Retrieved the 15-page governing document directly from the Google Docs link
+  on Luma and recorded the source, retrieval hash, technical requirements,
+  eligibility provisions, prize/payment terms, and legal effects in
+  [`submission/RULES_REVIEW_2026-07-28.md`](submission/RULES_REVIEW_2026-07-28.md).
+- The public report and pull request do not need the legal name. The legal name
+  is required in the private Luma registration. Public materials can continue
+  to identify the solo entry as **Aegis Motion** / `@nvm-star-max`.
+- GuardianSim meets the technical package requirements: Track 3 simulation,
+  one Radeon GPU and ROCm, Genesis, English report and repository, detailed
+  reproduction instructions, optional Docker packaging, and a 4:41.5 workflow
+  video. Qwen TTS is presentation-only and is not a core project function.
+- Personal facts remain outside repository verification: legal-name
+  registration, age/majority, sanctions/export-control and employment
+  eligibility, valid Discord ID, and Luma team-name consistency.
+- Opening the organizer pull request constitutes the competition entry. Do not
+  perform that final action until the owner accepts the broad entry license,
+  publicity/release provisions, possible winner forms, and tax obligations
+  summarized in the rules review.

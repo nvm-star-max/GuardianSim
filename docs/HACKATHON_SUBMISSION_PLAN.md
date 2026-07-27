@@ -20,9 +20,11 @@ When requirements conflict or change, use this order:
 3. Organizer announcements and live Q&A.
 4. This repository's internal plans.
 
-The Luma page and the Chinese cloud guide could not be read automatically from
-the development environment. The owner must complete a final manual rules
-check before submission and record any requirement not already listed here.
+The Luma page and its 15-page official Rules and Conditions document were
+retrieved and reviewed on 2026-07-28. The durable review is
+[`submission/RULES_REVIEW_2026-07-28.md`](submission/RULES_REVIEW_2026-07-28.md).
+Personal eligibility facts and acceptance of the legal terms remain owner-only
+decisions.
 
 ### Confirmed project identity
 
@@ -101,7 +103,7 @@ environment must be reproducible. At minimum preserve:
 | 3–5 minute complete demo | Owner-approved, strictly validated 4:41.5 English V2 | Upload the frozen bytes without re-encoding |
 | Supplementary deck/poster | Intentionally omitted; optional | Keep scope on the mandatory report and video |
 | English official-repo PR | Local package and PR text ready; official fork missing | Fork, copy the prepared package, and open the English PR |
-| Luma Rules sign-off | Manual action pending | Owner reads full page and records extra requirements |
+| Luma Rules sign-off | Rules reviewed; personal/legal attestations pending | Owner confirms registration identity, Discord/team-name consistency, eligibility, and legal acceptance |
 
 ## 3. Winning MVP
 
@@ -253,11 +255,11 @@ Exit criterion: no unfinished mandatory artifact remains.
 
 ## 8. Final acceptance checklist
 
-- [ ] Luma rules manually reviewed and any extra requirements recorded.
+- [x] Luma rules retrieved, reviewed, hashed, and recorded.
 - [x] Track 3 identity and English naming are consistent.
 - [x] Public source and evidence identity is fixed at immutable commit `25e27aced13237b5af93fd91697d7abb12101a30`.
 - [x] Final English technical-report PDF identifies Aegis Motion and the solo public contributor.
-- [ ] Owner confirms whether a legal name must appear in the public report.
+- [x] Rules require a legal name in private registration, not in the public report or PR.
 - [x] Reproducibility README passes a local clean-room clone test.
 - [x] AMD Radeon/ROCm environment manifest and real Genesis smoke are complete.
 - [x] Pinned Dockerfile is present and the supported native Radeon Cloud fallback is clear; a local ROCm container run is not claimed.
@@ -267,11 +269,14 @@ Exit criterion: no unfinished mandatory artifact remains.
 - [x] Optional supplementary deck/poster is intentionally not used.
 - [ ] Official repository is forked and the English PR is ready.
 - [ ] Final Luma submission and PR evidence are archived.
+- [ ] Owner confirms legal-name registration, Discord/team-name consistency,
+  personal eligibility, and acceptance of the entry-license/publicity terms.
 
 Working report and video-production sources:
 
 - [`submission/TECHNICAL_REPORT.md`](submission/TECHNICAL_REPORT.md)
 - [`submission/GuardianSim-Technical-Report.pdf`](submission/GuardianSim-Technical-Report.pdf)
+- [`submission/RULES_REVIEW_2026-07-28.md`](submission/RULES_REVIEW_2026-07-28.md)
 - [`submission/DEMO_VIDEO_SCRIPT.md`](submission/DEMO_VIDEO_SCRIPT.md)
 - [`submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4`](submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4)
 - [`submission/official-package/Track3-Aegis-Motion-GuardianSim`](submission/official-package/Track3-Aegis-Motion-GuardianSim)

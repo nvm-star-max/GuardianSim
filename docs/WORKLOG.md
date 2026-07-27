@@ -1246,3 +1246,24 @@ Gate decision:
 - The Docker daemon was unavailable on this Mac; no unverified ROCm container
   result was added. The supported native Radeon Cloud route remains the
   reproduced path.
+
+## 2026-07-28 — Governing rules retrieved and reconciled
+
+- Opened the current Luma event and followed its official Rules and Conditions
+  link to the governing Google document.
+- Exported and read all 15 pages. Preserved only a source-linked summary and
+  SHA-256 identity, not the external legal document itself.
+- Confirmed the 2026-08-06 23:59 UTC+8 deadline, official-fork pull-request
+  submission method, English-material rule, and Track 3 deliverables.
+- Confirmed GuardianSim's single-Radeon/ROCm Genesis simulation path and
+  mandatory artifacts comply with the technical requirements. A Docker image
+  is preferred rather than mandatory; supplementary Track 3 material is
+  optional.
+- Confirmed that the legal name is required in private registration, not the
+  public report. Kept public attribution as Aegis Motion / `@nvm-star-max`.
+- Recorded owner-only eligibility and legal checks: legal-name/team-name
+  registration consistency, valid Discord ID, age and exclusion provisions,
+  broad AMD entry license, publicity/release terms, winner forms, withholding,
+  and China CNY conversion.
+- No organizer pull request was opened in this step because it is the final
+  competition-entry action and carries the legal effects above.
