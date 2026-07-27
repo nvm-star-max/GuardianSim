@@ -25,6 +25,8 @@ not infer either value. The raw record is
 
 - Native target: the same Radeon Cloud template with Python 3.12 and the
   exact ROCm wheels in `scripts/install_rocm_stack.sh`.
+- Blank OpenCode environment path: `/opt/venv`; the image may leave
+  `VIRTUAL_ENV` unset, so the evaluator scripts detect this path explicitly.
 - Container target: `rocm/dev-ubuntu-24.04:7.2.1-complete`.
 - Python dependency identity: `pyproject.toml` plus committed `uv.lock`.
 - Evaluator manifest: `scripts/capture_environment.py`.

@@ -4,6 +4,11 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+# Match evaluator_preflight.sh when this script is invoked directly.
+if [[ -z "${UV_PROJECT_ENVIRONMENT:-}" && -z "${VIRTUAL_ENV:-}" && -x /opt/venv/bin/python ]]; then
+  export UV_PROJECT_ENVIRONMENT=/opt/venv
+fi
+
 evidence_dir="${1:-outputs/evaluator-smoke}"
 mkdir -p "$evidence_dir"
 

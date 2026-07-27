@@ -46,6 +46,8 @@ cd GuardianSim
 
 scripts/install_system_deps.sh
 uv python install 3.12
+# Blank OpenCode provides its persistent ROCm environment here:
+export UV_PROJECT_ENVIRONMENT=/opt/venv
 uv sync --frozen --python 3.12
 scripts/install_rocm_stack.sh
 ```
@@ -60,6 +62,12 @@ GuardianSim evaluator; install it only when needed by setting
 All evaluator commands use `uv run --no-sync` after this replacement. This is
 intentional: another automatic `uv sync` could replace the official ROCm wheel
 with the default package selected during platform-independent locking.
+
+The Blank OpenCode image may not set `VIRTUAL_ENV`, even though its working
+ROCm Python is `/opt/venv/bin/python`. The evaluator scripts automatically
+reuse `/opt/venv` when it exists. Without this check, uv can create an empty
+`.venv` and correctly report that PyTorch is missing. On another Linux image,
+set `UV_PROJECT_ENVIRONMENT` to the intended environment before installation.
 
 No API key, model token, training dataset, or external checkpoint is required
 for the GuardianSim smoke or preserved benchmark validation. The Franka and
@@ -199,6 +207,9 @@ passthrough; macOS Docker cannot validate `/dev/kfd`.
 
 - **`PyTorch is not a ROCm build`** — run
   `scripts/install_rocm_stack.sh`; do not use the default PyPI CPU wheel.
+- **PyTorch is installed in `/opt/venv` but uv reports it missing** — export
+  `UV_PROJECT_ENVIRONMENT=/opt/venv`, or use the evaluator scripts, which
+  detect the Blank OpenCode layout automatically.
 - **Wrong Python version** — run
   `uv python install 3.12 && uv sync --frozen --python 3.12`.
 - **No visible GPU or more than one GPU** — expose exactly one Radeon device.

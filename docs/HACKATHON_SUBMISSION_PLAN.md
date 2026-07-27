@@ -92,11 +92,11 @@ environment must be reproducible. At minimum preserve:
 | Dedicated source repository | Ready | Prepare stable public submission branch/tag |
 | Formal benchmark evidence | Strong Gate 3.2 evidence | Preserve claim boundary and checksums |
 | Breadth evidence | Two Gate 3.3 strata preserved | Do not expand before P0 submission work |
-| Reproducibility README | Implemented, not yet independently clean-room tested | Fresh-checkout review |
-| Dependency/environment capture | Implemented | Capture one final submission-commit manifest |
+| Reproducibility README | Ready; clean-room clone and real Radeon smoke passed | Re-run from the final submission commit |
+| Dependency/environment capture | Ready; real Blank OpenCode manifest captured | Archive the 253 KB cloud evidence package locally |
 | Docker image or Dockerfile | Pinned complete-source Dockerfile present | Linux ROCm build/run still pending |
-| English technical report | Missing | Draft, review, and export final PDF |
-| 3–5 minute complete demo | Missing | Record real workflow, GPU proof, comparison, results |
+| English technical report | V1 drafted | Add verified team details, review, and export final PDF |
+| 3–5 minute complete demo | Script and shot list drafted | Record accepted formal replay, GPU proof, workflow, and results |
 | Supplementary deck/poster | Missing | Produce only after report/video reach review quality |
 | English official-repo PR | Missing | Fork, add submission entry/materials, open PR |
 | Luma Rules sign-off | Manual action pending | Owner reads full page and records extra requirements |
@@ -253,9 +253,9 @@ Exit criterion: no unfinished mandatory artifact remains.
 - [ ] Luma rules manually reviewed and any extra requirements recorded.
 - [ ] Track 3 identity and English naming are consistent.
 - [ ] Public source commit/tag is fixed.
-- [ ] English technical report PDF is complete.
-- [ ] Reproducibility README passes a clean-room test.
-- [ ] AMD Radeon/ROCm environment manifest is complete.
+- [ ] English technical report V1 has verified team details and is exported to PDF.
+- [x] Reproducibility README passes a local clean-room clone test.
+- [x] AMD Radeon/ROCm environment manifest and real Genesis smoke are complete.
 - [ ] Docker image/Dockerfile is validated, or the supported fallback is clear.
 - [ ] 3–5 minute English demo video shows real execution and results.
 - [ ] Formal claims map to preserved evidence and checksums.
@@ -263,3 +263,11 @@ Exit criterion: no unfinished mandatory artifact remains.
 - [ ] Supplementary material is complete if used.
 - [ ] Official repository is forked and the English PR is ready.
 - [ ] Final Luma submission and PR evidence are archived.
+
+Working report and video-production sources:
+
+- [`submission/TECHNICAL_REPORT.md`](submission/TECHNICAL_REPORT.md)
+- [`submission/DEMO_VIDEO_SCRIPT.md`](submission/DEMO_VIDEO_SCRIPT.md)
+
+The cloud evaluator-smoke archive must be downloaded through the Jupyter file
+browser and verified locally before its evidence item can be marked archived.

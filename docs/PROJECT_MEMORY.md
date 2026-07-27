@@ -624,3 +624,51 @@ The Docker daemon was unavailable on the Mac, and macOS cannot expose
 `/dev/kfd`; therefore a full container build plus real GPU smoke remains an
 explicit Radeon Linux acceptance item. Do not mark that item complete based
 only on this local batch.
+
+## P0 evaluator reproduction engineering — Radeon acceptance
+
+On 2026-07-27, the committed evaluator workflow was accepted on the retained
+Radeon Cloud Blank OpenCode instance `u-13907-735d71cb` without destroying or
+replacing it:
+
+- Cloud source identity was exact commit
+  `58a76d407a255f11d57bc401dcecb2604eafaca8` with a clean worktree.
+- The image's working ROCm Python was `/opt/venv/bin/python`, although
+  `VIRTUAL_ENV` was unset. A direct uv invocation would otherwise create an
+  empty `.venv`. The evaluator scripts now detect and reuse `/opt/venv`.
+- GPU-required preflight passed with Python 3.12.3, PyTorch
+  `2.9.1+gitff65f5b`, HIP `7.2.53211-e1a6bc5663`, one AMD Radeon GPU, all
+  54 tests from the tested commit, strict Gate 3.2 validation, and recursive
+  checksum verification.
+- The one-command real Genesis smoke built and rendered the Franka scene on
+  `gs.amdgpu`, captured one physical snapshot, evaluated three yaw
+  alternatives from that identical snapshot, and produced a strictly valid
+  candidate report.
+- Candidate validation recorded:
+  - `validated: true`;
+  - candidate count `3`;
+  - snapshot fingerprint
+    `8a3692e8f016af7602ecb54e6f4db1cde765ce232138c9e72f8939ca2c8e2ee2`;
+  - top candidate `yaw_+00.0_offset_+0.000`.
+- All 15 files in the smoke evidence directory passed the cloud checksum
+  manifest. This is an evaluator-path proof only, not a performance result.
+- A 253 KB cloud archive named `evaluator-smoke-58a76d4.tar.gz` was prepared.
+  Browser security correctly prevented automated download; local archival and
+  final archive-hash verification remain pending the owner's normal Jupyter
+  file-browser download.
+- Drafted the English Track 3 technical report and 4-minute demo-video script
+  under [`submission`](submission). The report still requires verified team
+  name, member names, and contributions. The video still requires one accepted
+  Gate 3.2 comparison replay with exact, report-backed clearance overlays.
+- Generated a six-page A4 review PDF with a reproducible ReportLab builder.
+  All six pages were visually inspected after rendering to PNG; table
+  contrast, wrapping, clipping, page numbers, draft labeling, and required
+  Gate 3.2 metrics passed review. The PDF intentionally substitutes a neutral
+  pending-attribution notice for unverified team details.
+- Final local acceptance for this batch passed shell syntax, `uv lock
+  --check`, 55/55 unit tests, PDF compilation/text checks, whitespace checks,
+  and a targeted secret/personal-email scan.
+
+Do not start a new formal benchmark before the submission report and video are
+reviewable. The next major stage is production of the accepted comparison
+replay and final report/video assets.

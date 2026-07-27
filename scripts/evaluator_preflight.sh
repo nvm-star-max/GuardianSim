@@ -4,6 +4,13 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+# Radeon Cloud's Blank OpenCode template ships its working ROCm environment at
+# /opt/venv but may leave VIRTUAL_ENV unset. Reuse it instead of letting uv
+# create an empty project-local environment.
+if [[ -z "${UV_PROJECT_ENVIRONMENT:-}" && -z "${VIRTUAL_ENV:-}" && -x /opt/venv/bin/python ]]; then
+  export UV_PROJECT_ENVIRONMENT=/opt/venv
+fi
+
 require_gpu=1
 if [[ "${1:-}" == "--no-gpu" ]]; then
   require_gpu=0

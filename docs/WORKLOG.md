@@ -958,3 +958,63 @@ Gate decision:
   Radeon Linux.
 - No cloud instance was stopped, destroyed, or modified, and no new benchmark
   was launched during this batch.
+
+## 2026-07-27 — Radeon evaluator acceptance and submission V1
+
+- Reused the retained Radeon Cloud Blank OpenCode instance
+  `u-13907-735d71cb`; did not stop or destroy it.
+- Fetched and checked out exact source commit
+  `58a76d407a255f11d57bc401dcecb2604eafaca8` in a clean detached cloud
+  checkout.
+- Diagnosed the template-specific environment:
+  - ROCm PyTorch and uv live in `/opt/venv`;
+  - `VIRTUAL_ENV` was unset;
+  - an unqualified `uv run --no-sync` created an empty local `.venv` and
+    correctly reported missing PyTorch.
+- Ran the GPU-required evaluator preflight with
+  `UV_PROJECT_ENVIRONMENT=/opt/venv`:
+  - Python 3.12.3;
+  - PyTorch `2.9.1+gitff65f5b`;
+  - HIP `7.2.53211-e1a6bc5663`;
+  - one visible AMD Radeon GPU;
+  - 54/54 tests from the deployed commit;
+  - strict Gate 3.2 validation and checksum checks passed.
+- Ran the bounded real Genesis counterfactual smoke:
+  - Genesis selected `gs.amdgpu` and reported approximately 47.98 GB device
+    memory;
+  - the scene built and rendered successfully;
+  - one snapshot fed three yaw candidates;
+  - candidate validation returned `validated: true`;
+  - snapshot fingerprint was
+    `8a3692e8f016af7602ecb54e6f4db1cde765ce232138c9e72f8939ca2c8e2ee2`;
+  - all 15 files passed `SHA256SUMS`.
+- Prepared cloud archive
+  `outputs/evaluator-smoke-58a76d4/evaluator-smoke-58a76d4.tar.gz`
+  (approximately 253 KB). Automated browser download was blocked by an
+  explicit security policy, so the archive awaits normal manual download from
+  the Jupyter file browser before local evidence preservation.
+- Added automatic Blank OpenCode `/opt/venv` detection to both evaluator shell
+  entry points, documentation, and a regression test.
+- Drafted the official-section-aligned English technical report and a
+  4:00–4:30 demo script. The script requires path overlays, a contact
+  freeze-frame, explicit left/right color semantics, millimeter clearance, and
+  a top-down inset so the prior visually ambiguous comparison is not reused.
+- Re-checked the official contest repository on 2026-07-27. It still requires
+  an English Track 3 technical report, dedicated source repository,
+  reproducibility README, and 3–5 minute complete-workflow demo; a complete
+  Docker image is preferable. Luma's complete legal/rules text remains a
+  mandatory manual owner review.
+- Added a deterministic ReportLab builder and generated
+  `output/pdf/GuardianSim-Technical-Report-DRAFT.pdf`.
+- Rendered the PDF to PNG after each meaningful layout revision. The accepted
+  review draft is six A4 pages with a cover, architecture figure, formal result
+  table, limitations, references, page numbers, and an explicit draft/team
+  attribution notice. All six pages passed visual inspection without clipping,
+  overlap, unreadable headers, or broken list wrapping.
+- Final local checks passed:
+  - shell syntax for both evaluator entry points;
+  - `uv lock --check` with 132 packages;
+  - 55/55 unit tests;
+  - PDF generation, extraction, required-metric, and placeholder checks;
+  - Python compilation, `git diff --check`, and targeted secret/personal-email
+    scan.

@@ -19,6 +19,7 @@ git clone https://github.com/nvm-star-max/GuardianSim.git
 cd GuardianSim
 scripts/install_system_deps.sh
 uv python install 3.12
+export UV_PROJECT_ENVIRONMENT=/opt/venv
 uv sync --frozen --python 3.12
 scripts/install_rocm_stack.sh
 ```

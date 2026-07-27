@@ -101,5 +101,17 @@ class ChecksumManifestTests(unittest.TestCase):
             )
 
 
+class EvaluatorShellTests(unittest.TestCase):
+    def test_cloud_preflight_detects_blank_opencode_environment(self) -> None:
+        repo_root = Path(__file__).resolve().parents[1]
+        for relative_path in (
+            "scripts/evaluator_preflight.sh",
+            "scripts/run_evaluator_smoke.sh",
+        ):
+            source = (repo_root / relative_path).read_text(encoding="utf-8")
+            self.assertIn("-x /opt/venv/bin/python", source)
+            self.assertIn("export UV_PROJECT_ENVIRONMENT=/opt/venv", source)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,5 +1,6 @@
 # --- Generated artifacts (eval results, videos, scripted-demo frames) ---
 outputs/
+tmp/
 
 # --- Python ---
 __pycache__/
