@@ -19,7 +19,7 @@ git clone https://github.com/nvm-star-max/GuardianSim.git
 cd GuardianSim
 scripts/install_system_deps.sh
 uv python install 3.12
-uv sync --python 3.12
+uv sync --frozen --python 3.12
 scripts/install_rocm_stack.sh
 ```
 
@@ -29,19 +29,20 @@ Expected conditions:
 - ROCm/HIP is present
 - Exactly one AMD Radeon GPU is visible
 
-## Install the upstream environment
+## Evaluator path
 
-Follow the pinned ROCm-wheel installation in the root README. Session A is a
-single command after installation:
+Run the concise evaluator preflight and bounded real Genesis smoke:
 
 ```bash
-scripts/start_gpu_session.sh
+scripts/evaluator_preflight.sh
+scripts/run_evaluator_smoke.sh
 ```
 
-It records the commit, ROCm/PyTorch device information, tests, a labeled
-synthetic pipeline smoke test, and a real Genesis GPU scene probe with world and
-wrist frames. If only the non-GPU setup is being prepared, set
-`GUARDIANSIM_SKIP_SCENE_PROBE=1`.
+The first command records the commit, full environment, tests, a labeled
+synthetic decision-loop smoke, and strict formal-report validation. The second
+adds a real Genesis GPU scene probe and a validated three-candidate
+counterfactual run. See the root [`REPRODUCIBILITY.md`](../REPRODUCIBILITY.md)
+for expected outputs and the Docker alternative.
 
 ## Session B / Gate 2.5 diagnostic run
 

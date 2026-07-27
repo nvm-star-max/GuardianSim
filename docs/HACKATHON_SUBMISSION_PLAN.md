@@ -88,13 +88,13 @@ environment must be reproducible. At minimum preserve:
 | Deliverable | State on 2026-07-27 | Required next proof |
 | --- | --- | --- |
 | Track and application direction | Ready | Keep Track 3 claim consistent everywhere |
-| AMD Radeon/ROCm execution | Strong evidence | Add concise evaluator preflight |
+| AMD Radeon/ROCm execution | Strong evidence + preflight implemented | Re-run cleanly on Radeon before freeze |
 | Dedicated source repository | Ready | Prepare stable public submission branch/tag |
 | Formal benchmark evidence | Strong Gate 3.2 evidence | Preserve claim boundary and checksums |
 | Breadth evidence | Two Gate 3.3 strata preserved | Do not expand before P0 submission work |
-| Reproducibility README | Partial | Clean-room reproduction from documented commands |
-| Dependency/environment capture | Partial | Add a complete manifest and exact setup path |
-| Docker image or Dockerfile | Missing | Produce and validate if feasible; document fallback |
+| Reproducibility README | Implemented, not yet independently clean-room tested | Fresh-checkout review |
+| Dependency/environment capture | Implemented | Capture one final submission-commit manifest |
+| Docker image or Dockerfile | Pinned complete-source Dockerfile present | Linux ROCm build/run still pending |
 | English technical report | Missing | Draft, review, and export final PDF |
 | 3–5 minute complete demo | Missing | Record real workflow, GPU proof, comparison, results |
 | Supplementary deck/poster | Missing | Produce only after report/video reach review quality |

@@ -10,7 +10,7 @@ if ! command -v uv >/dev/null 2>&1; then
   exit 1
 fi
 
-python_version="$(uv run python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+python_version="$(uv run --frozen python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
 if [[ "$python_version" != "3.12" ]]; then
   echo "ERROR: expected the project environment to use Python 3.12, found $python_version." >&2
   echo "Run: uv python install 3.12 && uv sync --python 3.12" >&2
@@ -41,6 +41,9 @@ done
 
 uv pip uninstall torch torchvision torchaudio triton pytorch-triton pytorch-triton-rocm || true
 uv pip install "$wheel_dir"/*.whl
-uv pip install "lerobot[training,smolvla]==0.6.0"
 
-uv run python scripts/verify_rocm.py
+if [[ "${GUARDIANSIM_INSTALL_LEROBOT:-0}" == "1" ]]; then
+  uv pip install "lerobot[training,smolvla]==0.6.0"
+fi
+
+uv run --frozen --no-sync python scripts/verify_rocm.py

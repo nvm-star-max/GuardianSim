@@ -22,6 +22,11 @@ def main() -> None:
         action="store_true",
         help="validate a resumable prefix instead of requiring all 30 episodes",
     )
+    parser.add_argument(
+        "--compact",
+        action="store_true",
+        help="print only evaluator-facing headline metrics",
+    )
     args = parser.parse_args()
 
     report_path = Path(args.report)
@@ -30,20 +35,37 @@ def main() -> None:
         payload,
         require_complete=not args.allow_partial,
     )
-    print(
-        json.dumps(
-            {
-                "report": str(report_path),
-                "validated_episode_count": len(episodes),
-                "protocol_sha256": payload["protocol"]["protocol_sha256"],
-                "summary": payload["summary"],
-            },
-            indent=2,
-            sort_keys=True,
-        )
-    )
+    result = {
+        "report": str(report_path),
+        "validated_episode_count": len(episodes),
+        "protocol_sha256": payload["protocol"]["protocol_sha256"],
+    }
+    if args.compact:
+        summary = payload["summary"]
+        result["verified_metrics"] = {
+            "baseline_repeatable_safe_completion": (
+                f"{summary['baseline']['repeatable_safe_completion_count']}"
+                f"/{summary['baseline']['episode_count']}"
+            ),
+            "guardiansim_repeatable_safe_completion": (
+                f"{summary['guardiansim']['repeatable_safe_completion_count']}"
+                f"/{summary['guardiansim']['episode_count']}"
+            ),
+            "baseline_independent_safe_executions": (
+                f"{summary['baseline']['execution_safe_completion_count']}"
+                f"/{summary['baseline']['execution_count']}"
+            ),
+            "guardiansim_independent_safe_executions": (
+                f"{summary['guardiansim']['execution_safe_completion_count']}"
+                f"/{summary['guardiansim']['execution_count']}"
+            ),
+            "baseline_clutter_contacts": summary["baseline"]["clutter_contact_count"],
+            "guardiansim_clutter_contacts": summary["guardiansim"]["clutter_contact_count"],
+        }
+    else:
+        result["summary"] = payload["summary"]
+    print(json.dumps(result, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":
     main()
-

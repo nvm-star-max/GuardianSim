@@ -913,3 +913,48 @@ Gate decision:
   [`evidence/gate-3-3-two-strata/README.md`](evidence/gate-3-3-two-strata/README.md).
 - Major-stage decision: stop before the remaining two strata. Move to
   reproducibility, English technical report, and complete 3–5 minute video.
+
+## 2026-07-27 — P0 evaluator reproduction path implemented
+
+- Audited the repository's evaluator setup before changing it.
+- Found a blocking Docker reproducibility defect: `docker/Dockerfile` copied
+  `uv.lock`, but no lock file existed in the repository.
+- Generated `uv.lock` with `uv 0.11.28`; `uv lock --check` resolved 132
+  packages successfully.
+- Added:
+  - root English `REPRODUCIBILITY.md`;
+  - `docs/ENVIRONMENT.md`;
+  - portable JSON environment capture;
+  - GPU-required and explicit non-GPU evaluator preflight;
+  - bounded three-candidate Radeon/Genesis smoke;
+  - candidate-report validator;
+  - deterministic recursive SHA-256 manifest writer.
+- Updated the Docker path to use GuardianSim naming, copy the complete
+  evaluator source plus bundled assets, install the package, and run tests at
+  image build time.
+- Identified and fixed a ROCm-environment drift risk: post-install `uv run`
+  could re-synchronize the default locked PyTorch over the exact Radeon wheel.
+  All GPU/evaluator run commands now use `--frozen --no-sync`.
+- Updated the root README, Radeon Cloud runbook, and submission readiness
+  matrix to route new evaluators through the concise commands.
+- Local acceptance:
+  - shell syntax passed;
+  - Python compilation passed;
+  - tests passed `54/54`;
+  - `./scripts/evaluator_preflight.sh --no-gpu` passed;
+  - strict Gate 3.2 schema-5 validation passed 30/30;
+  - generated local preflight checksums verified;
+  - all eight preserved Gate 3.2 checksum entries verified.
+- Repeated the acceptance path after committing from a new `git clone
+  --no-local` directory:
+  - `uv sync --frozen --python 3.12` created the environment from the lock;
+  - 80 dependency packages plus GuardianSim installed;
+  - source metadata reported `git_dirty: false`;
+  - tests passed 54/54;
+  - strict formal validation and generated checksum verification passed.
+- The Mac environment correctly recorded no ROCm GPU. Docker Desktop's CLI was
+  installed but its daemon was not running, and macOS cannot provide
+  `/dev/kfd`; full Docker/GPU validation is intentionally still pending on
+  Radeon Linux.
+- No cloud instance was stopped, destroyed, or modified, and no new benchmark
+  was launched during this batch.

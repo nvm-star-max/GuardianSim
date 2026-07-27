@@ -25,12 +25,11 @@ frozen Gate 3.2 action-space expansion, unsafe-nominal replacement, and
 three-execution repeatability requirement.
 
 ```bash
-python3 -m unittest discover -s tests -v
-python3 -m guardian_sim.cli
-python3 -m guardian_sim.benchmark_cli --episodes 100
-python3 scripts/run_gate31_adversarial_benchmark.py --help
-python3 scripts/run_gate32_benchmark.py --help
-./scripts/run_showcase.sh
+# Source/evidence validation on any development machine:
+./scripts/evaluator_preflight.sh --no-gpu
+
+# One-command real Radeon/Genesis evaluator smoke:
+./scripts/run_evaluator_smoke.sh
 ```
 
 The synthetic CLI benchmark remains only a deterministic pipeline smoke test.
@@ -40,6 +39,7 @@ results, not physical-robot deployment claims.
 
 Project documents:
 
+- [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) — evaluator-first setup and smoke
 - [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md)
 - [`docs/HACKATHON_SUBMISSION_PLAN.md`](docs/HACKATHON_SUBMISSION_PLAN.md)
 - [`docs/PROJECT_MEMORY.md`](docs/PROJECT_MEMORY.md)
@@ -111,8 +111,8 @@ franka_fruit_pick_demo/
 ```bash
 # 1. Install dependencies (physics engine + demo deps)
 #    Requires Python 3.12 (matches the ROCm torch wheels below).
-cd franka_fruit_pick_demo
-uv sync
+cd GuardianSim
+uv sync --frozen --python 3.12
 
 # 2. Install a policy backend for M5
 #    This project runs on an AMD Radeon (ROCm) GPU — use the prebuilt ROCm 7.2.1 wheels (Python 3.12):
@@ -131,10 +131,10 @@ uv pip install \
 uv pip install "lerobot[training,smolvla]==0.6.0"
 
 # 3. Verify assets are in place (M1)
-uv run python franka_fruit_pick/setup_assets.py
+uv run --no-sync python franka_fruit_pick/setup_assets.py
 
 # 4. Smoke-test the scene (renders one frame per camera)
-uv run python franka_fruit_pick/build_scene.py --steps 50 --save-frames
+uv run --no-sync python franka_fruit_pick/build_scene.py --steps 50 --save-frames
 ```
 
 ### Run the pipeline
@@ -144,9 +144,9 @@ uv run python franka_fruit_pick/build_scene.py --steps 50 --save-frames
 Record scripted episodes into a per-object LeRobot dataset:
 
 ```bash
-uv run python franka_fruit_pick/record_dataset.py --episodes 50 --pick 011_banana --repo-id demo/banana_pick
-uv run python franka_fruit_pick/record_dataset.py --episodes 50 --pick 014_lemon --repo-id demo/lemon_pick
-uv run python franka_fruit_pick/record_dataset.py --episodes 50 --pick 018_plum --repo-id demo/plum_pick
+uv run --no-sync python franka_fruit_pick/record_dataset.py --episodes 50 --pick 011_banana --repo-id demo/banana_pick
+uv run --no-sync python franka_fruit_pick/record_dataset.py --episodes 50 --pick 014_lemon --repo-id demo/lemon_pick
+uv run --no-sync python franka_fruit_pick/record_dataset.py --episodes 50 --pick 018_plum --repo-id demo/plum_pick
 ```
 
 Sample frames recorded with basic setting:
@@ -157,7 +157,7 @@ Sample frames recorded with basic setting:
 Optionally record with **domain randomization** (M4) enabled:
 
 ```bash
-uv run python franka_fruit_pick/record_dataset.py --episodes 50 --pick 011_banana --repo-id demo/banana_pick_dr --dr-appearance --dr-object-color --dr-table-jitter 0.15 --dr-fov-jitter 2.0 --dr-rebuild-every 5 --dr-runtime --dr-friction 0.6 1.4 --dr-mass 0.8 1.2 --dr-cam-pos 0.01 --dr-cam-lookat 0.02
+uv run --no-sync python franka_fruit_pick/record_dataset.py --episodes 50 --pick 011_banana --repo-id demo/banana_pick_dr --dr-appearance --dr-object-color --dr-table-jitter 0.15 --dr-fov-jitter 2.0 --dr-rebuild-every 5 --dr-runtime --dr-friction 0.6 1.4 --dr-mass 0.8 1.2 --dr-cam-pos 0.01 --dr-cam-lookat 0.02
 ```
 
 Sample frames recorded with domain randomization enabled:
@@ -167,7 +167,7 @@ Sample frames recorded with domain randomization enabled:
 Optionally merge per-object datasets into one training set:
 
 ```bash
-uv run python franka_fruit_pick/aggregate_datasets.py \
+uv run --no-sync python franka_fruit_pick/aggregate_datasets.py \
     --dataset-root datasets/banana_pick --dataset-root datasets/lemon_pick \
     --dataset-root datasets/plum_pick   --out datasets/fruit_pick
 ```
@@ -177,7 +177,7 @@ uv run python franka_fruit_pick/aggregate_datasets.py \
 Train a LeRobot policy on the recorded dataset:
 
 ```bash
-uv run python franka_fruit_pick/train_policy.py smolvla --repo-id demo/fruit_pick --dataset-root datasets/fruit_pick
+uv run --no-sync python franka_fruit_pick/train_policy.py smolvla --repo-id demo/fruit_pick --dataset-root datasets/fruit_pick
 ```
 
 #### 3. Evaluate (M5)
@@ -186,10 +186,10 @@ Run closed-loop evaluation, then sweep checkpoints:
 
 ```bash
 # eval_policy.py takes --policy-path (a single checkpoint dir, containing config.json + model.safetensors)
-uv run python franka_fruit_pick/eval_policy.py --policy-path <train-out>/checkpoints/last/pretrained_model --repo-id demo/fruit_pick --dataset-root datasets/fruit_pick --episodes 50 --pick 011_banana 014_lemon 018_plum --save-video
+uv run --no-sync python franka_fruit_pick/eval_policy.py --policy-path <train-out>/checkpoints/last/pretrained_model --repo-id demo/fruit_pick --dataset-root datasets/fruit_pick --episodes 50 --pick 011_banana 014_lemon 018_plum --save-video
 
 # eval_sweep.py takes --run-dir (the training run dir, containing checkpoints/) and evaluates every checkpoint
-uv run python franka_fruit_pick/eval_sweep.py  --run-dir <train-out> --repo-id demo/fruit_pick --dataset-root datasets/fruit_pick --pick 011_banana 014_lemon 018_plum
+uv run --no-sync python franka_fruit_pick/eval_sweep.py  --run-dir <train-out> --repo-id demo/fruit_pick --dataset-root datasets/fruit_pick --pick 011_banana 014_lemon 018_plum
 ```
 
 Example closed-loop rollout of the trained policy:

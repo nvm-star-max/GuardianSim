@@ -11,7 +11,7 @@ started_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 printf '%s\n' "$started_at" | tee "$evidence_dir/session-started-at.txt"
 git rev-parse HEAD | tee "$evidence_dir/git-commit.txt"
 
-uv run python scripts/verify_rocm.py | tee "$evidence_dir/rocm.json"
+uv run --frozen --no-sync python scripts/verify_rocm.py | tee "$evidence_dir/rocm.json"
 
 if command -v rocm-smi >/dev/null 2>&1; then
   rocm-smi | tee "$evidence_dir/rocm-smi.txt"
@@ -19,15 +19,15 @@ else
   echo "WARNING: rocm-smi is unavailable; PyTorch ROCm verification still passed." | tee "$evidence_dir/rocm-smi.txt"
 fi
 
-uv run python -m unittest discover -s tests -v
-uv run python -m guardian_sim.cli | tee "$evidence_dir/planner-smoke.json"
-uv run python -m guardian_sim.benchmark_cli \
+uv run --frozen --no-sync python -m unittest discover -s tests -v
+uv run --frozen --no-sync python -m guardian_sim.cli | tee "$evidence_dir/planner-smoke.json"
+uv run --frozen --no-sync python -m guardian_sim.benchmark_cli \
   --episodes 100 \
   --seed 7 \
   --output-dir "$evidence_dir/synthetic-benchmark"
 
 if [[ "${GUARDIANSIM_SKIP_SCENE_PROBE:-0}" != "1" ]]; then
-  uv run python scripts/probe_genesis.py \
+  uv run --frozen --no-sync python scripts/probe_genesis.py \
     --steps 20 \
     --save-frames \
     --output-dir "$evidence_dir/genesis-probe" \

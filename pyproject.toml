@@ -31,8 +31,9 @@ dependencies = [
 # NOTE: lerobot 0.6.0 split its install into feature-scoped extras; this demo needs
 # `lerobot[training,smolvla]` ([training] -> [dataset] = datasets/av/pyarrow/torchcodec +
 # wandb + accelerate; [smolvla] -> transformers/num2words; ACT needs no extra). The actual
-# install is done explicitly in the README/Dockerfile (`uv pip install "lerobot[training,smolvla]==0.6.0"`),
-# not via `uv sync`, so this marker stays unpinned to keep the lockfile stable.
+# optional install is documented in the upstream M5 section
+# (`uv pip install "lerobot[training,smolvla]==0.6.0"`), not included in the
+# GuardianSim evaluator environment, so this marker stays out of the core lock.
 learn = [
     "torch",
     "lerobot",

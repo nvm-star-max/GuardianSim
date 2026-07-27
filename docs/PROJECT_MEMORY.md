@@ -562,3 +562,65 @@ declaration and cannot alter Gate 3.3.
 - Session B instance `u-13907-735d71cb` is intentionally still running.
 - At the latest verified profile check, the instance was ready, 10 credits were
   available, and 0 credits had been consumed despite an extended runtime.
+
+## P0 evaluator reproduction engineering — first batch
+
+On 2026-07-27, submission work replaced the implicit developer setup with an
+evaluator-facing reproduction path:
+
+- Added and committed a 132-package `uv.lock`; the previous Dockerfile
+  referenced this file even though it did not exist, so a direct build would
+  have failed before dependency installation.
+- Added the English root `REPRODUCIBILITY.md` with:
+  - supported Radeon Cloud and Docker targets;
+  - exact native install commands;
+  - GPU and non-GPU preflight paths;
+  - a bounded real Genesis counterfactual smoke;
+  - strict formal-report and checksum validation;
+  - expected outputs, claim boundaries, and troubleshooting.
+- Added a portable environment-manifest collector covering source revision,
+  dirty state, OS, Python, tracked package versions, PyTorch/HIP, visible
+  devices, `rocm-smi`, cloud template metadata, and explicit readiness checks.
+- Added `scripts/evaluator_preflight.sh`:
+  - GPU mode fails unless Linux, Python 3.12, ROCm PyTorch, and exactly one GPU
+    are present;
+  - `--no-gpu` mode validates source and preserved evidence without claiming
+    ROCm proof;
+  - outputs are recursively checksummed.
+- Pinned every post-install evaluator invocation to
+  `uv run --frozen --no-sync`. This prevents uv from reconciling the
+  platform-independent lock after the exact ROCm wheels have intentionally
+  replaced its default PyTorch distribution.
+- Added `scripts/run_evaluator_smoke.sh`, which performs the GPU preflight,
+  builds and renders the real Genesis scene, evaluates three yaw alternatives
+  against one captured snapshot, validates the candidate report, and writes
+  checksums. It is a bounded path proof, not a replacement performance claim.
+- Updated the Dockerfile to use GuardianSim names and paths, include source,
+  tests, scripts, and bundled assets, install the evaluator project, and run
+  unit tests during the build. The optional upstream LeRobot training stack is
+  excluded from the core evaluator image. The base remains
+  `rocm/dev-ubuntu-24.04:7.2.1-complete`.
+- Added concise formal-report output via `validate_gate32_report.py --compact`.
+- Added tests for portable environment capture, candidate-smoke validation,
+  and deterministic recursive checksum manifests.
+
+Verified locally on macOS arm64:
+
+- `uv lock --check` passed with 132 resolved packages.
+- Bash syntax and Python byte-compilation passed.
+- Unit tests passed `54/54`.
+- The one-command non-GPU evaluator preflight passed.
+- A post-commit `git clone --no-local` clean-room test created a new Python
+  3.12 environment from only `uv.lock`, installed 80 runtime packages plus
+  GuardianSim, reported a clean source tree, passed 54/54 tests, validated the
+  formal report, and verified its generated preflight checksums.
+- Gate 3.2 strict schema-5 validation passed 30/30 with the frozen protocol
+  hash.
+- All eight entries in `formal-sha256.txt` passed checksum verification.
+- The local machine correctly reported `gpu_ready: false`; this is expected
+  and proves that non-GPU mode does not masquerade as Radeon validation.
+
+The Docker daemon was unavailable on the Mac, and macOS cannot expose
+`/dev/kfd`; therefore a full container build plus real GPU smoke remains an
+explicit Radeon Linux acceptance item. Do not mark that item complete based
+only on this local batch.

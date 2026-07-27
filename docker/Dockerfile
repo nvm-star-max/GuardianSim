@@ -1,28 +1,28 @@
 # =============================================================================
-# Franka Fruit-Pick Demo — AMD ROCm development environment
+# GuardianSim — AMD ROCm evaluator environment
 # -----------------------------------------------------------------------------
 # Reproduces the exact host setup this repo is developed/tested on:
 #   - Ubuntu 24.04  (=> system Python 3.12, matching the ROCm cp312 wheels)
 #   - ROCm 7.2.1 runtime + dev libraries
 #   - Prebuilt ROCm 7.2.1 torch/vision/audio/triton wheels (repo.radeon.com)
-#   - genesis-world + demo deps (resolved from uv.lock) and lerobot[smolvla]
+#   - genesis-world + GuardianSim evaluator deps resolved from uv.lock
 #   - Vulkan / OpenGL runtime so Genesis can render camera images headless
 #
-# Verified on: AMD Radeon AI PRO R9700 (gfx1201 / RDNA4).
+# The formal benchmark was recorded on an AMD Radeon Cloud gfx1100 device.
 #
-# The image contains ONLY the Python environment (in /opt/venv). Mount the repo
-# at runtime so large assets/datasets/outputs stay out of the image, e.g.:
+# The image contains the source, bundled simulation assets, and Python
+# environment in /opt/venv. A bind mount is optional for development:
 #
-#   docker build -f docker/Dockerfile -t franka-fruit-pick:rocm7.2.1 .
+#   docker build -f docker/Dockerfile -t guardiansim:rocm7.2.1 .
 #   docker run --rm -it --network=host \
 #       --device=/dev/kfd --device=/dev/dri \
 #       --group-add video --group-add render \
 #       --security-opt seccomp=unconfined \
 #       --cap-add=SYS_PTRACE \
 #       --ipc=host --shm-size=8g \
-#       -v "$PWD":/workspace/franka_fruit_pick_demo \
+#       -v "$PWD":/workspace/GuardianSim \
 #       -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \
-#       franka-fruit-pick:rocm7.2.1
+#       guardiansim:rocm7.2.1
 # =============================================================================
 FROM rocm/dev-ubuntu-24.04:7.2.1-complete
 
@@ -44,7 +44,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN groupadd -f render && usermod -aG render,video root
 
 # --- uv (pinned to the version used on the host) -----------------------------
-COPY --from=ghcr.io/astral-sh/uv:0.11.23 /uv /usr/local/bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.11.28 /uv /usr/local/bin/uv
 
 # Put the project virtualenv at a fixed path outside the (mounted) source tree
 # so a bind-mount of the repo never shadows the installed environment.
@@ -54,7 +54,7 @@ ENV UV_PROJECT_ENVIRONMENT=/opt/venv \
     VIRTUAL_ENV=/opt/venv \
     PATH="/opt/venv/bin:${PATH}"
 
-WORKDIR /workspace/franka_fruit_pick_demo
+WORKDIR /workspace/GuardianSim
 
 # --- Base dependencies (genesis-world, numpy, trimesh, opencv, ...) -----------
 # Resolved reproducibly from uv.lock; --no-install-project skips building the
@@ -79,16 +79,19 @@ RUN set -eux; \
     uv pip install "$TORCH_WHL" "$VISION_WHL" "$AUDIO_WHL" "$TRITON_WHL"; \
     cd / && rm -rf /tmp/wheels
 
-# --- Policy backend (M5) -----------------------------------------------------
-# Installed after torch so the ROCm build is already satisfied and preserved.
-# lerobot 0.6.0 uses feature-scoped extras: [training] -> [dataset] (datasets/av/pyarrow/
-# torchcodec) + wandb + accelerate; [smolvla] -> transformers/num2words. Its torch pin
-# (>=2.7,<2.12) is already satisfied by the ROCm wheels above, so torch is not replaced.
-RUN uv pip install "lerobot[training,smolvla]==0.6.0"
+# --- GuardianSim source and bundled assets ---------------------------------
+COPY README.md REPRODUCIBILITY.md ./
+COPY guardian_sim ./guardian_sim
+COPY franka_fruit_pick ./franka_fruit_pick
+COPY scripts ./scripts
+COPY tests ./tests
+COPY assets ./assets
+RUN uv pip install --no-deps -e .
 
 # --- Runtime environment -----------------------------------------------------
 # Genesis renders through GLX on this stack (matches the host dev setup).
-# gfx1201 is natively supported by ROCm 7.2, so no HSA_OVERRIDE is required.
+# The supported Radeon Cloud stack does not require an HSA architecture
+# override. Do not add one unless the evaluator's own hardware requires it.
 ENV PYOPENGL_PLATFORM=glx \
     HSA_ENABLE_SDMA=0
 
@@ -97,6 +100,6 @@ RUN python -c "import torch, torchvision, torchaudio; \
 print('torch', torch.__version__, 'hip', torch.version.hip); \
 assert torch.version.hip is not None, 'torch is not a ROCm build!'" \
  && python -c "import genesis; print('genesis', genesis.__version__)" \
- && python -c "import lerobot; print('lerobot', getattr(lerobot,'__version__','ok'))"
+ && python -m unittest discover -s tests
 
 CMD ["/bin/bash"]

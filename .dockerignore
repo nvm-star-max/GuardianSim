@@ -1,5 +1,20 @@
-# The image bakes only the Python environment; source/assets are mounted at runtime.
-# Keep the build context tiny (repo is ~11G) by shipping only dependency metadata.
+# Ship only the evaluator source and bundled runtime assets. Generated evidence,
+# videos, datasets, Git history, and local environments stay outside the image.
 *
 !pyproject.toml
 !uv.lock
+!README.md
+!REPRODUCIBILITY.md
+!guardian_sim/
+!guardian_sim/**
+!franka_fruit_pick/
+!franka_fruit_pick/**
+!scripts/
+!scripts/**
+!tests/
+!tests/**
+!assets/
+!assets/**
+
+**/__pycache__/
+**/*.py[cod]
