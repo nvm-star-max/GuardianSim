@@ -918,3 +918,32 @@ Evidence and working material:
   [`submission/FINAL_SUBMISSION_2026-07-28.md`](submission/FINAL_SUBMISSION_2026-07-28.md).
   Do not change the PR's frozen quantitative claims unless a factual
   correction is required.
+
+## P0 award strategy and Parallel Futures showcase — 2026-07-28
+
+- The owner reprioritized post-submission work:
+  - **P0:** a judge-facing wow hook;
+  - **P1:** a useful upstream Genesis/ROCm contribution;
+  - **P3:** ordinary slogan and copy refinement.
+- Implemented **GuardianSim: Parallel Futures**, an interactive safety time
+  machine under `showcase/`. A judge chooses among three candidate actions,
+  reveals verified counterfactual outcomes, and can download an evidence
+  receipt containing immutable report identity and the simulation-only claim
+  boundary.
+- The three challenges use only preserved evidence:
+  - Gate 3.2 Seed 411 collision trap;
+  - Gate 3.2 Seed 401 high-clearance but unstable decoy;
+  - Gate 3.3 Seed 509 impossible gap ending in a safe stop.
+- The interaction does not alter or regenerate any frozen benchmark report.
+  Gate 3.2 aggregate values remain `18/30 -> 30/30` repeatable-safe scenarios,
+  `58/90 -> 90/90` independent safe executions, `30 -> 0` clutter contacts,
+  and `23.191 -> 46.003 mm` mean sampled clearance.
+- Added a dedicated Seed 411 replay asset and a generated 1200×630 social
+  card showing one robot branching into red, amber, and green futures.
+- Local acceptance before deployment:
+  - showcase rendered-HTML and evidence cross-check tests passed;
+  - showcase lint passed;
+  - production build passed.
+- Preview URL remains
+  <https://guardiansim-proof.dghcdtddgh.chatgpt.site>. Public judge access is
+  not enabled without a separate access-control decision.

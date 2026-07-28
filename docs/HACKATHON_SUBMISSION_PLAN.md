@@ -128,26 +128,28 @@ experiments. The product story is:
 
 ## 4. Priority order
 
-### P0 — Submission validity
+The mandatory submission is already valid and PR #39 is open. From
+2026-07-28 onward, work is reprioritized around judge impact:
 
-- Manually verify Luma Rules & Conditions.
-- Create an evaluator-first English reproducibility guide.
-- Capture the exact Radeon Cloud environment.
-- Produce a clean-room smoke command with expected output.
-- Draft the English technical report and team contribution section.
-- Record a complete 3–5 minute real-workflow video.
-- Prepare the official fork and English pull request.
+### P0 — Judge-facing wow hook
 
-### P1 — Award quality
+- Ship **GuardianSim: Parallel Futures**, an interactive safety time machine
+  that lets a judge select a robot action, reveal three verified
+  counterfactual futures, and receive a machine-readable evidence receipt.
+- Keep the experience grounded in frozen Gate 3.2 and Gate 3.3 evidence:
+  collision trap, clearance decoy, and impossible-gap safe stop.
+- Make the distinction between “high clearance”, “stable”, and “certifiably
+  executable” visually obvious within the first minute.
+- Keep the public claim boundary explicit: Genesis simulation on Radeon/ROCm,
+  not physical-robot validation.
 
-- Make the visual difference unmistakable with obstacle markers, action paths,
-  safety margins, and decision reasons.
-- Use the verified Gate 3.2 result as the primary quantitative claim.
-- Present Gate 3.1 as the failure that motivated Gate 3.2, not as hidden
-  negative evidence.
-- Include the interactive showcase, architecture diagram, evidence checksums,
-  and a concise competitive-value narrative.
-- Complete one independent reproduction review by a clean agent or machine.
+### P1 — Useful upstream contribution
+
+- Prepare a narrowly scoped, reusable contribution to the upstream
+  Genesis/ROCm reference workflow after the P0 showcase is stable.
+- Prefer evaluator utilities, deterministic evidence export, or Radeon
+  reproducibility improvements over GuardianSim-specific promotional code.
+- Keep the contribution independent from the frozen benchmark reports.
 
 ### P2 — Optional evidence depth
 
@@ -156,6 +158,13 @@ experiments. The product story is:
   schedule.
 - Do not start the proposed 120-scenario robustness gate before submission
   unless it cannot threaten the package, video, or reproduction deadline.
+
+### P3 — Ordinary messaging refinement
+
+- Improve slogans, prose, and secondary presentation polish only after the P0
+  interaction and P1 contribution are secure.
+- Do not replace verified quantitative claims with unmeasured marketing
+  language.
 
 ## 5. Calendar
 

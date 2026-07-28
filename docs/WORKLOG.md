@@ -1307,3 +1307,24 @@ Gate decision:
   - no required status checks were reported at submission time.
 - Added a durable non-private final submission record. No credentials, legal
   names, private contact details, or payment information were recorded.
+
+## 2026-07-28 — P0 Parallel Futures interactive showcase
+
+- Replaced the static evidence landing experience with **GuardianSim:
+  Parallel Futures**, a judge-facing safety time machine.
+- Added three evidence-bound challenges:
+  - Seed 411 collision trap;
+  - Seed 401 clearance decoy;
+  - Seed 509 impossible-gap safe stop.
+- Added interactive future selection, reveal animation, explicit
+  accepted/rejected/safe-stop verdicts, downloadable JSON evidence receipts,
+  immutable audit links, the preserved Seed 411 replay, and the frozen Gate
+  3.2 aggregate proof panel.
+- Generated a single project-bound social card for the new concept and added
+  local preview/video assets. No experimental result or frozen report was
+  modified.
+- Programmatically cross-checked every displayed scenario value against the
+  preserved schema-5 and schema-6 reports.
+- Verified the showcase with rendered-HTML tests, lint, and a production
+  build. Full repository regression and hosted-version evidence are recorded
+  in the following release step.

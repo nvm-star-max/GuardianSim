@@ -1,8 +1,9 @@
-# GuardianSim Judge Showcase
+# GuardianSim: Parallel Futures
 
-Interactive evidence presentation for the verified Gate 3.1 → Gate 3.2 story.
-It links every headline result to the frozen schema-5 report, logs, checksums,
-and source; it does not rerun Genesis or consume GPU time.
+Interactive counterfactual safety arena for the verified GuardianSim evidence.
+It lets a judge choose between bounded robot futures, reveal the frozen safety
+decision, inspect or download an evidence receipt, and watch the preserved Seed
+411 Genesis replay. It does not rerun Genesis or consume GPU time.
 
 From the repository root:
 
@@ -12,9 +13,10 @@ From the repository root:
 
 The site includes:
 
-- a 90-second presenter mode;
-- the preserved negative Gate 3.1 result;
-- the frozen obstacle-aware, repeatability-first Gate 3.2 policy;
-- verified Gate 3.2 metrics and recovered adversarial cells;
+- three evidence-backed red-team challenges;
+- a same-state, three-future safety reveal;
+- the preserved Seed 411 replay;
+- downloadable decision receipts with source hashes;
+- verified Gate 3.2 headline metrics;
 - direct raw evidence and checksum links;
 - explicit simulation-only claim boundaries.

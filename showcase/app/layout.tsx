@@ -21,26 +21,28 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase,
-    title: "GuardianSim · Auditable safety for Physical AI",
+    title: "GuardianSim: Parallel Futures",
     description:
-      "A verified AMD ROCm and Genesis benchmark: 60% to 100% repeatable safe completion, 30 to 0 clutter contacts, and 98.36% more clearance.",
+      "See three futures before the robot moves. An interactive, evidence-backed safety time machine for Physical AI on AMD Radeon.",
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
     },
     openGraph: {
-      title: "GuardianSim · Choose safer. Prove it.",
+      title: "GuardianSim: Parallel Futures",
       description:
-        "30/30 repeatable safe scenarios, zero clutter contacts, and 98.36% more clearance on AMD Radeon GPU.",
+        "See three futures before the robot moves. Try to break GuardianSim in a verified counterfactual safety arena.",
       type: "website",
-      images: [{ url: "/og.png", width: 1200, height: 630 }],
+      images: [
+        { url: "/og-parallel-futures.png", width: 1200, height: 630 },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "GuardianSim · Auditable safety for Physical AI",
+      title: "GuardianSim: Parallel Futures",
       description:
-        "From 60% to 100% repeatable safe completion in a frozen 30-scenario benchmark.",
-      images: ["/og.png"],
+        "An interactive counterfactual safety time machine for robot manipulation on AMD Radeon.",
+      images: ["/og-parallel-futures.png"],
     },
   };
 }

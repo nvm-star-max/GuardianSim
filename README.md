@@ -56,6 +56,17 @@ Project documents:
 - [`docs/evidence/gate-3-3-two-strata/README.md`](docs/evidence/gate-3-3-two-strata/README.md)
 - [`showcase/README.md`](showcase/README.md)
 
+## Interactive showcase
+
+**GuardianSim: Parallel Futures** turns the frozen evidence into a
+judge-facing safety time machine: choose one of three counterfactual robot
+actions, run the verified futures, and inspect the resulting evidence receipt.
+
+- Preview: <https://guardiansim-proof.dghcdtddgh.chatgpt.site>
+- Verified challenges: collision trap, clearance decoy, and impossible gap
+- Claim boundary: Genesis simulation on AMD Radeon/ROCm; no physical-robot
+  safety claim
+
 ## Upstream reference
 
 This repository is based on the AMD competition's recommended
