@@ -1274,7 +1274,7 @@ Evidence and working material:
 - New report SHA-256:
   `6a735fe0a77c0c6ec3e9461051bac29ce371a3ca04d74246f0d39d6a64a3291c`.
 - Local package-manifest SHA-256:
-  `7a7d988add6c13b7a190c220084fb2028e11b31a96817ed1dd545b8f1a4b805c`.
+  `392e624b5839e4af0799d59d321ae27d31b12a34cb225fe20d342bd4ceef0d94`.
 - The local official package now contains:
   - the seven-page technical report;
   - the 80-second V4 preview;
@@ -1294,3 +1294,41 @@ Evidence and working material:
   draft. Do not update the PR until the owner authorizes that release step.
 - No push, deployment, organizer PR edit, cloud execution, or Radeon instance
   destruction occurred.
+
+## Public Radeon P0 release and organizer PR update — 2026-07-29
+
+- The owner authorized the prepared release step.
+- Published GuardianSim commit
+  `830e4fc8e2467bc4a0eacbb9777b91351e20f924` on branch
+  `agent/parallel-futures-showcase`.
+- Created and pushed the annotated immutable tag
+  `hackathon-2026-submission-v2`; its peeled commit is exactly
+  `830e4fc8e2467bc4a0eacbb9777b91351e20f924`.
+- All release links were checked after publication and returned HTTP 200:
+  source tree, reproducibility guide, 4:41 workflow video, 80-second Radeon
+  preview, and P0 evidence directory.
+- Updated official contest fork branch
+  `submission/track3-aegis-motion-guardiansim` with commit
+  `d73bad667db22d67d737ec50ceb8ff761b0c3816`.
+- Updated organizer PR #39 in place. Verified state:
+  - URL: <https://github.com/AMD-DEV-CONTEST/Radeon-hackathon-2026-07/pull/39>;
+  - state `OPEN`;
+  - not a draft;
+  - merge state `CLEAN`;
+  - head commit `d73bad667db22d67d737ec50ceb8ff761b0c3816`.
+- Downloaded the remote report, preview, manifest, and evidence files from the
+  fork branch. The recursive manifest passed and the report/preview hashes
+  matched local artifacts.
+- Final identities:
+  - technical report:
+    `6a735fe0a77c0c6ec3e9461051bac29ce371a3ca04d74246f0d39d6a64a3291c`;
+  - supplementary preview:
+    `2be66996eb0e3bb460148c5afc8060f69680f1d7e314e2e46cf2d363d53a923a`;
+  - official-package manifest:
+    `392e624b5839e4af0799d59d321ae27d31b12a34cb225fe20d342bd4ceef0d94`;
+  - submission working-set manifest:
+    `98ab53ab4d900d9dacfabf04a2ae22dfc5e1dec1fe6b27484c04a42550a9a57c`.
+- Local V1/V2/V3 intermediate scale-video iterations and Playwright captures
+  were deliberately not staged or published.
+- The organizer PR was not merged, and the Radeon instance was not accessed or
+  destroyed.

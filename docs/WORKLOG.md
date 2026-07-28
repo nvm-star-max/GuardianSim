@@ -1567,9 +1567,38 @@ Gate decision:
   defect was found.
 - Rebuilt and verified the recursive package checksum manifest.
 - Package-manifest SHA-256:
-  `7a7d988add6c13b7a190c220084fb2028e11b31a96817ed1dd545b8f1a4b805c`.
+  `392e624b5839e4af0799d59d321ae27d31b12a34cb225fe20d342bd4ceef0d94`.
 - Passed `82/82` Python tests, `3/3` showcase HTML tests, production build,
   ESLint, both strict Radeon report validators, and the V4 full A/V validator.
 - Stopped before the public release boundary. The next release must publish
   the P0 source/evidence and then update the immutable links in organizer PR
   #39; no push or PR edit was performed.
+
+## 2026-07-29 — Published Radeon P0 release and updated organizer PR #39
+
+- Confirmed GitHub CLI authentication and scanned the staged release for
+  Qwen/OpenAI/GitHub credential patterns; no secret was staged.
+- Excluded local video intermediates and Playwright screenshots from the
+  public commit.
+- Fixed the final Ruff findings: import ordering, unused render variables, and
+  executable modes for shebang scripts.
+- Re-ran all release checks successfully:
+  - Python unit tests `82/82`;
+  - Ruff;
+  - strict scale and Parallel Futures validators;
+  - silent V3 and narrated V4 full decode/claim validators;
+  - both checksum manifests;
+  - showcase production build, rendered-HTML tests `3/3`, and ESLint;
+  - staged diff whitespace check.
+- Published GuardianSim commit
+  `830e4fc8e2467bc4a0eacbb9777b91351e20f924` and immutable tag
+  `hackathon-2026-submission-v2`.
+- Synced the official package to the contest fork and pushed commit
+  `d73bad667db22d67d737ec50ceb8ff761b0c3816`.
+- Updated PR #39's English body with measured scale, 54-world candidate
+  screening, statistical boundaries, v2 release links, and limitations.
+- Verified PR #39 is open, non-draft, cleanly mergeable, and points to the
+  expected fork commit.
+- Downloaded remote package artifacts and validated their recursive checksums.
+- Did not merge the organizer PR and did not access or destroy the Radeon
+  instance.

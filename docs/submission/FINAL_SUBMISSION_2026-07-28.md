@@ -74,9 +74,23 @@ or organizer PR #39. It adds:
 The local report SHA-256 is
 `6a735fe0a77c0c6ec3e9461051bac29ce371a3ca04d74246f0d39d6a64a3291c`.
 The local package-manifest SHA-256 is
-`7a7d988add6c13b7a190c220084fb2028e11b31a96817ed1dd545b8f1a4b805c`.
+`392e624b5839e4af0799d59d321ae27d31b12a34cb225fe20d342bd4ceef0d94`.
 
-Before this update can replace the public material, the P0 implementation and
-evidence need a final immutable GuardianSim release commit, and the organizer
-README/PR links need to be updated to that commit. This requires a separate
-owner-authorized push and PR-edit step.
+## Public P0 update completed on 2026-07-29
+
+The owner authorized the release and PR update.
+
+- GuardianSim release commit:
+  `830e4fc8e2467bc4a0eacbb9777b91351e20f924`
+- Immutable release tag:
+  `hackathon-2026-submission-v2`
+- Official fork update commit:
+  `d73bad667db22d67d737ec50ceb8ff761b0c3816`
+- Organizer PR:
+  <https://github.com/AMD-DEV-CONTEST/Radeon-hackathon-2026-07/pull/39>
+- Verified PR state: `OPEN`, non-draft, merge state `CLEAN`
+- Supplementary preview SHA-256:
+  `2be66996eb0e3bb460148c5afc8060f69680f1d7e314e2e46cf2d363d53a923a`
+
+The remote package files were downloaded after the update and passed their
+recursive checksum manifest. The PR was not merged.
