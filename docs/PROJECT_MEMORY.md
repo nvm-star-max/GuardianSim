@@ -944,6 +944,11 @@ Evidence and working material:
   - showcase rendered-HTML and evidence cross-check tests passed;
   - showcase lint passed;
   - production build passed.
-- Preview URL remains
-  <https://guardiansim-proof.dghcdtddgh.chatgpt.site>. Public judge access is
-  not enabled without a separate access-control decision.
+- Sites production version **3** deployed successfully at
+  <https://guardiansim-proof.dghcdtddgh.chatgpt.site>.
+  - GitHub feature commit:
+    `e566b69848a4ffc79168ac39087d6c86c9ac897b`;
+  - Sites source commit:
+    `a8bf2af3b7a367c0e5b07960028b9ee58e9156f3`.
+- Access remains owner-only. Public judge access is not enabled without a
+  separate access-control decision.

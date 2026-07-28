@@ -1326,5 +1326,13 @@ Gate decision:
 - Programmatically cross-checked every displayed scenario value against the
   preserved schema-5 and schema-6 reports.
 - Verified the showcase with rendered-HTML tests, lint, and a production
-  build. Full repository regression and hosted-version evidence are recorded
-  in the following release step.
+  build; the full repository regression passed `58/58`.
+- Committed the exact validated source on
+  `agent/parallel-futures-showcase` at
+  `e566b69848a4ffc79168ac39087d6c86c9ac897b`.
+- Preserved the `showcase/` subtree as Sites source commit
+  `a8bf2af3b7a367c0e5b07960028b9ee58e9156f3`, saved version 3, and deployed it
+  successfully to
+  <https://guardiansim-proof.dghcdtddgh.chatgpt.site>.
+- Kept the deployment owner-only; changing it to public requires a separate
+  access-control decision.
