@@ -1,0 +1,90 @@
+nohup: ignoring input
+Using Python 3.12.3 environment at: /opt/venv
+Resolved 81 packages in 2.25s
+   Building pygltflib==1.16.0
+   Building guardiansim @ file:///persistent/GuardianSim
+Downloading coacd (2.5MiB)
+Downloading networkx (2.0MiB)
+Downloading plotly (18.2MiB)
+Downloading fast-simplification (1.6MiB)
+Downloading pysplashsurf (2.8MiB)
+Downloading scikit-image (12.9MiB)
+Downloading imageio-ffmpeg (28.1MiB)
+Downloading genesis-world (79.4MiB)
+Downloading dracopy (4.9MiB)
+Downloading gs-madrona (60.9MiB)
+Downloading pillow (6.3MiB)
+Downloading pyopengl (3.0MiB)
+Downloading opencv-python (70.4MiB)
+Downloading libigl (12.8MiB)
+Downloading openexr (1.2MiB)
+Downloading pygel3d (3.9MiB)
+Downloading quadrants (39.1MiB)
+Downloading pymeshlab (101.6MiB)
+Downloading mujoco (18.0MiB)
+Downloading vtk (139.3MiB)
+      Built pygltflib==1.16.0
+ Downloaded openexr
+ Downloaded fast-simplification
+ Downloaded networkx
+ Downloaded coacd
+ Downloaded pysplashsurf
+ Downloaded pyopengl
+ Downloaded pygel3d
+ Downloaded dracopy
+ Downloaded pillow
+      Built guardiansim @ file:///persistent/GuardianSim
+ Downloaded libigl
+ Downloaded scikit-image
+ Downloaded mujoco
+ Downloaded plotly
+ Downloaded imageio-ffmpeg
+ Downloaded quadrants
+ Downloaded gs-madrona
+ Downloaded opencv-python
+ Downloaded genesis-world
+ Downloaded pymeshlab
+ Downloaded vtk
+Prepared 36 packages in 13.29s
+Uninstalled 4 packages in 459ms
+Installed 36 packages in 455ms
+ + coacd==1.0.11
+ + dracopy==2.0.0
+ + etils==1.14.0
+ + fast-simplification==0.1.13
+ + freetype-py==2.5.1
+ + frozendict==2.4.7
+ + genesis-world==1.2.3
+ + glfw==2.10.2
+ + gs-madrona==0.0.8
+ + guardiansim==0.1.0 (from file:///persistent/GuardianSim)
+ + imageio-ffmpeg==0.6.0
+ + libigl==2.6.1
+ + moviepy==2.2.1
+ + mujoco==3.11.0
+ - networkx==2.8.8
+ + networkx==3.6.1
+ + opencv-python==5.0.0.93
+ + openexr==3.4.13
+ - pillow==11.0.0
+ + pillow==11.3.0
+ - plotly==6.7.0
+ + plotly==5.24.1
+ + proglog==0.1.12
+ + pycollada==0.9.3
+ + pygel3d==0.6.1
+ + pyglet==2.1.15
+ + pygltflib==1.16.0
+ + pymeshlab==2025.7.post1
+ + pyopengl==3.1.10
+ + pysplashsurf==0.14.1.0
+ + quadrants==1.1.1
+ + rtree==1.4.1
+ - scikit-image==0.22.0
+ + scikit-image==0.26.0
+ + tenacity==9.1.4
+ + tetgen==0.8.2
+ + trimesh==4.12.2
+ + vtk==9.6.2
+ + xacro==2.1.1
+ + zipp==4.1.0

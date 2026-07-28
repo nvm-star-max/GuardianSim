@@ -57,3 +57,26 @@ Under the official process, accepted Luma registration establishes prize
 eligibility and the official-repository pull request is the project entry.
 No separate project-upload form was stated in the governing document or the
 official repository instructions.
+
+## Local post-submission update prepared on 2026-07-29
+
+The record above describes the public PR exactly as verified on 2026-07-28.
+It has not been rewritten.
+
+A separate local update is now prepared but has not been pushed to GuardianSim
+or organizer PR #39. It adds:
+
+- a seven-page technical report with separately scoped Radeon scale evidence;
+- an 80-second supplementary Radeon/Parallel Futures preview;
+- raw scale and Parallel Futures reports plus validator outputs;
+- an updated recursive package checksum manifest.
+
+The local report SHA-256 is
+`6a735fe0a77c0c6ec3e9461051bac29ce371a3ca04d74246f0d39d6a64a3291c`.
+The local package-manifest SHA-256 is
+`7a7d988add6c13b7a190c220084fb2028e11b31a96817ed1dd545b8f1a4b805c`.
+
+Before this update can replace the public material, the P0 implementation and
+evidence need a final immutable GuardianSim release commit, and the organizer
+README/PR links need to be updated to that commit. This requires a separate
+owner-authorized push and PR-edit step.

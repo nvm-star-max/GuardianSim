@@ -25,6 +25,12 @@ decreased from 30 to zero. Mean sampled clutter clearance increased from
 0.023191 m to 0.046003 m. These are Genesis simulation results on AMD Radeon
 Cloud, not physical-robot deployment claims.
 
+A separate Radeon throughput run measured the same GPU backend at 1, 16, 64,
+and 256 parallel Genesis worlds. The 256-world point reached 35,166.1
+environment-steps/s, 228.16 times the single-world throughput, at 89.1%
+parallel efficiency. This is compute evidence, not an increase in the formal
+safety sample count.
+
 ## 1. Target application and motivation
 
 The target application is safety-aware action selection for robot manipulation
@@ -199,6 +205,35 @@ The repository includes exact ROCm wheel installation, a dependency lock, an
 environment-manifest collector, a GPU-required preflight, a bounded
 three-candidate Genesis smoke, and a complete-source ROCm Dockerfile.
 
+### 5.1 Measured parallel-physics scale
+
+The scale run used one fixed headless Franka scene, 100 warmup steps, and 1,000
+timed steps per batch size. Scene construction and JIT warmup were excluded
+from the timed interval.
+
+| Parallel worlds | Environment-steps/s | Speedup vs. 1 world | Parallel efficiency |
+| ---: | ---: | ---: | ---: |
+| 1 | 154.1 | 1.00x | 100.0% |
+| 16 | 2,383.7 | 15.47x | 96.7% |
+| 64 | 9,354.3 | 60.69x | 94.8% |
+| 256 | 35,166.1 | 228.16x | 89.1% |
+
+All four points reached 96% peak GPU utilization. At 256 worlds, mean GPU
+utilization was 85.5% and peak VRAM use was 1.34 GiB. The complete timed
+workload contained 337,000 environment steps.
+
+### 5.2 Parallel Futures engineering run
+
+GuardianSim also evaluated all 18 Gate 3.2 candidate actions with three repeats
+in one 54-world Genesis scene. The batched rollout took 12.839 seconds:
+32 futures passed the unchanged hard gates and 22 were rejected. Mean and peak
+GPU utilization were 71.8% and 95%, with 1.13 GiB peak VRAM use.
+
+The 54 futures are 18 candidates times three repeats, not 54 independent
+scenarios. Likewise, the 337,000 timed environment steps measure simulation
+throughput; they are not safety trials. Both reports retain protocol hashes,
+ROCm telemetry, strict validator output, and checksums.
+
 ## 6. Results
 
 ### 6.1 Primary Gate 3.2 result
@@ -237,23 +272,26 @@ candidate satisfied all frozen hard gates. This is correct fail-safe behavior,
 but it exposes a real action-space coverage limitation. GuardianSim does not
 claim universal completion under arbitrary geometry.
 
-## 7. Innovation and technical contributions
+## 7. What GuardianSim adds
 
-1. **Counterfactual safety layer rather than another task policy.** GuardianSim
-   can wrap a policy-proposed action and reason about alternatives before
-   physical execution.
-2. **Snapshot-safe candidate comparison.** Every alternative is evaluated from
-   an identical fingerprinted scene state, and incompatible cross-process
-   resumes are rejected.
-3. **Hard eligibility before ranking.** Utility cannot compensate for failed
-   safety requirements; no eligible action results in an explicit stop.
-4. **Repeatability-aware evidence.** Formal success requires three independent
-   safe executions rather than one favorable rollout.
-5. **Explainable diagnostics and audit trail.** Reports preserve physical
-   metrics, responsible links/obstacles, decision taxonomy, frozen protocol
-   identity, logs, and checksums.
-6. **Failure-driven development.** The preserved Gate 3.1 negative result and
-   Gate 3.3 safe-stop limitation constrain the claims and guide future work.
+1. **It sits between a task policy and execution.** The policy still proposes
+   the nominal action; GuardianSim checks bounded alternatives before the robot
+   moves.
+2. **Candidate comparisons start from one state.** Every rollout restores the
+   same fingerprinted snapshot. An incompatible cross-process resume is
+   rejected instead of silently mixing evidence.
+3. **Safety gates run before utility ranking.** A candidate cannot trade a
+   failed clearance or stability requirement for a higher score. If no action
+   passes, the result is a visible stop.
+4. **The published result requires repeatability.** A scenario counts only
+   when all three independent executions are safe.
+5. **The report explains each decision.** It records the measured clearance,
+   stability, responsible link and obstacle, decision type, protocol identity,
+   logs, and checksums.
+6. **The Radeon path is measured at two useful grains.** The scale suite shows
+   1-to-256-world physics throughput; the 54-world run shows how that batching
+   maps to candidate screening. Neither is presented as additional safety
+   data.
 
 ## 8. Reproducibility and deliverables
 
@@ -267,6 +305,7 @@ Primary deliverables:
 - bounded real Genesis counterfactual smoke;
 - immutable Gate 3.2 schema-5 report and validator;
 - Gate 3.3 breadth evidence;
+- strict Radeon scale and 54-world Parallel Futures reports;
 - annotated comparison demo and interactive showcase;
 - technical report and 3–5 minute video.
 
@@ -281,6 +320,14 @@ The owner-approved 4 minute 41.5 second English submission video is
 It binds the accepted Seed 411 replay, aggregate Gate 3.2 results, separate
 Gate 3.3 limitation evidence, and simulation-only claim boundary.
 
+An 80-second supplementary Radeon preview is
+`docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4`,
+SHA-256
+`2be66996eb0e3bb460148c5afc8060f69680f1d7e314e2e46cf2d363d53a923a`.
+It shows the measured scale curve, the 54-world candidate funnel, and the
+unchanged frozen safety result. It does not replace the complete workflow
+video.
+
 ## 9. Limitations and responsible claims
 
 - All evidence comes from Genesis simulation.
@@ -293,6 +340,10 @@ Gate 3.3 limitation evidence, and simulation-only claim boundary.
 - Safe stopping protects against unsupported geometry but reduces task
   completion.
 - The reported 30-scenario result applies only to the frozen Gate 3.2 matrix.
+- The scale benchmark measures steady-state Genesis stepping after warmup; it
+  excludes scene construction and does not measure policy-training throughput.
+- The 54-world run is an engineering demonstration of batched candidate
+  evaluation, not 54 new safety scenarios.
 
 Future work should expand continuous grasp geometry, use richer collision
 distance models, calibrate perception uncertainty from camera observations,

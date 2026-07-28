@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "schema_version": 1,
+  "showcase_ready": false,
+  "hard_safe_f1": 0.7894736842105264,
+  "unsafe_precision": 0.7913669064748201,
+  "largest_batch_size": 4096
+}

@@ -1,0 +1,18 @@
+{
+  "benchmark_name": "radeon-parallel-physics-scaling",
+  "batch_sizes": [
+    1,
+    16,
+    64,
+    256
+  ],
+  "warmup_steps": 100,
+  "measurement_steps": 1000,
+  "simulation_dt_s": 0.01,
+  "scene": "Franka + table + four active YCB entities; headless; cameras disabled",
+  "scene_source_sha256": "a12eae5690f9c97614ca305cca15f5a2df9ea8d7b47158d4627509d8c60160df",
+  "scene_config_sha256": "ab8e92f8bf9344cb3222592b6d7a2d3b53068740ba372766f38ef16209f36340",
+  "timing_scope": "steady-state control command plus Genesis scene.step after a separate warmup; scene build and JIT warmup are excluded",
+  "primary_metric": "environment_steps_per_second",
+  "protocol_sha256": "4944cd288c1a855414c987e4229e1488498e56cd61e4d45136c62f3fb98d7603"
+}

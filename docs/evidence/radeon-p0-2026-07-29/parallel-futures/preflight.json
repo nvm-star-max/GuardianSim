@@ -1,0 +1,46 @@
+{
+  "status": "frozen_before_execution",
+  "protocol": {
+    "report_name": "guardiansim-parallel-candidate-futures",
+    "candidate_ids": [
+      "yaw_-90.0_retreat_+0.000_approach_+0.140",
+      "yaw_-90.0_retreat_+0.025_approach_+0.140",
+      "yaw_-67.5_retreat_+0.000_approach_+0.140",
+      "yaw_-67.5_retreat_+0.025_approach_+0.140",
+      "yaw_-45.0_retreat_+0.000_approach_+0.140",
+      "yaw_-45.0_retreat_+0.025_approach_+0.140",
+      "yaw_-22.5_retreat_+0.000_approach_+0.140",
+      "yaw_-22.5_retreat_+0.025_approach_+0.140",
+      "yaw_+00.0_offset_+0.000",
+      "yaw_+00.0_retreat_+0.025_approach_+0.140",
+      "yaw_+22.5_retreat_+0.000_approach_+0.140",
+      "yaw_+22.5_retreat_+0.025_approach_+0.140",
+      "yaw_+45.0_retreat_+0.000_approach_+0.140",
+      "yaw_+45.0_retreat_+0.025_approach_+0.140",
+      "yaw_+67.5_retreat_+0.000_approach_+0.140",
+      "yaw_+67.5_retreat_+0.025_approach_+0.140",
+      "yaw_+90.0_retreat_+0.000_approach_+0.140",
+      "yaw_+90.0_retreat_+0.025_approach_+0.140"
+    ],
+    "candidate_count": 18,
+    "repeats_per_candidate": 3,
+    "parallel_environment_count": 54,
+    "pick_object": "011_banana",
+    "obstacle_object": "018_plum",
+    "minimum_safe_clearance_m": 0.01,
+    "minimum_stability": 0.7,
+    "phase_steps": {
+      "settle": 60,
+      "approach": 140,
+      "approach_settle": 20,
+      "descent": 80,
+      "descent_settle": 15,
+      "close": 100,
+      "lift": 120,
+      "lift_settle": 20
+    },
+    "execution": "one Genesis scene built with one environment per candidate/repeat; batched inverse kinematics and GPU-resident control tensors",
+    "evidence_scope": "Engineering throughput and batched-future demonstration. This does not increase the independent formal safety-evaluation sample count.",
+    "protocol_sha256": "0a741806852b4333d41a1296c016d67dce988f5393f7800eaf1020a185a4c076"
+  }
+}

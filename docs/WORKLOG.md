@@ -1336,3 +1336,240 @@ Gate decision:
   <https://guardiansim-proof.dghcdtddgh.chatgpt.site>.
 - Kept the deployment owner-only; changing it to public requires a separate
   access-control decision.
+
+## 2026-07-28 — Evidence-scale audit and Gate 4 local draft
+
+- Paused merge/publication at the owner's request.
+- Added a programmatic evidence-scale auditor that counts unique initial
+  rollouts, non-duplicated confirmation rollouts, and final executions from
+  the preserved schema-5 and schema-6 reports.
+- Verified:
+  - 42 scene units;
+  - 1,185 counterfactual rollouts;
+  - 202 final executions;
+  - 1,387 total simulated action traces.
+- Added local showcase copy and tests that present those counts with the
+  explicit warning that nested traces are not independent scenes.
+- Audited the public Track 3 PRs and recorded why training steps and inference
+  throughput are not directly comparable with evaluation episodes.
+- Implemented and tested the outcome-blind 240-scenario Gate 4 matrix,
+  adaptive bounded candidate family, workload accounting, and exact McNemar
+  helper.
+- New targeted tests passed `8/8`. Ruff was not available in the current uv
+  environment, so style verification remains pending before any commit.
+- No branch push, site deployment, official PR edit, or Radeon run was made.
+
+## 2026-07-29 — Radeon parallel-physics benchmark implemented locally
+
+- Audited the Genesis scene integration:
+  - `build_scene(n_envs=...)` uses Genesis batched environments;
+  - formal GuardianSim benchmark runners remain single-environment;
+  - several grasp helpers flatten or select the first batch element.
+- Defined an honest presentation split between safety effectiveness and GPU
+  physics throughput.
+- Added:
+  - `guardian_sim/radeon_scale.py`;
+  - isolated trial and suite runners;
+  - a strict report validator;
+  - ROCm utilization/VRAM sampling;
+  - protocol documentation and synthetic validator tests.
+- Default cloud matrix: `1 / 16 / 64 / 256` worlds, `100` warmup steps and
+  `1,000` timed steps per process, totaling `337,000` timed environment steps.
+- Added a local-only 256-world scale-wall section to the showcase. It contains
+  no fabricated performance result and remains marked pending.
+- No cloud run, commit, push, deployment, or official submission edit was made
+  in this stage.
+
+## 2026-07-29 — Safety Critic and 54-way parallel futures implemented locally
+
+- Converted the preserved Gate 3.2/Gate 3.3 rollout evidence into a
+  scene-held-out surrogate dataset without double-counting repeated initial
+  observations.
+- Verified dataset accounting:
+  - 1,185 candidate rollouts;
+  - 42 scene units;
+  - 34 training scenes and 8 held-out test scenes;
+  - 571 hard-safe positive rows.
+- Added a pre-trained-at-submission Safety Critic workflow with held-out
+  quality gates, ROCm inference batches through 4,096 candidates, latency and
+  throughput measurements, and GPU telemetry.
+- Kept the learned model explicitly subordinate to the deterministic physics
+  verifier.
+- Added a 54-environment engineering runner for 18 candidates × 3 repeats,
+  using batched IK, batched controls, vectorized clearance sampling, a frozen
+  preflight protocol, and strict AMD/HIP report validation.
+- Added portable tests for assignment coverage, pose expansion, report
+  arithmetic, hard-safety label derivation, and tamper rejection.
+- Full local regression passed `82/82`; targeted Ruff and `git diff --check`
+  passed.
+- The current connected Chrome session does not expose the Radeon Cloud
+  Jupyter tab, so no cloud result was fabricated or inserted into the
+  showcase. The next action is a real cloud run after that existing instance
+  is opened manually.
+- No commit, push, site deployment, official PR edit, frozen benchmark change,
+  or instance destruction occurred.
+
+## 2026-07-29 — Radeon P0 scale, 54-future run, and evidence preservation
+
+- Relaunched the Radeon Cloud Blank OpenCode workspace and restored
+  GuardianSim under `/workspace/persistent/GuardianSim`.
+- Verified ROCm/HIP PyTorch, one AMD Radeon GPU, Python, Git, and `uv`.
+- Preserved the initial failed scale logs from the missing-Genesis environment,
+  installed the project into `/opt/venv`, and reverified PyTorch/HIP identity.
+- Passed cloud targeted tests `16/16`.
+- Completed and strictly validated the frozen `1 / 16 / 64 / 256` parallel
+  physics matrix:
+  - `154.1 / 2,383.7 / 9,354.3 / 35,166.1 env-steps/s`;
+  - maximum measured speedup `228.16×`;
+  - 256-world parallel efficiency `89.1%`;
+  - 256-world mean/peak GPU use `85.5% / 96%`;
+  - `337,000` timed environment steps.
+- Completed and strictly validated the 54-way Parallel Futures engineering run:
+  - `12.839 s`, `4.206 futures/s`;
+  - `32` hard-safe, `22` rejected;
+  - mean/peak GPU use `71.8% / 95%`.
+- Ran the fixed Safety Critic experiment once. The report is structurally valid
+  but `showcase_ready=false`: F1 `0.789` and unsafe precision `0.791` missed
+  their predeclared `0.80` and `0.90` gates. No threshold was changed and the
+  model is excluded from the judge-facing claim.
+- Downloaded the evidence archive directly from the Jupyter file endpoint.
+  Cloud and local SHA-256 matched:
+  `35c1110711c96a7271fe723ffd2dd8160e179e63cd46864df4e5198f518fa46d`.
+- Preserved reports, preflight, telemetry, raw logs, validators, chart,
+  checkpoint, diagnostic failures, and checksums under
+  `docs/evidence/radeon-p0-2026-07-29`.
+- Updated the local showcase with strictly validated metrics only.
+- Final local regression passed `82/82`; `npm test` rebuilt the showcase and
+  passed all `3/3` rendered-HTML checks; `git diff --check` passed.
+- No commit, push, deployment, official PR edit, or instance destruction.
+
+## 2026-07-29 — Scale-first page and 80-second visual review cut
+
+- Promoted the measured Radeon compute result to the first judge-facing
+  screen: `256 robot worlds. One safe move.`
+- Added the complete measured progression
+  `154 / 2,384 / 9,354 / 35,166 env-steps/s` for
+  `1 / 16 / 64 / 256` worlds and retained the `228.16×`, `89.1%`, GPU
+  telemetry, and statistical-boundary labels.
+- Added an animated 54-world Parallel Futures funnel with the strictly
+  validated `32` hard-safe and `22` rejected result.
+- Ran the showcase production build and rendered-HTML tests: `3/3` passed.
+- Inspected the desktop full page, hero, Radeon section, and 390-pixel mobile
+  layout using Playwright. Browser console: zero errors and zero warnings.
+- Built
+  `docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v1.mp4`:
+  - 80.0 seconds;
+  - 1920×1080 at 20 FPS;
+  - silent visual review;
+  - preserved Seed 411 replay embedded without physics re-execution.
+- Strictly validated output decode, source hashes, report-bound metrics, and
+  claim boundaries. Output SHA-256:
+  `76948ac89f3026cf6d0b845d6d009ab63cff27975b62ba952858355b4cb5073f`.
+- Kept the existing approved Qwen V2 video unchanged. Natural Qwen narration
+  for the new scale-first edit remains gated on owner visual approval.
+- No commit, push, deployment, official PR edit, frozen-report mutation, cloud
+  run, or instance destruction.
+
+## 2026-07-29 — 80-second Qwen narrated review candidate
+
+- Kept the validated silent cut unchanged and generated a separate narrated
+  artifact from it.
+- Used Qwen3-TTS Instruct
+  `qwen3-tts-instruct-flash-2026-01-26` with the `Ethan` voice and a
+  conversational robotics-engineer instruction.
+- Added six fixed chapter captions plus an original low-volume ambient bed and
+  transition chimes.
+- Built and strictly validated
+  `docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v2.mp4`:
+  - 80.0 seconds, 1920×1080, 20 FPS;
+  - full audio/video decode passed;
+  - visual-source, narration-segment, caption, and evidence hashes passed;
+  - verified metrics and claim boundaries remained locked;
+  - SHA-256
+    `b07d0c71e7aceea5f2ebe82cd87d94ea223a99c090c5a6e1f6e06ce06559a2c9`.
+- Inspected representative frames from all evidence-heavy chapters. Captions
+  were readable and did not obscure the central scale, filtering, replay, or
+  proof comparisons.
+- Measured final audio at approximately `-18.2 dB` mean and `-1.3 dB` peak.
+- Final local regression passed `82/82`; the showcase production build and
+  rendered-HTML tests passed `3/3`; Python compilation and `git diff --check`
+  passed.
+- Kept this artifact local for owner listening and visual approval; no commit,
+  push, deployment, official PR edit, cloud execution, or instance
+  destruction occurred.
+
+## 2026-07-29 — Fixed card overflow and removed template-like copy
+
+- Reproduced the fourth-card overflow on the frozen-result screen.
+- Added measured-width font selection for all card titles, values, and detail
+  lines instead of relying on fixed font sizes.
+- Rewrote the 80-second visual and narration copy as a direct account of the
+  experiment. Removed the “formal proof” wording and several slogan-like
+  transitions without changing any evidence-backed metric.
+- Added a durable human-writing rule to `docs/PROJECT_MEMORY.md` for future
+  reports, site text, PR copy, and narration.
+- Preserved the old V1/V2 artifacts and generated new versions:
+  - silent visual source V2 SHA-256
+    `5033b75ed91fd8883e70fd6ec7f4ce52c8a2ee8092822d8c89404b7894cb6edb`;
+  - narrated V3 SHA-256
+    `70c1bf9734b29c7e698dacc3a09e9a0602757c3be93a6917fbd17372530bb9c8`.
+- Strict silent and narrated validators passed. V3 full A/V decode passed;
+  audio measured approximately `-18.2 dB` mean and `-1.2 dB` peak.
+- Inspected the opening, Parallel Futures, frozen-result, and closing frames;
+  all text remained within its intended container.
+- Final local regression passed `82/82`; the showcase production build and
+  rendered-HTML tests passed `3/3`; Python compilation and `git diff --check`
+  passed.
+- No commit, push, deployment, official PR edit, cloud execution, or instance
+  destruction occurred.
+
+## 2026-07-29 — Replaced fixed anchors with optical centering
+
+- Confirmed that V3 solved overflow but left the short `30 → 0` row visually
+  spread across fixed anchor positions.
+- Implemented measured whole-row centering with dynamic font fitting and
+  a render-time symmetry assertion of at most one pixel.
+- Centered each card title and detail line from its measured pixel width.
+- Extracted and inspected the final encoded V4 proof frame.
+- Built and validated:
+  - `GuardianSim-Radeon-Parallel-Futures-review-v3.mp4`,
+    SHA-256
+    `4e2c6eddc1bb127818dcf0368c83e4eb30f4b3dcdfe754d8933d3ed36799c85d`;
+  - `GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4`,
+    SHA-256
+    `2be66996eb0e3bb460148c5afc8060f69680f1d7e314e2e46cf2d363d53a923a`.
+- Final local regression passed `82/82`; the showcase production build and
+  rendered-HTML tests passed `3/3`; Python compilation and `git diff --check`
+  passed.
+- No commit, push, deployment, official PR edit, cloud execution, or instance
+  destruction occurred.
+
+## 2026-07-29 — Integrated the Radeon P0 evidence into the local submission package
+
+- Verified the current organizer README: Track 3 asks for a technical report,
+  reproducibility README, source repository, and a recommended 3-5 minute
+  complete-workflow video; supplementary material is allowed.
+- Kept the approved 4:41 V2 as the workflow video and accepted the 80-second
+  optically centered V4 as a supplementary Radeon preview.
+- Added measured 1/16/64/256-world throughput and the 54-world Parallel Futures
+  run to:
+  - `docs/submission/TECHNICAL_REPORT.md`;
+  - the local official-package README;
+  - `docs/submission/OFFICIAL_PR_DRAFT.md`.
+- Kept Gate 3.2 safety metrics unchanged and explicitly separated environment
+  steps/candidate futures from independent safety scenarios.
+- Copied the V4 preview and the two raw reports plus validator outputs into
+  `docs/submission/official-package/Track3-Aegis-Motion-GuardianSim`.
+- Rebuilt `GuardianSim-Technical-Report.pdf` with ReportLab. The final report
+  is seven pages and has SHA-256
+  `6a735fe0a77c0c6ec3e9461051bac29ce371a3ca04d74246f0d39d6a64a3291c`.
+- Rendered all seven PDF pages to PNG and inspected every page. No visual
+  defect was found.
+- Rebuilt and verified the recursive package checksum manifest.
+- Package-manifest SHA-256:
+  `7a7d988add6c13b7a190c220084fb2028e11b31a96817ed1dd545b8f1a4b805c`.
+- Passed `82/82` Python tests, `3/3` showcase HTML tests, production build,
+  ESLint, both strict Radeon report validators, and the V4 full A/V validator.
+- Stopped before the public release boundary. The next release must publish
+  the P0 source/evidence and then update the immutable links in organizer PR
+  #39; no push or PR edit was performed.

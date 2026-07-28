@@ -19,6 +19,16 @@ Mean clutter clearance increased from `0.023191 m` to `0.046003 m`
 (`+98.36%`). The complete schema-5 report, logs, environment, checksums, and
 failed cross-process resume audit trail are preserved in the repository.
 
+The separate Radeon compute demonstration advances `256` headless Franka
+worlds at `35,166.1 environment-steps/s`, a measured `228.16×` speedup over
+the single-world baseline with `89.1%` parallel efficiency. A second batched
+run executes `18` candidate actions × `3` physical repeats as `54`
+simultaneous Genesis worlds in `12.839 s`; `32` futures passed the unchanged
+hard safety gates and `22` were rejected. These are physics-throughput and
+engineering-demo results, not additional independent safety scenes. Raw
+reports, logs, telemetry, and checksums are preserved under
+[`docs/evidence/radeon-p0-2026-07-29`](docs/evidence/radeon-p0-2026-07-29).
+
 The earlier Gate 3.1 negative result remains part of the evidence. It showed
 that improving clearance alone did not improve safety rate, motivating the
 frozen Gate 3.2 action-space expansion, unsafe-nominal replacement, and
@@ -54,6 +64,7 @@ Project documents:
 - [`docs/evidence/gate-3-1/README.md`](docs/evidence/gate-3-1/README.md)
 - [`docs/evidence/gate-3-2/README.md`](docs/evidence/gate-3-2/README.md)
 - [`docs/evidence/gate-3-3-two-strata/README.md`](docs/evidence/gate-3-3-two-strata/README.md)
+- [`docs/evidence/radeon-p0-2026-07-29`](docs/evidence/radeon-p0-2026-07-29)
 - [`showcase/README.md`](showcase/README.md)
 
 ## Interactive showcase

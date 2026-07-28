@@ -33,14 +33,33 @@ test("server-renders the GuardianSim Parallel Futures arena", async () => {
     html,
     /<title>GuardianSim: Parallel Futures<\/title>/i,
   );
-  assert.match(html, /See three futures/);
+  assert.match(html, /256 robot worlds/);
+  assert.match(html, /One safe move/);
   assert.match(html, /Try to break GuardianSim/);
   assert.match(html, /RUN 18 FUTURES/);
   assert.match(html, /Seed 411/);
   assert.match(html, /Seed 509/);
+  assert.match(html, /1,387/);
+  assert.match(html, /1,185/);
+  assert.match(html, /202/);
+  assert.match(html, /not independent scenes/i);
   assert.match(html, /30\/30/);
   assert.match(html, /\+98\.36%/);
   assert.match(html, /No physical-robot deployment claim/i);
+  assert.match(html, /One GPU\. 256 robot worlds\./);
+  assert.match(html, /337,000 env-steps/);
+  assert.match(html, /35,166 env-steps\/s/);
+  assert.match(html, /228\.16×/);
+  assert.match(html, /89\.1%/);
+  assert.match(html, /85\.5% mean · 96% peak/);
+  assert.match(html, /54 physical futures, evaluated together/);
+  assert.match(html, /12\.839 s/);
+  assert.match(html, /32/);
+  assert.match(html, /22/);
+  assert.match(html, /not independent scenes or added formal trials/);
+  assert.match(html, /STRICT VALIDATION PASSED/);
+  assert.doesNotMatch(html, /pending strict validation/i);
+  assert.match(html, /not 337,000 independent safety trials/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
@@ -116,6 +135,49 @@ test("interactive claims match the preserved Gate 3.2 and Gate 3.3 reports", asy
   assert.equal(seed401.selection.decision, "higher_margin_alternative");
   assert.equal(seed509.selection.decision, "safe_stop");
   assert.equal(seed509.guardiansim.safe_stopped, true);
+
+  const countGate32 = gate32.episodes.reduce(
+    (counts, episode) => {
+      counts.rollouts += Object.keys(
+        episode.selection.initial_metrics_by_id,
+      ).length;
+      counts.rollouts += Object.values(
+        episode.selection.observations_by_id,
+      ).reduce((total, observations) => total + observations.length - 1, 0);
+      counts.executions += episode.baseline.executions.length;
+      counts.executions += episode.guardiansim.executions.length;
+      return counts;
+    },
+    { rollouts: 0, executions: 0 },
+  );
+  const countGate33 = gate33.episodes.reduce(
+    (counts, episode) => {
+      counts.rollouts += Object.keys(
+        episode.selection.initial_raw_metrics_by_id,
+      ).length;
+      counts.rollouts += Object.values(
+        episode.selection.observations_by_id,
+      ).reduce((total, observations) => total + observations.length - 1, 0);
+      counts.executions += Number(episode.baseline.execution !== null);
+      counts.executions += Number(episode.guardiansim.execution !== null);
+      return counts;
+    },
+    { rollouts: 0, executions: 0 },
+  );
+
+  assert.equal(gate32.episodes.length + gate33.episodes.length, 42);
+  assert.equal(countGate32.rollouts + countGate33.rollouts, 1185);
+  assert.equal(countGate32.executions + countGate33.executions, 202);
+  assert.equal(
+    countGate32.rollouts
+      + countGate33.rollouts
+      + countGate32.executions
+      + countGate33.executions,
+    1387,
+  );
+  assert.match(client, /1,387/);
+  assert.match(client, /1,185/);
+  assert.match(client, /202/);
 
   assert.match(client, /1\.42 mm/);
   assert.match(client, /17\.1 mm/);

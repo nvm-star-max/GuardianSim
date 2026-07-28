@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "protocol_sha256": "4944cd288c1a855414c987e4229e1488498e56cd61e4d45136c62f3fb98d7603",
+  "backend": "genesis_gpu",
+  "n_envs": 64,
+  "build_seconds": 30.279580854810774,
+  "warmup_seconds": 0.6918924637138844,
+  "measurement_seconds": 6.841759799979627,
+  "environment_steps": 64000,
+  "environment_steps_per_second": 9354.318460608712,
+  "simulated_seconds_per_wall_second": 93.54318460608712,
+  "device": {
+    "name": "AMD Radeon Graphics",
+    "torch_version": "2.9.1+gitff65f5b",
+    "hip_version": "7.2.53211-e1a6bc5663",
+    "genesis_version": "1.2.3"
+  },
+  "gpu_telemetry": {
+    "sample_count": 20,
+    "mean_gpu_utilization_pct": 89.05,
+    "max_gpu_utilization_pct": 96.0,
+    "max_vram_used_bytes": 1168105472.0,
+    "total_vram_bytes": 51522830336.0,
+    "sampling_errors": []
+  }
+}

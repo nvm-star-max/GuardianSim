@@ -1,9 +1,10 @@
 # GuardianSim: Parallel Futures
 
-Interactive counterfactual safety arena for the verified GuardianSim evidence.
-It lets a judge choose between bounded robot futures, reveal the frozen safety
-decision, inspect or download an evidence receipt, and watch the preserved Seed
-411 Genesis replay. It does not rerun Genesis or consume GPU time.
+Scale-first Physical AI showcase for the verified GuardianSim evidence. It
+opens with the strictly measured Radeon progression from 1 to 256 parallel
+Genesis worlds, connects that compute to a 54-world Parallel Futures safety
+funnel, and then lets a judge challenge the frozen formal decisions. It does
+not rerun Genesis or consume GPU time.
 
 From the repository root:
 
@@ -13,6 +14,8 @@ From the repository root:
 
 The site includes:
 
+- a measured 1 → 16 → 64 → 256 Radeon scale progression;
+- a 54-world safety funnel with 32 hard-safe and 22 rejected futures;
 - three evidence-backed red-team challenges;
 - a same-state, three-future safety reveal;
 - the preserved Seed 411 replay;

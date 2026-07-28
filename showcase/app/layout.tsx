@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase,
     title: "GuardianSim: Parallel Futures",
     description:
-      "See three futures before the robot moves. An interactive, evidence-backed safety time machine for Physical AI on AMD Radeon.",
+      "256 robot worlds. One safe move. An evidence-backed parallel Physical AI safety system on AMD Radeon.",
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "GuardianSim: Parallel Futures",
       description:
-        "See three futures before the robot moves. Try to break GuardianSim in a verified counterfactual safety arena.",
+        "256 robot worlds. One safe move. Explore verified Radeon scale and try to break GuardianSim in a counterfactual safety arena.",
       type: "website",
       images: [
         { url: "/og-parallel-futures.png", width: 1200, height: 630 },
@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: "GuardianSim: Parallel Futures",
       description:
-        "An interactive counterfactual safety time machine for robot manipulation on AMD Radeon.",
+        "Radeon parallel physics turns bounded robot futures into an explainable move-or-stop decision.",
       images: ["/og-parallel-futures.png"],
     },
   };

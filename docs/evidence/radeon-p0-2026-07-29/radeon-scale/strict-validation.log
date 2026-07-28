@@ -1,0 +1,8 @@
+{
+  "largest_batch_size": 256,
+  "protocol_sha256": "4944cd288c1a855414c987e4229e1488498e56cd61e4d45136c62f3fb98d7603",
+  "schema_version": 1,
+  "status": "passed",
+  "telemetry_required": true,
+  "trial_count": 4
+}

@@ -9,32 +9,38 @@ submission. It is a working set, not yet the final uploaded package.
   aligned to the official Track 3 section list and limited to preserved
   metrics.
 - [`GuardianSim-Technical-Report.pdf`](GuardianSim-Technical-Report.pdf):
-  visually inspected six-page submission edition with no draft markings.
-- [`DEMO_VIDEO_SCRIPT.md`](DEMO_VIDEO_SCRIPT.md): a 4:00–4:30 production
-  script designed to make the baseline/GuardianSim physical difference
-  visually explicit.
-- [`GuardianSim-Aegis-Motion-demo-review-v1.mp4`](GuardianSim-Aegis-Motion-demo-review-v1.mp4):
-  a strictly validated 4:15 English-narrated review cut. It combines the
-  accepted formal replay with preserved Radeon environment, evaluator,
-  aggregate-result, and safe-stop evidence.
-- [`GuardianSim-Aegis-Motion-demo-review-v1.json`](GuardianSim-Aegis-Motion-demo-review-v1.json):
-  machine-readable narration, source hashes, timing, claim boundary, and
-  verified metrics for the review cut.
-- [`GuardianSim-Aegis-Motion-demo-review-v1-validation.json`](GuardianSim-Aegis-Motion-demo-review-v1-validation.json):
-  strict duration, decode, source-identity, metric, and claim-boundary
-  validation.
+  visually inspected seven-page submission edition with no draft markings.
+  The Radeon section now includes the separately scoped 1/16/64/256-world
+  scale run and the 54-world Parallel Futures engineering run.
 - [`GuardianSim-Aegis-Motion-demo-review-v2.mp4`](GuardianSim-Aegis-Motion-demo-review-v2.mp4):
-  the 4:41 review cut with Qwen3-TTS Instruct narration, fixed per-chapter
-  captions, and normalized presentation loudness.
+  the approved 4:41 complete-workflow submission video with Qwen3-TTS Instruct
+  narration, fixed chapter captions, and normalized loudness.
 - [`GuardianSim-Aegis-Motion-demo-review-v2.json`](GuardianSim-Aegis-Motion-demo-review-v2.json):
   V2 narration model, voice, instructions, per-segment audio hashes, timing,
   evidence bindings, and verified metrics.
 - [`GuardianSim-Aegis-Motion-demo-review-v2-validation.json`](GuardianSim-Aegis-Motion-demo-review-v2-validation.json):
   strict V2 narration, caption-policy, duration, decode, source-identity,
   metric, and claim-boundary validation.
-- [`../../output/pdf/GuardianSim-Technical-Report-DRAFT.pdf`](../../output/pdf/GuardianSim-Technical-Report-DRAFT.pdf):
-  visually reviewed six-page A4 draft for owner review. It is labeled as a
-  draft and identifies the solo team as Aegis Motion.
+- [`GuardianSim-Radeon-Parallel-Futures-review-v3.mp4`](GuardianSim-Radeon-Parallel-Futures-review-v3.mp4):
+  final silent source for the supplementary Radeon preview. Each metric row is
+  optically centered from measured pixel widths.
+- [`GuardianSim-Radeon-Parallel-Futures-review-v3.json`](GuardianSim-Radeon-Parallel-Futures-review-v3.json):
+  source hashes, locked metrics, chapter timing, layout policy, and claim
+  boundaries.
+- [`GuardianSim-Radeon-Parallel-Futures-review-v3-validation.json`](GuardianSim-Radeon-Parallel-Futures-review-v3-validation.json):
+  strict visual decode, source-hash, metric, layout, and claim-boundary
+  validation.
+- [`GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4`](GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4):
+  approved 80-second supplementary preview using the final silent source and
+  direct-language Qwen narration.
+- [`GuardianSim-Radeon-Parallel-Futures-narrated-v4.json`](GuardianSim-Radeon-Parallel-Futures-narrated-v4.json):
+  narration timing, audio hashes, immutable visual identity, evidence
+  bindings, and locked metrics.
+- [`GuardianSim-Radeon-Parallel-Futures-narrated-v4.ass`](GuardianSim-Radeon-Parallel-Futures-narrated-v4.ass):
+  fixed chapter captions.
+- [`GuardianSim-Radeon-Parallel-Futures-narrated-v4-validation.json`](GuardianSim-Radeon-Parallel-Futures-narrated-v4-validation.json):
+  strict V4 full audio/video decode, narration and caption hashes, source
+  identity, metric, duration, and claim-boundary validation.
 - [`COMPETITOR_SCAN_2026-07-27.md`](COMPETITOR_SCAN_2026-07-27.md): a
   time-stamped inventory of the official repository and GuardianSim's
   evidence-backed competitive position.
@@ -46,7 +52,12 @@ submission. It is a working set, not yet the final uploaded package.
 - [`OFFICIAL_PR_DRAFT.md`](OFFICIAL_PR_DRAFT.md): the English official-repo
   pull-request title and body draft.
 - [`official-package/Track3-Aegis-Motion-GuardianSim`](official-package/Track3-Aegis-Motion-GuardianSim):
-  self-contained directory prepared for the official contest fork.
+  self-contained directory prepared for the official contest fork. It now
+  includes the report, the 80-second supplementary Radeon preview, the raw
+  scale/Parallel Futures reports, validator outputs, and recursive checksums.
+
+Earlier scale-video review iterations remain local development artifacts and
+are intentionally excluded from the public release.
 
 Rebuild the final PDF with ReportLab:
 
@@ -79,6 +90,11 @@ evidence claims without a new explicit owner decision. A real-time
 final-commit Radeon terminal capture is no longer required for this version;
 the current terminal section is clearly labeled archived evidence.
 
+The owner accepted the optically centered 80-second Radeon scale-first V4 on
+2026-07-29 as a supplementary preview. It does not replace the previously
+approved 4:41 V2 workflow video because the official Track 3 guidance
+recommends a 3-5 minute complete-workflow demonstration.
+
 ## Blocking owner inputs
 
 Before opening the final organizer pull request, the owner must personally:
@@ -101,5 +117,7 @@ tokens, or payment information to this directory.
 Performance statements must map to the immutable Gate 3.2 schema-5 report in
 [`../evidence/gate-3-2`](../evidence/gate-3-2). Gate 3.3 may be used only as
 separately labeled breadth and limitation evidence. The bounded evaluator
-smoke proves that the documented Radeon/Genesis execution path works; it is
-not a performance benchmark.
+smoke checks that the documented Radeon/Genesis execution path runs; it is not
+a performance benchmark. Radeon scale and Parallel Futures measurements must
+remain separately labeled compute evidence and must not be added to the formal
+safety sample count.

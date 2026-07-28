@@ -217,6 +217,13 @@ const architecture = [
   ["05", "Move or stop", "Choose an eligible future—or refuse to move."],
 ];
 
+const scaleSteps = [
+  { worlds: "1", throughput: "154", speedup: "1.00×" },
+  { worlds: "16", throughput: "2,384", speedup: "15.47×" },
+  { worlds: "64", throughput: "9,354", speedup: "60.69×" },
+  { worlds: "256", throughput: "35,166", speedup: "228.16×" },
+];
+
 function MiniScene({
   trajectory,
   active,
@@ -241,6 +248,115 @@ function MiniScene({
         <i />
       </div>
     </div>
+  );
+}
+
+function RadeonScaleSection() {
+  return (
+    <section className="radeon-scale-section" id="scale">
+      <div className="section-heading scale-heading">
+        <div>
+          <p className="kicker">RADEON PARALLEL PHYSICS LAB</p>
+          <h2>One GPU. 256 robot worlds.</h2>
+        </div>
+        <p>
+          Strictly validated on Radeon Cloud with real Genesis physics. Scale
+          evidence is reported separately from the formal safety sample count.
+        </p>
+      </div>
+
+      <div className="scale-progression" aria-label="Measured Radeon scaling progression">
+        {scaleSteps.map((step, index) => (
+          <article key={step.worlds} className={index === scaleSteps.length - 1 ? "scale-peak" : ""}>
+            <span>{String(index + 1).padStart(2, "0")} · BATCH</span>
+            <strong>{step.worlds}</strong>
+            <p>parallel worlds</p>
+            <dl>
+              <div>
+                <dt>Throughput</dt>
+                <dd>{step.throughput}</dd>
+              </div>
+              <div>
+                <dt>Speedup</dt>
+                <dd>{step.speedup}</dd>
+              </div>
+            </dl>
+          </article>
+        ))}
+      </div>
+
+      <div className="radeon-scale-shell">
+        <div className="future-wall" aria-label="Measured 256-world Radeon batch">
+          {Array.from({ length: 256 }, (_, index) => (
+            <i
+              key={index}
+              className={index % 19 === 0 ? "future-hot" : ""}
+              aria-hidden="true"
+            />
+          ))}
+          <div className="future-wall-label">
+            <span>256 SIMULTANEOUS FRANKA WORLDS</span>
+            <b>337,000 measured environment steps</b>
+          </div>
+        </div>
+        <div className="scale-console">
+          <span>STRICT VALIDATION PASSED</span>
+          <strong>35,166 env-steps/s</strong>
+          <p>256 headless Franka worlds on one AMD Radeon GPU</p>
+          <dl>
+            <div><dt>Speedup vs 1 world</dt><dd>228.16×</dd></div>
+            <div><dt>Parallel efficiency</dt><dd>89.1%</dd></div>
+            <div><dt>GPU use</dt><dd>85.5% mean · 96% peak</dd></div>
+            <div><dt>Measured workload</dt><dd>337,000 env-steps</dd></div>
+          </dl>
+          <small>
+            Physics throughput benchmark · not 337,000 independent safety trials
+          </small>
+        </div>
+      </div>
+
+      <div className="parallel-futures-stage">
+        <div className="parallel-futures-copy">
+          <span>FROM RAW SCALE TO A ROBOT DECISION</span>
+          <h3>54 physical futures, evaluated together.</h3>
+          <p>
+            Eighteen bounded actions, each repeated three times in one batched
+            Genesis scene. Hard gates reject unsafe futures before utility
+            ranking chooses an action.
+          </p>
+          <div className="parallel-time">
+            <strong>12.839 s</strong>
+            <span>wall time · 71.8% mean GPU · 95% peak</span>
+          </div>
+        </div>
+        <div className="parallel-funnel" aria-label="54 parallel futures safety funnel">
+          <div className="parallel-grid">
+            {Array.from({ length: 54 }, (_, index) => (
+              <i
+                key={index}
+                className={index < 32 ? "parallel-safe" : "parallel-rejected"}
+                aria-hidden="true"
+              />
+            ))}
+          </div>
+          <div className="funnel-arrow" aria-hidden="true">→</div>
+          <div className="funnel-results">
+            <div className="funnel-safe">
+              <strong>32</strong>
+              <span>hard-safe futures</span>
+            </div>
+            <div className="funnel-rejected">
+              <strong>22</strong>
+              <span>rejected before execution</span>
+            </div>
+          </div>
+        </div>
+        <small className="parallel-boundary">
+          Engineering throughput demonstration · 54 nested candidate/repeat
+          worlds, not independent scenes or added formal trials
+        </small>
+      </div>
+    </section>
   );
 }
 
@@ -323,6 +439,7 @@ export function ShowcaseClient() {
         </a>
         <nav aria-label="Primary navigation">
           <a href="#arena">Arena</a>
+          <a href="#scale">Radeon Scale</a>
           <a href="#replay">Replay</a>
           <a href="#proof">Proof</a>
         </nav>
@@ -339,42 +456,46 @@ export function ShowcaseClient() {
       <section className="hero" id="top">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
-          <p className="kicker">GUARDIANSIM · PARALLEL FUTURES</p>
+          <p className="kicker">AMD RADEON · PARALLEL PHYSICAL AI</p>
           <h1>
-            See three futures
+            256 robot worlds.
             <br />
-            <span>before the robot moves.</span>
+            <span>One safe move.</span>
           </h1>
           <p className="hero-lede">
-            A counterfactual safety time machine for robot manipulation,
-            evaluated in Genesis on an AMD Radeon GPU.
+            GuardianSim turns Radeon parallel physics into an explainable
+            execute-or-stop decision before a robot touches the scene.
           </p>
           <div className="hero-actions">
-            <a className="primary-action" href="#arena">
-              Break the robot <span>↓</span>
+            <a className="primary-action" href="#scale">
+              Enter the parallel lab <span>↓</span>
             </a>
-            <a className="secondary-action" href="#replay">
-              Watch the real replay
+            <a className="secondary-action" href="#arena">
+              Try the safety arena
             </a>
           </div>
         </div>
         <div className="hero-manifesto">
-          <span>ONE STATE</span>
+          <span>ONE RADEON GPU</span>
           <i />
-          <span>18 FUTURES</span>
+          <span>256 PHYSICS WORLDS</span>
+          <i />
+          <span>54 ACTION FUTURES</span>
           <i />
           <span>MOVE OR STOP</span>
         </div>
-        <div className="hero-score" aria-label="Verified Gate 3.2 result">
-          <span>FROZEN GATE 3.2</span>
-          <strong>30 / 30</strong>
-          <p>repeatable safe scenarios</p>
+        <div className="hero-score" aria-label="Preserved evidence scale">
+          <span>STRICT RADEON CLOUD RUN</span>
+          <strong>35,166</strong>
+          <p>environment steps per second · 256 worlds</p>
           <div>
-            <b>58/90 → 90/90</b>
-            <small>independent safe executions</small>
+            <b>228.16× measured speedup</b>
+            <small>89.1% parallel efficiency · 96% peak GPU</small>
           </div>
         </div>
       </section>
+
+      <RadeonScaleSection />
 
       <section className="arena-section" id="arena">
         <div className="section-heading arena-heading">
@@ -596,12 +717,35 @@ export function ShowcaseClient() {
         <div className="section-heading proof-heading">
           <div>
             <p className="kicker dark">FROZEN 30-SCENARIO BENCHMARK</p>
-            <h2>One scene is the hook. Thirty scenes are the claim.</h2>
+            <h2>Count the scenes. Audit every nested trace.</h2>
           </div>
           <p>
             The interactive arena illustrates preserved episodes. Performance
             claims come only from the complete schema-5 report.
           </p>
+        </div>
+
+        <div className="scale-ledger" aria-label="Preserved evidence scale">
+          <article>
+            <span>INDEPENDENT SCENE UNITS</span>
+            <strong>42</strong>
+            <p>30 formal Gate 3.2 + 12 engineering-breadth Gate 3.3 scenes.</p>
+          </article>
+          <article>
+            <span>COUNTERFACTUAL ROLLOUTS</span>
+            <strong>1,185</strong>
+            <p>Initial candidates plus additional confirmation rollouts.</p>
+          </article>
+          <article>
+            <span>FINAL EXECUTIONS</span>
+            <strong>202</strong>
+            <p>Baseline and GuardianSim actions physically executed in Genesis.</p>
+          </article>
+          <article className="scale-total">
+            <span>TOTAL SIMULATED ACTION TRACES</span>
+            <strong>1,387</strong>
+            <p>Nested inside 42 scenes; never presented as 1,387 independent trials.</p>
+          </article>
         </div>
 
         <div className="metric-grid">
