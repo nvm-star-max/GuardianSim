@@ -1843,3 +1843,40 @@ Gate decision:
   cloud instance was not restarted or destroyed. Next action:
   `triad-4` on Radeon Cloud, followed by 72, 288, and 4,608 pairs only when
   each preceding frozen gate passes.
+
+## 2026-07-30 — Passed and preserved Safety Swarm V2 Gate V2-A
+
+- Reused Radeon Cloud instance `u-13907-735d71cb` without restarting or
+  destroying it. Created a separate clean detached V2 worktree at
+  `/workspace/persistent/GuardianSim-safety-swarm-v2` because the prior V1
+  evidence commit was not an ancestor of V2 source commit
+  `dd300f98320f39666f684c3aed1f3afa25884d20`.
+- Executed the frozen `triad-4` tier as one Genesis GPU scene: 3 candidates ×
+  4 worlds = 12 candidate-world pairs. Strict schema-1 validation passed.
+- The deterministic result selected `yaw_+00.0_offset_+0.000`, the only
+  candidate that passed 4/4 with zero contact. Its worst sampled clearance
+  was `42.136 mm`, fifth-percentile clearance `42.985 mm`, and minimum
+  stability `0.923`.
+- Rejected the two `+67.5°` alternatives from execution:
+  - centered approach: 2/4 safe and two clutter contacts;
+  - `25 mm` retreat: 0/4 safe, one clutter contact, and three stability
+    failures.
+- Recorded 6 safe and 3 contact candidate-world pairs overall. This does not
+  mean all 12 pairs passed; V2-A passed because one candidate survived every
+  frozen world, exactly as predeclared.
+- Measured `5,988` environment steps in `10.755 s`, or `556.783` steps/s.
+  Radeon telemetry recorded `69%` mean and `94%` peak GPU utilization, about
+  `1.049 GiB` maximum VRAM use, and no sampling errors.
+- Preserved report, preflight, logs, process ID, before/after ROCm snapshots,
+  validation receipts, source provenance, protocol, and recursive checksums
+  under `docs/evidence/safety-swarm-v2-triad-4-2026-07-30`.
+- Verified downloaded archive SHA-256
+  `7280f59866980954ec52287fd4046069c487dfb23bca5f8c51d91c72568f877f`,
+  rejected unsafe archive structures before extraction, passed all 13 inner
+  checksums, and reran strict local `--require-radeon` validation.
+- Left the offline fixture and all V1 evidence untouched. The fixture's
+  different selected candidate is additional evidence that it was not used
+  as a cloud result.
+- No protocol or threshold changed. Stopped before Gate V2-B. The only next
+  eligible scale step is the frozen 18×4 = 72-pair run; V2-C and the
+  4,608-pair formal run remain closed.

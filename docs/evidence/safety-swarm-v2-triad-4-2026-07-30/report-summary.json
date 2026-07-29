@@ -1,0 +1,93 @@
+{
+  "summary": {
+    "smoke_status": "passed",
+    "decision": "execute",
+    "selected_candidate_id": "yaw_+00.0_offset_+0.000",
+    "qualifying_candidate_ids": [
+      "yaw_+00.0_offset_+0.000"
+    ],
+    "candidate_count": 3,
+    "world_count_per_candidate": 4,
+    "candidate_world_count": 12,
+    "safe_candidate_world_count": 6,
+    "contact_candidate_world_count": 3,
+    "batched_execution_wall_seconds": 10.75464776204899,
+    "total_environment_steps": 5988,
+    "candidate_worlds_per_second": 1.1157966551304088,
+    "environment_steps_per_second": 556.782530910074
+  },
+  "candidate_summaries": [
+    {
+      "candidate_index": 0,
+      "candidate_id": "yaw_+00.0_offset_+0.000",
+      "qualifies": true,
+      "safe_world_count": 4,
+      "unsafe_world_count": 0,
+      "contact_world_count": 0,
+      "worst_case_clearance_m": 0.042135827243328094,
+      "fifth_percentile_clearance_m": 0.042985348775982854,
+      "minimum_stability": 0.922619104385376,
+      "failure_histogram": {
+        "safe": 4,
+        "clutter_contact": 0,
+        "unreachable": 0,
+        "clearance_below_minimum": 0,
+        "stability_below_minimum": 0,
+        "task_failure": 0
+      }
+    },
+    {
+      "candidate_index": 1,
+      "candidate_id": "yaw_+67.5_retreat_+0.000_approach_+0.140",
+      "qualifies": false,
+      "safe_world_count": 2,
+      "unsafe_world_count": 2,
+      "contact_world_count": 2,
+      "worst_case_clearance_m": 0.0,
+      "fifth_percentile_clearance_m": 0.0,
+      "minimum_stability": 0.0,
+      "failure_histogram": {
+        "safe": 2,
+        "clutter_contact": 2,
+        "unreachable": 0,
+        "clearance_below_minimum": 0,
+        "stability_below_minimum": 0,
+        "task_failure": 0
+      }
+    },
+    {
+      "candidate_index": 2,
+      "candidate_id": "yaw_+67.5_retreat_+0.025_approach_+0.140",
+      "qualifies": false,
+      "safe_world_count": 0,
+      "unsafe_world_count": 4,
+      "contact_world_count": 1,
+      "worst_case_clearance_m": 0.0,
+      "fifth_percentile_clearance_m": 0.006221188232302667,
+      "minimum_stability": 0.0,
+      "failure_histogram": {
+        "safe": 0,
+        "clutter_contact": 1,
+        "unreachable": 0,
+        "clearance_below_minimum": 0,
+        "stability_below_minimum": 3,
+        "task_failure": 0
+      }
+    }
+  ],
+  "device": {
+    "name": "AMD Radeon Graphics",
+    "torch_version": "2.9.1+gitff65f5b",
+    "hip_version": "7.2.53211-e1a6bc5663",
+    "genesis_version": "1.2.3"
+  },
+  "gpu_telemetry": {
+    "sample_count": 27,
+    "mean_gpu_utilization_pct": 69.0,
+    "max_gpu_utilization_pct": 94.0,
+    "max_vram_used_bytes": 1126154240.0,
+    "total_vram_bytes": 51522830336.0,
+    "sampling_errors": []
+  },
+  "report_sha256": "61fff08c21accbae5d237905d754e48e530e2bbfa33ca0642d62b2331f58874a"
+}

@@ -1,0 +1,7 @@
+commit dd300f98320f39666f684c3aed1f3afa25884d20
+Author:     aolos <2668084124@qq.com>
+AuthorDate: Wed Jul 29 16:19:45 2026 +0800
+Commit:     aolos <2668084124@qq.com>
+CommitDate: Wed Jul 29 16:19:45 2026 +0800
+
+    Freeze Safety Swarm V2 candidate selection

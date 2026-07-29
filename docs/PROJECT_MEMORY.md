@@ -1639,3 +1639,42 @@ Evidence and working material:
 - No cloud workload, instance restart, instance destruction, threshold
   change, or formal claim occurred in this stage. The next gate is the
   isolated 12-environment `triad-4` Radeon smoke.
+
+## Safety Swarm V2 Gate V2-A Radeon result — 2026-07-30
+
+- Reused Radeon Cloud instance `u-13907-735d71cb` without restart or
+  destruction. Ran from the clean detached worktree
+  `/workspace/persistent/GuardianSim-safety-swarm-v2` at source commit
+  `dd300f98320f39666f684c3aed1f3afa25884d20`. The previous V1 cloud evidence
+  commit was not an ancestor of this V2 source, so its worktree and evidence
+  were not modified.
+- The predeclared `triad-4` run completed all 3 candidates × 4 frozen worlds,
+  or 12 candidate-world pairs. Strict schema-1 Radeon validation passed with
+  report SHA-256
+  `61fff08c21accbae5d237905d754e48e530e2bbfa33ca0642d62b2331f58874a`.
+- Decision: `execute`. The only qualifying candidate was
+  `yaw_+00.0_offset_+0.000`, with 4/4 safe worlds, zero contacts,
+  `42.136 mm` worst-case sampled clearance, `42.985 mm` fifth-percentile
+  sampled clearance, and `0.923` minimum stability.
+- The centered `+67.5°` candidate passed 2/4 and contacted clutter twice. Its
+  `25 mm` retreat counterpart passed 0/4, with one contact and three
+  stability failures. Across all 12 pairs, 6 were safe and 3 had sampled
+  clutter contact.
+- The offline fixture had selected a different candidate. The measured
+  Radeon decision therefore confirms that fixture data was not used as
+  result evidence.
+- Measured AMD execution: `5,988` environment steps in `10.755 s`,
+  `556.783` environment steps/s, `69%` mean and `94%` peak GPU utilization
+  across 27 telemetry samples, and maximum VRAM use of
+  `1,126,154,240 bytes` (about `1.049 GiB`). No telemetry sampling errors
+  occurred.
+- The downloaded evidence archive matched cloud SHA-256
+  `7280f59866980954ec52287fd4046069c487dfb23bca5f8c51d91c72568f877f`.
+  It contained no unsafe paths or links, all 13 inner checksums passed, and
+  the imported report passed local strict `--require-radeon` validation.
+  Raw evidence is under
+  `docs/evidence/safety-swarm-v2-triad-4-2026-07-30`.
+- Gate V2-A is executor evidence only and remains `showcase_ready=false`.
+  No thresholds, candidates, worlds, ordering, or protocol hashes changed.
+  The next unopened gate is V2-B, all 18 candidates × 4 worlds = 72 pairs.
+  Do not start V2-C, V2-D, or make a formal robustness claim from this result.

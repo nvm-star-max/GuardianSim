@@ -91,19 +91,3 @@ population, not 4,608 independent real-robot trials and not a physical safety
 guarantee. Small-tier results remain `showcase_ready=false`. The workload may
 demonstrate AMD ROCm batched-physics throughput only after measured Radeon
 telemetry and strict evidence validation.
-
-## Post-run record — Gate V2-A (2026-07-30)
-
-Gate V2-A completed all 12 predeclared candidate-world pairs and passed strict
-schema-1 Radeon validation. The preserved report SHA-256 is
-`61fff08c21accbae5d237905d754e48e530e2bbfa33ca0642d62b2331f58874a`.
-
-Only `yaw_+00.0_offset_+0.000` qualified, passing all four worlds with zero
-contacts. The centered `+67.5°` candidate failed two worlds through sampled
-clutter contact. Its `25 mm` retreat counterpart failed all four worlds
-through one contact and three stability failures.
-
-This outcome satisfies the frozen V2-A acceptance rule and opens Gate V2-B.
-It does not open V2-C or V2-D and remains `showcase_ready=false`. No hard
-gate, candidate, world, ordering rule, or protocol identity was changed after
-the run.
