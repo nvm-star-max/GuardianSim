@@ -36,7 +36,7 @@ test("server-renders the GuardianSim Parallel Futures arena", async () => {
   assert.match(html, /256 robot worlds/);
   assert.match(html, /One safe move/);
   assert.match(html, /Try to break GuardianSim/);
-  assert.match(html, /RUN 18 FUTURES/);
+  assert.match(html, /APPLY GATES TO 18 FUTURES/);
   assert.match(html, /Seed 411/);
   assert.match(html, /Seed 509/);
   assert.match(html, /1,387/);
@@ -185,4 +185,8 @@ test("interactive claims match the preserved Gate 3.2 and Gate 3.3 reports", asy
   assert.match(client, /98\.4 mm/);
   assert.match(client, /8\.29 mm/);
   assert.match(client, /28\.6 mm/);
+  assert.match(client, /CLEARANCE <b>{future\.clearance}<\/b>/);
+  assert.match(client, /STABILITY <b>{future\.stability}<\/b>/);
+  assert.doesNotMatch(client, /future\.clearance : "—"/);
+  assert.doesNotMatch(client, /future\.stability : "—"/);
 });

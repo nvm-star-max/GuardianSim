@@ -586,16 +586,28 @@ export function ShowcaseClient() {
                     <p>{future.action}</p>
                     <div>
                       <span>
-                        CLEARANCE <b>{revealed ? future.clearance : "—"}</b>
+                        CLEARANCE <b>{future.clearance}</b>
                       </span>
                       <span>
-                        STABILITY <b>{revealed ? future.stability : "—"}</b>
+                        STABILITY <b>{future.stability}</b>
                       </span>
                     </div>
                   </div>
                   <div className="future-verdict">
-                    <strong>{revealed ? future.verdict : "UNSEEN"}</strong>
-                    <span>{revealed ? future.reason : "Run the counterfactual"}</span>
+                    <strong>
+                      {revealed
+                        ? future.verdict
+                        : phase === "running"
+                          ? "EVALUATING"
+                          : "MEASURED"}
+                    </strong>
+                    <span>
+                      {revealed
+                        ? future.reason
+                        : phase === "running"
+                          ? "Applying frozen hard gates"
+                          : "Choose, then apply the gates"}
+                    </span>
                   </div>
                 </button>
               );
@@ -605,7 +617,8 @@ export function ShowcaseClient() {
           <div className="arena-controls">
             <div className="run-status" aria-live="polite">
               <span className={`status-light status-${phase}`} />
-              {phase === "idle" && "Snapshot frozen. Choose a future or let GuardianSim decide."}
+              {phase === "idle" &&
+                "Verified measurements loaded. Choose a future, then apply the frozen gates."}
               {phase === "running" && "Restoring one state · evaluating bounded futures · applying hard gates…"}
               {phase === "revealed" && humanResult}
             </div>
@@ -622,10 +635,10 @@ export function ShowcaseClient() {
                 disabled={phase === "running" || phase === "revealed"}
               >
                 {phase === "running"
-                  ? "EVALUATING 18 FUTURES…"
+                  ? "CHECKING 18 FUTURES…"
                   : phase === "revealed"
                     ? "DECISION REVEALED"
-                    : "RUN 18 FUTURES"}
+                    : "APPLY GATES TO 18 FUTURES"}
               </button>
             </div>
           </div>

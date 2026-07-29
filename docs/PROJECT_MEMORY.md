@@ -1365,3 +1365,41 @@ Evidence and working material:
 - Organizer PR #39 remained `OPEN`, non-draft, and `CLEAN`, with no comments,
   reviews, or failed checks. It was not merged.
 - No Radeon Cloud instance was accessed or destroyed.
+
+## Arena measurement visibility and open-source overlap audit — 2026-07-29
+
+- The public arena previously hid clearance and stability behind em dashes
+  until the frozen gates were applied. This was valid interaction state but
+  looked like missing data.
+- Changed the interaction boundary:
+  - evidence-backed clearance and stability are visible immediately;
+  - collision/rejection/selection verdicts remain hidden until the user
+    applies the frozen hard gates;
+  - the call to action now says `APPLY GATES TO 18 FUTURES`.
+- Verified the static build in a real browser:
+  - all three Future cards exposed their measurements before evaluation;
+  - selecting Future C and applying the gates revealed the expected
+    collision, rejection, and selected states;
+  - no card overflow was observed at the tested desktop viewport.
+- Local acceptance passed Python unit tests `82/82`, both showcase test suites
+  `3/3`, ESLint, submission checksum verification, and `git diff --check`.
+- Added
+  `docs/submission/OPEN_SOURCE_OVERLAP_AUDIT_2026-07-29.md` using only
+  project-owned repositories and documentation.
+- Closest reviewed layers:
+  - cuRobo and MoveIt 2: motion generation/planning and collision checking;
+  - ManiSkill and Isaac Lab: high-throughput robotics simulation/training;
+  - Safety-Gymnasium: constrained safe-RL benchmarking;
+  - Genesis: GuardianSim's physics foundation.
+- AMD finding:
+  - Genesis explicitly documents ROCm/HIP, `gs.amdgpu`, and an AMD Dockerfile;
+  - cuRobo and Isaac Lab document NVIDIA/CUDA requirements;
+  - ManiSkill's official matrix does not support AMD GPU simulation;
+  - MoveIt 2 is a vendor-neutral CPU planning stack without a documented ROCm
+    acceleration path;
+  - Safety-Gymnasium does not document an AMD/ROCm acceleration path.
+- Positioning boundary: GuardianSim is not a replacement for these projects.
+  Its distinct layer is same-state physical counterfactual evaluation,
+  frozen gates, repeatability, execute-or-stop behavior, and an evidence
+  receipt on a demonstrated AMD ROCm path.
+- No Radeon Cloud instance was accessed or destroyed.

@@ -1631,3 +1631,29 @@ Gate decision:
   non-draft, and `CLEAN`.
 - Did not merge the organizer PR and did not access or destroy the Radeon
   instance.
+
+## 2026-07-29 — Fixed arena evidence visibility and audited adjacent projects
+
+- Replaced pre-evaluation clearance/stability dashes with the preserved
+  measurements already bound to each Future card.
+- Kept safety verdicts behind the interaction boundary and clarified the
+  button/status copy so users understand that the next action applies frozen
+  gates rather than generating missing measurements.
+- Passed:
+  - Python unit tests `82/82`;
+  - showcase production build and rendered-HTML tests `3/3`;
+  - static GitHub Pages build and tests `3/3`;
+  - ESLint;
+  - submission working-set checksum verification;
+  - `git diff --check`.
+- Used a headed browser against the static build to verify:
+  - initial measurement visibility for Futures A/B/C;
+  - Future C selection;
+  - final collision/rejection/selection verdicts and decision receipt;
+  - desktop layout without card overflow.
+- Reviewed Genesis, cuRobo, ManiSkill, Isaac Lab, MoveIt 2, and
+  Safety-Gymnasium from their official repositories/documentation.
+- Recorded functional overlap, platform distinctions, AMD/ROCm status, and
+  conservative claim language in
+  `docs/submission/OPEN_SOURCE_OVERLAP_AUDIT_2026-07-29.md`.
+- Did not access or destroy the Radeon Cloud instance.

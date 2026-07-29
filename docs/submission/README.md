@@ -46,6 +46,9 @@ submission. It is a working set, not yet the final uploaded package.
   evidence-backed competitive position.
 - [`RULES_REVIEW_2026-07-28.md`](RULES_REVIEW_2026-07-28.md): a source-linked
   compliance review of the official 15-page Rules and Conditions document.
+- [`OPEN_SOURCE_OVERLAP_AUDIT_2026-07-29.md`](OPEN_SOURCE_OVERLAP_AUDIT_2026-07-29.md):
+  a primary-source comparison of the closest robotics projects, their overlap
+  with GuardianSim, and whether their official GPU path supports AMD/ROCm.
 - [`FINAL_SUBMISSION_2026-07-28.md`](FINAL_SUBMISSION_2026-07-28.md): the
   verified organizer PR, commit, file list, checksums, and authorization
   record without private identity data.
