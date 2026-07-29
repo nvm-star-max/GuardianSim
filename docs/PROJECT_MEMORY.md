@@ -1402,4 +1402,13 @@ Evidence and working material:
   Its distinct layer is same-state physical counterfactual evaluation,
   frozen gates, repeatability, execute-or-stop behavior, and an evidence
   receipt on a demonstrated AMD ROCm path.
+- Published source commit:
+  `ea775906a4e40d38b976b21e3e1b97e27312173b`.
+- Published GitHub Pages commit:
+  `ec824eeaa8a5d9959f7d0135c14f0ac609ab6aa8`.
+- GitHub Pages reported `built`. Public HTML, JavaScript, CSS, and the Seed 411
+  replay each returned HTTP 200. The remote JavaScript contained the expected
+  visible measurement values and new gate-action copy.
+- The immutable contest tag was not moved and organizer PR #39 was not
+  changed or merged.
 - No Radeon Cloud instance was accessed or destroyed.

@@ -1656,4 +1656,14 @@ Gate decision:
 - Recorded functional overlap, platform distinctions, AMD/ROCm status, and
   conservative claim language in
   `docs/submission/OPEN_SOURCE_OVERLAP_AUDIT_2026-07-29.md`.
+- Pushed source commit
+  `ea775906a4e40d38b976b21e3e1b97e27312173b`.
+- Deployed GitHub Pages commit
+  `ec824eeaa8a5d9959f7d0135c14f0ac609ab6aa8`; the Pages API reported
+  `built`.
+- Verified public HTTP 200 responses for HTML, compiled JavaScript,
+  stylesheet, and Seed 411 replay. The deployed bundle contained the visible
+  measurement copy, gate-action copy, `−1.42 mm`, and `0.936`.
+- Did not move the immutable contest tag, edit or merge organizer PR #39, or
+  publish local video/Playwright intermediates.
 - Did not access or destroy the Radeon Cloud instance.
