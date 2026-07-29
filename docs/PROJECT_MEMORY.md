@@ -1542,3 +1542,55 @@ Evidence and working material:
 - Local checks passed `92/92` tests, compilation, and diff hygiene.
 - Next action is an isolated 4-world Radeon smoke. Only a passing and strictly
   validated 4-world result may open the 16-world visual smoke gate.
+
+## Safety Swarm Radeon smoke gate — 2026-07-29
+
+- Reused Radeon Cloud instance `u-13907-735d71cb` without restart or
+  destruction. The existing dirty `main` worktree was not modified; all
+  Safety Swarm execution used the separate clean worktree
+  `/workspace/persistent/GuardianSim-safety-swarm`.
+- Preserved the first 4-world negative run. It was bound to the wrong
+  already-defined candidate,
+  `yaw_+67.5_retreat_+0.025_approach_+0.140`, and passed `0/4` because the
+  extra `25 mm` retreat caused the gripper to miss the target. This was an
+  implementation-binding error, not a reason to tune thresholds.
+- Corrected the binding from the preserved Gate 3.2 replay to
+  `yaw_+67.5_retreat_+0.000_approach_+0.140`.
+- The corrected 4-world engineering smoke passed strict validation:
+  - safe worlds `4/4`;
+  - clutter contacts `0`;
+  - worst sampled clearance `16.372 mm`;
+  - minimum stability `0.925`;
+  - `1,996` total environment steps in `8.323 s`;
+  - `239.806` environment steps/s;
+  - AMD GPU use: `62.545%` mean, `89%` peak across 22 samples.
+- The predeclared balanced 16-world engineering smoke was report-valid but
+  failed its all-world acceptance gate:
+  - safe worlds `12/16`;
+  - clutter-contact worlds `3`;
+  - worst sampled clearance `0 mm`;
+  - minimum stability `0`;
+  - `7,984` total environment steps in `10.676 s`;
+  - `747.843` environment steps/s;
+  - AMD GPU use: `68.231%` mean, `94%` peak across 26 samples.
+- The four failed rows were:
+  - world `69`: `9.680 mm` clearance, no contact, stability `1.0`;
+  - worlds `91`, `109`, and `209`: sampled contact, zero clearance, zero
+    stability, and task failure.
+- Gate decision: do not start the frozen 256-world formal run. Do not change
+  the V1 matrix, thresholds, row order, or protocol based on these partial
+  outcomes. A subsequent attempt requires a separately frozen protocol
+  version that can select another eligible candidate or safely stop under the
+  full uncertainty envelope.
+- The cloud evidence was committed as
+  `599c04770aca17b32971ed417d678122dbe4c453`. The package at
+  `/workspace/safety-swarm-smoke-evidence-2026-07-29.tar.gz` has SHA-256
+  `31a4c1c6923c793a501915260fa66eb5f8179dab8e728fc003d99b41687571c0`.
+- The manually downloaded package matched that hash. Pre-extraction safety
+  checks found 21 archive members, no absolute or parent-traversal paths, and
+  no symbolic or hard links. All 16 payloads in the recursive checksum
+  manifest passed locally.
+- Imported the raw reports, preflights, validation receipts, logs, PIDs, and
+  provenance under
+  `docs/evidence/safety-swarm-smoke-2026-07-29`. All three reports passed the
+  repository's strict `--require-radeon` validator.

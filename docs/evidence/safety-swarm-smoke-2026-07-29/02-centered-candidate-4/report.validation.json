@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "schema_version": 1,
+  "mode": "radeon_engineering_smoke",
+  "protocol_sha256": "b6cb473d67a9c3ab78a52271292d01e334935015d304613da8e7da235e236bff",
+  "formal_protocol_sha256": "9a8c5763d2ca007be924326812e9fd19c3125b8cfa968cdd734e01e7980f462c",
+  "formal_matrix_sha256": "71ea95a7194f1e9afdc0690ecdb30037b2a309a03049d26d832b9b21789b43eb",
+  "report_sha256": "c4939033c88f7dc811bc5b5e8d48f8d0440ea9408394113838cdfcc1a7e907f9",
+  "world_count": 4,
+  "smoke_status": "passed",
+  "safe_world_count": 4,
+  "showcase_ready": false
+}

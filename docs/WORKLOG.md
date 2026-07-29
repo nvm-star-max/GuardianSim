@@ -1765,3 +1765,44 @@ Gate decision:
 - Local acceptance passed `92/92` Python tests, Python compilation, unchanged
   formal matrix/protocol hashes, and `git diff --check`.
 - No Radeon workload has been run yet in this checkpoint.
+
+## 2026-07-29 — Ran the Safety Swarm 4/16-world Radeon smoke gate
+
+- Reused instance `u-13907-735d71cb` and kept the original cloud repository
+  untouched. Created
+  `/workspace/persistent/GuardianSim-safety-swarm` as a clean detached
+  worktree for the smoke execution.
+- Preserved a valid but failed first 4-world report after discovering that the
+  runner had selected the retreat-`25 mm` candidate instead of the centered
+  Gate 3.2 candidate. The failure was diagnosed from task completion and
+  retained-lift measurements; no safety threshold was changed.
+- Bound the runner to the verified centered candidate and reran the same
+  predeclared four rows. Strict validation passed with `4/4` safe, zero
+  contacts, `16.372 mm` worst clearance, `0.925` minimum stability,
+  `239.806` environment steps/s, and `89%` peak AMD GPU use.
+- Opened the predeclared 16-world gate. Strict report validation passed, but
+  the acceptance result was `12/16`:
+  - world `69` missed only the frozen clearance threshold at `9.680 mm`;
+  - worlds `91`, `109`, and `209` contacted clutter and failed the task;
+  - batch throughput was `747.843` environment steps/s with `94%` peak AMD
+    GPU use.
+- Stopped before the formal 256-world batch, as required by the frozen gate.
+  Did not edit the matrix, threshold, row order, protocol hash, or any prior
+  report.
+- Collected the wrong-candidate 4-world run, corrected 4-world run, and
+  balanced 16-world run with preflights, logs, PIDs, validation receipts,
+  provenance, and recursive checksums under
+  `docs/evidence/safety-swarm-smoke-2026-07-29` in cloud commit
+  `599c04770aca17b32971ed417d678122dbe4c453`.
+- Built cloud transfer package
+  `/workspace/safety-swarm-smoke-evidence-2026-07-29.tar.gz`; verified package
+  SHA-256 is
+  `31a4c1c6923c793a501915260fa66eb5f8179dab8e728fc003d99b41687571c0`.
+- Downloaded the package manually after automatic browser transfer was
+  security-blocked. The local package hash matched, the 21-member archive had
+  no unsafe paths or links, and all 16 inner `SHA256SUMS` payloads passed.
+- Imported the raw evidence into
+  `docs/evidence/safety-swarm-smoke-2026-07-29` and reran strict
+  `--require-radeon` validation against all three reports. Each report's
+  schema, protocol identity, full-matrix reference, measurements, derived
+  labels, AMD/HIP/ROCm evidence, and report hash passed.

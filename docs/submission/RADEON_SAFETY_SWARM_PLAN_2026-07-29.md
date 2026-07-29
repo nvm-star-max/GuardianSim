@@ -232,3 +232,36 @@ The second local slice now provides a separate engineering-smoke path:
 
 The 4/16 reports cannot be merged into or presented as the 256-world formal
 population. The formal matrix and protocol hashes remain unchanged.
+
+## Radeon smoke outcome — 2026-07-29
+
+The smoke gate has now been executed without changing the frozen V1 protocol.
+
+The first four-world attempt is preserved as a binding-error negative result:
+the runner selected the retreat-`25 mm` candidate, which missed the target in
+all four worlds. The correction did not tune a threshold or uncertainty row;
+it restored the selected candidate recorded in the Gate 3.2 replay:
+`yaw_+67.5_retreat_+0.000_approach_+0.140`.
+
+The corrected four-world run passed `4/4` with zero clutter contacts,
+`16.372 mm` worst sampled clearance, `0.925` minimum stability, and
+`239.806` environment steps/s. Peak sampled AMD GPU use was `89%`.
+
+The predeclared balanced 16-world run was structurally valid but passed only
+`12/16`. World `69` measured `9.680 mm` clearance against the frozen `10 mm`
+gate. Worlds `91`, `109`, and `209` made sampled clutter contact and failed
+the task. The batch measured `747.843` environment steps/s and `94%` peak AMD
+GPU use.
+
+Therefore the V1 formal 256-world run is closed, not launched. Its matrix,
+protocol hash, thresholds, and scenario order remain untouched. The next
+proposal must be a new frozen protocol version and should test one of two
+product behaviors:
+
+1. rank multiple already-eligible candidates against the complete uncertainty
+   envelope, then execute only a candidate that passes every world; or
+2. return a typed safe-stop receipt when no eligible candidate survives.
+
+The smoke measurements may demonstrate that the AMD batched execution path is
+working and that throughput rises at the larger batch. They must not be
+described as linear scaling, a 256-world result, or a formal robustness claim.

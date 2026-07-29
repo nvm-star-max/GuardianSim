@@ -1,0 +1,31 @@
+{
+  "instance_id": "u-13907-735d71cb",
+  "preserved_at_utc": "2026-07-29T05:35:03.050026+00:00",
+  "formal_matrix_sha256": "71ea95a7194f1e9afdc0690ecdb30037b2a309a03049d26d832b9b21789b43eb",
+  "formal_protocol_sha256": "9a8c5763d2ca007be924326812e9fd19c3125b8cfa968cdd734e01e7980f462c",
+  "formal_256_world_run_started": false,
+  "thresholds_changed_after_partial_results": false,
+  "runs": [
+    {
+      "path": "01-wrong-candidate-4",
+      "source_commit": "5abf315eaeb9b2513bc252ef5ab9ce24d0221b37",
+      "candidate_id": "yaw_+67.5_retreat_+0.025_approach_+0.140",
+      "safe_world_count": 0,
+      "world_count": 4
+    },
+    {
+      "path": "02-centered-candidate-4",
+      "source_commit": "738da71c2221c6c5e7ec2120a0f95d0ce42e3e69",
+      "candidate_id": "yaw_+67.5_retreat_+0.000_approach_+0.140",
+      "safe_world_count": 4,
+      "world_count": 4
+    },
+    {
+      "path": "03-balanced-16",
+      "source_commit": "738da71c2221c6c5e7ec2120a0f95d0ce42e3e69",
+      "candidate_id": "yaw_+67.5_retreat_+0.000_approach_+0.140",
+      "safe_world_count": 12,
+      "world_count": 16
+    }
+  ]
+}
