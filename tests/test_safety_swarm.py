@@ -210,7 +210,7 @@ class SafetySwarmTests(unittest.TestCase):
                 )
                 for world_id in world_ids
             ],
-            candidate_id="yaw_+67.5_retreat_+0.025_approach_+0.140",
+            candidate_id="yaw_+67.5_retreat_+0.000_approach_+0.140",
             wall_seconds=2.0,
             source_commit="b" * 40,
             backend="genesis_gpu_batched",

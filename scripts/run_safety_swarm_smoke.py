@@ -35,7 +35,7 @@ from guardian_sim.safety_swarm_genesis import (
 
 PICK_OBJECT = "011_banana"
 OBSTACLE_OBJECT = "018_plum"
-DEFAULT_CANDIDATE_ID = "yaw_+67.5_retreat_+0.025_approach_+0.140"
+DEFAULT_CANDIDATE_ID = "yaw_+67.5_retreat_+0.000_approach_+0.140"
 REQUESTED_LIFT_HEIGHT_M = 0.10
 CLEARANCE_LINK_NAMES = (
     "link5",
