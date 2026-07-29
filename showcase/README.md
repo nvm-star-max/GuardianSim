@@ -6,6 +6,9 @@ Genesis worlds, connects that compute to a 54-world Parallel Futures safety
 funnel, and then lets a judge challenge the frozen formal decisions. It does
 not rerun Genesis or consume GPU time.
 
+Public judge-facing site:
+<https://nvm-star-max.github.io/GuardianSim/>
+
 From the repository root:
 
 ```bash

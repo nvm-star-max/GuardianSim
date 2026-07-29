@@ -700,10 +700,10 @@ export function ShowcaseClient() {
             muted
             loop
             playsInline
-            poster="/seed-411-preview.png"
+            poster="seed-411-preview.png"
             preload="metadata"
           >
-            <source src="/seed-411-parallel-futures.mp4" type="video/mp4" />
+            <source src="seed-411-parallel-futures.mp4" type="video/mp4" />
           </video>
           <div className="video-legend">
             <span><i className="legend-red" /> Nominal · 1.42 mm overlap</span>
