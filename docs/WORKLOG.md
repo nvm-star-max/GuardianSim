@@ -1700,3 +1700,13 @@ Gate decision:
   negative evidence/P3 research.
 - Passed `84/84` Python unit tests, Python compilation, and
   `git diff --check`.
+- Committed and pushed the isolated backup/tooling scope as
+  `b97fd7e9a08a9c0fc7fdf2c9232dac76fb998afd`; no video drafts, Playwright
+  scratch data, immutable-tag movement, or organizer-PR edits were included.
+- Executed the backup in the current Radeon Jupyter session. Result:
+  `/persistent/GuardianSim-backups/20260729T035224Z-1481f51cd706`.
+- Verified every `SHA256SUMS` payload, the Git bundle, and all 580 tar members.
+  The manifest covers the Git bundle, working-tree archive, metadata,
+  restore README, Git status, and both external raw P0 artifacts.
+- The cloud working tree remains on `main@1481f51cd706`; no branch switch,
+  restart, or instance destruction occurred.

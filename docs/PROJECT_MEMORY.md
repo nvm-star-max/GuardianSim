@@ -1460,4 +1460,18 @@ Evidence and working material:
   and telemetry method must be frozen before the formal cloud run.
 - Local acceptance passed `84/84` Python unit tests, Python compilation, and
   `git diff --check`.
+- Published the backup tool and P0 gate on
+  `agent/parallel-futures-showcase` at commit
+  `b97fd7e9a08a9c0fc7fdf2c9232dac76fb998afd`.
+- Executed the complete backup against the live NFS mount. The restorable
+  backup directory is:
+  `/persistent/GuardianSim-backups/20260729T035224Z-1481f51cd706`.
+- The cloud source repository was intentionally left on
+  `main@1481f51cd706`; its Git status and all untracked P0 working files are
+  captured in the working-tree archive. The separately pushed feature branch
+  preserves the new backup implementation and plan.
+- Independent cloud verification passed:
+  - seven manifest payloads, including both raw external Radeon artifacts;
+  - verified Git bundle;
+  - readable working-tree tar archive with 580 members.
 - The Radeon instance was reused without restart or destruction.
