@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a frozen 4- or 16-world Radeon Safety Swarm engineering smoke."""
+"""Run a frozen V1 or candidate-selection V2 Safety Swarm Radeon smoke."""
 
 from __future__ import annotations
 
@@ -32,6 +32,14 @@ from guardian_sim.safety_swarm_genesis import (
     build_safety_swarm_placements,
     delayed_trajectory_alphas,
 )
+from guardian_sim.safety_swarm_v2 import (
+    CandidateWorldMeasurement,
+    assemble_safety_swarm_v2_smoke_report,
+    assign_candidate_worlds,
+    build_safety_swarm_v2_smoke_protocol,
+    safety_swarm_v2_tier_definition,
+    validate_safety_swarm_v2_smoke_report,
+)
 
 PICK_OBJECT = "011_banana"
 OBSTACLE_OBJECT = "018_plum"
@@ -49,7 +57,12 @@ CLEARANCE_LINK_NAMES = (
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--world-count", type=int, choices=(4, 16), required=True)
+    selection = parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument("--world-count", type=int, choices=(4, 16))
+    selection.add_argument(
+        "--v2-tier",
+        choices=("triad-4", "full-4", "full-16"),
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--preflight-output", type=Path)
     parser.add_argument("--validation-output", type=Path)
@@ -361,16 +374,36 @@ def main() -> None:
     )
     _refuse_overwrite((args.output, preflight_path, validation_path))
 
-    world_ids = safety_swarm_smoke_world_ids(args.world_count)
     matrix = build_safety_swarm_matrix()
-    worlds = tuple(matrix[world_id] for world_id in world_ids)
-    protocol = build_safety_swarm_smoke_protocol(args.world_count)
+    v2_mode = args.v2_tier is not None
+    if v2_mode:
+        candidate_ids, world_ids = safety_swarm_v2_tier_definition(args.v2_tier)
+        assignments = assign_candidate_worlds(candidate_ids, world_ids)
+        worlds = tuple(matrix[assignment.world_id] for assignment in assignments)
+        candidate_ids_by_env = tuple(
+            assignment.candidate_id for assignment in assignments
+        )
+        protocol = build_safety_swarm_v2_smoke_protocol(args.v2_tier)
+    else:
+        world_ids = safety_swarm_smoke_world_ids(args.world_count)
+        worlds = tuple(matrix[world_id] for world_id in world_ids)
+        assignments = ()
+        candidate_ids_by_env = (args.candidate_id,) * len(worlds)
+        protocol = build_safety_swarm_smoke_protocol(args.world_count)
     source_commit = _source_commit()
     preflight = {
         "status": "frozen_before_execution",
         "source_commit": source_commit,
-        "candidate_id": args.candidate_id,
+        "mode": "candidate_selection_v2" if v2_mode else "single_candidate_v1",
+        "candidate_ids": list(dict.fromkeys(candidate_ids_by_env)),
         "protocol": protocol,
+        "assignments": [
+            {
+                field: getattr(assignment, field)
+                for field in assignment.__dataclass_fields__
+            }
+            for assignment in assignments
+        ],
         "worlds": [
             {
                 field: getattr(world, field)
@@ -402,7 +435,7 @@ def main() -> None:
     if not torch.cuda.is_available() or not torch.version.hip:
         raise RuntimeError("Safety Swarm smoke requires ROCm/HIP PyTorch")
 
-    n_envs = args.world_count
+    n_envs = len(worlds)
     gs.init(backend=gs.gpu)
     build_started = time.perf_counter()
     bundle = build_scene(
@@ -462,9 +495,10 @@ def main() -> None:
         torch=torch,
     ).detach().cpu().tolist()
     selected_candidates = []
-    for target_position, obstacle_position in zip(
+    for target_position, obstacle_position, candidate_id in zip(
         actual_targets,
         actual_obstacles,
+        candidate_ids_by_env,
         strict=True,
     ):
         candidates = generate_obstacle_aware_candidates(
@@ -474,11 +508,11 @@ def main() -> None:
         matches = [
             candidate
             for candidate in candidates
-            if candidate.candidate_id == args.candidate_id
+            if candidate.candidate_id == candidate_id
         ]
         if len(matches) != 1:
             raise ValueError(
-                f"candidate {args.candidate_id!r} is not uniquely defined"
+                f"candidate {candidate_id!r} is not uniquely defined"
             )
         selected_candidates.append(matches[0])
 
@@ -685,35 +719,64 @@ def main() -> None:
     stabilities = stability.detach().cpu().tolist()
     reachability = reachable.detach().cpu().tolist()
     contacts = recorder.clutter_contact.detach().cpu().tolist()
-    measurements = [
-        SafetySwarmMeasurement(
-            world_id=world.world_id,
-            minimum_clearance_m=float(clearances[index]),
-            stability=float(stabilities[index]),
-            reachable=bool(reachability[index]),
-            task_completed=(
-                bool(reachability[index])
-                and float(stabilities[index]) >= GATE32_MINIMUM_STABILITY
-            ),
-            clutter_contact=bool(contacts[index]),
-            elapsed_environment_steps=total_steps,
+    device_identity = {
+        "name": torch.cuda.get_device_name(0),
+        "torch_version": torch.__version__,
+        "hip_version": torch.version.hip,
+        "genesis_version": getattr(gs, "__version__", "unknown"),
+    }
+    if v2_mode:
+        measurements = [
+            CandidateWorldMeasurement(
+                candidate_id=assignment.candidate_id,
+                world_id=assignment.world_id,
+                minimum_clearance_m=float(clearances[index]),
+                stability=float(stabilities[index]),
+                reachable=bool(reachability[index]),
+                task_completed=(
+                    bool(reachability[index])
+                    and float(stabilities[index]) >= GATE32_MINIMUM_STABILITY
+                ),
+                clutter_contact=bool(contacts[index]),
+                elapsed_environment_steps=total_steps,
+            )
+            for index, assignment in enumerate(assignments)
+        ]
+        report = assemble_safety_swarm_v2_smoke_report(
+            measurements,
+            tier=args.v2_tier,
+            wall_seconds=execution_seconds,
+            mode="radeon_engineering_smoke",
+            source_commit=source_commit,
+            backend="genesis_gpu_batched",
+            device=device_identity,
+            gpu_telemetry=telemetry,
         )
-        for index, world in enumerate(worlds)
-    ]
-    report = assemble_safety_swarm_smoke_report(
-        measurements,
-        candidate_id=args.candidate_id,
-        wall_seconds=execution_seconds,
-        source_commit=source_commit,
-        backend="genesis_gpu_batched",
-        device={
-            "name": torch.cuda.get_device_name(0),
-            "torch_version": torch.__version__,
-            "hip_version": torch.version.hip,
-            "genesis_version": getattr(gs, "__version__", "unknown"),
-        },
-        gpu_telemetry=telemetry,
-    )
+    else:
+        measurements = [
+            SafetySwarmMeasurement(
+                world_id=world.world_id,
+                minimum_clearance_m=float(clearances[index]),
+                stability=float(stabilities[index]),
+                reachable=bool(reachability[index]),
+                task_completed=(
+                    bool(reachability[index])
+                    and float(stabilities[index]) >= GATE32_MINIMUM_STABILITY
+                ),
+                clutter_contact=bool(contacts[index]),
+                elapsed_environment_steps=total_steps,
+            )
+            for index, world in enumerate(worlds)
+        ]
+        report = assemble_safety_swarm_smoke_report(
+            measurements,
+            candidate_id=args.candidate_id,
+            wall_seconds=execution_seconds,
+            source_commit=source_commit,
+            backend="genesis_gpu_batched",
+            device=device_identity,
+            gpu_telemetry=telemetry,
+        )
     report["scene_build_seconds"] = scene_build_seconds
     report["runtime"] = {
         "pick_object": PICK_OBJECT,
@@ -724,15 +787,24 @@ def main() -> None:
         "maximum_action_delay_steps": max(delays),
     }
     # Runtime provenance is intentionally hashed too.
-    from guardian_sim.safety_swarm import _sha256_json
+    if v2_mode:
+        from guardian_sim.safety_swarm_v2 import _sha256_json
+    else:
+        from guardian_sim.safety_swarm import _sha256_json
 
     report["report_sha256"] = _sha256_json(
         {key: value for key, value in report.items() if key != "report_sha256"}
     )
-    validation = validate_safety_swarm_smoke_report(
-        report,
-        require_radeon=True,
-    )
+    if v2_mode:
+        validation = validate_safety_swarm_v2_smoke_report(
+            report,
+            require_radeon=True,
+        )
+    else:
+        validation = validate_safety_swarm_smoke_report(
+            report,
+            require_radeon=True,
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(report, indent=2) + "\n",

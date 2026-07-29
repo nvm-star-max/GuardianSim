@@ -1806,3 +1806,40 @@ Gate decision:
   `--require-radeon` validation against all three reports. Each report's
   schema, protocol identity, full-matrix reference, measurements, derived
   labels, AMD/HIP/ROCm evidence, and report hash passed.
+
+## 2026-07-29 — Froze and implemented Safety Swarm V2 locally
+
+- Kept every Safety Swarm V1 protocol identity and evidence file unchanged.
+  Added an independent V2 protocol for selecting one action only after
+  evaluating the candidate across an uncertainty envelope.
+- Froze the 18-action Gate 3.2 catalog and deterministic Cartesian execution
+  order over the existing 256-world matrix:
+  - 4,608 candidate-world pairs in the formal population;
+  - candidate catalog SHA-256
+    `9c3af60dfb812e6128f6e849d27cf2acd0d672cdcb3aa98191656e4009054e44`;
+  - formal protocol SHA-256
+    `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`;
+  - formal chunks contain at most 256 Genesis environments.
+- Added frozen V2 cloud gates:
+  - `triad-4`: 12 pairs,
+    `4fad8ddaebbff6f2b328af83671465574a0482046a1361522ae8399c15fd574c`;
+  - `full-4`: 72 pairs,
+    `e6c24948ee708c20d6c6ea270ac4ff3fb5b503d18896508d7d66fa69536aa984`;
+  - `full-16`: 288 pairs,
+    `128a494aec03498c8ba6c807a3e26f8e733c87f61ec5e696371839270c3d9f44`;
+  - formal: 4,608 pairs.
+- Implemented strict all-world qualification, deterministic robust ranking,
+  typed `safe_stop`, V2 report assembly and validation, AMD/HIP/ROCm checks,
+  an offline fixture, and an adaptive candidate-by-world evidence renderer.
+- Extended `scripts/run_safety_swarm_smoke.py` with `--v2-tier` while
+  preserving the V1 interface. One tier is flattened into a single Genesis
+  GPU scene with per-environment candidate and world assignment.
+- Built and strictly validated the local 3×4 fixture. It selected the expected
+  centered `+67.5°` candidate, but remains clearly labelled offline with
+  `showcase_ready=false`; it is UI/execution-path calibration only.
+- Local verification passed `98/98` unit tests, compilation, report
+  validation, renderer inspection, and `git diff --check`.
+- Stopped before the next major gate. No Radeon workload was launched and the
+  cloud instance was not restarted or destroyed. Next action:
+  `triad-4` on Radeon Cloud, followed by 72, 288, and 4,608 pairs only when
+  each preceding frozen gate passes.

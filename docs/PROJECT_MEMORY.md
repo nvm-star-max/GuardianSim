@@ -1594,3 +1594,48 @@ Evidence and working material:
   provenance under
   `docs/evidence/safety-swarm-smoke-2026-07-29`. All three reports passed the
   repository's strict `--require-radeon` validator.
+
+## Safety Swarm V2 frozen candidate selection — 2026-07-29
+
+- V1 remains immutable, including its reports, matrices, thresholds, hashes,
+  and negative 16-world gate result. V2 is a new protocol rather than a
+  reinterpretation or overwrite of V1 evidence.
+- V2 freezes the 18 existing Gate 3.2 action candidates against the complete
+  256-world uncertainty matrix:
+  - 18 candidates × 256 worlds = 4,608 candidate-world pairs;
+  - candidate catalog SHA-256:
+    `9c3af60dfb812e6128f6e849d27cf2acd0d672cdcb3aa98191656e4009054e44`;
+  - formal protocol SHA-256:
+    `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`;
+  - maximum formal Genesis chunk: 256 environments.
+- The unchanged hard gates are sampled clearance at least `10 mm`, stability
+  at least `0.70`, no clutter contact, reachable, and task completed.
+  A candidate qualifies only when every selected world passes and the
+  candidate records zero contacts.
+- Selection happens only among qualifying candidates and is deterministic:
+  worst clearance descending, 5th-percentile clearance descending, minimum
+  stability descending, then candidate index ascending. If none qualifies,
+  the typed result is `safe_stop`; V2 does not choose the least-bad unsafe
+  action.
+- The predeclared cloud progression is:
+  - `triad-4`: 3 candidates × 4 worlds = 12 pairs, protocol
+    `4fad8ddaebbff6f2b328af83671465574a0482046a1361522ae8399c15fd574c`;
+  - `full-4`: 18 × 4 = 72 pairs, protocol
+    `e6c24948ee708c20d6c6ea270ac4ff3fb5b503d18896508d7d66fa69536aa984`;
+  - `full-16`: 18 × 16 = 288 pairs, protocol
+    `128a494aec03498c8ba6c807a3e26f8e733c87f61ec5e696371839270c3d9f44`;
+  - formal: 18 × 256 = 4,608 pairs.
+  Each larger gate opens only after the preceding gate passes strict report
+  validation and its frozen acceptance rule.
+- The Genesis runner can now flatten one V2 candidate-world tier into one GPU
+  scene while preserving candidate-major/world-ID ordering. The V2 schema-1
+  validator reconstructs assignments, measurements, qualification,
+  selection, AMD/HIP/ROCm identity, telemetry, and report hashes.
+- The local `triad-4` fixture covers all 12 assignments and validates the
+  report/rendering path, but is explicitly offline, has
+  `showcase_ready=false`, and is not an AMD result or performance claim.
+- Local acceptance passed `98/98` tests, Python compilation, fixture strict
+  validation, renderer checks, and diff hygiene.
+- No cloud workload, instance restart, instance destruction, threshold
+  change, or formal claim occurred in this stage. The next gate is the
+  isolated 12-environment `triad-4` Radeon smoke.
