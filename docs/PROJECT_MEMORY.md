@@ -1412,3 +1412,52 @@ Evidence and working material:
 - The immutable contest tag was not moved and organizer PR #39 was not
   changed or merged.
 - No Radeon Cloud instance was accessed or destroyed.
+
+## Radeon maintenance backup and Safety Swarm P0 gate — 2026-07-29
+
+- The organizer announced a Radeon Cloud publication/maintenance window for
+  2026-07-31 at 18:00 UTC+8 and asked participants to preserve important data
+  in NFS plus Git and local backups.
+- The announcement names `/workspace/persistence`; instance
+  `u-13907-735d71cb` actually exposes `/workspace/persistent`. The repository
+  remains at `/workspace/persistent/GuardianSim`.
+- Preserved the raw 2026-07-29 Radeon P0 archive and checksum in both:
+  - `/workspace/persistent/`;
+  - `/Users/aolos/Downloads/GuardianSim-backups/2026-07-29/`.
+- Verified archive SHA-256:
+  `35c1110711c96a7271fe723ffd2dd8160e179e63cd46864df4e5198f518fa46d`.
+  The archive contains Radeon scale, Parallel Futures, Safety Critic, and
+  session-environment outputs. Safety Critic remains a negative result with
+  `showcase_ready=false`.
+- Added a restorable maintenance-backup implementation:
+  - auto-detects both persistence mount spellings;
+  - writes a Git bundle plus complete working-tree archive;
+  - includes optional external raw artifacts;
+  - records Git/environment metadata and recursive SHA-256 checksums;
+  - excludes `.env*`, credentials, private keys, caches, virtual
+    environments, Playwright scratch data, and Git internals.
+- Added backup runbook
+  `docs/submission/RADEON_MAINTENANCE_BACKUP_2026-07-29.md`.
+- Rechecked the two currently visible Track 3 competitors:
+  - NaviSense AI's strongest delivery mechanisms are a single end-to-end
+    workflow, explicit measured Radeon inference, live demo, fallback path,
+    and reusable upstream component;
+  - 1bit.systems' strongest presentation mechanism is visible hardware-level
+    telemetry and throughput, not a mechanism GuardianSim should duplicate.
+- Combined the useful mechanisms from current entries and adjacent open-source
+  projects into the next P0 gate, **Radeon Safety Swarm**:
+  - one selected move;
+  - a frozen 256-world uncertainty grid;
+  - a 16×16 robustness wall;
+  - typed safety costs, worst-case margin, failure histogram, and
+    execute-or-stop result;
+  - visible AMD/ROCm batch telemetry and a checksummed evidence receipt.
+- The plan is recorded in
+  `docs/submission/RADEON_SAFETY_SWARM_PLAN_2026-07-29.md`.
+- Claim boundary: the 256 worlds are a separate engineering uncertainty
+  stress-test population, not additional formal Gate 3.2 scenarios and not a
+  physical-robot safety guarantee. The protocol, matrix, schema, thresholds,
+  and telemetry method must be frozen before the formal cloud run.
+- Local acceptance passed `84/84` Python unit tests, Python compilation, and
+  `git diff --check`.
+- The Radeon instance was reused without restart or destruction.

@@ -1667,3 +1667,36 @@ Gate decision:
 - Did not move the immutable contest tag, edit or merge organizer PR #39, or
   publish local video/Playwright intermediates.
 - Did not access or destroy the Radeon Cloud instance.
+
+## 2026-07-29 — Closed the maintenance-backup gap and froze the next P0 direction
+
+- Reused the existing Jupyter session for Radeon instance
+  `u-13907-735d71cb`; did not restart or destroy it.
+- Confirmed that the instance mount is `/workspace/persistent`, despite the
+  organizer announcement using `/workspace/persistence`.
+- Downloaded the raw Radeon P0 archive and checksum, verified archive contents,
+  and matched SHA-256
+  `35c1110711c96a7271fe723ffd2dd8160e179e63cd46864df4e5198f518fa46d`.
+- Copied the archive and checksum into the actual NFS persistence mount and
+  preserved a local Mac copy under
+  `/Users/aolos/Downloads/GuardianSim-backups/2026-07-29/`.
+- Added `guardian_sim.backup` and
+  `scripts/backup_radeon_workspace.py`:
+  - Git bundle for committed history and refs;
+  - working-tree tarball for tracked and untracked files;
+  - optional raw external artifacts;
+  - recursive checksum manifest and restore metadata;
+  - secret/cache exclusion policy.
+- Added two unit tests covering restore artifacts, recursive checksums, raw
+  artifact inclusion, secret exclusion, cache exclusion, and invalid source
+  rejection.
+- Read the current Track 3 PRs for NaviSense AI and 1bit.systems, then compared
+  their delivery mechanisms with cuRobo, ManiSkill, Isaac Lab,
+  Safety-Gymnasium, and Genesis.
+- Defined **Radeon Safety Swarm** as the next P0 implementation gate:
+  a frozen 256-world uncertainty stress test, 16×16 robustness wall, typed
+  costs, visible AMD telemetry, execute-or-stop decision, and evidence receipt.
+- Kept the failed Safety Critic out of the headline; it remains preserved
+  negative evidence/P3 research.
+- Passed `84/84` Python unit tests, Python compilation, and
+  `git diff --check`.
