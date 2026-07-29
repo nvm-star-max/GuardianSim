@@ -73,7 +73,8 @@ Project documents:
 judge-facing safety time machine: choose one of three counterfactual robot
 actions, run the verified futures, and inspect the resulting evidence receipt.
 
-- Preview: <https://guardiansim-proof.dghcdtddgh.chatgpt.site>
+- Public showcase, no sign-in required:
+  <https://nvm-star-max.github.io/GuardianSim/>
 - Verified challenges: collision trap, clearance decoy, and impossible gap
 - Claim boundary: Genesis simulation on AMD Radeon/ROCm; no physical-robot
   safety claim

@@ -1332,3 +1332,36 @@ Evidence and working material:
   were deliberately not staged or published.
 - The organizer PR was not merged, and the Radeon instance was not accessed or
   destroyed.
+
+## Public judge-facing showcase — 2026-07-29
+
+- The owner authorized changing the interactive showcase to public access and
+  adding it to organizer PR #39.
+- The existing Sites workspace rejected internet-public access. The private
+  deployment was left unchanged; no bypass credential was published.
+- Added a separate static build that reuses the verified React experience and
+  preserves the existing Sites build:
+  - source commit
+    `1d66d3ffe6d6a05956d4e4ae314347f1ebb9d073`;
+  - GitHub Pages commit
+    `3b4b438b57d3d7c1539f74c33e8c14358fe45cc1`;
+  - public URL:
+    <https://nvm-star-max.github.io/GuardianSim/>.
+- Both the original server-rendered build/tests (`3/3`) and the static
+  build/tests (`2/2`) passed, together with ESLint.
+- Verified without authentication:
+  - HTML HTTP 200;
+  - compiled JavaScript HTTP 200;
+  - stylesheet HTTP 200;
+  - Seed 411 replay HTTP 200;
+  - social-preview image HTTP 200.
+- Added a no-sign-in judge quick-start to the official package and PR body.
+  Official fork commit:
+  `289e4c09211974f12f74b8298e493ab93e78037f`.
+- The updated recursive official-package manifest passed; its SHA-256 is
+  `5ffab05ff5ef602fefc6b42f1d993090a113f411fb2bc8ab16c45d1868fee621`.
+- The updated submission working-set manifest passed; its SHA-256 is
+  `fe7b8bae188b96585010a44b6b43d0d6057826745a0643336d6e6e06fab5eff4`.
+- Organizer PR #39 remained `OPEN`, non-draft, and `CLEAN`, with no comments,
+  reviews, or failed checks. It was not merged.
+- No Radeon Cloud instance was accessed or destroyed.

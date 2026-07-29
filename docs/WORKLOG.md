@@ -1602,3 +1602,32 @@ Gate decision:
 - Downloaded remote package artifacts and validated their recursive checksums.
 - Did not merge the organizer PR and did not access or destroy the Radeon
   instance.
+
+## 2026-07-29 — Published a no-sign-in judge showcase
+
+- Audited organizer PR #39 after the P0 release. It had no comments, reviews,
+  or checks requiring action and remained open and cleanly mergeable.
+- Found that the repository's interactive-showcase URL returned HTTP 401 and
+  required ChatGPT sign-in.
+- After owner authorization, attempted to make the Sites deployment public.
+  The workspace did not permit internet-public Sites access, so the existing
+  deployment was left unchanged.
+- Added an isolated Vite static build for the same React showcase without
+  changing the evidence-backed interaction or metrics.
+- Passed:
+  - existing server-rendered showcase tests `3/3`;
+  - static GitHub Pages tests `2/2`;
+  - ESLint;
+  - both submission checksum manifests;
+  - `git diff --check`.
+- Published the public page at
+  <https://nvm-star-max.github.io/GuardianSim/>.
+- Verified unauthenticated HTTP 200 responses for its HTML, JavaScript, CSS,
+  replay video, and social-preview image.
+- Added the public quick-start URL to the repository README, official package,
+  and organizer PR body.
+- Pushed official fork commit
+  `289e4c09211974f12f74b8298e493ab93e78037f`; PR #39 remained open,
+  non-draft, and `CLEAN`.
+- Did not merge the organizer PR and did not access or destroy the Radeon
+  instance.

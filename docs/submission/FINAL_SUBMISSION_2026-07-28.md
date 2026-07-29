@@ -94,3 +94,25 @@ The owner authorized the release and PR update.
 
 The remote package files were downloaded after the update and passed their
 recursive checksum manifest. The PR was not merged.
+
+## Public judge showcase completed on 2026-07-29
+
+The owner authorized public access to the interactive evidence arena. The
+existing Sites workspace did not permit internet-public access, so an
+independent static build was published through GitHub Pages:
+
+<https://nvm-star-max.github.io/GuardianSim/>
+
+- GuardianSim static-build source commit:
+  `1d66d3ffe6d6a05956d4e4ae314347f1ebb9d073`
+- GitHub Pages deployment commit:
+  `3b4b438b57d3d7c1539f74c33e8c14358fe45cc1`
+- Updated official fork commit:
+  `289e4c09211974f12f74b8298e493ab93e78037f`
+- Updated official-package manifest SHA-256:
+  `5ffab05ff5ef602fefc6b42f1d993090a113f411fb2bc8ab16c45d1868fee621`
+
+An unsigned request verified HTTP 200 responses for the public HTML, compiled
+JavaScript, stylesheet, Seed 411 replay video, and social-preview image. The
+organizer PR now presents this no-sign-in arena before the metric summary and
+remains open, non-draft, and cleanly mergeable. The PR was not merged.

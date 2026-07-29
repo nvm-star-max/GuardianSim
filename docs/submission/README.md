@@ -51,6 +51,8 @@ submission. It is a working set, not yet the final uploaded package.
   record without private identity data.
 - [`OFFICIAL_PR_DRAFT.md`](OFFICIAL_PR_DRAFT.md): the English official-repo
   pull-request title and body draft.
+- **Public judge-facing showcase:**
+  <https://nvm-star-max.github.io/GuardianSim/> (no sign-in required).
 - [`official-package/Track3-Aegis-Motion-GuardianSim`](official-package/Track3-Aegis-Motion-GuardianSim):
   self-contained directory prepared for the official contest fork. It now
   includes the report, the 80-second supplementary Radeon preview, the raw

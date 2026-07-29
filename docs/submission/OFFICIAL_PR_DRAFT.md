@@ -24,6 +24,15 @@ Genesis. It evaluates bounded counterfactual grasp actions from the same
 fingerprinted physical state on an AMD Radeon GPU, applies frozen hard safety
 gates, and either selects an eligible action or explicitly stops.
 
+## Try it first
+
+Open the public **Parallel Futures** evidence arena (no sign-in required):
+https://nvm-star-max.github.io/GuardianSim/
+
+It lets judges challenge three preserved decisions and trace every displayed
+metric back to immutable reports. It replays published evidence and does not
+claim new benchmark samples.
+
 ## Verified result
 
 In the frozen 30-scenario Gate 3.2 Genesis benchmark:
@@ -58,6 +67,8 @@ candidate futures are not additional formal safety scenarios.
 
 ## Deliverables
 
+- Public interactive evidence arena:
+  https://nvm-star-max.github.io/GuardianSim/
 - Source and reproducibility instructions:
   https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v2
 - Technical report:

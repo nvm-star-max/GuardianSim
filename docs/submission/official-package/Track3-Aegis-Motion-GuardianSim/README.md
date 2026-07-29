@@ -7,6 +7,16 @@
 **Team structure:** Solo developer, GitHub
 [`@nvm-star-max`](https://github.com/nvm-star-max)
 
+## Judge quick start
+
+Open the public **Parallel Futures** evidence arena:
+<https://nvm-star-max.github.io/GuardianSim/>
+
+No account or sign-in is required. Judges can challenge three preserved
+decisions, inspect the Radeon scale path, and follow every displayed metric to
+immutable evidence. The site replays published results; it does not create new
+benchmark samples.
+
 ## Project overview
 
 GuardianSim is a policy-agnostic safety layer for robot manipulation in
@@ -89,6 +99,8 @@ independent scenarios.
 
 ## Deliverables
 
+- **Public interactive evidence arena:**
+  <https://nvm-star-max.github.io/GuardianSim/>
 - **Immutable source and evidence release:**
   <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v2>
 - **Reproducibility guide:**
