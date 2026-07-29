@@ -160,3 +160,75 @@ Safety Critic as negative evidence/P3 research; it should not become the
 headline. The first coding slice is the frozen 256-row matrix, typed cost
 vector, strict report schema, and offline 16×16 replay—before another long
 cloud run.
+
+## Local implementation checkpoint — 2026-07-29
+
+The first coding slice is complete locally.
+
+Implemented:
+
+- a deterministic `4 × 4 × 4 × 4` Cartesian matrix:
+  - target pose group: XY bias plus yaw bias;
+  - clutter geometry group: gap delta plus bearing bias;
+  - end-effector XY bias group;
+  - action-start delay group;
+- exactly 256 unique, ordered worlds mapped to a 16×16 wall;
+- typed costs for contact, clearance deficit, stability deficit, and task
+  failure;
+- frozen hard gates inherited from Gate 3.2:
+  - minimum sampled clearance `0.010 m`;
+  - minimum stability `0.70`;
+  - all 256 worlds must pass;
+  - zero clutter-contact worlds;
+- deterministic stop-reason precedence;
+- Wilson lower bound, worst-case clearance, fifth-percentile clearance,
+  failure histogram, wall time, and environment-steps/s aggregation;
+- strict report validation that recomputes every world label, cost, summary,
+  protocol hash, matrix hash, and report hash;
+- separate validation rules for:
+  - `offline_fixture`, always `showcase_ready=false`;
+  - `radeon_formal`, requiring Genesis GPU batching, AMD identity, HIP, ROCm
+    telemetry, and a Git commit;
+- a standalone interactive 16×16 HTML replay. Hovering a cell exposes its
+  exact perturbation, measurements, and stop reason.
+
+Frozen identities:
+
+- matrix SHA-256:
+  `71ea95a7194f1e9afdc0690ecdb30037b2a309a03049d26d832b9b21789b43eb`;
+- protocol SHA-256:
+  `9a8c5763d2ca007be924326812e9fd19c3125b8cfa968cdd734e01e7980f462c`.
+
+The local review frame intentionally uses deterministic fixture measurements:
+128 worlds pass and 128 fail the clearance gate. This is only to exercise both
+visual states. It is prominently labelled
+`OFFLINE UI FIXTURE · NOT A RADEON RESULT`, carries no AMD throughput claim,
+and cannot pass `--require-radeon`.
+
+The next implementation gate is the Genesis adapter. It must apply the frozen
+matrix per environment, bind one real selected candidate to every world,
+collect the seven raw measurements, and support isolated 4-world and 16-world
+smoke runs without changing the 256-world formal protocol. No formal cloud
+result or public claim exists yet.
+
+## Genesis smoke adapter checkpoint — 2026-07-29
+
+The second local slice now provides a separate engineering-smoke path:
+
+- fixed balanced subsets:
+  - 4 worlds: IDs `0, 85, 170, 255`, covering every level once;
+  - 16 worlds: an orthogonal subset covering every factor level four times;
+- one candidate ID is held constant while target pose, clutter geometry,
+  end-effector bias, and action delay vary per Genesis environment;
+- target and obstacle positions preserve the declared physical gap;
+- delayed environments hold their start pose, then receive the same number of
+  trajectory steps as the undelayed environments;
+- measurements include sampled AABB clearance, strict sampled overlap,
+  reachability, retained-lift stability, task completion, and executed
+  environment steps;
+- evidence files refuse overwrite;
+- smoke reports have their own schema/report name, reference the full frozen
+  matrix and protocol hashes, and are always `showcase_ready=false`.
+
+The 4/16 reports cannot be merged into or presented as the 256-world formal
+population. The formal matrix and protocol hashes remain unchanged.

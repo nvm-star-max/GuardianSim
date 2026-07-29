@@ -1475,3 +1475,70 @@ Evidence and working material:
   - verified Git bundle;
   - readable working-tree tar archive with 580 members.
 - The Radeon instance was reused without restart or destruction.
+
+## Safety Swarm local protocol and replay — 2026-07-29
+
+- Implemented the first local Radeon Safety Swarm slice without accessing or
+  changing the cloud instance.
+- Frozen one 256-world uncertainty matrix as a `4 × 4 × 4 × 4` Cartesian
+  product:
+  - target XY/yaw pose group;
+  - clutter gap/bearing group;
+  - end-effector XY bias group;
+  - action-start delay group.
+- Frozen matrix SHA-256:
+  `71ea95a7194f1e9afdc0690ecdb30037b2a309a03049d26d832b9b21789b43eb`.
+- Frozen protocol SHA-256:
+  `9a8c5763d2ca007be924326812e9fd19c3125b8cfa968cdd734e01e7980f462c`.
+- The execute rule is deliberately strict: all 256 worlds must pass the
+  existing `10 mm` clearance and `0.70` stability gates, with zero clutter
+  contacts and no reachability/task failure. Otherwise the result is
+  `safe_stop`.
+- Added typed safety costs, deterministic stop reasons, Wilson lower bound,
+  worst/5th-percentile clearance, failure histogram, measured wall time, and
+  environment-steps/s.
+- Added a strict schema-1 validator that reconstructs all world labels,
+  aggregates, and hashes. Radeon-formal reports additionally require:
+  - `genesis_gpu_batched`;
+  - an AMD device name;
+  - a HIP version;
+  - at least one ROCm telemetry sample;
+  - a Git source commit.
+- Added a standalone 16×16 HTML evidence replay and checked it in a real
+  Chromium viewport at 1920×1450. No metric, hash, grid cell, footer, or
+  decision card overflow was observed.
+- The current 128-green/128-orange page is a deterministic UI fixture, not a
+  simulation result. It is labelled
+  `OFFLINE UI FIXTURE · NOT A RADEON RESULT`, has
+  `showcase_ready=false`, and is rejected by `--require-radeon`.
+- Next gate: implement per-environment Genesis perturbation and measurement
+  capture, then run isolated 4-world and 16-world cloud smoke tests before one
+  untouched 256-world formal run. Do not alter the frozen matrix or thresholds
+  after seeing partial cloud outcomes.
+- No commit, push, deployment, organizer-PR edit, formal Radeon run, instance
+  restart, or instance destruction occurred in this slice.
+
+## Safety Swarm Genesis smoke executor — 2026-07-29
+
+- Added a dedicated engineering-smoke path for 4 and 16 Radeon environments.
+- Smoke selection is predeclared and balanced:
+  - 4-world IDs: `0, 85, 170, 255`;
+  - the 16-world orthogonal subset represents each level of all four factors
+    exactly four times.
+- Every environment executes the same selected obstacle-aware candidate while
+  receiving its own target pose, clutter geometry, end-effector bias, and
+  start delay.
+- The runner writes a frozen preflight before Genesis starts, refuses to
+  overwrite evidence, records AMD/HIP/ROCm identity, and strictly validates
+  raw world measurements and derived labels.
+- Partial smoke reports use a separate report identity and remain
+  `showcase_ready=false`; they cannot be combined with the 256-world formal
+  report.
+- The original formal identities remain unchanged:
+  - matrix:
+    `71ea95a7194f1e9afdc0690ecdb30037b2a309a03049d26d832b9b21789b43eb`;
+  - protocol:
+    `9a8c5763d2ca007be924326812e9fd19c3125b8cfa968cdd734e01e7980f462c`.
+- Local checks passed `92/92` tests, compilation, and diff hygiene.
+- Next action is an isolated 4-world Radeon smoke. Only a passing and strictly
+  validated 4-world result may open the 16-world visual smoke gate.

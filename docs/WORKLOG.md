@@ -1710,3 +1710,58 @@ Gate decision:
   restore README, Git status, and both external raw P0 artifacts.
 - The cloud working tree remains on `main@1481f51cd706`; no branch switch,
   restart, or instance destruction occurred.
+
+## 2026-07-29 — Built the frozen Safety Swarm protocol and offline future wall
+
+- Added `guardian_sim/safety_swarm.py` with:
+  - the complete 256-world matrix;
+  - typed cost vectors;
+  - hard-safe classification and ordered stop reasons;
+  - Wilson and percentile aggregation;
+  - schema-1 report assembly and strict validation;
+  - a deterministic UI-only fixture.
+- Added CLI tools to build the fixture, validate any Safety Swarm report, and
+  render the report as a standalone interactive HTML page.
+- Added five unit tests covering:
+  - matrix uniqueness, order, balance, and hash;
+  - typed costs and multi-gate failure explanations;
+  - formal AMD/HIP/ROCm report acceptance;
+  - matrix, label, summary, and hash tamper rejection;
+  - explicit separation between an offline fixture and Radeon evidence.
+- Generated the fixture report and strict validation under the ignored
+  `outputs/safety-swarm/` workspace.
+- Opened the HTML in Chromium, inspected the accessibility snapshot containing
+  all 256 cells, and captured a complete 1920×1450 review frame at
+  `output/playwright/safety-swarm-offline-fixture.png`.
+- Verified the full grid, decision card, metrics, hashes, legend, and claim
+  boundary fit their containers. Cell-level hover data contains the exact
+  physical perturbation, clearance, stability, and stop reason.
+- The fixture result (`128/256`, `safe_stop`) is synthetic UI calibration and
+  is not eligible for any submission metric or AMD performance statement.
+- Stopped before the Genesis/Radeon execution gate. No cloud run, public-site
+  change, push, organizer-PR edit, or instance destruction occurred.
+
+## 2026-07-29 — Added the isolated Safety Swarm Genesis smoke executor
+
+- Added a simulator-independent placement/timing adapter for per-environment:
+  - target XY/yaw perturbation;
+  - clutter gap/bearing perturbation;
+  - end-effector XY bias;
+  - action-start delay.
+- Added fixed balanced 4-world and 16-world subsets that reference, but never
+  mutate, the frozen 256-world matrix.
+- Added a Radeon-only engineering-smoke schema with:
+  - strict world reconstruction;
+  - AMD/HIP/ROCm requirements;
+  - recomputed labels, summaries, and report hash;
+  - `showcase_ready=false`;
+  - explicit prohibition on merging partial smoke evidence into the formal
+    population.
+- Added a Genesis GPU batched smoke runner with no-overwrite evidence paths,
+  preflight protocol preservation, per-world IK targets, delayed control,
+  sampled clearance/contact capture, retained-lift stability, and ROCm
+  telemetry.
+- Extended the validator CLI to auto-detect formal versus smoke reports.
+- Local acceptance passed `92/92` Python tests, Python compilation, unchanged
+  formal matrix/protocol hashes, and `git diff --check`.
+- No Radeon workload has been run yet in this checkpoint.
