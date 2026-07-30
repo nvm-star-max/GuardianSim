@@ -10,8 +10,10 @@ submission. It is a working set, not yet the final uploaded package.
   metrics.
 - [`GuardianSim-Technical-Report.pdf`](GuardianSim-Technical-Report.pdf):
   visually inspected seven-page submission edition with no draft markings.
-  The Radeon section now includes the separately scoped 1/16/64/256-world
-  scale run and the 54-world Parallel Futures engineering run.
+  The Radeon section now separates the 1/16/64/256-world throughput curve, the
+  30-scenario safety benchmark, and the formal 18 × 256 = 4,608-pair decision
+  run. PDF SHA-256:
+  `4028372be15ca2fba2a0cd7f1ddd7e51c8d9cd012521e4be80cc40a523500ef3`.
 - [`GuardianSim-Aegis-Motion-demo-review-v2.mp4`](GuardianSim-Aegis-Motion-demo-review-v2.mp4):
   the approved 4:41 complete-workflow submission video with Qwen3-TTS Instruct
   narration, fixed chapter captions, and normalized loudness.
@@ -55,11 +57,14 @@ submission. It is a working set, not yet the final uploaded package.
 - [`OFFICIAL_PR_DRAFT.md`](OFFICIAL_PR_DRAFT.md): the English official-repo
   pull-request title and body draft.
 - **Public judge-facing showcase:**
-  <https://nvm-star-max.github.io/GuardianSim/> (no sign-in required).
+  <https://nvm-star-max.github.io/GuardianSim/> (no sign-in required). The
+  pending V3 static build promotes the exact 4,608-pair matrix and
+  `4,608 → 5 → 1` funnel.
 - [`official-package/Track3-Aegis-Motion-GuardianSim`](official-package/Track3-Aegis-Motion-GuardianSim):
   self-contained directory prepared for the official contest fork. It now
-  includes the report, the 80-second supplementary Radeon preview, the raw
-  scale/Parallel Futures reports, validator outputs, and recursive checksums.
+  includes the report, the 80-second supplementary Radeon preview, raw scale
+  evidence, a compact Safety Swarm V2 formal summary, validator outputs, and
+  recursive checksums.
 
 Earlier scale-video review iterations remain local development artifacts and
 are intentionally excluded from the public release.
@@ -99,6 +104,19 @@ The owner accepted the optically centered 80-second Radeon scale-first V4 on
 2026-07-29 as a supplementary preview. It does not replace the previously
 approved 4:41 V2 workflow video because the official Track 3 guidance
 recommends a 3-5 minute complete-workflow demonstration.
+
+The approved videos predate the completed 4,608-pair formal run. They remain
+unchanged evidence-bound artifacts. The V3 technical report and public
+interactive showcase carry the later formal result; no old video frame is
+relabeled as if it showed the new workload.
+
+## V3 release state
+
+The V3 package is being prepared locally on
+`agent/parallel-futures-showcase`. Tag `hackathon-2026-submission-v3`, the
+public GitHub Pages update, and organizer PR #39 update remain pending. Do not
+publish any of them until the final package checksums and public static build
+have passed and the owner authorizes the organizer-facing update.
 
 ## Blocking owner inputs
 

@@ -12,10 +12,11 @@
 Open the public **Parallel Futures** evidence arena:
 <https://nvm-star-max.github.io/GuardianSim/>
 
-No account or sign-in is required. Judges can challenge three preserved
-decisions, inspect the Radeon scale path, and follow every displayed metric to
-immutable evidence. The site replays published results; it does not create new
-benchmark samples.
+No account or sign-in is required. The main view renders the exact 18 × 256
+formal outcome matrix and the `4,608 → 5 → 1` decision funnel. Judges can also
+challenge three preserved decisions, inspect the Radeon scale path, and follow
+displayed metrics to immutable evidence. The site replays published results;
+it does not create new benchmark samples.
 
 ## Project overview
 
@@ -46,6 +47,24 @@ with three independent physical executions per strategy and scenario:
 Mean sampled clearance increased by **98.36%**. These are Genesis simulation
 measurements, not physical-robot deployment claims.
 
+## Formal decision-scale result
+
+Safety Swarm V2 evaluated **18 candidate actions × 256 uncertainty worlds =
+4,608 measured candidate-world pairs**. Five candidates passed all 256 worlds.
+Frozen ranking selected
+`yaw_-45.0_retreat_+0.000_approach_+0.140`, which recorded:
+
+- **256/256** safe worlds;
+- **0** sampled clutter contacts;
+- **66.249 mm** worst-case sampled clearance;
+- **66.304 mm** fifth-percentile sampled clearance;
+- **0.907** minimum stability.
+
+The run advanced **2,299,392** Genesis environment steps in **226.676 s**
+(`10,143.979 environment-steps/s`). Radeon telemetry recorded **73.406% mean /
+97% peak GPU utilization**. The 4,608 pairs are an engineering
+candidate-by-uncertainty population, not independent robot trials.
+
 ## AMD Radeon GPU and ROCm
 
 The preserved formal benchmark and evaluator smoke used:
@@ -73,14 +92,10 @@ sizes:
 | 64 | 9,354.3 | 60.69x | 94.8% |
 | 256 | 35,166.1 | 228.16x | 89.1% |
 
-At 256 worlds, mean/peak GPU utilization was 85.5%/96%. A second engineering
-run evaluated 18 candidate actions with three repeats in one 54-world Genesis
-scene in 12.839 seconds. Of those futures, 32 passed the unchanged hard gates
-and 22 were rejected.
-
-The 337,000 timed environment steps measure physics throughput, not safety
-trials. The 54 futures are 18 candidates times three repeats, not 54
-independent scenarios.
+At 256 worlds, mean/peak GPU utilization was 85.5%/96%. The 337,000 timed
+environment steps measure raw physics throughput, not safety trials. The
+separate formal decision workload is reported in the preceding section and
+keeps its candidate-world counts distinct from the Gate 3.2 safety benchmark.
 
 ## Innovation
 
@@ -102,21 +117,23 @@ independent scenarios.
 - **Public interactive evidence arena:**
   <https://nvm-star-max.github.io/GuardianSim/>
 - **Immutable source and evidence release:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v2>
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3>
 - **Reproducibility guide:**
-  <https://github.com/nvm-star-max/GuardianSim/blob/hackathon-2026-submission-v2/REPRODUCIBILITY.md>
+  <https://github.com/nvm-star-max/GuardianSim/blob/hackathon-2026-submission-v3/REPRODUCIBILITY.md>
 - **Technical report:**
   [`GuardianSim-Technical-Report.pdf`](GuardianSim-Technical-Report.pdf)
 - **Owner-approved 4:41 English demonstration video:**
-  <https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v2/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4>
+  <https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v3/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4>
 - **80-second measured Radeon preview:**
   [`GuardianSim-Radeon-Parallel-Futures-preview.mp4`](GuardianSim-Radeon-Parallel-Futures-preview.mp4)
 - **Raw Radeon scale and Parallel Futures reports:**
   [`evidence`](evidence)
+- **Formal Safety Swarm V2 evidence:**
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3/docs/evidence/safety-swarm-v2-formal-2026-07-30>
 - **Immutable Gate 3.2 evidence:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v2/docs/evidence/gate-3-2>
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3/docs/evidence/gate-3-2>
 - **Validated Gate 3.3 limitation evidence:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v2/docs/evidence/gate-3-3-two-strata>
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3/docs/evidence/gate-3-3-two-strata>
 
 ## Reproduction
 
@@ -125,7 +142,7 @@ On the supported Radeon Cloud Blank OpenCode workspace:
 ```bash
 git clone https://github.com/nvm-star-max/GuardianSim.git
 cd GuardianSim
-git checkout hackathon-2026-submission-v2
+git checkout hackathon-2026-submission-v3
 
 scripts/install_system_deps.sh
 uv python install 3.12
@@ -152,10 +169,10 @@ benchmark.
 - The action family is bounded and planning is not yet real-time.
 - Harder unsupported geometry may produce a deliberate safe stop.
 - The 30-scenario result applies only to the frozen Gate 3.2 matrix.
+- The 4,608 Safety Swarm V2 pairs are candidate-by-uncertainty engineering
+  evidence, not 4,608 independent robot trials.
 - The scale suite measures steady-state Genesis stepping after warmup; scene
   construction is excluded.
-- The 54-world run is batched-candidate engineering evidence, not additional
-  formal safety data.
 
 ## Team contribution
 

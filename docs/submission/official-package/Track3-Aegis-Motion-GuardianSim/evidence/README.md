@@ -31,3 +31,23 @@ result.
 The environment-step count is a throughput workload, not a count of
 independent safety trials. The 54 futures are 18 candidates times three
 repeats, not 54 independent scenarios.
+
+## Safety Swarm V2 formal decision run
+
+- Candidate actions: 18.
+- Frozen uncertainty worlds per candidate: 256.
+- Candidate-world pairs: 4,608.
+- Candidates passing all 256 worlds: 5.
+- Selected action: 256/256 safe worlds and zero sampled clutter contacts.
+- Measured execution: 2,299,392 environment steps in 226.676 seconds.
+- Radeon telemetry: 73.406% mean and 97% peak GPU utilization.
+
+`safety-swarm-v2-summary.json` is the compact derivative used for review.
+`safety-swarm-v2-validation.json` is the strict validation receipt. The full
+5.7 MB report, logs, protocol, environment, and recursive checksums remain in
+the dedicated source repository under
+`docs/evidence/safety-swarm-v2-formal-2026-07-30`.
+
+The 4,608 pairs form a candidate-by-uncertainty engineering stress-test
+population. They are not 4,608 independent robot trials and not a
+physical-robot safety guarantee.

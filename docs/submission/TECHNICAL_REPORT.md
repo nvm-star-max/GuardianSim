@@ -25,6 +25,14 @@ decreased from 30 to zero. Mean sampled clutter clearance increased from
 0.023191 m to 0.046003 m. These are Genesis simulation results on AMD Radeon
 Cloud, not physical-robot deployment claims.
 
+The completed Safety Swarm V2 run tested the decision layer at a larger
+candidate-by-uncertainty scale: 18 actions across 256 declared uncertainty
+worlds each, for 4,608 measured pairs. Five actions passed all 256 worlds. The
+frozen ranking selected one action with 256/256 safe outcomes, zero sampled
+clutter contacts, 66.249 mm worst-case sampled clearance, and 0.907 minimum
+stability. This is an engineering stress-test population, not 4,608
+independent robot trials.
+
 A separate Radeon throughput run measured the same GPU backend at 1, 16, 64,
 and 256 parallel Genesis worlds. The 256-world point reached 35,166.1
 environment-steps/s, 228.16 times the single-world throughput, at 89.1%
@@ -180,6 +188,12 @@ Gate 3.3 adds engineering breadth tests for pose shift and changed
 gap/bearing. Its completed 12-scenario prefix is reported separately and is
 not combined with the primary 30-scenario performance claim.
 
+Safety Swarm V2 uses a separate frozen uncertainty matrix for action
+screening. Each of the 18 Gate 3.2 action geometries is evaluated against the
+same 256 deterministic worlds. Its unit of analysis is a candidate-world pair,
+so its 4,608 outcomes are never added to the Gate 3.2 scenario or execution
+counts.
+
 ## 5. AMD Radeon GPU use
 
 The formal benchmark and evaluator smoke ran on AMD Radeon Cloud using the
@@ -222,17 +236,27 @@ All four points reached 96% peak GPU utilization. At 256 worlds, mean GPU
 utilization was 85.5% and peak VRAM use was 1.34 GiB. The complete timed
 workload contained 337,000 environment steps.
 
-### 5.2 Parallel Futures engineering run
+### 5.2 Safety Swarm V2 formal decision-scale run
 
-GuardianSim also evaluated all 18 Gate 3.2 candidate actions with three repeats
-in one 54-world Genesis scene. The batched rollout took 12.839 seconds:
-32 futures passed the unchanged hard gates and 22 were rejected. Mean and peak
-GPU utilization were 71.8% and 95%, with 1.13 GiB peak VRAM use.
+The final run evaluated all 18 candidates against all 256 frozen uncertainty
+worlds: 4,608 candidate-world pairs, executed as deterministic candidate-major
+chunks on one Radeon GPU. It advanced 2,299,392 Genesis environment steps in
+226.676 seconds, or 10,143.979 environment-steps/s and 20.329 candidate-world
+pairs/s.
 
-The 54 futures are 18 candidates times three repeats, not 54 independent
-scenarios. Likewise, the 337,000 timed environment steps measure simulation
-throughput; they are not safety trials. Both reports retain protocol hashes,
-ROCm telemetry, strict validator output, and checksums.
+Radeon telemetry recorded 73.406% mean and 97% peak GPU utilization over 588
+samples, with 1.381 GiB maximum VRAM use and no sampling errors. Across all
+alternatives, 2,614 pairs were safe, 270 recorded sampled clutter contact,
+1,691 failed the stability gate, and 33 failed the clearance gate.
+
+Five candidates passed every one of their 256 worlds. Frozen ranking selected
+`yaw_-45.0_retreat_+0.000_approach_+0.140`, which recorded 256/256 safe
+worlds, zero sampled clutter contacts, 66.249 mm worst-case sampled clearance,
+66.304 mm fifth-percentile sampled clearance, and 0.907 minimum stability.
+
+An earlier 54-world run remains a bounded engineering smoke, but it is no
+longer the project's main scale result. Neither the 4,608 formal pairs nor the
+54 smoke futures are independent physical-robot trials.
 
 ## 6. Results
 
@@ -250,7 +274,20 @@ GuardianSim decisions comprised 11 higher-margin alternatives, 10 replacements
 of unsafe nominal actions, and nine eligible nominal fallbacks. No Gate 3.2
 scenario required a safe stop.
 
-### 6.2 Negative evidence and iteration
+### 6.2 Formal decision-scale result
+
+The Safety Swarm V2 result is summarized as `4,608 -> 5 -> 1`: 4,608 measured
+candidate-world pairs, five candidates passing all 256 worlds, and one action
+chosen by a ranking rule frozen before the result was inspected. The complete
+report, validator receipt, environment, logs, source identity, and checksums
+are preserved under
+`docs/evidence/safety-swarm-v2-formal-2026-07-30`.
+
+The full population result is retained, including rejected alternatives. It
+shows that the selected action was not an isolated successful rollout and that
+unsafe candidate-world outcomes were not hidden from the decision record.
+
+### 6.3 Negative evidence and iteration
 
 Gate 3.1 is intentionally retained. It showed that increasing average
 clearance alone did not improve safe-completion rate. This negative result
@@ -260,7 +297,7 @@ motivated three Gate 3.2 changes:
 - an explicit rule forbidding fallback to an unsafe nominal action;
 - three independent physical executions for repeatability.
 
-### 6.3 Breadth evidence and limitation
+### 6.4 Breadth evidence and limitation
 
 In the independent 12-scenario Gate 3.3 prefix, GuardianSim executed ten
 actions safely and safe-stopped twice, with zero clutter contacts or
@@ -288,10 +325,10 @@ claim universal completion under arbitrary geometry.
 5. **The report explains each decision.** It records the measured clearance,
    stability, responsible link and obstacle, decision type, protocol identity,
    logs, and checksums.
-6. **The Radeon path is measured at two useful grains.** The scale suite shows
-   1-to-256-world physics throughput; the 54-world run shows how that batching
-   maps to candidate screening. Neither is presented as additional safety
-   data.
+6. **The Radeon path is measured at two useful grains.** The raw scale suite
+   isolates 1-to-256-world physics throughput. The formal Safety Swarm V2 run
+   shows how Radeon batching supports a complete 18-by-256 action decision.
+   Neither result is added to the 30-scenario safety sample count.
 
 ## 8. Reproducibility and deliverables
 
@@ -305,7 +342,8 @@ Primary deliverables:
 - bounded real Genesis counterfactual smoke;
 - immutable Gate 3.2 schema-5 report and validator;
 - Gate 3.3 breadth evidence;
-- strict Radeon scale and 54-world Parallel Futures reports;
+- strict Radeon scale report;
+- complete Safety Swarm V2 4,608-pair report, validator, logs, and checksums;
 - annotated comparison demo and interactive showcase;
 - technical report and 3–5 minute video.
 
@@ -314,19 +352,16 @@ The evaluator path is documented in the repository root
 30-episode report and its frozen protocol hash before any primary metric is
 used.
 
-The owner-approved 4 minute 41.5 second English submission video is
-`docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4`, SHA-256
-`e235a315cf4370ccd10cce5f50d317a7ec3376725940235482b530a641804888`.
-It binds the accepted Seed 411 replay, aggregate Gate 3.2 results, separate
-Gate 3.3 limitation evidence, and simulation-only claim boundary.
+The 4 minute 41.5 second English submission video binds the accepted Seed 411
+replay, aggregate Gate 3.2 result, Gate 3.3 limitation evidence, and
+simulation-only claim boundary. Its SHA-256 is recorded in the package
+checksum manifest.
 
-An 80-second supplementary Radeon preview is
-`docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4`,
-SHA-256
-`2be66996eb0e3bb460148c5afc8060f69680f1d7e314e2e46cf2d363d53a923a`.
-It shows the measured scale curve, the 54-world candidate funnel, and the
-unchanged frozen safety result. It does not replace the complete workflow
-video.
+An 80-second supplementary Radeon preview shows the scale curve and earlier
+bounded candidate funnel; it does not replace the complete workflow video.
+The public showcase is the judge-facing view of the later 4,608-pair formal
+run and links to its immutable report. Its file identity is also recorded in
+the package checksum manifest.
 
 ## 9. Limitations and responsible claims
 
@@ -342,8 +377,8 @@ video.
 - The reported 30-scenario result applies only to the frozen Gate 3.2 matrix.
 - The scale benchmark measures steady-state Genesis stepping after warmup; it
   excludes scene construction and does not measure policy-training throughput.
-- The 54-world run is an engineering demonstration of batched candidate
-  evaluation, not 54 new safety scenarios.
+- The 4,608 Safety Swarm V2 pairs are a candidate-by-uncertainty engineering
+  population, not 4,608 independent robot trials.
 
 Future work should expand continuous grasp geometry, use richer collision
 distance models, calibrate perception uncertainty from camera observations,
@@ -362,13 +397,8 @@ claims, licenses, and competition-rule compliance.
 
 ## References
 
-1. GuardianSim source and evidence:
-   <https://github.com/nvm-star-max/GuardianSim>
-2. Genesis Embodied AI:
-   <https://github.com/Genesis-Embodied-AI/Genesis>
-3. LeRobot:
-   <https://github.com/huggingface/lerobot>
-4. ROCm documentation:
-   <https://rocm.docs.amd.com/>
-5. Upstream Franka fruit-picking reference:
-   <https://github.com/wangxunx/franka_fruit_pick_demo>
+1. [GuardianSim source and evidence](https://github.com/nvm-star-max/GuardianSim)
+2. [Genesis Embodied AI](https://github.com/Genesis-Embodied-AI/Genesis)
+3. [LeRobot](https://github.com/huggingface/lerobot)
+4. [ROCm documentation](https://rocm.docs.amd.com/)
+5. [Upstream Franka fruit-picking reference](https://github.com/wangxunx/franka_fruit_pick_demo)

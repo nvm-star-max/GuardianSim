@@ -14,7 +14,7 @@ Track 3, Aegis Motion, GuardianSim
 ```markdown
 ## Project
 
-**GuardianSim — Counterfactual Safety Certification for Robot Manipulation on
+**GuardianSim — Parallel Counterfactual Safety Search for Robot Manipulation on
 AMD Radeon GPUs**
 
 Team: **Aegis Motion** (solo developer)
@@ -29,9 +29,10 @@ gates, and either selects an eligible action or explicitly stops.
 Open the public **Parallel Futures** evidence arena (no sign-in required):
 https://nvm-star-max.github.io/GuardianSim/
 
-It lets judges challenge three preserved decisions and trace every displayed
-metric back to immutable reports. It replays published evidence and does not
-claim new benchmark samples.
+The main view renders the exact 18 × 256 formal outcome matrix and the
+`4,608 → 5 → 1` decision funnel. Judges can also challenge three preserved
+decisions and trace displayed metrics back to immutable reports. The site
+replays published evidence and does not create new benchmark samples.
 
 ## Verified result
 
@@ -44,6 +45,18 @@ In the frozen 30-scenario Gate 3.2 Genesis benchmark:
 
 These are simulation results, not physical-robot deployment claims.
 
+In the separate Safety Swarm V2 formal decision run:
+
+- **18 candidate actions × 256 uncertainty worlds = 4,608 measured pairs**;
+- **5** candidates passed all 256 worlds;
+- frozen ranking selected **1** action with **256/256 safe worlds** and
+  **0 sampled clutter contacts**;
+- selected worst-case sampled clearance: **66.249 mm**;
+- selected minimum stability: **0.907**.
+
+The 4,608 pairs are a candidate-by-uncertainty engineering stress-test
+population. They are not 4,608 independent robot trials.
+
 ## AMD Radeon use
 
 Counterfactual physical rollouts were evaluated with Genesis 1.2.3 on the
@@ -51,7 +64,7 @@ Counterfactual physical rollouts were evaluated with Genesis 1.2.3 on the
 PyTorch `2.9.1+gitff65f5b` with HIP `7.2.53211-e1a6bc5663` and one gfx1100
 Radeon GPU.
 
-## Measured Radeon scale
+## Measured Radeon scale and decision workload
 
 A separate fixed-workload suite measured:
 
@@ -60,29 +73,30 @@ A separate fixed-workload suite measured:
 - **228.16x** speedup and **89.1%** parallel efficiency at 256 worlds;
 - **85.5% mean / 96% peak GPU utilization** at 256 worlds.
 
-A 54-world engineering run evaluated 18 candidate actions with three repeats
-in 12.839 seconds; 32 passed the unchanged hard gates and 22 were rejected.
-These are compute measurements. The 337,000 timed environment steps and 54
-candidate futures are not additional formal safety scenarios.
+The formal Safety Swarm V2 run advanced **2,299,392** Genesis environment
+steps in **226.676 s** (**10,143.979 environment-steps/s**). Radeon telemetry
+recorded **73.406% mean / 97% peak GPU utilization**. These measurements are
+separate from the 30-scenario safety benchmark and from the raw 1-to-256-world
+throughput curve.
 
 ## Deliverables
 
 - Public interactive evidence arena:
   https://nvm-star-max.github.io/GuardianSim/
 - Source and reproducibility instructions:
-  https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v2
+  https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3
 - Technical report:
   `submissions/Track3-Aegis-Motion-GuardianSim/GuardianSim-Technical-Report.pdf`
 - 3–5 minute workflow demo:
-  https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v2/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4
+  https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v3/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4
 - 80-second measured Radeon preview:
   `submissions/Track3-Aegis-Motion-GuardianSim/GuardianSim-Radeon-Parallel-Futures-preview.mp4`
-- Raw Radeon scale and Parallel Futures reports:
+- Raw Radeon scale and Safety Swarm V2 reports:
   `submissions/Track3-Aegis-Motion-GuardianSim/evidence/`
 - Immutable benchmark evidence and checksums:
-  https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v2/docs/evidence
+  https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3/docs/evidence
 - Container path and documented hardware requirement:
-  https://github.com/nvm-star-max/GuardianSim/blob/hackathon-2026-submission-v2/REPRODUCIBILITY.md#6-docker-path
+  https://github.com/nvm-star-max/GuardianSim/blob/hackathon-2026-submission-v3/REPRODUCIBILITY.md#6-docker-path
 
 ## Reproduction
 
@@ -102,8 +116,9 @@ simulation stepping after warmup, not model-training throughput.
 ## Release-time checks
 
 - Confirm every immutable URL remains publicly accessible.
-- Confirm tag `hackathon-2026-submission-v2` resolves to the released
-  GuardianSim commit containing the Radeon scale implementation and reports.
+- Create and verify tag `hackathon-2026-submission-v3` only after the final
+  report, package checksums, public showcase, and submission commit are
+  frozen.
 - Confirm the official-repository PDF path after copying the prepared package.
 - Confirm the private Luma registration uses the legal name and intended team
   identity; public materials may use Aegis Motion / `@nvm-star-max`.

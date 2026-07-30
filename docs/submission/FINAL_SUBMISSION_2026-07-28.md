@@ -116,3 +116,27 @@ An unsigned request verified HTTP 200 responses for the public HTML, compiled
 JavaScript, stylesheet, Seed 411 replay video, and social-preview image. The
 organizer PR now presents this no-sign-in arena before the metric summary and
 remains open, non-draft, and cleanly mergeable. The PR was not merged.
+
+## Local V3 decision-scale update prepared on 2026-07-30
+
+This section records work prepared after the public V2 update. It does not
+claim that organizer PR #39, the public release tag, or GitHub Pages already
+contains the V3 payload.
+
+- Added the completed Safety Swarm V2 formal result:
+  18 candidates × 256 uncertainty worlds = 4,608 candidate-world pairs.
+- Preserved the complete 5.7 MB report, strict validator receipt, logs,
+  environment, protocol, source identity, and recursive checksums in the
+  GuardianSim repository.
+- Updated the judge-facing website to render the exact 18 × 256 matrix and
+  `4,608 → 5 → 1` decision funnel.
+- Rebuilt the final seven-page technical report. PDF SHA-256:
+  `4028372be15ca2fba2a0cd7f1ddd7e51c8d9cd012521e4be80cc40a523500ef3`.
+- Added a compact formal summary and validation receipt to the organizer
+  package while keeping the full report in the dedicated source repository.
+- Kept the approved 4:41 workflow video and 80-second Radeon preview unchanged;
+  neither is relabeled as footage of the later 4,608-pair run.
+
+Planned immutable release tag: `hackathon-2026-submission-v3`. It must not be
+created until final checks pass. Updating organizer PR #39 remains an external
+publication step requiring owner authorization.
