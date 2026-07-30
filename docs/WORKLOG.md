@@ -1880,3 +1880,39 @@ Gate decision:
 - No protocol or threshold changed. Stopped before Gate V2-B. The only next
   eligible scale step is the frozen 18×4 = 72-pair run; V2-C and the
   4,608-pair formal run remain closed.
+
+## 2026-07-30 — Passed and preserved Safety Swarm V2 Gate V2-B
+
+- Revalidated the clean Radeon worktree and V2-A evidence before launch, then
+  reused instance `u-13907-735d71cb` without restart or destruction.
+- Executed the frozen `full-4` tier from source commit
+  `dd300f98320f39666f684c3aed1f3afa25884d20` as one Genesis AMD GPU scene:
+  18 candidates × worlds `0, 85, 170, 255` = 72 candidate-world pairs.
+- Strict schema-1 `--require-radeon` validation passed with the frozen
+  `full-4` protocol SHA-256
+  `e6c24948ee708c20d6c6ea270ac4ff3fb5b503d18896508d7d66fa69536aa984`
+  and unchanged formal protocol SHA-256
+  `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`.
+- The run produced eight qualifying candidates. Deterministic robust ranking
+  selected `yaw_-22.5_retreat_+0.025_approach_+0.140`: 4/4 safe, zero
+  contacts, `96.009 mm` worst-case sampled clearance, `96.857 mm`
+  fifth-percentile clearance, and `0.847` minimum stability.
+- Batch diagnostics were 41/72 safe candidate-world pairs and five sampled
+  contact pairs. The result is an action-search result, not a claim that all
+  alternatives were safe.
+- Measured `35,928` environment steps in `15.098 s`, or `2,379.598` steps/s
+  and `4.769` candidate-world pairs/s. Radeon telemetry recorded `76.378%`
+  mean and `96%` peak utilization over 37 samples, about `1.162 GiB` maximum
+  VRAM use, and no telemetry errors.
+- Preserved the raw report, preflight, validation, launch command, logs,
+  process ID, Git provenance, ROCm snapshots, protocol, acceptance receipt,
+  and checksums. Corrected only an initially generated derivative summary
+  that read nested protocol hashes from the wrong location; the original
+  report and strict validation were never changed.
+- Downloaded archive SHA-256
+  `78e3df66673037cfde9ff04e19bd35ffd040c257b4468ac2268dd1e8c3a75359`
+  matched the cloud receipt. Archive safety checks passed and all 17 inner
+  checksums verified before import to
+  `docs/evidence/safety-swarm-v2-full-4-2026-07-30`.
+- No frozen protocol element changed. Gate V2-C is now eligible but was not
+  launched. Gate V2-D and formal 4,608-pair claims remain closed.

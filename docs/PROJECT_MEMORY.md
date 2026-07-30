@@ -1678,3 +1678,44 @@ Evidence and working material:
   No thresholds, candidates, worlds, ordering, or protocol hashes changed.
   The next unopened gate is V2-B, all 18 candidates × 4 worlds = 72 pairs.
   Do not start V2-C, V2-D, or make a formal robustness claim from this result.
+
+## Safety Swarm V2 Gate V2-B Radeon result — 2026-07-30
+
+- Reused Radeon Cloud instance `u-13907-735d71cb` without restart or
+  destruction and ran the unchanged clean detached worktree at source commit
+  `dd300f98320f39666f684c3aed1f3afa25884d20`.
+- The frozen `full-4` tier completed all 18 candidates × 4 worlds, exactly 72
+  candidate-world pairs. Strict schema-1 Radeon validation and the independent
+  acceptance check passed. The report SHA-256 is
+  `3b8d816c73efd99bdd2d34123e60eed8fb70161ed0d599ddb00e959aae38d4f4`.
+- Eight candidates qualified across all four worlds with zero contacts. The
+  deterministic ranking selected
+  `yaw_-22.5_retreat_+0.025_approach_+0.140`, which passed 4/4 with:
+  - `96.009 mm` worst-case sampled clearance;
+  - `96.857 mm` fifth-percentile sampled clearance;
+  - `0.847` minimum stability;
+  - zero clutter contacts.
+- Across the complete 72-pair batch, 41 candidate-world pairs were safe and
+  five recorded sampled clutter contact. These are search-population
+  diagnostics; V2-B passes because at least one candidate satisfied every
+  frozen world and the deterministic selector executed only a qualifying
+  candidate.
+- Measured AMD execution completed `35,928` environment steps in `15.098 s`:
+  `2,379.598` environment steps/s and `4.769` candidate-world pairs/s.
+  Radeon telemetry recorded `76.378%` mean and `96%` peak GPU utilization
+  across 37 samples, maximum VRAM use of `1,247,768,576 bytes` (about
+  `1.162 GiB`), and no sampling errors.
+- The evidence archive SHA-256 is
+  `78e3df66673037cfde9ff04e19bd35ffd040c257b4468ac2268dd1e8c3a75359`.
+  Its cloud and downloaded hashes matched; pre-extraction checks found no
+  absolute paths, parent traversal, symbolic links, or hard links. All 17
+  inner checksums passed. Evidence is preserved under
+  `docs/evidence/safety-swarm-v2-full-4-2026-07-30`.
+- The first derived acceptance summary incorrectly looked for protocol hashes
+  at the report root. The original report and strict validator were correct;
+  the summary was regenerated from `report.protocol`, rechecked, and only the
+  corrected version was packaged.
+- No candidate, world, hard gate, ordering rule, threshold, or protocol hash
+  changed. V2-B remains partial engineering evidence with
+  `showcase_ready=false`; it opens only Gate V2-C (`18 × 16 = 288` pairs).
+  Gate V2-D and any 4,608-pair robustness claim remain closed.

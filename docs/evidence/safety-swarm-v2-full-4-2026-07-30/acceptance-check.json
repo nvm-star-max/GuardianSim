@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "at_least_one_candidate_qualifies": true,
+    "candidate_count_is_18": true,
+    "candidate_world_count_is_72": true,
+    "formal_protocol_sha256_matches": true,
+    "protocol_sha256_matches": true,
+    "result_count_is_72": true,
+    "schema_version_is_1": true,
+    "showcase_ready_is_false": true,
+    "smoke_status_passed": true,
+    "tier_is_full_4": true,
+    "world_count_per_candidate_is_4": true
+  },
+  "status": "passed"
+}
