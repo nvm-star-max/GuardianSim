@@ -2048,3 +2048,22 @@ Gate decision:
 - Preserved all unrelated untracked submission videos, previews, PDF output,
   and browser artifacts. The Radeon Cloud instance was not restarted,
   destroyed, or used during this website-only stage.
+
+## 2026-07-30 — Published the calibrated showcase as Sites version 4
+
+- Pushed exact source commit
+  `f5b9ed061e9483027f367ebfd1d950ee76ed7312` to the existing Sites `main`
+  branch.
+- Packaged the `showcase` build from that commit and saved version `4`;
+  archive content hash:
+  `sha256:91c98971aa4498571b257676b098633ddf70b1d36d45cf50fe11d81ce1916eba`.
+- Deployed the saved version to
+  `https://guardiansim-proof.dghcdtddgh.chatgpt.site`; Sites deployment
+  `appgdep_6a6b1cfe6b608191a0bd8509f0cccae2` completed with status
+  `succeeded`.
+- Kept the existing owner-only access configuration unchanged. Browser
+  navigation reached the expected sign-in gate, so protected production DOM
+  inspection was not substituted for the already completed exact-commit
+  local QA.
+- No Radeon instance, formal evidence, frozen protocol, thresholds, or
+  unrelated untracked submission artifacts changed during deployment.

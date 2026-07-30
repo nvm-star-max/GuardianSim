@@ -1874,3 +1874,23 @@ Evidence and working material:
 - Showcase server build, rendered evidence tests, GitHub Pages build/static
   tests, ESLint, and browser console checks passed. No Radeon instance,
   frozen evidence, submission media, or unrelated local files changed.
+
+## Private production showcase deployment — 2026-07-30
+
+- Pushed showcase source commit
+  `f5b9ed061e9483027f367ebfd1d950ee76ed7312` to the existing Sites source
+  branch and saved it as site version `4`.
+- Deployed version `4` successfully to the existing owner-only production
+  site:
+  `https://guardiansim-proof.dghcdtddgh.chatgpt.site`.
+- The uploaded archive was built from that exact commit and recorded content
+  hash
+  `sha256:91c98971aa4498571b257676b098633ddf70b1d36d45cf50fe11d81ce1916eba`.
+- Sites reported deployment
+  `appgdep_6a6b1cfe6b608191a0bd8509f0cccae2` as `succeeded`. Access remained
+  owner-only; no sharing or permission setting changed.
+- Anonymous and current browser smoke checks correctly reached the site's
+  sign-in gate, so no claim is made that the protected production DOM was
+  inspected without owner authentication. The exact deployed commit had
+  already passed desktop/mobile visual, overflow, data-reconciliation,
+  console, build, static-page, and lint checks locally.
