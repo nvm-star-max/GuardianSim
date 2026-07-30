@@ -1,0 +1,44 @@
+GATE=V2-C
+EXPECTED_HEAD=dd300f98320f39666f684c3aed1f3afa25884d20
+ACTUAL_HEAD=dd300f98320f39666f684c3aed1f3afa25884d20
+WORKTREE_CLEAN=1
+{
+  "status": "passed",
+  "schema_version": 1,
+  "mode": "radeon_engineering_smoke",
+  "tier": "full-4",
+  "protocol_sha256": "e6c24948ee708c20d6c6ea270ac4ff3fb5b503d18896508d7d66fa69536aa984",
+  "formal_protocol_sha256": "7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac",
+  "candidate_world_count": 72,
+  "smoke_status": "passed",
+  "decision": "execute",
+  "selected_candidate_id": "yaw_-22.5_retreat_+0.025_approach_+0.140",
+  "showcase_ready": false,
+  "report_sha256": "3b8d816c73efd99bdd2d34123e60eed8fb70161ed0d599ddb00e959aae38d4f4"
+}
+V2B_ACCEPTANCE=passed
+OUTPUT_ABSENT=1
+
+
+============================ ROCm System Management Interface ============================
+====================================== Product Info ======================================
+GPU[0]		: Card Series: 		AMD Radeon Graphics
+GPU[0]		: Card Model: 		0x744b
+GPU[0]		: Card Vendor: 		Advanced Micro Devices, Inc. [AMD/ATI]
+GPU[0]		: Card SKU: 		D7070910
+GPU[0]		: Subsystem ID: 	0x0e0c
+GPU[0]		: Device Rev: 		0x00
+GPU[0]		: Node ID: 		3
+GPU[0]		: GUID: 		49884
+GPU[0]		: GFX Version: 		gfx1100
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+TORCH=2.9.1+gitff65f5b
+HIP=7.2.53211-e1a6bc5663
+GPU_AVAILABLE=True
+GPU=AMD Radeon Graphics
+GENESIS=1.2.3
+TIER=full-16
+CANDIDATE_WORLD_COUNT=288
+PROTOCOL_SHA256=128a494aec03498c8ba6c807a3e26f8e733c87f61ec5e696371839270c3d9f44
+READY=1

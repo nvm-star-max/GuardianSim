@@ -1719,3 +1719,45 @@ Evidence and working material:
   changed. V2-B remains partial engineering evidence with
   `showcase_ready=false`; it opens only Gate V2-C (`18 × 16 = 288` pairs).
   Gate V2-D and any 4,608-pair robustness claim remain closed.
+
+## Safety Swarm V2 Gate V2-C Radeon result — 2026-07-30
+
+- Reused Radeon Cloud instance `u-13907-735d71cb` without restart or
+  destruction. The clean detached worktree and source commit remained
+  `dd300f98320f39666f684c3aed1f3afa25884d20`.
+- The frozen `full-16` tier completed all 18 candidates × 16 orthogonal
+  worlds, exactly 288 candidate-world pairs. Strict schema-1 Radeon validation
+  and the independent acceptance check passed. The report SHA-256 is
+  `0ba9c8db2754c72b2e4e99ebda6ef163763a4244bd9fc068df0b74b21b6f166d`.
+- Five candidates qualified across all 16 worlds with zero contacts. The
+  deterministic ranking selected
+  `yaw_-45.0_retreat_+0.000_approach_+0.140`, which passed 16/16 with:
+  - `66.339 mm` worst-case sampled clearance;
+  - `70.144 mm` fifth-percentile sampled clearance;
+  - `0.909` minimum stability;
+  - zero clutter contacts.
+- The larger uncertainty envelope changed the decision. V2-B's four-world
+  winner was `yaw_-22.5_retreat_+0.025_approach_+0.140`; it was not the
+  V2-C winner. The qualifying set also narrowed from eight candidates to
+  five. This is measured evidence that expanding world coverage changes
+  robust action selection.
+- Across the complete 288-pair search population, 165 candidate-world pairs
+  were safe and 14 recorded sampled clutter contact. These values describe
+  evaluated alternatives, not the selected action and not 288 independent
+  real-robot trials.
+- Measured AMD execution completed `143,712` environment steps in `15.870 s`:
+  `9,055.573` environment steps/s and `18.147` candidate-world pairs/s.
+  Radeon telemetry recorded `78.282%` mean and `96%` peak GPU utilization
+  across 39 samples, maximum VRAM use of `1,518,317,568 bytes` (about
+  `1.414 GiB`), and no sampling errors.
+- The evidence archive SHA-256 is
+  `b5262da3769e41fb67838eb537b37357c99544902ee8d6fa9effb9890fe82fd5`.
+  Cloud and downloaded hashes matched; the archive contained no absolute
+  paths, parent traversal, symbolic links, or hard links, and all 17 inner
+  checksums passed. Evidence is under
+  `docs/evidence/safety-swarm-v2-full-16-2026-07-30`.
+- No candidate, world, hard gate, assignment order, selection rule, threshold,
+  or protocol hash changed. V2-C remains partial engineering evidence with
+  `showcase_ready=false`. It opens Gate V2-D under the frozen protocol, but the
+  18 × 256 = 4,608-pair formal run has not started and no formal robustness
+  claim is permitted yet.
