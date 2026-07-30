@@ -1,0 +1,7 @@
+commit 4d0aaec1da077e333cbfdd9ee3f413d852c1cbec
+Author:     aolos <2668084124@qq.com>
+AuthorDate: Thu Jul 30 11:00:05 2026 +0800
+Commit:     aolos <2668084124@qq.com>
+CommitDate: Thu Jul 30 11:00:05 2026 +0800
+
+    Implement resumable Safety Swarm V2 formal gate

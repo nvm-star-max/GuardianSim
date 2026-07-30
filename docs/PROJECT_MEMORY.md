@@ -1784,3 +1784,57 @@ Evidence and working material:
   protocol-hash identity, and diff hygiene. This is implementation
   verification only: no formal Radeon chunk has run yet and no formal result
   or performance claim exists.
+
+## Safety Swarm V2 Gate V2-D formal Radeon result — 2026-07-30
+
+- Reused Radeon Cloud instance `u-13907-735d71cb` without restart or
+  destruction. The formal run used the clean detached persistent worktree
+  `/workspace/persistent/GuardianSim-safety-swarm-v2-formal` at source commit
+  `4d0aaec1da077e333cbfdd9ee3f413d852c1cbec`.
+- Completed all 18 frozen candidate-major chunks on their first numbered
+  attempt. Each chunk evaluated one candidate against all 256 frozen worlds,
+  for exactly `18 × 256 = 4,608` candidate-world pairs. No chunk was resumed,
+  replaced, or combined across source revisions.
+- Strict schema-1 `--require-radeon` validation passed for the complete report
+  under unchanged formal protocol SHA-256
+  `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`.
+  The complete report SHA-256 is
+  `a3e86baa03e84d75a81062fee5f9f22770a3753708c116168174ea291c7a93cf`.
+- Five candidates qualified across all 256 worlds. Frozen ranking selected
+  `yaw_-45.0_retreat_+0.000_approach_+0.140`, which recorded:
+  - `256/256` safe worlds and zero sampled clutter contacts;
+  - `66.249 mm` worst-case sampled clearance;
+  - `66.304 mm` fifth-percentile sampled clearance;
+  - `0.907` minimum stability.
+- Across the full candidate-search population, `2,614/4,608` pairs were safe
+  and 270 recorded sampled clutter contact. These counts characterize rejected
+  alternatives as well as qualifying candidates; they are not 4,608
+  independent robot trials.
+- Measured AMD execution completed `2,299,392` environment steps in
+  `226.676 s`, or `10,143.979` environment steps/s and `20.329`
+  candidate-world pairs/s. Scene construction across all chunks took
+  `385.078 s`.
+- Radeon telemetry recorded `73.406%` mean and `97%` peak GPU utilization
+  across 588 samples, maximum VRAM use of `1,482,690,560 bytes` (about
+  `1.381 GiB`), and no sampling errors. Device evidence identifies
+  `AMD Radeon Graphics`, HIP `7.2.53211-e1a6bc5663`, PyTorch
+  `2.9.1+gitff65f5b`, and Genesis `1.2.3`.
+- Cloud archive SHA-256
+  `0450857c2d50446ba76c1358bdf622c7e5cc4f43dbcc6dd48abb2e855b48e9ee`
+  matched the downloaded file. Safe extraction passed, all 90 recursive inner
+  checksums matched, and the imported report passed local strict Radeon
+  validation. Raw evidence is under
+  `docs/evidence/safety-swarm-v2-formal-2026-07-30`.
+- The first post-run validator command used the smoke filename `report.json`
+  instead of the formal filename `formal-report.json`. It did not alter the
+  report or run; the empty failed receipt was preserved as
+  `strict-validation.failed-missing-report-path.txt`, after which validation
+  was rerun against the correct file and passed. The generated
+  `report-summary.json` is a convenience derivative; the authoritative
+  sources are `formal-report.json`, `formal-validation.json`,
+  `strict-validation.txt`, and `SHA256SUMS`.
+- Gate V2-D is complete and `showcase_ready=true` under the frozen engineering
+  protocol. The allowed claim is a Radeon candidate-by-uncertainty stress
+  test and measured batched-physics throughput. It is not a physical-robot
+  safety guarantee and must not be described as 4,608 independent real-robot
+  trials.

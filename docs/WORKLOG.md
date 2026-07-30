@@ -1981,3 +1981,41 @@ Gate decision:
   `git diff --check` passed.
 - Stopped before cloud synchronization and launch. No Radeon formal result
   exists yet.
+
+## 2026-07-30 — Passed and preserved Safety Swarm V2 Gate V2-D
+
+- Pushed formal executor commit
+  `4d0aaec1da077e333cbfdd9ee3f413d852c1cbec`, created a clean detached
+  persistent worktree, revalidated the prior 288-pair V2-C report, and passed
+  all nine targeted V2 tests on Radeon Cloud before launch.
+- The cloud-wide 101-test suite had one unrelated Gate 4 draft hash failure
+  caused by Python-micro-version random-float drift. The frozen V2 protocol
+  hash and all V2 tests passed; no Gate 4 source or V2 threshold was changed.
+- Launched the formal orchestrator once and completed chunks `00..17` in
+  frozen candidate-major order. Every chunk completed in `attempt-001`;
+  there were no partial retries, mixed commits, or overwritten reports.
+- Strict complete-report validation reconstructed all 4,608 labels,
+  candidate envelopes, qualification, ranking, source/device identity,
+  timing, telemetry, and hashes. It passed with report SHA-256
+  `a3e86baa03e84d75a81062fee5f9f22770a3753708c116168174ea291c7a93cf`.
+- Five candidates passed all 256 worlds. The selector executed
+  `yaw_-45.0_retreat_+0.000_approach_+0.140`: 256/256 safe, zero contacts,
+  `66.249 mm` worst sampled clearance, `66.304 mm` fifth-percentile
+  clearance, and `0.907` minimum stability.
+- Population diagnostics were 2,614 safe pairs and 270 sampled contact pairs
+  out of 4,608. Measured execution was 2,299,392 environment steps in
+  226.676 s: 10,143.979 steps/s and 20.329 candidate-world pairs/s.
+- AMD telemetry recorded 73.406% mean and 97% peak GPU utilization over 588
+  samples, about 1.381 GiB maximum VRAM use, and no sampling errors.
+- The first post-run validation command accidentally referenced
+  `report.json`; formal output is `formal-report.json`. Preserved the empty
+  failed receipt, reran against the correct path, and required a passing
+  strict result before packaging.
+- Downloaded archive SHA-256
+  `0450857c2d50446ba76c1358bdf622c7e5cc4f43dbcc6dd48abb2e855b48e9ee`
+  matched the cloud receipt. Safe extraction passed, all 90 inner checksums
+  matched, and local `--require-radeon` validation passed.
+- Imported 92 raw evidence files under
+  `docs/evidence/safety-swarm-v2-formal-2026-07-30`. No prior V1/V2 evidence,
+  frozen protocol identity, cloud instance, or unrelated local submission
+  media was modified.

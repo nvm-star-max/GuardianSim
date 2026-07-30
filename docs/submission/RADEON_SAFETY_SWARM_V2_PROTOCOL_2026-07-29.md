@@ -175,3 +175,38 @@ SHA-256 unchanged at
 `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`.
 This record is not a result: no formal Radeon chunk had run when it was
 written.
+
+## Post-run record — Gate V2-D (2026-07-30)
+
+Gate V2-D completed all 18 candidate-major chunks on AMD Radeon Cloud. Each
+frozen candidate was evaluated against all 256 frozen worlds exactly once, so
+the complete report contains all 4,608 predeclared candidate-world pairs.
+Every chunk completed in its first numbered attempt and the source commit
+remained `4d0aaec1da077e333cbfdd9ee3f413d852c1cbec`.
+
+Strict complete-report validation passed under the unchanged formal protocol.
+The preserved report SHA-256 is
+`a3e86baa03e84d75a81062fee5f9f22770a3753708c116168174ea291c7a93cf`.
+
+Five candidates qualified across every one of their 256 worlds with zero
+sampled clutter contacts. The frozen ranking selected
+`yaw_-45.0_retreat_+0.000_approach_+0.140`, with `256/256` safe worlds,
+`66.249 mm` worst-case sampled clearance, `66.304 mm` fifth-percentile
+sampled clearance, `0.907` minimum stability, and zero contacts.
+
+Across all evaluated alternatives, 2,614/4,608 candidate-world pairs were
+safe and 270 recorded sampled clutter contact. The Radeon workload executed
+2,299,392 environment steps in 226.676 seconds, equivalent to 10,143.979
+environment steps/s and 20.329 candidate-world pairs/s. Telemetry recorded
+73.406% mean and 97% peak GPU utilization over 588 samples, about 1.381 GiB
+maximum VRAM use, and no sampling errors.
+
+The evidence archive SHA-256 is
+`0450857c2d50446ba76c1358bdf622c7e5cc4f43dbcc6dd48abb2e855b48e9ee`.
+The downloaded hash matched, all 90 inner checksums passed, and the imported
+report passed local strict Radeon validation.
+
+This result satisfies Gate V2-D and is `showcase_ready=true` for the declared
+engineering protocol. Its scope remains the frozen candidate-by-uncertainty
+simulation stress test. It does not establish physical-robot safety and the
+4,608 pairs must not be represented as independent real-robot trials.
