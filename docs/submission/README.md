@@ -58,7 +58,7 @@ submission. It is a working set, not yet the final uploaded package.
   pull-request title and body draft.
 - **Public judge-facing showcase:**
   <https://nvm-star-max.github.io/GuardianSim/> (no sign-in required). The
-  pending V3 static build promotes the exact 4,608-pair matrix and
+  published V3 static build promotes the exact 4,608-pair matrix and
   `4,608 → 5 → 1` funnel.
 - [`official-package/Track3-Aegis-Motion-GuardianSim`](official-package/Track3-Aegis-Motion-GuardianSim):
   self-contained directory prepared for the official contest fork. It now
@@ -112,11 +112,15 @@ relabeled as if it showed the new workload.
 
 ## V3 release state
 
-The V3 package is being prepared locally on
-`agent/parallel-futures-showcase`. Tag `hackathon-2026-submission-v3`, the
-public GitHub Pages update, and organizer PR #39 update remain pending. Do not
-publish any of them until the final package checksums and public static build
-have passed and the owner authorizes the organizer-facing update.
+The V3 package is prepared on `agent/parallel-futures-showcase`. The public
+GitHub Pages build was published at deployment commit
+`c649178c638fcd8302d01a2e7ec7af7e705d54c4` and verified online with the
+`4,608 futures` payload, zero page-level horizontal overflow, and no browser
+console warnings or errors.
+
+Tag `hackathon-2026-submission-v3` and organizer PR #39 update remain pending.
+Do not publish either until final checks pass and the owner authorizes the
+organizer-facing update.
 
 ## Blocking owner inputs
 

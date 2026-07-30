@@ -120,8 +120,7 @@ remains open, non-draft, and cleanly mergeable. The PR was not merged.
 ## Local V3 decision-scale update prepared on 2026-07-30
 
 This section records work prepared after the public V2 update. It does not
-claim that organizer PR #39, the public release tag, or GitHub Pages already
-contains the V3 payload.
+claim that organizer PR #39 or a V3 release tag already contains the payload.
 
 - Added the completed Safety Swarm V2 formal result:
   18 candidates × 256 uncertainty worlds = 4,608 candidate-world pairs.
@@ -136,6 +135,11 @@ contains the V3 payload.
   package while keeping the full report in the dedicated source repository.
 - Kept the approved 4:41 workflow video and 80-second Radeon preview unchanged;
   neither is relabeled as footage of the later 4,608-pair run.
+- Published the updated static showcase to GitHub Pages at deployment commit
+  `c649178c638fcd8302d01a2e7ec7af7e705d54c4`. An unsigned online check loaded
+  asset `assets/index-DZNAy0i7.js` and confirmed the `4,608 futures` payload.
+  Browser QA recorded zero page-level horizontal overflow and no console
+  warnings or errors.
 
 Planned immutable release tag: `hackathon-2026-submission-v3`. It must not be
 created until final checks pass. Updating organizer PR #39 remains an external

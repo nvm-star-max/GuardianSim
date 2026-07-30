@@ -1894,3 +1894,35 @@ Evidence and working material:
   inspected without owner authentication. The exact deployed commit had
   already passed desktop/mobile visual, overflow, data-reconciliation,
   console, build, static-page, and lint checks locally.
+
+## V3 submission package and public showcase — 2026-07-30
+
+- Reconciled the official Track 3 requirements against the organizer
+  repository: English technical report, dedicated source, detailed
+  reproducibility README, and a 3-5 minute complete-workflow video remain the
+  required deliverables. The official PR title remains
+  `Track 3, Aegis Motion, GuardianSim`.
+- Updated the root README, reproducibility guide, technical-report source,
+  organizer PR draft, submission working-set README, and official-package
+  README to separate:
+  - the 30-scenario Gate 3.2 safety result;
+  - the raw 1/16/64/256-world physics-throughput curve;
+  - the formal 18 × 256 = 4,608 candidate-world decision workload.
+- Rebuilt the final technical report as a seven-page A4 PDF. All pages were
+  rendered and visually inspected; no clipping, overlap, orphan reference
+  page, or draft marking remained. Final PDF SHA-256:
+  `4028372be15ca2fba2a0cd7f1ddd7e51c8d9cd012521e4be80cc40a523500ef3`.
+- Added compact Safety Swarm V2 summary and strict validation receipts to the
+  organizer package. Recursive package checksum manifest SHA-256:
+  `b55bd15e4c9bc7649e126bfd8c5a7229cecc735849871ec163090073395a0143`.
+- Preserved the approved 4:41 workflow video and 80-second Radeon preview
+  byte-for-byte. They predate the formal 4,608-pair run and are not relabeled
+  as footage of that workload.
+- Published the exact static showcase build to the public `gh-pages` branch at
+  commit `c649178c638fcd8302d01a2e7ec7af7e705d54c4`. Online checks loaded
+  `assets/index-DZNAy0i7.js`, found the `4,608 futures` payload, measured zero
+  page-level horizontal overflow, and found no console warnings or errors.
+- Source and package preparation commit:
+  `a8a8ec0615ed4ccc806fee252ade9ff7077e56aa`.
+- No V3 tag was created and organizer PR #39 was not updated. Both remain
+  explicit publication gates.

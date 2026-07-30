@@ -2067,3 +2067,27 @@ Gate decision:
   local QA.
 - No Radeon instance, formal evidence, frozen protocol, thresholds, or
   unrelated untracked submission artifacts changed during deployment.
+
+## 2026-07-30 — Prepared the V3 submission package and updated public Pages
+
+- Rechecked the official Track 3 repository instructions and retained the
+  required English report, source/reproducibility guide, and 3-5 minute
+  complete-workflow video structure.
+- Rewrote the submission front door so the 30-scenario safety benchmark and
+  the 4,608 candidate-world decision workload use distinct denominators and
+  claims.
+- Rebuilt and rendered the technical report. The first V3 render exposed a
+  one-reference orphan page; shortened the delivery section, rebuilt to seven
+  pages, and visually verified the corrected final page.
+- Copied the byte-identical final PDF into the working submission set and
+  organizer package. Added compact Safety Swarm V2 summary/validation files
+  and regenerated both checksum manifests.
+- Passed showcase server tests (4/4), public static tests (3/3), ESLint, PDF
+  text checks, recursive package checksums, and working-set checksums.
+- Committed and pushed V3 package preparation as `a8a8ec0`.
+- Published the tested `pages-dist` payload to `gh-pages` commit `c649178`.
+  The public CDN initially served the prior asset for four checks, then served
+  `assets/index-DZNAy0i7.js`; browser QA confirmed the 4,608 payload, zero
+  horizontal overflow, and no console warnings or errors.
+- Did not create the planned `hackathon-2026-submission-v3` tag and did not
+  update organizer PR #39. Those remain owner-authorized release actions.
