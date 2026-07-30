@@ -155,3 +155,23 @@ This outcome satisfies the frozen V2-C acceptance rule and opens Gate V2-D.
 It remains `showcase_ready=false` and is not the 4,608-pair formal robustness
 result. No hard gate, candidate, world, assignment order, selection rule,
 threshold, or protocol identity changed after inspection.
+
+## Pre-run implementation record — Gate V2-D (2026-07-30)
+
+Before any formal execution, the runner was extended to implement the
+protocol's existing 256-environment maximum chunk size. The full assignment
+stream is divided into exactly 18 candidate-major chunks: one frozen candidate
+against all 256 worlds per chunk.
+
+Every chunk has an independently hashed report and strict validator. Failed
+attempts are retained under numbered directories; resume skips a chunk only
+after strict AMD/HIP/ROCm validation. The complete report requires all 18
+chunks in frozen order and reconstructs all 4,608 measurements, labels,
+candidate envelopes, selection, source/device identity, timing, telemetry,
+and hashes.
+
+The implementation passed `101/101` local tests and kept the formal protocol
+SHA-256 unchanged at
+`7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`.
+This record is not a result: no formal Radeon chunk had run when it was
+written.

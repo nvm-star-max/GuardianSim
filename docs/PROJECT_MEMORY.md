@@ -1761,3 +1761,26 @@ Evidence and working material:
   `showcase_ready=false`. It opens Gate V2-D under the frozen protocol, but the
   18 × 256 = 4,608-pair formal run has not started and no formal robustness
   claim is permitted yet.
+
+## Safety Swarm V2 Gate V2-D formal executor — 2026-07-30
+
+- Implemented the previously missing formal execution chain without changing
+  the frozen protocol SHA-256
+  `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`.
+- The 4,608 assignments are now represented as exactly 18 ordered chunks.
+  Chunk `i` contains candidate `i` against all world IDs `0..255`, with global
+  assignment interval `[i×256, (i+1)×256)`. No chunk can be presented as
+  standalone formal evidence.
+- Each attempt writes to a new numbered directory and is never overwritten.
+  A restart revalidates an existing complete chunk before skipping it; failed
+  or interrupted attempts remain preserved and the next attempt receives a
+  new number.
+- The final report can be assembled only from all 18 strictly validated AMD
+  chunks in frozen order. Validation reconstructs all 4,608 labels,
+  qualification and ranking, verifies source/device consistency, recomputes
+  wall-time and ROCm telemetry aggregation from chunk receipts, and checks
+  report hashes.
+- Local verification passed `101/101` tests, Python compilation, Ruff checks,
+  protocol-hash identity, and diff hygiene. This is implementation
+  verification only: no formal Radeon chunk has run yet and no formal result
+  or performance claim exists.

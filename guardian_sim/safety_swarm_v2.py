@@ -14,6 +14,7 @@ import math
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass
+from functools import lru_cache
 
 from guardian_sim.candidates import OBSTACLE_AWARE_YAWS
 from guardian_sim.gate32_benchmark import (
@@ -33,6 +34,9 @@ from guardian_sim.safety_swarm import (
 SAFETY_SWARM_V2_SCHEMA_VERSION = 1
 SAFETY_SWARM_V2_REPORT_NAME = "radeon-safety-swarm-v2-smoke"
 SAFETY_SWARM_V2_FORMAL_REPORT_NAME = "radeon-safety-swarm-v2-formal"
+SAFETY_SWARM_V2_FORMAL_CHUNK_REPORT_NAME = (
+    "radeon-safety-swarm-v2-formal-chunk"
+)
 SAFETY_SWARM_V2_RETREAT_DISTANCE_M = 0.025
 SAFETY_SWARM_V2_APPROACH_HEIGHT_M = 0.14
 SAFETY_SWARM_V2_GRIPPER_WIDTH_M = 0.06
@@ -116,6 +120,11 @@ def _percentile(values: Sequence[float], percentile: float) -> float:
         return ordered[lower]
     weight = position - lower
     return ordered[lower] * (1.0 - weight) + ordered[upper] * weight
+
+
+@lru_cache(maxsize=1)
+def _frozen_world_matrix():
+    return build_safety_swarm_matrix()
 
 
 def build_safety_swarm_v2_candidate_catalog() -> tuple[SafetySwarmCandidate, ...]:
@@ -227,6 +236,27 @@ def assign_candidate_worlds(
                 )
             )
     return tuple(assignments)
+
+
+def safety_swarm_v2_formal_chunk_assignments(
+    chunk_index: int,
+) -> tuple[CandidateWorldAssignment, ...]:
+    """Return one frozen 256-world formal chunk for a single candidate."""
+
+    catalog = build_safety_swarm_v2_candidate_catalog()
+    if chunk_index < 0 or chunk_index >= len(catalog):
+        raise ValueError("formal chunk index must be between 0 and 17")
+    candidate = catalog[chunk_index]
+    offset = chunk_index * SAFETY_SWARM_V2_FORMAL_BATCH_CHUNK_SIZE
+    return tuple(
+        CandidateWorldAssignment(
+            env_index=offset + world_id,
+            candidate_index=chunk_index,
+            candidate_id=candidate.candidate_id,
+            world_id=world_id,
+        )
+        for world_id in range(SAFETY_SWARM_V2_FORMAL_BATCH_CHUNK_SIZE)
+    )
 
 
 def build_safety_swarm_v2_formal_protocol() -> dict[str, object]:
@@ -363,7 +393,7 @@ def classify_candidate_world(
         raise ValueError("measurement candidate_id does not match assignment")
     if assignment.world_id != measurement.world_id:
         raise ValueError("measurement world_id does not match assignment")
-    world = build_safety_swarm_matrix()[assignment.world_id]
+    world = _frozen_world_matrix()[assignment.world_id]
     classified = classify_safety_swarm_world(
         world,
         SafetySwarmMeasurement(
@@ -549,6 +579,447 @@ def assemble_safety_swarm_v2_smoke_report(
         require_radeon=mode == "radeon_engineering_smoke",
     )
     return payload
+
+
+def _validate_radeon_identity(
+    payload: Mapping[str, object],
+    *,
+    label: str,
+) -> tuple[Mapping[str, object], Mapping[str, object], str]:
+    source = _mapping(payload.get("source"), "source")
+    commit = str(source.get("commit", ""))
+    if len(commit) < 7 or any(
+        character not in "0123456789abcdef" for character in commit
+    ):
+        raise ValueError(f"{label} requires a Git commit")
+    if payload.get("backend") != "genesis_gpu_batched":
+        raise ValueError(f"{label} requires Genesis GPU batching")
+    device = _mapping(payload.get("device"), "device")
+    if "amd" not in str(device.get("name", "")).lower():
+        raise ValueError(f"{label} does not identify an AMD GPU")
+    if not str(device.get("hip_version", "")).strip():
+        raise ValueError(f"{label} is missing HIP")
+    telemetry = _mapping(payload.get("gpu_telemetry"), "gpu_telemetry")
+    if int(telemetry.get("sample_count", 0)) < 1:
+        raise ValueError(f"{label} has no ROCm telemetry")
+    for field in (
+        "mean_gpu_utilization_pct",
+        "max_gpu_utilization_pct",
+        "max_vram_used_bytes",
+        "total_vram_bytes",
+    ):
+        if _finite(telemetry.get(field), field) < 0.0:
+            raise ValueError(f"{label} has invalid {field}")
+    if not isinstance(telemetry.get("sampling_errors"), list):
+        raise TypeError(f"{label} has invalid telemetry errors")
+    return device, telemetry, commit
+
+
+def assemble_safety_swarm_v2_formal_chunk_report(
+    measurements: Sequence[Mapping[str, object] | CandidateWorldMeasurement],
+    *,
+    chunk_index: int,
+    wall_seconds: float,
+    source_commit: str,
+    backend: str,
+    device: Mapping[str, object],
+    gpu_telemetry: Mapping[str, object],
+) -> dict[str, object]:
+    """Assemble one independently hashed 256-world formal execution chunk."""
+
+    protocol = build_safety_swarm_v2_formal_protocol()
+    assignments = safety_swarm_v2_formal_chunk_assignments(chunk_index)
+    parsed = [_measurement_from_mapping(value) for value in measurements]
+    if len(parsed) != len(assignments):
+        raise ValueError("formal chunk measurement count mismatch")
+    results = [
+        classify_candidate_world(assignment, measurement)
+        for assignment, measurement in zip(assignments, parsed, strict=True)
+    ]
+    payload: dict[str, object] = {
+        "schema_version": SAFETY_SWARM_V2_SCHEMA_VERSION,
+        "report_name": SAFETY_SWARM_V2_FORMAL_CHUNK_REPORT_NAME,
+        "mode": "radeon_formal_chunk",
+        "backend": backend,
+        "evidence_status": "formal_chunk_not_standalone_evidence",
+        "showcase_ready": False,
+        "claim_boundary": protocol["evidence_scope"],
+        "source": {"commit": source_commit},
+        "formal_protocol_sha256": protocol["protocol_sha256"],
+        "chunk": {
+            "chunk_index": chunk_index,
+            "assignment_start": assignments[0].env_index,
+            "assignment_end_exclusive": assignments[-1].env_index + 1,
+            "candidate_index": assignments[0].candidate_index,
+            "candidate_id": assignments[0].candidate_id,
+            "world_ids": list(range(SAFETY_SWARM_V2_FORMAL_BATCH_CHUNK_SIZE)),
+            "candidate_world_count": len(assignments),
+        },
+        "device": dict(device),
+        "gpu_telemetry": dict(gpu_telemetry),
+        "batched_execution_wall_seconds": wall_seconds,
+        "results": results,
+    }
+    payload["report_sha256"] = _sha256_json(payload)
+    validate_safety_swarm_v2_formal_chunk_report(payload, require_radeon=True)
+    return payload
+
+
+def validate_safety_swarm_v2_formal_chunk_report(
+    payload: Mapping[str, object],
+    *,
+    require_radeon: bool = False,
+) -> dict[str, object]:
+    """Strictly validate one exact contiguous formal chunk."""
+
+    if payload.get("schema_version") != SAFETY_SWARM_V2_SCHEMA_VERSION:
+        raise ValueError("unsupported Safety Swarm V2 schema")
+    if payload.get("report_name") != SAFETY_SWARM_V2_FORMAL_CHUNK_REPORT_NAME:
+        raise ValueError("unexpected Safety Swarm V2 formal chunk report name")
+    if payload.get("mode") != "radeon_formal_chunk":
+        raise ValueError("unexpected Safety Swarm V2 formal chunk mode")
+    if payload.get("evidence_status") != "formal_chunk_not_standalone_evidence":
+        raise ValueError("formal chunk evidence status mismatch")
+    if bool(payload.get("showcase_ready")):
+        raise ValueError("formal chunk cannot be showcase-ready")
+
+    protocol = build_safety_swarm_v2_formal_protocol()
+    if payload.get("formal_protocol_sha256") != protocol["protocol_sha256"]:
+        raise ValueError("formal chunk protocol mismatch")
+    if payload.get("claim_boundary") != protocol["evidence_scope"]:
+        raise ValueError("formal chunk claim boundary mismatch")
+
+    chunk = _mapping(payload.get("chunk"), "chunk")
+    chunk_index = int(chunk.get("chunk_index", -1))
+    assignments = safety_swarm_v2_formal_chunk_assignments(chunk_index)
+    expected_chunk = {
+        "chunk_index": chunk_index,
+        "assignment_start": assignments[0].env_index,
+        "assignment_end_exclusive": assignments[-1].env_index + 1,
+        "candidate_index": assignments[0].candidate_index,
+        "candidate_id": assignments[0].candidate_id,
+        "world_ids": list(range(SAFETY_SWARM_V2_FORMAL_BATCH_CHUNK_SIZE)),
+        "candidate_world_count": len(assignments),
+    }
+    if chunk != expected_chunk:
+        raise ValueError("formal chunk assignment metadata mismatch")
+
+    raw_results = payload.get("results")
+    if not isinstance(raw_results, list) or len(raw_results) != len(assignments):
+        raise ValueError("formal chunk result count mismatch")
+    for assignment, raw_result in zip(assignments, raw_results, strict=True):
+        result = _mapping(raw_result, f"formal result {assignment.env_index}")
+        measurement = _measurement_from_mapping(
+            _mapping(result.get("measurement"), "measurement")
+        )
+        rebuilt = classify_candidate_world(assignment, measurement)
+        if result != rebuilt:
+            raise ValueError(
+                f"formal environment {assignment.env_index} label drift"
+            )
+
+    wall_seconds = _finite(
+        payload.get("batched_execution_wall_seconds"),
+        "batched_execution_wall_seconds",
+    )
+    if wall_seconds <= 0.0:
+        raise ValueError("batched_execution_wall_seconds must be positive")
+    if require_radeon:
+        _validate_radeon_identity(payload, label="Radeon V2 formal chunk")
+
+    without_hash = {
+        key: value for key, value in payload.items() if key != "report_sha256"
+    }
+    if payload.get("report_sha256") != _sha256_json(without_hash):
+        raise ValueError("Safety Swarm V2 formal chunk hash mismatch")
+    return {
+        "status": "passed",
+        "schema_version": SAFETY_SWARM_V2_SCHEMA_VERSION,
+        "mode": "radeon_formal_chunk",
+        "formal_protocol_sha256": protocol["protocol_sha256"],
+        "chunk_index": chunk_index,
+        "candidate_id": assignments[0].candidate_id,
+        "candidate_world_count": len(assignments),
+        "showcase_ready": False,
+        "report_sha256": payload["report_sha256"],
+    }
+
+
+def _aggregate_gpu_telemetry(
+    chunks: Sequence[Mapping[str, object]],
+) -> dict[str, object]:
+    telemetry_values = [
+        _mapping(chunk.get("gpu_telemetry"), "gpu_telemetry")
+        for chunk in chunks
+    ]
+    sample_counts = [int(value["sample_count"]) for value in telemetry_values]
+    total_samples = sum(sample_counts)
+    if total_samples < 1:
+        raise ValueError("formal report has no ROCm telemetry")
+    mean_utilization = sum(
+        float(value["mean_gpu_utilization_pct"]) * sample_count
+        for value, sample_count in zip(
+            telemetry_values,
+            sample_counts,
+            strict=True,
+        )
+    ) / total_samples
+    total_vram_values = {
+        float(value["total_vram_bytes"]) for value in telemetry_values
+    }
+    if len(total_vram_values) != 1:
+        raise ValueError("formal chunks disagree on total VRAM")
+    return {
+        "sample_count": total_samples,
+        "mean_gpu_utilization_pct": mean_utilization,
+        "max_gpu_utilization_pct": max(
+            float(value["max_gpu_utilization_pct"])
+            for value in telemetry_values
+        ),
+        "max_vram_used_bytes": max(
+            float(value["max_vram_used_bytes"]) for value in telemetry_values
+        ),
+        "total_vram_bytes": total_vram_values.pop(),
+        "sampling_errors": [
+            error
+            for value in telemetry_values
+            for error in value.get("sampling_errors", [])
+        ],
+    }
+
+
+def assemble_safety_swarm_v2_formal_report(
+    chunks: Sequence[Mapping[str, object]],
+) -> dict[str, object]:
+    """Aggregate all 18 validated chunks into the sole formal report."""
+
+    protocol = build_safety_swarm_v2_formal_protocol()
+    expected_chunk_count = int(protocol["candidate_count"])
+    if len(chunks) != expected_chunk_count:
+        raise ValueError("formal report requires all 18 chunks")
+
+    validated_chunks: list[Mapping[str, object]] = []
+    for expected_index, chunk in enumerate(chunks):
+        validation = validate_safety_swarm_v2_formal_chunk_report(
+            chunk,
+            require_radeon=True,
+        )
+        if validation["chunk_index"] != expected_index:
+            raise ValueError("formal chunks must be supplied in frozen order")
+        validated_chunks.append(chunk)
+
+    first_device, _, first_commit = _validate_radeon_identity(
+        validated_chunks[0],
+        label="Radeon V2 formal chunk",
+    )
+    for chunk in validated_chunks[1:]:
+        device, _, commit = _validate_radeon_identity(
+            chunk,
+            label="Radeon V2 formal chunk",
+        )
+        if device != first_device:
+            raise ValueError("formal chunks disagree on device identity")
+        if commit != first_commit:
+            raise ValueError("formal chunks disagree on source commit")
+
+    results = [
+        result
+        for chunk in validated_chunks
+        for result in chunk["results"]
+    ]
+    wall_seconds = sum(
+        _finite(
+            chunk["batched_execution_wall_seconds"],
+            "batched_execution_wall_seconds",
+        )
+        for chunk in validated_chunks
+    )
+    candidate_summaries, summary = summarize_candidate_selection(
+        results,
+        protocol=protocol,
+        wall_seconds=wall_seconds,
+    )
+    summary["formal_status"] = summary.pop("smoke_status")
+    payload: dict[str, object] = {
+        "schema_version": SAFETY_SWARM_V2_SCHEMA_VERSION,
+        "report_name": SAFETY_SWARM_V2_FORMAL_REPORT_NAME,
+        "mode": "radeon_formal",
+        "backend": "genesis_gpu_batched",
+        "evidence_status": "complete_formal_candidate_selection",
+        "showcase_ready": True,
+        "claim_boundary": protocol["evidence_scope"],
+        "source": {"commit": first_commit},
+        "protocol": protocol,
+        "device": dict(first_device),
+        "gpu_telemetry": _aggregate_gpu_telemetry(validated_chunks),
+        "chunk_receipts": [
+            {
+                "chunk_index": index,
+                "candidate_id": chunk["chunk"]["candidate_id"],
+                "candidate_world_count": chunk["chunk"]["candidate_world_count"],
+                "source_commit": chunk["source"]["commit"],
+                "device_sha256": _sha256_json(chunk["device"]),
+                "batched_execution_wall_seconds": chunk[
+                    "batched_execution_wall_seconds"
+                ],
+                "scene_build_seconds": chunk.get("scene_build_seconds"),
+                "gpu_telemetry": chunk["gpu_telemetry"],
+                "report_sha256": chunk["report_sha256"],
+            }
+            for index, chunk in enumerate(validated_chunks)
+        ],
+        "results": results,
+        "candidate_summaries": candidate_summaries,
+        "summary": summary,
+    }
+    scene_build_values = [
+        chunk.get("scene_build_seconds") for chunk in validated_chunks
+    ]
+    if all(value is not None for value in scene_build_values):
+        payload["total_scene_build_seconds"] = sum(
+            _finite(value, "scene_build_seconds") for value in scene_build_values
+        )
+    payload["report_sha256"] = _sha256_json(payload)
+    validate_safety_swarm_v2_formal_report(payload, require_radeon=True)
+    return payload
+
+
+def validate_safety_swarm_v2_formal_report(
+    payload: Mapping[str, object],
+    *,
+    require_radeon: bool = False,
+) -> dict[str, object]:
+    """Strictly reconstruct the complete 4,608-pair formal selection report."""
+
+    if payload.get("schema_version") != SAFETY_SWARM_V2_SCHEMA_VERSION:
+        raise ValueError("unsupported Safety Swarm V2 schema")
+    if payload.get("report_name") != SAFETY_SWARM_V2_FORMAL_REPORT_NAME:
+        raise ValueError("unexpected Safety Swarm V2 formal report name")
+    if payload.get("mode") != "radeon_formal":
+        raise ValueError("unexpected Safety Swarm V2 formal mode")
+    if payload.get("evidence_status") != "complete_formal_candidate_selection":
+        raise ValueError("formal report evidence status mismatch")
+    if not bool(payload.get("showcase_ready")):
+        raise ValueError("complete formal report must be showcase-ready")
+
+    protocol = build_safety_swarm_v2_formal_protocol()
+    if payload.get("protocol") != protocol:
+        raise ValueError("Safety Swarm V2 formal protocol mismatch")
+    if payload.get("claim_boundary") != protocol["evidence_scope"]:
+        raise ValueError("Safety Swarm V2 formal claim boundary mismatch")
+    if require_radeon:
+        _validate_radeon_identity(payload, label="Radeon V2 formal report")
+
+    candidate_ids = [str(value) for value in protocol["candidate_ids"]]
+    world_ids = [int(value) for value in protocol["world_ids"]]
+    assignments = assign_candidate_worlds(candidate_ids, world_ids)
+    raw_results = payload.get("results")
+    if not isinstance(raw_results, list) or len(raw_results) != len(assignments):
+        raise ValueError("Safety Swarm V2 formal result count mismatch")
+    rebuilt_results: list[dict[str, object]] = []
+    for assignment, raw_result in zip(assignments, raw_results, strict=True):
+        result = _mapping(raw_result, f"formal result {assignment.env_index}")
+        measurement = _measurement_from_mapping(
+            _mapping(result.get("measurement"), "measurement")
+        )
+        rebuilt = classify_candidate_world(assignment, measurement)
+        if result != rebuilt:
+            raise ValueError(
+                f"formal environment {assignment.env_index} label drift"
+            )
+        rebuilt_results.append(rebuilt)
+
+    receipts = payload.get("chunk_receipts")
+    if not isinstance(receipts, list) or len(receipts) != 18:
+        raise ValueError("formal report chunk receipts mismatch")
+    source = _mapping(payload.get("source"), "source")
+    device = _mapping(payload.get("device"), "device")
+    for chunk_index, receipt_value in enumerate(receipts):
+        receipt = _mapping(receipt_value, "chunk receipt")
+        expected = {
+            "chunk_index": chunk_index,
+            "candidate_id": candidate_ids[chunk_index],
+            "candidate_world_count": SAFETY_SWARM_V2_FORMAL_BATCH_CHUNK_SIZE,
+            "source_commit": source.get("commit"),
+            "device_sha256": _sha256_json(device),
+            "batched_execution_wall_seconds": receipt.get(
+                "batched_execution_wall_seconds"
+            ),
+            "scene_build_seconds": receipt.get("scene_build_seconds"),
+            "gpu_telemetry": receipt.get("gpu_telemetry"),
+            "report_sha256": receipt.get("report_sha256"),
+        }
+        if receipt != expected or not str(receipt["report_sha256"]).strip():
+            raise ValueError("formal report chunk receipt mismatch")
+        _finite(
+            receipt["batched_execution_wall_seconds"],
+            "batched_execution_wall_seconds",
+        )
+        if receipt["scene_build_seconds"] is not None:
+            _finite(receipt["scene_build_seconds"], "scene_build_seconds")
+        _validate_radeon_identity(
+            {
+                "source": {"commit": receipt["source_commit"]},
+                "backend": "genesis_gpu_batched",
+                "device": device,
+                "gpu_telemetry": receipt["gpu_telemetry"],
+            },
+            label="Radeon V2 formal receipt",
+        )
+
+    summary = _mapping(payload.get("summary"), "summary")
+    wall_seconds = _finite(
+        summary.get("batched_execution_wall_seconds"),
+        "batched_execution_wall_seconds",
+    )
+    receipt_wall_seconds = sum(
+        float(receipt["batched_execution_wall_seconds"])
+        for receipt in receipts
+    )
+    if wall_seconds != receipt_wall_seconds:
+        raise ValueError("formal report wall-time aggregation mismatch")
+    expected_telemetry = _aggregate_gpu_telemetry(receipts)
+    if payload.get("gpu_telemetry") != expected_telemetry:
+        raise ValueError("formal report telemetry aggregation mismatch")
+    receipt_scene_build_values = [
+        receipt["scene_build_seconds"] for receipt in receipts
+    ]
+    if all(value is not None for value in receipt_scene_build_values):
+        expected_scene_build = sum(
+            float(value) for value in receipt_scene_build_values
+        )
+        if payload.get("total_scene_build_seconds") != expected_scene_build:
+            raise ValueError("formal report scene-build aggregation mismatch")
+    elif "total_scene_build_seconds" in payload:
+        raise ValueError("formal report has incomplete scene-build receipts")
+    expected_candidates, expected_summary = summarize_candidate_selection(
+        rebuilt_results,
+        protocol=protocol,
+        wall_seconds=wall_seconds,
+    )
+    expected_summary["formal_status"] = expected_summary.pop("smoke_status")
+    if payload.get("candidate_summaries") != expected_candidates:
+        raise ValueError("formal candidate summaries mismatch")
+    if summary != expected_summary:
+        raise ValueError("formal selection summary mismatch")
+
+    without_hash = {
+        key: value for key, value in payload.items() if key != "report_sha256"
+    }
+    if payload.get("report_sha256") != _sha256_json(without_hash):
+        raise ValueError("Safety Swarm V2 formal report hash mismatch")
+    return {
+        "status": "passed",
+        "schema_version": SAFETY_SWARM_V2_SCHEMA_VERSION,
+        "mode": "radeon_formal",
+        "protocol_sha256": protocol["protocol_sha256"],
+        "candidate_world_count": len(assignments),
+        "formal_status": expected_summary["formal_status"],
+        "decision": expected_summary["decision"],
+        "selected_candidate_id": expected_summary["selected_candidate_id"],
+        "showcase_ready": True,
+        "report_sha256": payload["report_sha256"],
+    }
 
 
 def validate_safety_swarm_v2_smoke_report(

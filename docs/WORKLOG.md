@@ -1954,3 +1954,30 @@ Gate decision:
 - No frozen protocol element changed. Gate V2-D is now eligible but was not
   launched. The 4,608-pair formal result and any formal robustness claim
   remain absent.
+
+## 2026-07-30 — Implemented the resumable Gate V2-D formal path
+
+- Confirmed that the frozen protocol declared Gate V2-D but the runner only
+  implemented `triad-4`, `full-4`, and `full-16`; did not launch an
+  unverifiable 4,608-pair run.
+- Added exact formal chunk assignment, chunk report assembly, strict chunk
+  validation, complete-report aggregation, and complete formal validation.
+  The frozen candidate catalog, world matrix, gates, order, and formal
+  protocol hash remain byte-for-byte unchanged.
+- Extended the Genesis runner with `--v2-formal-chunk-index 0..17`. Each
+  invocation runs one candidate across all 256 frozen worlds in a maximum
+  256-environment AMD GPU batch.
+- Added `scripts/run_safety_swarm_v2_formal.py`. It preserves numbered
+  attempts, strictly validates completed chunks before resume, refuses
+  ambiguous duplicate valid attempts, requires all 18 chunks in frozen order,
+  and writes the final report and validation receipt without overwrite.
+- Extended the report validator to identify smoke, formal-chunk, and complete
+  formal reports. Added tests for exact chunk coverage, 4,608-pair
+  reconstruction, deterministic selection, missing/reordered/mixed chunk
+  rejection, label tampering, and telemetry aggregation.
+- Verification: formal protocol hash remained
+  `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`;
+  `101/101` unit tests passed; Python compilation, Ruff checks, and
+  `git diff --check` passed.
+- Stopped before cloud synchronization and launch. No Radeon formal result
+  exists yet.

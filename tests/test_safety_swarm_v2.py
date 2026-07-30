@@ -8,6 +8,8 @@ from guardian_sim.safety_swarm import safety_swarm_smoke_world_ids
 from guardian_sim.safety_swarm_v2 import (
     SAFETY_SWARM_V2_TRIAD_CANDIDATE_IDS,
     CandidateWorldMeasurement,
+    assemble_safety_swarm_v2_formal_chunk_report,
+    assemble_safety_swarm_v2_formal_report,
     assemble_safety_swarm_v2_smoke_report,
     assign_candidate_worlds,
     build_safety_swarm_v2_candidate_catalog,
@@ -15,7 +17,10 @@ from guardian_sim.safety_swarm_v2 import (
     build_safety_swarm_v2_offline_fixture_measurements,
     build_safety_swarm_v2_smoke_protocol,
     safety_swarm_v2_candidate_catalog_sha256,
+    safety_swarm_v2_formal_chunk_assignments,
     safety_swarm_v2_tier_definition,
+    validate_safety_swarm_v2_formal_chunk_report,
+    validate_safety_swarm_v2_formal_report,
     validate_safety_swarm_v2_smoke_report,
 )
 
@@ -29,6 +34,43 @@ class SafetySwarmV2Tests(unittest.TestCase):
             mode="offline_fixture",
             backend="deterministic_fixture",
             source_commit="fixture",
+        )
+
+    def _formal_chunk(self, chunk_index: int) -> dict[str, object]:
+        assignments = safety_swarm_v2_formal_chunk_assignments(chunk_index)
+        measurements = [
+            CandidateWorldMeasurement(
+                candidate_id=assignment.candidate_id,
+                world_id=assignment.world_id,
+                minimum_clearance_m=0.020 + chunk_index * 0.001,
+                stability=0.90,
+                reachable=True,
+                task_completed=True,
+                clutter_contact=False,
+                elapsed_environment_steps=499,
+            )
+            for assignment in assignments
+        ]
+        return assemble_safety_swarm_v2_formal_chunk_report(
+            measurements,
+            chunk_index=chunk_index,
+            wall_seconds=2.0 + chunk_index,
+            source_commit="a" * 40,
+            backend="genesis_gpu_batched",
+            device={
+                "name": "AMD Radeon Graphics",
+                "hip_version": "7.2",
+                "torch_version": "2.9",
+                "genesis_version": "1.2.3",
+            },
+            gpu_telemetry={
+                "sample_count": 2,
+                "mean_gpu_utilization_pct": 70.0 + chunk_index,
+                "max_gpu_utilization_pct": 95.0,
+                "max_vram_used_bytes": 1_500_000_000.0,
+                "total_vram_bytes": 51_000_000_000.0,
+                "sampling_errors": [],
+            },
         )
 
     def test_candidate_catalog_and_formal_protocol_are_frozen(self) -> None:
@@ -72,6 +114,79 @@ class SafetySwarmV2Tests(unittest.TestCase):
             safety_swarm_v2_tier_definition("triad-4"),
             (SAFETY_SWARM_V2_TRIAD_CANDIDATE_IDS, safety_swarm_smoke_world_ids(4)),
         )
+
+    def test_formal_chunks_are_exact_contiguous_candidate_blocks(self) -> None:
+        for chunk_index in range(18):
+            assignments = safety_swarm_v2_formal_chunk_assignments(chunk_index)
+            self.assertEqual(len(assignments), 256)
+            self.assertEqual(assignments[0].env_index, chunk_index * 256)
+            self.assertEqual(
+                assignments[-1].env_index,
+                (chunk_index + 1) * 256 - 1,
+            )
+            self.assertEqual(
+                {assignment.candidate_index for assignment in assignments},
+                {chunk_index},
+            )
+            self.assertEqual(
+                [assignment.world_id for assignment in assignments],
+                list(range(256)),
+            )
+
+    def test_formal_chunk_and_complete_report_validate_strictly(self) -> None:
+        chunks = [self._formal_chunk(index) for index in range(18)]
+        chunk_validation = validate_safety_swarm_v2_formal_chunk_report(
+            chunks[0],
+            require_radeon=True,
+        )
+        self.assertEqual(chunk_validation["candidate_world_count"], 256)
+
+        report = assemble_safety_swarm_v2_formal_report(chunks)
+        validation = validate_safety_swarm_v2_formal_report(
+            report,
+            require_radeon=True,
+        )
+        self.assertEqual(validation["status"], "passed")
+        self.assertEqual(validation["candidate_world_count"], 4608)
+        self.assertEqual(validation["decision"], "execute")
+        self.assertEqual(
+            validation["selected_candidate_id"],
+            build_safety_swarm_v2_candidate_catalog()[-1].candidate_id,
+        )
+        self.assertEqual(report["summary"]["safe_candidate_world_count"], 4608)
+        self.assertEqual(report["gpu_telemetry"]["sample_count"], 36)
+        self.assertTrue(report["showcase_ready"])
+
+        tampered = copy.deepcopy(report)
+        tampered["results"][0]["hard_safe"] = False
+        with self.assertRaisesRegex(ValueError, "label drift"):
+            validate_safety_swarm_v2_formal_report(tampered)
+
+    def test_formal_aggregation_rejects_missing_reordered_and_mixed_chunks(
+        self,
+    ) -> None:
+        chunks = [self._formal_chunk(index) for index in range(18)]
+        with self.assertRaisesRegex(ValueError, "all 18"):
+            assemble_safety_swarm_v2_formal_report(chunks[:-1])
+
+        reordered = list(chunks)
+        reordered[0], reordered[1] = reordered[1], reordered[0]
+        with self.assertRaisesRegex(ValueError, "frozen order"):
+            assemble_safety_swarm_v2_formal_report(reordered)
+
+        mixed = copy.deepcopy(chunks)
+        mixed[1]["source"]["commit"] = "b" * 40
+        from guardian_sim.safety_swarm_v2 import _sha256_json
+
+        mixed[1]["report_sha256"] = _sha256_json(
+            {
+                key: value
+                for key, value in mixed[1].items()
+                if key != "report_sha256"
+            }
+        )
+        with self.assertRaisesRegex(ValueError, "source commit"):
+            assemble_safety_swarm_v2_formal_report(mixed)
 
     def test_fixture_selects_only_candidate_that_passes_every_world(self) -> None:
         report = self._fixture_report()

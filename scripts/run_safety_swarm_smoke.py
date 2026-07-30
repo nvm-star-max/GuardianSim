@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a frozen V1 or candidate-selection V2 Safety Swarm Radeon smoke."""
+"""Run a frozen V1 smoke, V2 smoke, or one V2 formal Radeon chunk."""
 
 from __future__ import annotations
 
@@ -34,10 +34,14 @@ from guardian_sim.safety_swarm_genesis import (
 )
 from guardian_sim.safety_swarm_v2 import (
     CandidateWorldMeasurement,
+    assemble_safety_swarm_v2_formal_chunk_report,
     assemble_safety_swarm_v2_smoke_report,
     assign_candidate_worlds,
+    build_safety_swarm_v2_formal_protocol,
     build_safety_swarm_v2_smoke_protocol,
+    safety_swarm_v2_formal_chunk_assignments,
     safety_swarm_v2_tier_definition,
+    validate_safety_swarm_v2_formal_chunk_report,
     validate_safety_swarm_v2_smoke_report,
 )
 
@@ -62,6 +66,11 @@ def build_parser() -> argparse.ArgumentParser:
     selection.add_argument(
         "--v2-tier",
         choices=("triad-4", "full-4", "full-16"),
+    )
+    selection.add_argument(
+        "--v2-formal-chunk-index",
+        type=int,
+        choices=range(18),
     )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--preflight-output", type=Path)
@@ -375,8 +384,10 @@ def main() -> None:
     _refuse_overwrite((args.output, preflight_path, validation_path))
 
     matrix = build_safety_swarm_matrix()
-    v2_mode = args.v2_tier is not None
-    if v2_mode:
+    v2_smoke_mode = args.v2_tier is not None
+    v2_formal_chunk_mode = args.v2_formal_chunk_index is not None
+    v2_mode = v2_smoke_mode or v2_formal_chunk_mode
+    if v2_smoke_mode:
         candidate_ids, world_ids = safety_swarm_v2_tier_definition(args.v2_tier)
         assignments = assign_candidate_worlds(candidate_ids, world_ids)
         worlds = tuple(matrix[assignment.world_id] for assignment in assignments)
@@ -384,6 +395,15 @@ def main() -> None:
             assignment.candidate_id for assignment in assignments
         )
         protocol = build_safety_swarm_v2_smoke_protocol(args.v2_tier)
+    elif v2_formal_chunk_mode:
+        assignments = safety_swarm_v2_formal_chunk_assignments(
+            args.v2_formal_chunk_index
+        )
+        worlds = tuple(matrix[assignment.world_id] for assignment in assignments)
+        candidate_ids_by_env = tuple(
+            assignment.candidate_id for assignment in assignments
+        )
+        protocol = build_safety_swarm_v2_formal_protocol()
     else:
         world_ids = safety_swarm_smoke_world_ids(args.world_count)
         worlds = tuple(matrix[world_id] for world_id in world_ids)
@@ -394,7 +414,15 @@ def main() -> None:
     preflight = {
         "status": "frozen_before_execution",
         "source_commit": source_commit,
-        "mode": "candidate_selection_v2" if v2_mode else "single_candidate_v1",
+        "mode": (
+            "candidate_selection_v2_formal_chunk"
+            if v2_formal_chunk_mode
+            else (
+                "candidate_selection_v2_smoke"
+                if v2_smoke_mode
+                else "single_candidate_v1"
+            )
+        ),
         "candidate_ids": list(dict.fromkeys(candidate_ids_by_env)),
         "protocol": protocol,
         "assignments": [
@@ -742,16 +770,27 @@ def main() -> None:
             )
             for index, assignment in enumerate(assignments)
         ]
-        report = assemble_safety_swarm_v2_smoke_report(
-            measurements,
-            tier=args.v2_tier,
-            wall_seconds=execution_seconds,
-            mode="radeon_engineering_smoke",
-            source_commit=source_commit,
-            backend="genesis_gpu_batched",
-            device=device_identity,
-            gpu_telemetry=telemetry,
-        )
+        if v2_formal_chunk_mode:
+            report = assemble_safety_swarm_v2_formal_chunk_report(
+                measurements,
+                chunk_index=args.v2_formal_chunk_index,
+                wall_seconds=execution_seconds,
+                source_commit=source_commit,
+                backend="genesis_gpu_batched",
+                device=device_identity,
+                gpu_telemetry=telemetry,
+            )
+        else:
+            report = assemble_safety_swarm_v2_smoke_report(
+                measurements,
+                tier=args.v2_tier,
+                wall_seconds=execution_seconds,
+                mode="radeon_engineering_smoke",
+                source_commit=source_commit,
+                backend="genesis_gpu_batched",
+                device=device_identity,
+                gpu_telemetry=telemetry,
+            )
     else:
         measurements = [
             SafetySwarmMeasurement(
@@ -782,7 +821,11 @@ def main() -> None:
         "pick_object": PICK_OBJECT,
         "obstacle_object": OBSTACLE_OBJECT,
         "requested_lift_height_m": REQUESTED_LIFT_HEIGHT_M,
-        "measurement_contract": protocol["measurement_contract"],
+        "measurement_contract": build_safety_swarm_v2_smoke_protocol(
+            "full-16"
+        )["measurement_contract"]
+        if v2_formal_chunk_mode
+        else protocol["measurement_contract"],
         "phase_steps": dict(PARALLEL_FUTURES_PHASE_STEPS),
         "maximum_action_delay_steps": max(delays),
     }
@@ -795,7 +838,12 @@ def main() -> None:
     report["report_sha256"] = _sha256_json(
         {key: value for key, value in report.items() if key != "report_sha256"}
     )
-    if v2_mode:
+    if v2_formal_chunk_mode:
+        validation = validate_safety_swarm_v2_formal_chunk_report(
+            report,
+            require_radeon=True,
+        )
+    elif v2_smoke_mode:
         validation = validate_safety_swarm_v2_smoke_report(
             report,
             require_radeon=True,
