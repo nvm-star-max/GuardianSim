@@ -112,15 +112,19 @@ relabeled as if it showed the new workload.
 
 ## V3 release state
 
-The V3 package is prepared on `agent/parallel-futures-showcase`. The public
-GitHub Pages build was published at deployment commit
+The V3 package was released from `agent/parallel-futures-showcase` as
+`hackathon-2026-submission-v3`, which peels to
+`5f7e3f7c8f984fd378f8c147038d84fb2e4983b3`. The public GitHub Pages build was
+published at deployment commit
 `c649178c638fcd8302d01a2e7ec7af7e705d54c4` and verified online with the
 `4,608 futures` payload, zero page-level horizontal overflow, and no browser
 console warnings or errors.
 
-Tag `hackathon-2026-submission-v3` and organizer PR #39 update remain pending.
-Do not publish either until final checks pass and the owner authorizes the
-organizer-facing update.
+Existing organizer PR #39 was updated in place at fork commit
+`2657aa23e84c9f75e4f55b8cdec49bba985a8870`. Fresh-clone verification passed
+all ten package checksums; PR state was `OPEN`, non-draft, and `MERGEABLE`.
+The organizer repository reports no configured status checks for the branch.
+The PR remains unmerged for organizer review.
 
 ## Blocking owner inputs
 

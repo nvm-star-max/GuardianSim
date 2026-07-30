@@ -1,7 +1,9 @@
-# Official Repository Pull Request Draft
+# Official Repository Pull Request Record
 
-Do not open this pull request until the final report, video, source commit, and
-the owner's personal eligibility and legal acceptance checks are complete.
+This English body was applied to existing organizer PR #39 on 2026-07-30 after
+the final report, video, source commit, checksum, public-link, and owner
+authorization checks completed. It remains the canonical local copy of the
+public PR text.
 
 ## Title
 
@@ -115,14 +117,11 @@ simulation stepping after warmup, not model-training throughput.
 
 ## Release-time checks
 
-- Confirm every immutable URL remains publicly accessible.
-- Create and verify tag `hackathon-2026-submission-v3` only after the final
-  report, package checksums, public showcase, and submission commit are
-  frozen.
-- Confirm the official-repository PDF path after copying the prepared package.
-- Confirm the private Luma registration uses the legal name and intended team
-  identity; public materials may use Aegis Motion / `@nvm-star-max`.
-- Confirm a valid Discord ID and personal eligibility.
-- Do not open the PR until the owner accepts the entry-license,
-  publicity/release, winner-form, and tax terms recorded in
+- Completed: immutable V3 URLs returned HTTP 200.
+- Completed: annotated tag `hackathon-2026-submission-v3` peels to
+  `5f7e3f7c8f984fd378f8c147038d84fb2e4983b3`.
+- Completed: the official-package PDF and all ten manifest entries passed from
+  a fresh clone of PR head `2657aa23e84c9f75e4f55b8cdec49bba985a8870`.
+- Completed by owner before release: private registration identity, Discord
+  contact, personal eligibility, and the legal acceptance items recorded in
   `RULES_REVIEW_2026-07-28.md`.

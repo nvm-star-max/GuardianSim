@@ -1924,5 +1924,29 @@ Evidence and working material:
   page-level horizontal overflow, and found no console warnings or errors.
 - Source and package preparation commit:
   `a8a8ec0615ed4ccc806fee252ade9ff7077e56aa`.
-- No V3 tag was created and organizer PR #39 was not updated. Both remain
-  explicit publication gates.
+- At the end of package preparation, the V3 tag and organizer PR update
+  remained explicit publication gates. They were completed in the separate
+  release step recorded below.
+
+## Public V3 organizer release — 2026-07-30
+
+- After explicit owner authorization, created annotated tag
+  `hackathon-2026-submission-v3`. The tag peels to source commit
+  `5f7e3f7c8f984fd378f8c147038d84fb2e4983b3`.
+- Synchronized the prepared organizer package to the existing fork branch
+  `submission/track3-aegis-motion-guardiansim` at commit
+  `2657aa23e84c9f75e4f55b8cdec49bba985a8870`. No new pull request was opened.
+- Updated existing organizer PR #39 in place. Verified title:
+  `Track 3, Aegis Motion, GuardianSim`; state `OPEN`; non-draft; GitHub
+  mergeability `MERGEABLE`; head commit `2657aa23e84c9f75e4f55b8cdec49bba985a8870`.
+  The organizer repository reports no configured status checks for this
+  branch; this is not a failed check.
+- A fresh clone of the fork branch passed every entry in the ten-file package
+  checksum manifest. Manifest SHA-256:
+  `b55bd15e4c9bc7649e126bfd8c5a7229cecc735849871ec163090073395a0143`.
+- Unsigned HTTP checks returned 200 for the immutable V3 tag, reproducibility
+  guide, approved 4:41 workflow video, public GitHub Pages showcase, and
+  organizer-package PDF.
+- The public PR remains unmerged for organizer review. The Radeon Cloud
+  instance, frozen protocols, preserved evidence, and unrelated untracked
+  local media were not changed during release.

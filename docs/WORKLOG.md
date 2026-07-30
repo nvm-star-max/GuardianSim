@@ -2089,5 +2089,35 @@ Gate decision:
   The public CDN initially served the prior asset for four checks, then served
   `assets/index-DZNAy0i7.js`; browser QA confirmed the 4,608 payload, zero
   horizontal overflow, and no console warnings or errors.
-- Did not create the planned `hackathon-2026-submission-v3` tag and did not
-  update organizer PR #39. Those remain owner-authorized release actions.
+- At this preparation checkpoint, the planned V3 tag and organizer PR update
+  remained owner-authorized release actions. Their later completion is
+  recorded below.
+
+## 2026-07-30 — Released V3 to the existing organizer PR
+
+- Received explicit authorization to create the V3 release tag and update
+  existing organizer PR #39 without opening a new PR.
+- Confirmed tracked source state was clean, the branch matched its remote, no
+  local or remote V3 tag existed, and PR #39 was open, non-draft, and
+  mergeable.
+- Created and pushed annotated tag `hackathon-2026-submission-v3`, peeled
+  source commit `5f7e3f7c8f984fd378f8c147038d84fb2e4983b3`.
+- Re-cloned the organizer fork branch, synchronized only
+  `submissions/Track3-Aegis-Motion-GuardianSim`, reviewed the scoped diff,
+  passed recursive package checksums, and pushed commit
+  `2657aa23e84c9f75e4f55b8cdec49bba985a8870`.
+- Updated PR #39 title/body in place to lead with the public showcase,
+  separated Gate 3.2 safety evidence from the 4,608-pair decision workload,
+  and linked immutable V3 source, video, evidence, and reproduction paths.
+- GitHub's app connector could read but not mutate the organizer-owned
+  repository (`403 Resource not accessible by integration`), so the already
+  authenticated owner CLI performed the authorized metadata update. A
+  subsequent independent read verified the exact body and head commit.
+- Fresh-clone verification passed all ten package files; package-manifest
+  SHA-256:
+  `b55bd15e4c9bc7649e126bfd8c5a7229cecc735849871ec163090073395a0143`.
+  V3 source, reproduction guide, full video, showcase, and organizer PDF all
+  returned HTTP 200.
+- Final PR state at verification: `OPEN`, non-draft, `MERGEABLE`, head
+  `2657aa23e84c9f75e4f55b8cdec49bba985a8870`. No CI/status checks are
+  configured on the submission branch. The PR was not merged.

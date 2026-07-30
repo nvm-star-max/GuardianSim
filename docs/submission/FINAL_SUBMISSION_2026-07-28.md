@@ -117,10 +117,10 @@ JavaScript, stylesheet, Seed 411 replay video, and social-preview image. The
 organizer PR now presents this no-sign-in arena before the metric summary and
 remains open, non-draft, and cleanly mergeable. The PR was not merged.
 
-## Local V3 decision-scale update prepared on 2026-07-30
+## V3 decision-scale update prepared on 2026-07-30
 
-This section records work prepared after the public V2 update. It does not
-claim that organizer PR #39 or a V3 release tag already contains the payload.
+This section records the V3 payload before its organizer-facing release. The
+separate release receipt below records when the payload became public.
 
 - Added the completed Safety Swarm V2 formal result:
   18 candidates × 256 uncertainty worlds = 4,608 candidate-world pairs.
@@ -141,6 +141,25 @@ claim that organizer PR #39 or a V3 release tag already contains the payload.
   Browser QA recorded zero page-level horizontal overflow and no console
   warnings or errors.
 
-Planned immutable release tag: `hackathon-2026-submission-v3`. It must not be
-created until final checks pass. Updating organizer PR #39 remains an external
-publication step requiring owner authorization.
+## Public V3 release completed on 2026-07-30
+
+The owner explicitly authorized creation of the V3 tag and update of existing
+organizer PR #39. No new pull request was opened.
+
+- Immutable source tag: `hackathon-2026-submission-v3`
+- Tag target:
+  `5f7e3f7c8f984fd378f8c147038d84fb2e4983b3`
+- Official fork update commit:
+  `2657aa23e84c9f75e4f55b8cdec49bba985a8870`
+- Organizer PR:
+  <https://github.com/AMD-DEV-CONTEST/Radeon-hackathon-2026-07/pull/39>
+- Verified PR title: `Track 3, Aegis Motion, GuardianSim`
+- Verified PR state: `OPEN`, non-draft, `MERGEABLE`
+- Organizer package-manifest SHA-256:
+  `b55bd15e4c9bc7649e126bfd8c5a7229cecc735849871ec163090073395a0143`
+
+A fresh clone of the PR head passed all ten package checksums. Unsigned checks
+returned HTTP 200 for the immutable tag, reproducibility guide, approved 4:41
+video, public GitHub Pages showcase, and official-package PDF. GitHub reported
+no configured status checks on the submission branch. The PR remains
+unmerged for organizer review.
