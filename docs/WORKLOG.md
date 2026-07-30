@@ -2019,3 +2019,32 @@ Gate decision:
   `docs/evidence/safety-swarm-v2-formal-2026-07-30`. No prior V1/V2 evidence,
   frozen protocol identity, cloud instance, or unrelated local submission
   media was modified.
+
+## 2026-07-30 — Built and calibrated the 4,608-pair judge showcase
+
+- Replaced the website's small 54-future engineering vignette as the main
+  scale story with the completed Safety Swarm V2 formal result:
+  18 candidates × 256 uncertainty worlds = 4,608 measured pairs.
+- Added a deterministic generator from the preserved formal JSON to a compact
+  TypeScript dataset and a test that reconciles row lengths, safe/contact
+  counts, qualification count, selected count, report hash, physics-step
+  count, and GPU peak against the original report.
+- Implemented the exact 18 × 256 result matrix, `4,608 → 5 → 1` funnel,
+  selected-action receipt, rejection histogram, AMD execution card, and
+  immutable evidence links.
+- Updated the hero and metadata to lead with the formal workload while keeping
+  the 256-world throughput benchmark explicitly separate. Kept the claim
+  boundary visible next to the formal data.
+- Browser-calibrated the site at 1440 × 1000 and 390 × 844. Corrected a mobile
+  hero overlap; final measurements showed no page/card overflow and no browser
+  console warnings or errors.
+- Rejected two generated share-card drafts because they visually overstated
+  the number of all-world qualifiers. Did not copy either image into the
+  project and removed stale OG-image references.
+- Verification passed:
+  `npm --prefix showcase test`,
+  `npm --prefix showcase run test:pages`, and
+  `npm --prefix showcase run lint`.
+- Preserved all unrelated untracked submission videos, previews, PDF output,
+  and browser artifacts. The Radeon Cloud instance was not restarted,
+  destroyed, or used during this website-only stage.

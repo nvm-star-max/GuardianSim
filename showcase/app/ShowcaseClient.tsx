@@ -1,6 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  safetySwarmFormal,
+  safetySwarmRows,
+} from "./safetySwarmFormal.generated";
 
 type ChallengeKey = "collision" | "margin" | "stop";
 type Phase = "idle" | "running" | "revealed";
@@ -40,6 +44,10 @@ const GATE_32_REPORT =
   "https://github.com/nvm-star-max/GuardianSim/blob/25e27aced13237b5af93fd91697d7abb12101a30/docs/evidence/gate-3-2/formal-report.json";
 const GATE_33_REPORT =
   "https://github.com/nvm-star-max/GuardianSim/blob/25e27aced13237b5af93fd91697d7abb12101a30/docs/evidence/gate-3-3-two-strata/raw/two-strata-report.json";
+const SAFETY_SWARM_V2_REPORT =
+  "https://github.com/nvm-star-max/GuardianSim/blob/975a82b3e09d0458a4c02ac945859f2fdf874c4f/docs/evidence/safety-swarm-v2-formal-2026-07-30/formal-report.json";
+const SAFETY_SWARM_V2_EVIDENCE =
+  "https://github.com/nvm-star-max/GuardianSim/tree/975a82b3e09d0458a4c02ac945859f2fdf874c4f/docs/evidence/safety-swarm-v2-formal-2026-07-30";
 
 const challenges: Record<ChallengeKey, Challenge> = {
   collision: {
@@ -251,6 +259,243 @@ function MiniScene({
   );
 }
 
+const swarmOutcomeColors = {
+  S: "#54f58b",
+  C: "#ff6858",
+  M: "#ffc857",
+  G: "#73b9ff",
+  U: "#be8cff",
+  T: "#e9edf3",
+} as const;
+
+function SafetySwarmHeatmap() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    const width = 1440;
+    const height = 560;
+    const matrixLeft = 205;
+    const matrixTop = 58;
+    const matrixWidth = 1024;
+    const rowStep = 25;
+    const cellWidth = matrixWidth / safetySwarmFormal.worldCountPerCandidate;
+
+    canvas.width = width;
+    canvas.height = height;
+    context.clearRect(0, 0, width, height);
+    context.fillStyle = "#02090d";
+    context.fillRect(0, 0, width, height);
+
+    context.font = "700 15px ui-monospace, SFMono-Regular, Menlo, monospace";
+    context.fillStyle = "#8ca0ac";
+    context.fillText("CANDIDATE", 22, 33);
+    context.fillText("UNCERTAINTY WORLD 0", matrixLeft, 33);
+    context.textAlign = "right";
+    context.fillText("255", matrixLeft + matrixWidth, 33);
+    context.fillText("SAFE / 256", 1408, 33);
+    context.textAlign = "left";
+
+    for (let tick = 0; tick <= 256; tick += 32) {
+      const x = matrixLeft + tick * cellWidth;
+      context.strokeStyle = "rgba(115, 185, 255, 0.13)";
+      context.beginPath();
+      context.moveTo(x, matrixTop - 8);
+      context.lineTo(x, matrixTop + safetySwarmRows.length * rowStep - 7);
+      context.stroke();
+    }
+
+    safetySwarmRows.forEach((row, rowIndex) => {
+      const y = matrixTop + rowIndex * rowStep;
+
+      if (row.selected) {
+        context.fillStyle = "rgba(216, 255, 95, 0.08)";
+        context.fillRect(10, y - 4, width - 20, rowStep - 1);
+        context.fillStyle = "#d8ff5f";
+        context.fillRect(10, y - 4, 5, rowStep - 1);
+      }
+
+      context.font = row.selected
+        ? "800 14px ui-monospace, SFMono-Regular, Menlo, monospace"
+        : "600 14px ui-monospace, SFMono-Regular, Menlo, monospace";
+      context.fillStyle = row.selected ? "#d8ff5f" : "#aab8c1";
+      context.fillText(
+        `${String(row.candidateIndex + 1).padStart(2, "0")}  ${row.label}`,
+        22,
+        y + 11,
+      );
+
+      Array.from(row.outcomes).forEach((outcome, worldIndex) => {
+        context.fillStyle =
+          swarmOutcomeColors[outcome as keyof typeof swarmOutcomeColors] ??
+          "#47525a";
+        context.fillRect(
+          matrixLeft + worldIndex * cellWidth,
+          y,
+          Math.max(2.8, cellWidth - 0.6),
+          15,
+        );
+      });
+
+      context.textAlign = "right";
+      context.fillStyle = row.qualifies ? "#54f58b" : "#93a4ae";
+      context.fillText(
+        `${row.safeWorldCount}${row.qualifies ? "  PASS" : ""}`,
+        1408,
+        y + 11,
+      );
+      context.textAlign = "left";
+    });
+
+    context.strokeStyle = "rgba(255, 255, 255, 0.13)";
+    context.strokeRect(
+      matrixLeft - 1,
+      matrixTop - 1,
+      matrixWidth + 2,
+      safetySwarmRows.length * rowStep - 9,
+    );
+  }, []);
+
+  return (
+    <div className="swarm-heatmap-shell">
+      <div className="swarm-heatmap-scroll">
+        <canvas
+          ref={canvasRef}
+          className="swarm-heatmap-canvas"
+          role="img"
+          aria-label="Safety Swarm V2 formal matrix: 18 candidate actions by 256 uncertainty worlds. Five candidates pass all worlds and candidate five is selected."
+        />
+      </div>
+      <div className="swarm-legend" aria-label="Heatmap outcome legend">
+        <span><i className="legend-safe" /> Safe</span>
+        <span><i className="legend-contact" /> Clutter contact</span>
+        <span><i className="legend-stability" /> Stability gate</span>
+        <span><i className="legend-clearance" /> Clearance gate</span>
+        <b>Each pixel is one measured candidate-by-world result.</b>
+      </div>
+      <ol className="sr-only">
+        {safetySwarmRows.map((row) => (
+          <li key={row.candidateId}>
+            Candidate {row.candidateIndex + 1}, {row.label}:{" "}
+            {row.safeWorldCount} of 256 worlds safe
+            {row.qualifies ? ", qualified" : ", rejected"}
+            {row.selected ? ", selected for execution" : ""}.
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function SafetySwarmFormalSection() {
+  const selected = safetySwarmRows.find((row) => row.selected);
+
+  return (
+    <div className="swarm-formal-stage" id="formal">
+      <div className="swarm-formal-heading">
+        <div>
+          <span>SAFETY SWARM V2 · FROZEN FORMAL RUN</span>
+          <h3>18 actions. 256 uncertain worlds each.</h3>
+          <p>
+            Every candidate faced the same bounded uncertainty set in one
+            Radeon batch. A candidate survived only if all 256 worlds passed
+            the frozen hard gates.
+          </p>
+        </div>
+        <div className="swarm-funnel" aria-label="Safety Swarm decision funnel">
+          <div>
+            <strong>4,608</strong>
+            <span>measured candidate-world pairs</span>
+          </div>
+          <i>→</i>
+          <div>
+            <strong>5</strong>
+            <span>candidates passed 256/256</span>
+          </div>
+          <i>→</i>
+          <div className="swarm-funnel-selected">
+            <strong>1</strong>
+            <span>frozen ranking selected</span>
+          </div>
+        </div>
+      </div>
+
+      <SafetySwarmHeatmap />
+
+      <div className="swarm-formal-bottom">
+        <article className="swarm-decision-card">
+          <span>EXECUTE</span>
+          <h4>{selected?.label}</h4>
+          <p>{selected?.safeWorldCount}/256 worlds safe · zero clutter contacts</p>
+          <dl>
+            <div>
+              <dt>Worst clearance</dt>
+              <dd>{selected?.worstCaseClearanceMm.toFixed(3)} mm</dd>
+            </div>
+            <div>
+              <dt>5th percentile</dt>
+              <dd>{selected?.fifthPercentileClearanceMm.toFixed(3)} mm</dd>
+            </div>
+            <div>
+              <dt>Minimum stability</dt>
+              <dd>{selected?.minimumStability.toFixed(3)}</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article className="swarm-compute-card">
+          <span>AMD RADEON FORMAL WORKLOAD</span>
+          <strong>10,143.979</strong>
+          <p>measured environment steps per second</p>
+          <dl>
+            <div>
+              <dt>Physics steps</dt>
+              <dd>2,299,392</dd>
+            </div>
+            <div>
+              <dt>Execution wall time</dt>
+              <dd>226.676 s</dd>
+            </div>
+            <div>
+              <dt>GPU utilization</dt>
+              <dd>73.406% mean · 97% peak</dd>
+            </div>
+            <div>
+              <dt>Runtime</dt>
+              <dd>ROCm/HIP · Genesis 1.2.3</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article className="swarm-audit-card">
+          <span>WHAT WAS REJECTED</span>
+          <strong>1,994</strong>
+          <p>candidate-world pairs failed at least one frozen gate.</p>
+          <dl>
+            <div><dt>Stability gate</dt><dd>1,691</dd></div>
+            <div><dt>Clutter contact</dt><dd>270</dd></div>
+            <div><dt>Clearance gate</dt><dd>33</dd></div>
+          </dl>
+          <a href={SAFETY_SWARM_V2_REPORT} target="_blank" rel="noreferrer">
+            Inspect the immutable report ↗
+          </a>
+        </article>
+      </div>
+
+      <small className="swarm-boundary">
+        Engineering candidate-by-uncertainty simulation stress test on AMD
+        Radeon Cloud · not 4,608 independent robot trials and not a
+        physical-robot safety guarantee
+      </small>
+    </div>
+  );
+}
+
 function RadeonScaleSection() {
   return (
     <section className="radeon-scale-section" id="scale">
@@ -315,47 +560,7 @@ function RadeonScaleSection() {
         </div>
       </div>
 
-      <div className="parallel-futures-stage">
-        <div className="parallel-futures-copy">
-          <span>FROM RAW SCALE TO A ROBOT DECISION</span>
-          <h3>54 physical futures, evaluated together.</h3>
-          <p>
-            Eighteen bounded actions, each repeated three times in one batched
-            Genesis scene. Hard gates reject unsafe futures before utility
-            ranking chooses an action.
-          </p>
-          <div className="parallel-time">
-            <strong>12.839 s</strong>
-            <span>wall time · 71.8% mean GPU · 95% peak</span>
-          </div>
-        </div>
-        <div className="parallel-funnel" aria-label="54 parallel futures safety funnel">
-          <div className="parallel-grid">
-            {Array.from({ length: 54 }, (_, index) => (
-              <i
-                key={index}
-                className={index < 32 ? "parallel-safe" : "parallel-rejected"}
-                aria-hidden="true"
-              />
-            ))}
-          </div>
-          <div className="funnel-arrow" aria-hidden="true">→</div>
-          <div className="funnel-results">
-            <div className="funnel-safe">
-              <strong>32</strong>
-              <span>hard-safe futures</span>
-            </div>
-            <div className="funnel-rejected">
-              <strong>22</strong>
-              <span>rejected before execution</span>
-            </div>
-          </div>
-        </div>
-        <small className="parallel-boundary">
-          Engineering throughput demonstration · 54 nested candidate/repeat
-          worlds, not independent scenes or added formal trials
-        </small>
-      </div>
+      <SafetySwarmFormalSection />
     </section>
   );
 }
@@ -440,6 +645,7 @@ export function ShowcaseClient() {
         <nav aria-label="Primary navigation">
           <a href="#arena">Arena</a>
           <a href="#scale">Radeon Scale</a>
+          <a href="#formal">4,608 Run</a>
           <a href="#replay">Replay</a>
           <a href="#proof">Proof</a>
         </nav>
@@ -458,13 +664,13 @@ export function ShowcaseClient() {
         <div className="hero-copy">
           <p className="kicker">AMD RADEON · PARALLEL PHYSICAL AI</p>
           <h1>
-            256 robot worlds.
+            4,608 futures.
             <br />
-            <span>One safe move.</span>
+            <span>One action.</span>
           </h1>
           <p className="hero-lede">
-            GuardianSim turns Radeon parallel physics into an explainable
-            execute-or-stop decision before a robot touches the scene.
+            GuardianSim stress-tests 18 actions across 256 uncertainty worlds
+            on Radeon, then explains why one action executes—or why none should.
           </p>
           <div className="hero-actions">
             <a className="primary-action" href="#scale">
@@ -478,19 +684,19 @@ export function ShowcaseClient() {
         <div className="hero-manifesto">
           <span>ONE RADEON GPU</span>
           <i />
-          <span>256 PHYSICS WORLDS</span>
+          <span>18 BOUNDED ACTIONS</span>
           <i />
-          <span>54 ACTION FUTURES</span>
+          <span>256 WORLDS EACH</span>
           <i />
           <span>MOVE OR STOP</span>
         </div>
         <div className="hero-score" aria-label="Preserved evidence scale">
-          <span>STRICT RADEON CLOUD RUN</span>
-          <strong>35,166</strong>
-          <p>environment steps per second · 256 worlds</p>
+          <span>FROZEN 4,608-PAIR RUN</span>
+          <strong>10,144</strong>
+          <p>environment steps per second · formal workload</p>
           <div>
-            <b>228.16× measured speedup</b>
-            <small>89.1% parallel efficiency · 96% peak GPU</small>
+            <b>2.30M measured physics steps</b>
+            <small>73.4% mean GPU · 97% peak GPU</small>
           </div>
         </div>
       </section>
@@ -801,8 +1007,14 @@ export function ShowcaseClient() {
           <h2>No magic numbers. Just preserved evidence.</h2>
         </div>
         <div className="evidence-links">
+          <a href={SAFETY_SWARM_V2_REPORT} target="_blank" rel="noreferrer">
+            Safety Swarm V2 · 4,608-pair report <span>↗</span>
+          </a>
+          <a href={SAFETY_SWARM_V2_EVIDENCE} target="_blank" rel="noreferrer">
+            V2 raw logs, validation & checksums <span>↗</span>
+          </a>
           <a href={GATE_32_REPORT} target="_blank" rel="noreferrer">
-            Frozen schema-5 report <span>↗</span>
+            Frozen 30-scenario report <span>↗</span>
           </a>
           <a
             href="https://github.com/nvm-star-max/GuardianSim/tree/25e27aced13237b5af93fd91697d7abb12101a30/docs/evidence/gate-3-2"
@@ -831,7 +1043,7 @@ export function ShowcaseClient() {
           <br />
           No physical-robot deployment claim.
         </p>
-        <span>See three futures before the robot moves.</span>
+        <span>Test 4,608 futures before one action moves.</span>
       </footer>
     </main>
   );

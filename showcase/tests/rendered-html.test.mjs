@@ -33,8 +33,8 @@ test("server-renders the GuardianSim Parallel Futures arena", async () => {
     html,
     /<title>GuardianSim: Parallel Futures<\/title>/i,
   );
-  assert.match(html, /256 robot worlds/);
-  assert.match(html, /One safe move/);
+  assert.match(html, /4,608 futures/);
+  assert.match(html, /One action/);
   assert.match(html, /Try to break GuardianSim/);
   assert.match(html, /APPLY GATES TO 18 FUTURES/);
   assert.match(html, /Seed 411/);
@@ -42,7 +42,6 @@ test("server-renders the GuardianSim Parallel Futures arena", async () => {
   assert.match(html, /1,387/);
   assert.match(html, /1,185/);
   assert.match(html, /202/);
-  assert.match(html, /not independent scenes/i);
   assert.match(html, /30\/30/);
   assert.match(html, /\+98\.36%/);
   assert.match(html, /No physical-robot deployment claim/i);
@@ -52,11 +51,14 @@ test("server-renders the GuardianSim Parallel Futures arena", async () => {
   assert.match(html, /228\.16×/);
   assert.match(html, /89\.1%/);
   assert.match(html, /85\.5% mean · 96% peak/);
-  assert.match(html, /54 physical futures, evaluated together/);
-  assert.match(html, /12\.839 s/);
-  assert.match(html, /32/);
-  assert.match(html, /22/);
-  assert.match(html, /not independent scenes or added formal trials/);
+  assert.match(html, /18 actions\. 256 uncertain worlds each\./);
+  assert.match(html, /4,608/);
+  assert.match(html, /candidates passed 256\/256/);
+  assert.match(html, /10,143\.979/);
+  assert.match(html, /2,299,392/);
+  assert.match(html, /73\.406% mean · 97% peak/);
+  assert.match(html, /1,691/);
+  assert.match(html, /not 4,608 independent robot trials/);
   assert.match(html, /STRICT VALIDATION PASSED/);
   assert.doesNotMatch(html, /pending strict validation/i);
   assert.match(html, /not 337,000 independent safety trials/);
@@ -78,17 +80,74 @@ test("ships immutable audit links, replay assets, and finished metadata", async 
   assert.match(client, /safe_stop/);
   assert.match(client, /downloadReceipt/);
   assert.match(client, /seed-411-parallel-futures\.mp4/);
-  assert.match(layout, /summary_large_image/);
-  assert.match(layout, /\/og-parallel-futures\.png/);
+  assert.match(client, /SafetySwarmHeatmap/);
+  assert.match(client, /975a82b3e09d0458a4c02ac945859f2fdf874c4f/);
+  assert.match(layout, /card: "summary"/);
+  assert.doesNotMatch(layout, /\/og-parallel-futures\.png/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 
-  await access(
-    new URL("../public/og-parallel-futures.png", import.meta.url),
-  );
   await access(
     new URL("../public/seed-411-parallel-futures.mp4", import.meta.url),
   );
   await access(new URL("../public/seed-411-preview.png", import.meta.url));
+});
+
+test("Safety Swarm showcase data is generated from the preserved formal report", async () => {
+  const [generatedSource, reportText] = await Promise.all([
+    readFile(
+      new URL("../app/safetySwarmFormal.generated.ts", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL(
+        "../../docs/evidence/safety-swarm-v2-formal-2026-07-30/formal-report.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  ]);
+
+  const formalMatch = generatedSource.match(
+    /export const safetySwarmFormal = ([\s\S]*?) as const;/,
+  );
+  const rowsMatch = generatedSource.match(
+    /export const safetySwarmRows = ([\s\S]*?) as const;/,
+  );
+  assert.ok(formalMatch, "generated formal summary is missing");
+  assert.ok(rowsMatch, "generated heatmap rows are missing");
+
+  const generated = JSON.parse(formalMatch[1]);
+  const rows = JSON.parse(rowsMatch[1]);
+  const report = JSON.parse(reportText);
+
+  assert.equal(generated.reportSha256, report.report_sha256);
+  assert.equal(generated.candidateWorldCount, 4608);
+  assert.equal(generated.candidateCount, 18);
+  assert.equal(generated.worldCountPerCandidate, 256);
+  assert.equal(generated.qualifyingCandidateCount, 5);
+  assert.equal(generated.totalEnvironmentSteps, 2299392);
+  assert.equal(generated.maxGpuUtilizationPct, 97);
+
+  assert.equal(rows.length, 18);
+  assert.equal(rows.filter((row) => row.qualifies).length, 5);
+  assert.equal(rows.filter((row) => row.selected).length, 1);
+  assert.ok(rows.every((row) => row.outcomes.length === 256));
+  assert.equal(
+    rows.reduce(
+      (total, row) =>
+        total + Array.from(row.outcomes).filter((code) => code === "S").length,
+      0,
+    ),
+    report.summary.safe_candidate_world_count,
+  );
+  assert.equal(
+    rows.reduce(
+      (total, row) =>
+        total + Array.from(row.outcomes).filter((code) => code === "C").length,
+      0,
+    ),
+    report.summary.contact_candidate_world_count,
+  );
 });
 
 test("interactive claims match the preserved Gate 3.2 and Gate 3.3 reports", async () => {

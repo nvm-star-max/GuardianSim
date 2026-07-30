@@ -1838,3 +1838,39 @@ Evidence and working material:
   test and measured batched-physics throughput. It is not a physical-robot
   safety guarantee and must not be described as 4,608 independent real-robot
   trials.
+
+## Judge-facing Safety Swarm V2 showcase — 2026-07-30
+
+- Promoted the verified Gate V2-D result to the main website narrative:
+  `4,608 measured candidate-world pairs → 5 candidates passing 256/256 →
+  1 action selected by frozen ranking`.
+- Added `scripts/build_showcase_safety_swarm_data.py`. It reads the preserved
+  5.9 MB formal report and generates the compact tracked module
+  `showcase/app/safetySwarmFormal.generated.ts`; website heatmap values and
+  summary metrics are therefore derived from evidence rather than copied or
+  illustrated by hand.
+- Added an 18 × 256 canvas heatmap with exact per-pair labels:
+  safe, clutter contact, stability-gate failure, and clearance-gate failure.
+  The selected `-45° · R0` row is highlighted and reports the preserved
+  256/256 safe result, zero contact, `66.249 mm` worst clearance,
+  `66.304 mm` fifth-percentile clearance, and `0.907` minimum stability.
+- Separated the formal decision workload from the existing raw simulator
+  scaling benchmark. The formal card reports only the verified values:
+  `2,299,392` environment steps, `226.676 s`, `10,143.979 steps/s`,
+  `73.406%` mean GPU and `97%` peak GPU. The 256-world raw benchmark remains
+  separately labelled at `35,166 steps/s`.
+- Added immutable report/evidence links pinned to evidence commit
+  `975a82b3e09d0458a4c02ac945859f2fdf874c4f` and kept the visible boundary:
+  this is a candidate-by-uncertainty engineering simulation stress test, not
+  4,608 independent robot trials or a physical-robot safety guarantee.
+- Desktop QA at 1440 × 1000 measured zero page overflow and zero card
+  overflow. Mobile QA at 390 × 844 measured zero page overflow; the hero
+  button/performance-card overlap was corrected to a `32.8 px` gap. The
+  dense matrix scrolls only inside its own bounded viewer on mobile.
+- Two generated social-card attempts were rejected because their depicted
+  number of fully passing rows did not match the formal report. Neither image
+  entered the repository; OG-image references were removed rather than
+  publish inaccurate evidence.
+- Showcase server build, rendered evidence tests, GitHub Pages build/static
+  tests, ESLint, and browser console checks passed. No Radeon instance,
+  frozen evidence, submission media, or unrelated local files changed.

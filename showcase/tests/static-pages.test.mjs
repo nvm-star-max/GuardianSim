@@ -9,7 +9,7 @@ test("builds a public GitHub Pages entry point", async () => {
 
   assert.match(html, /<title>GuardianSim: Parallel Futures<\/title>/i);
   assert.match(html, /nvm-star-max\.github\.io\/GuardianSim/);
-  assert.match(html, /og-parallel-futures\.png/);
+  assert.doesNotMatch(html, /og-parallel-futures\.png/);
   assert.match(html, /assets\/[^"]+\.js/);
   assert.match(html, /assets\/[^"]+\.css/);
   assert.doesNotMatch(html, /signin-with-chatgpt|codex-preview/i);
@@ -18,7 +18,6 @@ test("builds a public GitHub Pages entry point", async () => {
 test("copies immutable showcase media into the static build", async () => {
   await access(new URL("seed-411-parallel-futures.mp4", outputRoot));
   await access(new URL("seed-411-preview.png", outputRoot));
-  await access(new URL("og-parallel-futures.png", outputRoot));
   await access(new URL("favicon.svg", outputRoot));
 });
 

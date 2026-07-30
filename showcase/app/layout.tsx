@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase,
     title: "GuardianSim: Parallel Futures",
     description:
-      "256 robot worlds. One safe move. An evidence-backed parallel Physical AI safety system on AMD Radeon.",
+      "4,608 physical counterfactuals. One action. An evidence-backed parallel Physical AI decision system on AMD Radeon.",
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
@@ -31,18 +31,14 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "GuardianSim: Parallel Futures",
       description:
-        "256 robot worlds. One safe move. Explore verified Radeon scale and try to break GuardianSim in a counterfactual safety arena.",
+        "18 actions face 256 uncertainty worlds each on AMD Radeon. Explore the verified 4,608-pair run and try to break GuardianSim.",
       type: "website",
-      images: [
-        { url: "/og-parallel-futures.png", width: 1200, height: 630 },
-      ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: "GuardianSim: Parallel Futures",
       description:
-        "Radeon parallel physics turns bounded robot futures into an explainable move-or-stop decision.",
-      images: ["/og-parallel-futures.png"],
+        "Radeon parallel physics turns 4,608 bounded robot futures into an explainable execute-or-stop decision.",
     },
   };
 }
