@@ -35,6 +35,9 @@ test("server-renders the GuardianSim Parallel Futures arena", async () => {
   );
   assert.match(html, /4,608 futures/);
   assert.match(html, /One action/);
+  assert.match(html, /ROBOT SAFETY CO-PROCESSOR/);
+  assert.match(html, /A PPO, VLA, or scripted policy proposes a motion/);
+  assert.match(html, /RADEON SIMULATES/);
   assert.match(html, /Try to break GuardianSim/);
   assert.match(html, /APPLY GATES TO 18 FUTURES/);
   assert.match(html, /Seed 411/);

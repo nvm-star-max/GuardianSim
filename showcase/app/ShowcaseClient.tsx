@@ -662,15 +662,16 @@ export function ShowcaseClient() {
       <section className="hero" id="top">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
-          <p className="kicker">AMD RADEON · PARALLEL PHYSICAL AI</p>
+          <p className="kicker">AMD RADEON · ROBOT SAFETY CO-PROCESSOR</p>
           <h1>
             4,608 futures.
             <br />
             <span>One action.</span>
           </h1>
           <p className="hero-lede">
-            GuardianSim stress-tests 18 actions across 256 uncertainty worlds
-            on Radeon, then explains why one action executes—or why none should.
+            A PPO, VLA, or scripted policy proposes a motion. GuardianSim uses
+            Radeon to test it across physical futures before one action
+            executes—or the robot stops.
           </p>
           <div className="hero-actions">
             <a className="primary-action" href="#scale">
@@ -682,11 +683,11 @@ export function ShowcaseClient() {
           </div>
         </div>
         <div className="hero-manifesto">
-          <span>ONE RADEON GPU</span>
+          <span>POLICY PROPOSES</span>
           <i />
-          <span>18 BOUNDED ACTIONS</span>
+          <span>RADEON SIMULATES</span>
           <i />
-          <span>256 WORLDS EACH</span>
+          <span>HARD GATES VERIFY</span>
           <i />
           <span>MOVE OR STOP</span>
         </div>

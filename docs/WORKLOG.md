@@ -2121,3 +2121,33 @@ Gate decision:
 - Final PR state at verification: `OPEN`, non-draft, `MERGEABLE`, head
   `2657aa23e84c9f75e4f55b8cdec49bba985a8870`. No CI/status checks are
   configured on the submission branch. The PR was not merged.
+
+## 2026-07-31 — Froze the Radeon Scale V2 implementation protocol
+
+- Reviewed six active Track 3 competitors and Chaal's public benchmark
+  artifacts. Recorded transferable practices without importing competitor
+  claims or presenting unlike workloads as directly comparable.
+- Defined GuardianSim's AMD-facing role as a parallel physical-simulation
+  safety co-processor downstream of PPO, VLA, or scripted action proposals.
+- Froze the V2 scale ladder at
+  `1/16/64/256/512/1024/2048/4096` full manipulation worlds, 200 warmup
+  steps, and 12,288 measured steps per batch.
+- The declared largest batch contains 50,331,648 environment steps; the full
+  sweep contains 98,512,896. Both remain target workload counts until a
+  complete strict Radeon report exists.
+- Added schema-2 protocol, raw-trial, report-hash, AMD/HIP, telemetry, derived
+  metric, and exact-formal-workload validation.
+- Added immutable per-batch output, numbered failure logs, exact-source resume,
+  Git/ROCm/command receipts, final checksum generation, and a standalone
+  strict validator.
+- Updated the local organizer-PR record with the plain-language architecture:
+  a policy proposes; Radeon simulates; GuardianSim executes one eligible
+  action or stops. The public organizer PR was not changed at this stage.
+- Added the same architecture to the local showcase hero without adding any
+  unverified V2 performance result. Server/static render tests and ESLint
+  passed.
+- Full local verification passed 111/111 Python tests, Ruff, compilation, and
+  `git diff --check`.
+- Browser QA passed at 1440 × 1000 and 390 × 844 with zero page overflow,
+  zero hero-content overflow, a 32.77 px mobile action-to-card gap, and no
+  console warning or error.

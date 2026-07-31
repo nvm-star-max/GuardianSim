@@ -1,6 +1,6 @@
 # GuardianSim Project Memory
 
-Last updated: 2026-07-29
+Last updated: 2026-07-31
 
 This file is the durable source of truth for continuing GuardianSim work across
 machines and agent sessions. Update it after every verified milestone, cloud
@@ -1950,3 +1950,40 @@ Evidence and working material:
 - The public PR remains unmerged for organizer review. The Radeon Cloud
   instance, frozen protocols, preserved evidence, and unrelated untracked
   local media were not changed during release.
+
+## Radeon Scale V2 direction frozen — 2026-07-31
+
+- Reviewed the active Track 3 field and separated GuardianSim's position from
+  locomotion-training and real-robot VLA entries. Chaal's strongest reusable
+  practices are its one-line workload definition, large but correctly scoped
+  environment-step count, physics-versus-training split, saturation reporting,
+  robustness table, raw JSON, and checkpoint/demo receipts.
+- Decided not to add PPO solely for a headline number. GuardianSim remains a
+  policy-agnostic execution-time safety layer: PPO, VLA, or a scripted policy
+  proposes a motion; Radeon evaluates physical futures; GuardianSim executes
+  one eligible action or stops.
+- Froze a separate Radeon Scale V2 workload:
+  - 1, 16, 64, 256, 512, 1,024, 2,048, and 4,096 full Franka/table/four-YCB
+    worlds;
+  - 200 warmup steps and 12,288 measured steps per batch;
+  - 50,331,648 measured environment steps at the largest batch;
+  - 98,512,896 measured environment steps across the complete sweep.
+- These counts are physics environment steps, not dataset rows, PPO training
+  experience, safety trials, or physical-robot evidence. No V2 result may be
+  added to the public PR, site, report, or video before strict Radeon
+  validation.
+- The protocol predeclares a separate capacity preflight. A 4,096-world
+  out-of-memory result fails this V2 protocol rather than silently lowering the
+  target after partial results.
+- Added a no-overwrite, exact-source resumable runner and schema-2 validator.
+  Existing V3 evidence and tag remain immutable. This stage stops before cloud
+  launch for local verification and owner review.
+- Local verification passed 111/111 Python tests, Ruff, Python compilation,
+  showcase server/static tests, ESLint, and diff hygiene. Browser QA measured
+  zero horizontal overflow at 1440 × 1000 and 390 × 844, a 32.77 px mobile
+  gap between the hero actions and AMD evidence card, and no console warning
+  or error.
+- The local showcase now tells judges on the first screen:
+  `policy proposes → Radeon simulates → hard gates verify → move or stop`.
+  It still displays only previously verified V3 measurements; V2 target
+  workload counts are not public-result claims.

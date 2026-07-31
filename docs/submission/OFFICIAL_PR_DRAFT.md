@@ -125,3 +125,12 @@ simulation stepping after warmup, not model-training throughput.
 - Completed by owner before release: private registration identity, Discord
   contact, personal eligibility, and the legal acceptance items recorded in
   `RULES_REVIEW_2026-07-28.md`.
+
+## Pending V4 positioning sentence
+
+This sentence is a local candidate for the next verified organizer update. It
+has not been applied to the public PR:
+
+> A PPO, VLA, or scripted policy may propose a motion. GuardianSim uses Radeon
+> as a parallel physical-simulation co-processor before execution, then
+> permits one eligible action or refuses to move.
