@@ -2179,3 +2179,26 @@ Evidence and working material:
   remained `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`, with zero comments,
   reviews, and checks. The normalized local and remote bodies matched at
   SHA-256 `f20b120aee0123fe122b6d1241984f051a87266a7bc326ab9000102bed6c5da1`.
+
+## Final submission lock — 2026-08-01
+
+- Owner chose submission hardening and monitoring instead of attempting a
+  last-minute upstream contribution.
+- Completed anonymous link checks for eleven judge-facing endpoints, fresh
+  organizer-branch archive verification, all ten package checksums, strict
+  Scale V2 validation, strict full-decode validation of both published videos,
+  and all 108 Python unit tests.
+- Fixed the only access-friction issue found: the technical report and
+  organizer evidence directory in PR #39 are now direct links rather than
+  backtick-only paths. Final normalized PR-body SHA-256 is
+  `465d1d5c5bf4c6ce59bbc4cc5d945d1ee6cfb37bb45f410c7f64bcf874ce7b0c`.
+- PR #39 remains `OPEN`, non-draft, and `MERGEABLE` at unchanged package head
+  `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`, with no comments, reviews, or
+  checks.
+- Source V4 remains fixed at
+  `0710dca1de8e7627c19a992164169c41e70ac338`; package manifest remains
+  `f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
+- Freeze policy and final identities are recorded in
+  `docs/submission/FINAL_SUBMISSION_LOCK_2026-08-01.md`. From this point, make
+  public changes only for organizer feedback, broken links, or material
+  factual, licensing, security, or eligibility errors.

@@ -118,13 +118,13 @@ curve above.
 - Source and reproducibility instructions:
   https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4
 - Technical report:
-  `submissions/Track3-Aegis-Motion-GuardianSim/GuardianSim-Technical-Report.pdf`
+  https://raw.githubusercontent.com/nvm-star-max/Radeon-hackathon-2026-07/submission/track3-aegis-motion-guardiansim/submissions/Track3-Aegis-Motion-GuardianSim/GuardianSim-Technical-Report.pdf
 - 3–5 minute workflow demo:
   https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v4/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4
 - Owner-approved 80-second Scale V2 Radeon preview:
   https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v4/docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v5.mp4
 - Raw Radeon scale and Safety Swarm V2 reports:
-  `submissions/Track3-Aegis-Motion-GuardianSim/evidence/`
+  https://github.com/nvm-star-max/Radeon-hackathon-2026-07/tree/submission/track3-aegis-motion-guardiansim/submissions/Track3-Aegis-Motion-GuardianSim/evidence
 - Immutable benchmark evidence and checksums:
   https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4/docs/evidence
 - Container path and documented hardware requirement:
@@ -235,3 +235,11 @@ Track 3 judging map contained in the body above. No package, release tag,
 Pages deployment, report, video, benchmark, or threshold changed. The
 normalized local and remote PR bodies matched at SHA-256
 `f20b120aee0123fe122b6d1241984f051a87266a7bc326ab9000102bed6c5da1`.
+
+## Final link-hardening update
+
+The final deadline audit changed only two path-style deliverables into direct
+links: the technical-report PDF and organizer evidence directory. PR #39
+remained open, non-draft, and mergeable at unchanged package head `2dad3d4`.
+The final normalized body SHA-256 is
+`465d1d5c5bf4c6ce59bbc4cc5d945d1ee6cfb37bb45f410c7f64bcf874ce7b0c`.

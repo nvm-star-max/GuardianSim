@@ -2342,3 +2342,25 @@ Gate decision:
 - Re-verified PR #39 is `OPEN`, non-draft, and `MERGEABLE` at organizer head
   `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`, with no comments, reviews, or
   checks.
+
+## 2026-08-01 — Locked the final submission
+
+- Chose deadline hardening instead of a last-minute upstream patch.
+- Re-verified the V4 annotated tag and exact source commit, current organizer
+  package head, PR state, Pages identity, and public judge paths.
+- Anonymous HTTP range requests passed for eleven public endpoints. GitHub and
+  Raw GitHub showed intermittent local TLS/EOF errors, but all affected reads
+  succeeded on retry.
+- Downloaded a fresh organizer branch archive through the GitHub API. All ten
+  package files passed the manifest; total package size remains `3,551,598`
+  bytes including `SHA256SUMS`.
+- Passed strict Scale V2 schema-2 validation, strict full audio/video and
+  source-identity validation for the 4:41.5 workflow video and 80-second Scale
+  V2 preview, and 108/108 Python unit tests.
+- Changed only PR #39's body to make the technical report and organizer
+  evidence paths directly clickable. The package head, V4, Pages, code,
+  reports, media, metrics, and Radeon instance remained unchanged.
+- Final PR-body SHA-256 is
+  `465d1d5c5bf4c6ce59bbc4cc5d945d1ee6cfb37bb45f410c7f64bcf874ce7b0c`.
+- Added `docs/submission/FINAL_SUBMISSION_LOCK_2026-08-01.md` as the controlling
+  pre-deadline freeze and monitoring record.
