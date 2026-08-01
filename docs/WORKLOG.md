@@ -2328,3 +2328,17 @@ Gate decision:
   explicitly makes no external upstream-patch claim.
 - Did not move V4, alter frozen evidence, edit the organizer PR, push, or touch
   the Radeon Cloud instance in this audit step.
+
+## 2026-08-01 — Published the judge-navigation refinement
+
+- Committed and pushed the judge red-team audit and prepared PR record as
+  source commit `35e3390` on `agent/parallel-futures-showcase`.
+- Updated only the body of organizer PR #39. Added the 90-second path and the
+  five-row official judging map; did not alter the package branch, V4 tag,
+  Pages, source evidence, video, report, or Radeon Cloud instance.
+- Verified the remote body matches the local prepared body after trailing
+  newline normalization, SHA-256
+  `f20b120aee0123fe122b6d1241984f051a87266a7bc326ab9000102bed6c5da1`.
+- Re-verified PR #39 is `OPEN`, non-draft, and `MERGEABLE` at organizer head
+  `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`, with no comments, reviews, or
+  checks.

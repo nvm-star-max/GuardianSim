@@ -227,3 +227,11 @@ candidate totals `3,551,598` bytes across ten payload files plus the manifest.
   PDF, PR page, and public Pages site.
 - The public Pages asset `assets/index-DaWXZz3t.js` contains the verified Scale
   V2 metrics and the PPO/VLA-to-Radeon decision narrative.
+
+## Post-release judge-navigation update
+
+On 2026-08-01, organizer PR #39 received the 90-second judge path and official
+Track 3 judging map contained in the body above. No package, release tag,
+Pages deployment, report, video, benchmark, or threshold changed. The
+normalized local and remote PR bodies matched at SHA-256
+`f20b120aee0123fe122b6d1241984f051a87266a7bc326ab9000102bed6c5da1`.

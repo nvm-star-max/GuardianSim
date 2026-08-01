@@ -2174,3 +2174,8 @@ Evidence and working material:
   `docs/submission/JUDGE_RED_TEAM_2026-08-01.md`.
 - The immutable V4 tag and all frozen reports, thresholds, and evidence remain
   unchanged.
+- Published only the prepared PR-body navigation update to organizer PR #39.
+  After the edit, the PR remained `OPEN`, non-draft, and `MERGEABLE`; its head
+  remained `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`, with zero comments,
+  reviews, and checks. The normalized local and remote bodies matched at
+  SHA-256 `f20b120aee0123fe122b6d1241984f051a87266a7bc326ab9000102bed6c5da1`.
