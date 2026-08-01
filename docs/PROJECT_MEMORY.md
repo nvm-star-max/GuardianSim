@@ -2118,3 +2118,33 @@ Evidence and working material:
   ESLint, strict silent-V4 and narrated-V5 media validation, strict Scale V2
   validation, package checksum verification, full packaged A/V decode, and
   `git diff --check`.
+
+## Public V4 release completed — 2026-08-01
+
+- Published source commit
+  `0710dca1de8e7627c19a992164169c41e70ac338` from
+  `agent/parallel-futures-showcase` and created annotated tag
+  `hackathon-2026-submission-v4`. GitHub's tag object peels to that exact
+  commit; V1–V3 tags were not moved.
+- Published the tested Scale V2 Pages build to `gh-pages` commit
+  `43af7d9578ff0f992fd1b3b242e59400123ede8f`. The live site serves
+  `assets/index-DaWXZz3t.js` with the 4,096-world, 152,099 env-steps/s,
+  98.51-million-step, and PPO/VLA-to-Radeon narrative.
+- Synchronized only `submissions/Track3-Aegis-Motion-GuardianSim` in the
+  contest fork and pushed commit
+  `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`.
+- Updated existing organizer PR #39 in place; no new PR was opened. Verified
+  title `Track 3, Aegis Motion, GuardianSim`, state `OPEN`, non-draft,
+  `MERGEABLE`, and head commit `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`.
+- A fresh GitHub API archive of the organizer branch passed all ten package
+  checksums and reproduced manifest SHA-256
+  `f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
+- Anonymous HTTP checks returned 200 for the V4 tag, reproduction guide,
+  workflow video, narrated V5 preview, source evidence, organizer PDF, PR, and
+  Pages site. The PR remains unmerged for organizer review.
+- Git transport had two transient connection failures during independent clone
+  checks. The authenticated GitHub API archive provided the independent remote
+  verification instead; no evidence or remote ref was altered by those
+  failures.
+- Unrelated local V1–V3 review artifacts, browser cache, historical PDF
+  candidates, and Radeon Cloud instance state were left untouched.

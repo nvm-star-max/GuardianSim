@@ -1,9 +1,9 @@
 # Official Repository Pull Request Record
 
-The English body below is the locally verified V4 replacement for organizer
-PR #39. It derives from the V3 public body but now carries the Scale V2 metrics,
-V4 immutable URLs, and policy-to-simulation architecture sentence. It must not
-be applied until the exact V4 tag and public links pass their release checks.
+The English body below was applied to organizer PR #39 on 2026-08-01 after the
+exact V4 tag, official package, Pages deployment, and public links passed their
+release checks. It carries the Scale V2 metrics, immutable V4 URLs, and the
+policy-to-simulation architecture sentence.
 
 ## Title
 
@@ -138,17 +138,15 @@ simulation stepping after warmup, not model-training throughput.
 
 ## V4 positioning sentence status
 
-This sentence is included in the V4 body above but has not yet been applied to
-the public PR:
+This sentence is included in the V4 body above and is now public in PR #39:
 
 > A PPO, VLA, or scripted policy may propose a motion. GuardianSim uses Radeon
 > as a parallel physical-simulation co-processor before execution, then
 > permits one eligible action or refuses to move.
 
-## Pending V4 verified Radeon replacement
+## V4 verified Radeon replacement
 
-The following block is locally verified but has not been applied to the public
-organizer PR:
+The following verified block is reflected in the public organizer PR:
 
 ```markdown
 ## Measured Radeon scale
@@ -167,27 +165,45 @@ attempt. The reported unit is a Genesis environment step, not a PPO training
 sample, dataset row, independent safety trial, or physical-robot execution.
 ```
 
-## Pending V4 deliverable replacement
+## V4 deliverable replacement
 
-The local V4 package candidate now contains the Scale V2 eight-page technical
-report, owner-approved narrated V5 supplementary preview, strict Scale V2 raw
-report, and validator receipt. It has not been pushed to the organizer PR.
+The V4 package contains the Scale V2 eight-page technical report,
+owner-approved narrated V5 supplementary preview, strict Scale V2 raw report,
+and validator receipt. It was pushed to the organizer PR head branch.
 
-At release time, replace every V3 source/evidence URL in the public body with
-`hackathon-2026-submission-v4`, replace the old measured-scale section with the
-verified block above, and describe the packaged preview as:
+The public body now uses `hackathon-2026-submission-v4`, the verified Scale V2
+section above, and this packaged-preview description:
 
 ```markdown
 - Owner-approved 80-second Scale V2 Radeon preview:
   `submissions/Track3-Aegis-Motion-GuardianSim/GuardianSim-Radeon-Parallel-Futures-preview.mp4`
 ```
 
-Local package manifest SHA-256 before release:
+Released package manifest SHA-256:
 `f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
-The planned V4 tag and URLs do not exist publicly yet; HTTP checks remain a
-release-time gate after the exact local source commit is approved.
+Annotated tag `hackathon-2026-submission-v4` peels to
+`0710dca1de8e7627c19a992164169c41e70ac338`.
 
 The V4 package was also rehearsed from a clean temporary directory on
 2026-08-01. All ten manifest entries, strict Scale V2 validation, artifact
 identity checks, JSON receipts, and a complete audio/video decode passed. The
 candidate totals `3,551,598` bytes across ten payload files plus the manifest.
+
+## V4 public release checks
+
+- Source release commit:
+  `0710dca1de8e7627c19a992164169c41e70ac338`.
+- GitHub Pages deployment commit:
+  `43af7d9578ff0f992fd1b3b242e59400123ede8f`.
+- Organizer fork package commit:
+  `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`.
+- PR #39 verified `OPEN`, non-draft, and `MERGEABLE` at that exact organizer
+  commit. No new PR was opened and the PR was not merged.
+- A fresh GitHub API archive of the organizer branch passed all ten package
+  checksums and reproduced manifest SHA-256
+  `f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
+- Anonymous HTTP checks returned 200 for the V4 tag, reproduction guide,
+  workflow video, narrated Scale V2 preview, evidence directory, organizer
+  PDF, PR page, and public Pages site.
+- The public Pages asset `assets/index-DaWXZz3t.js` contains the verified Scale
+  V2 metrics and the PPO/VLA-to-Radeon decision narrative.

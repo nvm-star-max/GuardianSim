@@ -2279,3 +2279,31 @@ Gate decision:
   5/5 server-rendered and 3/3 static Pages tests; both front-end builds and
   ESLint; strict Scale V2, silent V4, and narrated V5 validators; all package
   checksums; full packaged audio/video decode; and `git diff --check`.
+
+## 2026-08-01 — Released V4 to the existing organizer PR
+
+- Received owner authorization and committed the exact reviewed source/package
+  set as `0710dca1de8e7627c19a992164169c41e70ac338` with message
+  `Publish Radeon Scale V2 submission`.
+- Created and pushed annotated tag `hackathon-2026-submission-v4`; GitHub's tag
+  object peels to the exact release commit. Existing V1–V3 tags were unchanged.
+- Published the tested static showcase to `gh-pages` commit
+  `43af7d9578ff0f992fd1b3b242e59400123ede8f`.
+- Re-cloned the contest fork branch, replaced only
+  `submissions/Track3-Aegis-Motion-GuardianSim`, passed all ten package
+  checksums and diff hygiene, and pushed commit
+  `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`.
+- Updated organizer PR #39 in place with the Scale V2 metrics, immutable V4
+  links, owner-approved narrated preview, and policy-to-Radeon architecture.
+  Verified `OPEN`, non-draft, `MERGEABLE`, and exact head `2dad3d4`; no new PR
+  was opened and the organizer PR was not merged.
+- Two independent Git clones encountered transient GitHub transport failures.
+  Downloaded a fresh branch archive through the authenticated GitHub API and
+  verified all ten package entries and manifest SHA-256
+  `f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
+- Anonymous HTTP checks returned 200 for the V4 tag, reproduction guide,
+  workflow video, narrated V5 preview, evidence directory, organizer PDF, PR,
+  and Pages site. The live asset `assets/index-DaWXZz3t.js` contains the
+  verified Scale V2 and PPO/VLA-to-Radeon messaging.
+- Preserved all unrelated untracked review media and historical PDF/browser
+  artifacts. Did not access or destroy the Radeon Cloud instance.

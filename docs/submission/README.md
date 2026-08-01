@@ -132,10 +132,10 @@ The owner accepted the optically centered 80-second Radeon scale-first narrated 
 approved 4:41 V2 workflow video because the official Track 3 guidance
 recommends a 3-5 minute complete-workflow demonstration.
 
-Those approved videos remain unchanged evidence-bound artifacts. A separate
-silent review V4 now binds the later Scale V2 and 4,608-pair formal reports
-without relabeling an old frame. It remains a local candidate until visual
-approval and a separately generated narrated V5 are complete.
+Those approved videos remain unchanged evidence-bound artifacts. The silent
+review V4 binds the later Scale V2 and 4,608-pair formal reports without
+relabeling an old frame; its owner-approved narrated V5 is the V4 package's
+80-second supplementary Radeon preview.
 
 ## V3 release state
 
@@ -153,9 +153,26 @@ all ten package checksums; PR state was `OPEN`, non-draft, and `MERGEABLE`.
 The organizer repository reports no configured status checks for the branch.
 The PR remains unmerged for organizer review.
 
-## Blocking owner inputs
+## V4 release state
 
-Before opening the final organizer pull request, the owner must personally:
+The Scale V2 release was published from `agent/parallel-futures-showcase` as
+annotated tag `hackathon-2026-submission-v4`, which peels to
+`0710dca1de8e7627c19a992164169c41e70ac338`. GitHub Pages was deployed at
+`43af7d9578ff0f992fd1b3b242e59400123ede8f` with the 4,096-world Scale V2
+receipt and policy-to-Radeon decision narrative.
+
+The official package was synchronized to the existing contest-fork branch at
+`2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`. Existing organizer PR #39 was
+updated in place and verified `OPEN`, non-draft, and `MERGEABLE`. All ten
+package checksums passed from a fresh GitHub API branch archive; the manifest
+SHA-256 is
+`f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
+The PR remains unmerged for organizer review.
+
+## Owner-controlled eligibility record
+
+The owner previously confirmed these private items before the public release
+and remains responsible for their accuracy:
 
 1. confirm that the Luma registration contains the legal name and the intended
    `Aegis Motion` team identity;
