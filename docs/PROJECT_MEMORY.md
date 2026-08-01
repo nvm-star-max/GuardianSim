@@ -2148,3 +2148,29 @@ Evidence and working material:
   failures.
 - Unrelated local V1–V3 review artifacts, browser cache, historical PDF
   candidates, and Radeon Cloud instance state were left untouched.
+
+## Post-release judge red-team audit — 2026-08-01
+
+- Re-read the official Luma page, governing Rules & Conditions, and organizer
+  README. The verified Track 3 scoring weights are robot capability `30`,
+  Radeon/ROCm adoption `20`, innovation `20`, application value `20`, and
+  upstream open-source contribution `10`.
+- PR #39 remains open, non-draft, and mergeable. It has no comments, reviews,
+  review decision, or status checks. Its package head remains
+  `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`.
+- Six Track 3 submissions were open at inspection time. The material new
+  entries are SmolVLA fruit sorting (#45) and Chaal (#49). Chaal has the
+  strongest training/scale/upstream story; SmolVLA has a compact end-to-end
+  LeRobot path and a genuine upstream compatibility issue.
+- GuardianSim should not compare its environment-step throughput with Chaal's
+  PPO training throughput as if the units were interchangeable. Its strongest
+  category remains a policy-agnostic safety decision layer with full
+  manipulation scenes, frozen safety outcomes, and auditable evidence.
+- The highest-value post-release improvement is a 90-second judge path and an
+  explicit official-criteria evidence map in PR #39. No new benchmark is
+  justified before this navigation problem is solved.
+- No external upstream patch is claimed. Do not manufacture one before the
+  deadline. The honest score-path audit is stored in
+  `docs/submission/JUDGE_RED_TEAM_2026-08-01.md`.
+- The immutable V4 tag and all frozen reports, thresholds, and evidence remain
+  unchanged.

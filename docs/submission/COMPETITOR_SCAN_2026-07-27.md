@@ -62,3 +62,19 @@ Do not start another broad benchmark merely to increase the scenario count.
 The next award-critical milestone is an accepted formal comparison replay and a
 complete 3–5 minute video. The report, reproducibility path, and raw Radeon
 evidence are already stronger than the visual presentation.
+
+## 2026-08-01 addendum
+
+The open Track 3 count increased to six. The two material additions were:
+
+- PR #45, a SmolVLA fruit-sorting pipeline with LeRobot training on Radeon,
+  a small closed-loop evaluation, Docker materials, and a documented upstream
+  LeRobot compatibility issue;
+- PR #49, Chaal, with PPO locomotion training from random initialization,
+  4,096-robot formal training, a separate 32,768-robot scale test, robustness
+  measurements, and upstream Genesis contributions.
+
+The official Luma scoring weights were re-verified as 30/20/20/20/10 for robot
+capability, Radeon/ROCm adoption, innovation, application value, and upstream
+contribution. The resulting judge-view audit and response are recorded in
+`JUDGE_RED_TEAM_2026-08-01.md`.

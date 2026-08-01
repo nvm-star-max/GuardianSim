@@ -40,6 +40,26 @@ The main view renders the exact 18 × 256 formal outcome matrix and the
 decisions and trace displayed metrics back to immutable reports. The site
 replays published evidence and does not create new benchmark samples.
 
+## 90-second judge path
+
+1. Open the public arena and read the Radeon Scale V2 strip: **4,096** full
+   manipulation worlds, **152,099 environment-steps/s**, and **98.7% mean GPU
+   utilization**.
+2. Open **Seed 411** and compare the same-state nominal contact with the
+   GuardianSim-selected **17.1 mm** clearance replay.
+3. Inspect the **4,608 → 5 → 1** funnel, then follow the evidence links to the
+   immutable JSON reports, validators, and checksums.
+
+## Official Track 3 judging map
+
+| Criterion | Evidence in this submission |
+| --- | --- |
+| Robot capability performance — 30 | Frozen 30-scenario benchmark: repeatable safe completion **18/30 → 30/30**, independent safe executions **58/90 → 90/90**, and sampled clutter contacts **30 → 0**. |
+| AMD Radeon GPU and ROCm adoption — 20 | One Radeon GPU ran up to **4,096** full Franka/table/four-YCB Genesis scenes at **152,099 environment-steps/s**, **98.7% mean / 99% peak GPU utilization**, using the `gs.amdgpu` backend and ROCm/HIP. |
+| Innovation and originality — 20 | Policy-agnostic same-state counterfactual safety search with hard eligibility gates, deterministic ranking, and an explicit safe stop. |
+| Real-world application value — 20 | A pre-execution safety layer for manipulation policies that separates task completion from clutter-contact risk and leaves an auditable decision receipt. Current evidence is simulation-only. |
+| Upstream open-source contribution — 10 | The evaluator, validators, ROCm setup, reports, and evidence site are open source and reproducible. No external upstream patch is claimed. |
+
 ## Verified result
 
 In the frozen 30-scenario Gate 3.2 Genesis benchmark:

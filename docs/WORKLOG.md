@@ -2307,3 +2307,24 @@ Gate decision:
   verified Scale V2 and PPO/VLA-to-Radeon messaging.
 - Preserved all unrelated untracked review media and historical PDF/browser
   artifacts. Did not access or destroy the Radeon Cloud instance.
+
+## 2026-08-01 — Audited the submission from the judge's view
+
+- Verified organizer PR #39 is still open, non-draft, mergeable, and unchanged
+  at package commit `2dad3d4`; it has no comments, reviews, or checks.
+- Re-read the official Luma event, the exported governing Rules & Conditions,
+  and the organizer repository README. Confirmed the Track 3 weights are
+  `30/20/20/20/10` and the submission deadline remains August 6 at 23:59
+  UTC+8.
+- Updated the time-stamped competitor scan from four to six open Track 3
+  entries. Added SmolVLA (#45) and Chaal (#49), preserving distinctions among
+  PPO training samples, Genesis environment steps, candidate-world pairs, and
+  independent safety executions.
+- Added `docs/submission/JUDGE_RED_TEAM_2026-08-01.md` with the official
+  score-path audit, current field comparison, risks, and the decision not to
+  start another broad benchmark.
+- Prepared a local PR-body refinement with a 90-second judge path and a
+  criterion-by-criterion evidence table. It states the simulation boundary and
+  explicitly makes no external upstream-patch claim.
+- Did not move V4, alter frozen evidence, edit the organizer PR, push, or touch
+  the Radeon Cloud instance in this audit step.
