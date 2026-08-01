@@ -8,8 +8,13 @@ submission. It is a working set, not yet the final uploaded package.
 - [`TECHNICAL_REPORT.md`](TECHNICAL_REPORT.md): final technical-report source,
   aligned to the official Track 3 section list and limited to preserved
   metrics.
+- [`../../output/pdf/GuardianSim-Technical-Report.pdf`](../../output/pdf/GuardianSim-Technical-Report.pdf):
+  local eight-page Scale V2 release candidate. It was rendered page by page
+  and visually inspected, but has not replaced the released V3 package PDF.
+  PDF SHA-256:
+  `42338e06481c4caa08b6e53ab61ed7d522de0216931dfa402314cbcbdd6e850e`.
 - [`GuardianSim-Technical-Report.pdf`](GuardianSim-Technical-Report.pdf):
-  visually inspected seven-page submission edition with no draft markings.
+  currently released seven-page V3 submission edition with no draft markings.
   The Radeon section now separates the 1/16/64/256-world throughput curve, the
   30-scenario safety benchmark, and the formal 18 × 256 = 4,608-pair decision
   run. PDF SHA-256:
@@ -32,6 +37,27 @@ submission. It is a working set, not yet the final uploaded package.
 - [`GuardianSim-Radeon-Parallel-Futures-review-v3-validation.json`](GuardianSim-Radeon-Parallel-Futures-review-v3-validation.json):
   strict visual decode, source-hash, metric, layout, and claim-boundary
   validation.
+- [`GuardianSim-Radeon-Parallel-Futures-review-v4.mp4`](GuardianSim-Radeon-Parallel-Futures-review-v4.mp4):
+  local Scale V2 silent preview candidate. It shows the eight-point
+  1-to-4,096-world curve, the formal `4,608 → 5 → 1` Safety Swarm funnel,
+  accepted Seed 411 replay, and frozen 30-scenario result. It is not public.
+- [`GuardianSim-Radeon-Parallel-Futures-review-v4.json`](GuardianSim-Radeon-Parallel-Futures-review-v4.json):
+  V4 source hashes, locked metrics, chapter timing, layout policy, and claim
+  boundaries.
+- [`GuardianSim-Radeon-Parallel-Futures-review-v4-validation.json`](GuardianSim-Radeon-Parallel-Futures-review-v4-validation.json):
+  strict V4 full-video decode, source-hash, metric, layout, duration, and
+  claim-boundary validation.
+- [`GuardianSim-Radeon-Parallel-Futures-narrated-v5.mp4`](GuardianSim-Radeon-Parallel-Futures-narrated-v5.mp4):
+  local Qwen `Ethan` narration candidate built byte-for-byte from the silent
+  V4 visual source. It has not replaced the released narrated V4.
+- [`GuardianSim-Radeon-Parallel-Futures-narrated-v5.json`](GuardianSim-Radeon-Parallel-Futures-narrated-v5.json):
+  V5 narration text, timing, audio hashes, immutable visual identity, evidence
+  bindings, and locked metrics.
+- [`GuardianSim-Radeon-Parallel-Futures-narrated-v5.ass`](GuardianSim-Radeon-Parallel-Futures-narrated-v5.ass):
+  fixed V5 chapter captions.
+- [`GuardianSim-Radeon-Parallel-Futures-narrated-v5-validation.json`](GuardianSim-Radeon-Parallel-Futures-narrated-v5-validation.json):
+  strict V5 full audio/video decode, narration and caption hashes, source
+  identity, metric, duration, and claim-boundary validation.
 - [`GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4`](GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4):
   approved 80-second supplementary preview using the final silent source and
   direct-language Qwen narration.
@@ -61,10 +87,11 @@ submission. It is a working set, not yet the final uploaded package.
   published V3 static build promotes the exact 4,608-pair matrix and
   `4,608 → 5 → 1` funnel.
 - [`official-package/Track3-Aegis-Motion-GuardianSim`](official-package/Track3-Aegis-Motion-GuardianSim):
-  self-contained directory prepared for the official contest fork. It now
-  includes the report, the 80-second supplementary Radeon preview, raw scale
-  evidence, a compact Safety Swarm V2 formal summary, validator outputs, and
-  recursive checksums.
+  self-contained V4 release candidate prepared for the official contest fork.
+  It now includes the eight-page Scale V2 report, owner-approved narrated V5
+  supplementary preview, strict eight-batch scale report, compact Safety Swarm
+  V2 formal summary, validator outputs, and recursive checksums. The candidate
+  remains local until the V4 release gate is explicitly opened.
 
 Earlier scale-video review iterations remain local development artifacts and
 are intentionally excluded from the public release.
@@ -100,15 +127,15 @@ evidence claims without a new explicit owner decision. A real-time
 final-commit Radeon terminal capture is no longer required for this version;
 the current terminal section is clearly labeled archived evidence.
 
-The owner accepted the optically centered 80-second Radeon scale-first V4 on
+The owner accepted the optically centered 80-second Radeon scale-first narrated V4 on
 2026-07-29 as a supplementary preview. It does not replace the previously
 approved 4:41 V2 workflow video because the official Track 3 guidance
 recommends a 3-5 minute complete-workflow demonstration.
 
-The approved videos predate the completed 4,608-pair formal run. They remain
-unchanged evidence-bound artifacts. The V3 technical report and public
-interactive showcase carry the later formal result; no old video frame is
-relabeled as if it showed the new workload.
+Those approved videos remain unchanged evidence-bound artifacts. A separate
+silent review V4 now binds the later Scale V2 and 4,608-pair formal reports
+without relabeling an old frame. It remains a local candidate until visual
+approval and a separately generated narrated V5 are complete.
 
 ## V3 release state
 

@@ -1,0 +1,57 @@
+[38;5;159m[Genesis] [08:02:30] [INFO] [38;5;121m╭───────────────────────────────────────────────╮[0m[38;5;159m[0m
+[38;5;159m[Genesis] [08:02:30] [INFO] [38;5;121m│┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈[0m[38;5;159m [38;5;121m[1m[3mGenesis[0m[38;5;159m [38;5;121m┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈┉┈│[0m[38;5;159m[0m
+[38;5;159m[Genesis] [08:02:30] [INFO] [38;5;121m╰───────────────────────────────────────────────╯[0m[38;5;159m[0m
+[38;5;159m[Genesis] [08:02:31] [INFO] Running on [38;5;121m[4m[AMD Radeon Graphics][0m[38;5;159m with backend [38;5;121m[4mgs.amdgpu[0m[38;5;159m. Device memory: [38;5;121m[4m47.98[0m[38;5;159m GB.[0m
+[38;5;159m[Genesis] [08:02:31] [INFO] 🚀 Genesis initialized. 🔖 version: [38;5;121m[4m1.2.3[0m[38;5;159m, 🎨 theme: [38;5;121m[4mdark[0m[38;5;159m, 🌱 seed: [38;5;121m[4mNone[0m[38;5;159m, 🐛 debug: [38;5;121m[4mFalse[0m[38;5;159m, 📏 precision: [38;5;121m[4m32[0m[38;5;159m, 🔥 performance: [38;5;121m[4mFalse[0m[38;5;159m, 💬 verbose: [38;5;121m[4mINFO[0m[38;5;159m[0m
+[38;5;159m[Genesis] [08:02:32] [INFO] Scene [38;5;121m[3m<92ece6b>[0m[38;5;159m created.[0m
+[38;5;159m[Genesis] [08:02:32] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m0[0m[38;5;159m, uid: [38;5;121m[3m<86ce0d6>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Plane>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:32] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m1[0m[38;5;159m, uid: [38;5;121m[3m<2fb50f4>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:32] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m2[0m[38;5;159m, uid: [38;5;121m[3m<5e534e7>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:32] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m3[0m[38;5;159m, uid: [38;5;121m[3m<dcf1642>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:32] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m4[0m[38;5;159m, uid: [38;5;121m[3m<67138e4>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:32] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m5[0m[38;5;159m, uid: [38;5;121m[3m<81d04a7>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Box>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:32] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m6[0m[38;5;159m, uid: [38;5;121m[3m<25303e2>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/persistent/GuardianSim-radeon-scale-v2-20260731/assets/ycb/011_banana/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:33] [INFO] Convex hull is not accurate enough for collision detection (0.547). Falling back to more expensive convex decomposition (see FileMorph options).[0m
+[38;5;159m[Genesis] [08:02:33] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m7[0m[38;5;159m, uid: [38;5;121m[3m<6bb49df>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/persistent/GuardianSim-radeon-scale-v2-20260731/assets/ycb/014_lemon/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:33] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m8[0m[38;5;159m, uid: [38;5;121m[3m<00f2c09>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/persistent/GuardianSim-radeon-scale-v2-20260731/assets/ycb/018_plum/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:33] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m9[0m[38;5;159m, uid: [38;5;121m[3m<1275cab>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.Mesh(file='/persistent/GuardianSim-radeon-scale-v2-20260731/assets/ycb/024_bowl/textured.obj')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;159m[Genesis] [08:02:33] [INFO] Convex hull is not accurate enough for collision detection (21.454). Falling back to more expensive convex decomposition (see FileMorph options).[0m
+[38;5;159m[Genesis] [08:02:33] [INFO] Adding [38;5;121m<gs.engine.entities.RigidEntity>[0m[38;5;159m. idx: [38;5;121m10[0m[38;5;159m, uid: [38;5;121m[3m<64f6207>[0m[38;5;159m, morph: [38;5;121m<gs.morphs.MJCF(file='/persistent/GuardianSim-radeon-scale-v2-20260731/assets/robots/franka/panda.xml')>[0m[38;5;159m, material: [38;5;121m<gs.materials.Rigid>[0m[38;5;159m.[0m
+[38;5;226m[Genesis] [08:02:34] [WARNING] (MJCF) Approximating tendon by joint actuator for `finger_joint1`[0m
+[38;5;226m[Genesis] [08:02:34] [WARNING] (MJCF) Approximating tendon by joint actuator for `finger_joint2`[0m
+[38;5;159m[Genesis] [08:02:34] [INFO] Building scene [38;5;121m[3m<92ece6b>[0m[38;5;159m...[0m
+[38;5;226m[Genesis] [08:02:34] [WARNING] Neutral robot position (qpos0) exceeds joint limits.[0m
+[38;5;226m[Genesis] [08:02:35] [WARNING] Constraint solver time constant should be greater than 2*substep_dt. timeconst is changed from `0.005` to `0.01`). Decrease simulation timestep or increase timeconst to avoid altering the original value.[0m
+[38;5;226m[Genesis] [08:02:37] [WARNING] Filtered out geometry pairs causing self-collision for the neutral configuration (qpos0): (38, 43), (39, 43), (46, 53), (47, 52), (48, 55), (49, 54). Consider tuning Morph option 'decompose_robot_error_threshold' or specify dedicated collision meshes. This behavior can be disabled by setting Morph option 'enable_neutral_collision=True'.[0m
+[38;5;159m[Genesis] [08:02:39] [INFO] Compiling simulation kernels...[0m
+[38;5;159m[Genesis] [08:02:51] [INFO] Building visualizer...[0m
+{
+  "status": "passed",
+  "protocol_sha256": "bcb91e081b196a5b6274ce1efd461d2005f1c1505dbd7020e9fbbaab0bb536e8",
+  "backend": "genesis_gpu",
+  "n_envs": 2048,
+  "process_id": 136489,
+  "started_at_utc": "2026-07-31T08:02:30.257940+00:00",
+  "finished_at_utc": "2026-07-31T08:05:59.667264+00:00",
+  "build_seconds": 21.344093909021467,
+  "warmup_seconds": 3.048158731777221,
+  "measurement_seconds": 183.8806708608754,
+  "environment_steps": 25165824,
+  "environment_steps_per_second": 136859.53984277407,
+  "simulated_seconds_per_wall_second": 1368.5953984277407,
+  "device": {
+    "name": "AMD Radeon Graphics",
+    "torch_version": "2.9.1+gitff65f5b",
+    "hip_version": "7.2.53211-e1a6bc5663",
+    "genesis_version": "1.2.3"
+  },
+  "gpu_telemetry": {
+    "sample_count": 475,
+    "mean_gpu_utilization_pct": 97.34105263157895,
+    "max_gpu_utilization_pct": 98.0,
+    "max_vram_used_bytes": 3894480896.0,
+    "total_vram_bytes": 51522830336.0,
+    "sampling_errors": []
+  }
+}
+[38;5;159m[Genesis] [08:05:59] [INFO] 💤 Exiting Genesis and caching compiled kernels...[0m

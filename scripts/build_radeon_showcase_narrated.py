@@ -23,25 +23,25 @@ else:
 ROOT = Path(__file__).resolve().parents[1]
 SILENT_VIDEO = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v3.mp4"
+    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4.mp4"
 )
 SILENT_SIDECAR = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v3.json"
+    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4.json"
 )
 OUTPUT = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4"
+    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v5.mp4"
 )
 SIDECAR = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v4.json"
+    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v5.json"
 )
 CAPTIONS = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v4.ass"
+    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v5.ass"
 )
-CACHE = ROOT / "tmp/qwen-narration/radeon-parallel-futures-v3"
+CACHE = ROOT / "tmp/qwen-narration/radeon-parallel-futures-v4"
 MIX_WAV = CACHE / "full-mix.wav"
 NORMALIZED_WAV = CACHE / "full-mix-normalized.wav"
 
@@ -67,12 +67,12 @@ CHAPTERS = [
         "compute-hook",
         0.0,
         6.0,
-        "One Radeon GPU, 256 Genesis worlds",
+        "One Radeon GPU, 4,096 Genesis worlds",
         (
-            "Radeon ran two hundred fifty-six Genesis worlds in parallel, "
-            "then checked the next robot move."
+            "One Radeon GPU ran four thousand ninety-six full Genesis worlds "
+            "in parallel."
         ),
-        "One Radeon GPU ran 256 Genesis worlds.",
+        "One Radeon GPU ran 4,096 full Genesis worlds.",
     ),
     Chapter(
         "radeon-scale",
@@ -80,24 +80,23 @@ CHAPTERS = [
         24.0,
         "Radeon scale",
         (
-            "We started with one Genesis world and repeated the same measured workload "
-            "at sixteen, sixty-four, and two hundred and fifty-six worlds. At the "
-            "largest batch, Radeon Cloud reached thirty-five thousand, one hundred "
-            "and sixty-six environment steps per second."
+            "We measured eight frozen batch sizes, from one world to four thousand "
+            "ninety-six. The largest batch reached one hundred fifty-two thousand, "
+            "ninety-nine environment steps per second, with ninety-nine percent peak GPU use."
         ),
-        "Measured Genesis throughput from 1 to 256 worlds.",
+        "Scale V2: 1 → 4,096 worlds; 152,099 environment-steps/s.",
     ),
     Chapter(
-        "parallel-futures",
+        "safety-swarm",
         24.0,
         40.0,
-        "Parallel Futures",
+        "Safety Swarm",
         (
-            "For the next move, GuardianSim checks eighteen actions three times each. "
-            "That makes fifty-four simulated futures in one batch. Thirty-two pass "
-            "every hard gate; twenty-two are rejected before the robot moves."
+            "For one decision, GuardianSim checks eighteen actions against two hundred "
+            "fifty-six frozen uncertainty worlds each. Five actions pass every hard gate. "
+            "A ranking rule fixed in advance selects one."
         ),
-        "54 simulated futures are checked before the next move.",
+        "Safety Swarm: 4,608 candidate-world pairs → 5 eligible → 1 selected.",
     ),
     Chapter(
         "seed-411",
@@ -129,11 +128,8 @@ CHAPTERS = [
         72.0,
         80.0,
         "Execute or stop",
-        (
-            "The GPU checks the options. The robot uses one only if it passes every "
-            "gate. Otherwise, it stays put."
-        ),
-        "Use an action that passes every gate—or stay put.",
+        "Radeon tests each option. Pass every hard gate, or stop.",
+        "Policy proposes → Radeon simulates → hard gates verify → move or stop.",
     ),
 ]
 
@@ -347,7 +343,7 @@ def main() -> None:
     narration = build_audio()
     mux_video()
     payload = {
-        "kind": "guardiansim_radeon_parallel_futures_narrated_v4",
+        "kind": "guardiansim_radeon_parallel_futures_narrated_v5",
         "team": "Aegis Motion",
         "project": "GuardianSim",
         "claim_boundary": silent["claim_boundary"],

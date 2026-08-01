@@ -40,23 +40,42 @@ The presentation should use three separate denominators:
 2. **Decision workload:** 18 actions × 256 uncertainty worlds = 4,608 measured
    candidate-world pairs, narrowed to five eligible actions and one selected
    action.
-3. **Compute scale:** Radeon Scale V2 targets 4,096 concurrent full
-   manipulation worlds, 50,331,648 environment steps in the largest batch,
-   and 98,512,896 across the sweep.
+3. **Compute scale:** the strictly validated Radeon Scale V2 run reached
+   4,096 concurrent full manipulation worlds, 50,331,648 environment steps in
+   the largest batch, and 98,512,896 across the complete eight-batch sweep.
+   The largest batch sustained 152,099 environment-steps/s at 98.7% mean and
+   99% peak GPU utilization.
 
-The third item remains a target until a strict Radeon report exists.
+These are three deliberately separate claims. The scale workload is not
+relabelled as PPO experience or independent safety trials.
 
 ## Judge experience
 
-After V2 verification, the first screen should answer four questions without a
-judge running training:
+The first screen should answer four questions without a judge running
+training:
 
 - What is the robot deciding?
 - Why are thousands of parallel worlds needed?
 - What did the Radeon GPU actually execute?
 - Can I inspect the raw receipt?
 
-The final site should include a compact “AMD compute receipt” with concurrency,
-environment-step throughput, GPU use, VRAM, HIP version, protocol hash, and a
-link to raw evidence. The video should show the one-action funnel first and the
-scale curve second.
+The site now leads with a compact AMD compute receipt: 4,096 worlds, 152,099
+environment-steps/s, 98.7% mean / 99% peak GPU use, 6.25 GiB peak VRAM, and
+98.51 million measured steps across the sweep. The final published version
+must link those numbers to the raw schema-2 report and protocol hash. The video
+should show the one-action funnel first and the eight-batch scale curve second.
+
+## What to borrow without copying
+
+Chaal's PPO loop and GuardianSim's pre-execution verification layer are
+different products. The useful follow-up is presentation discipline:
+
+- give the workload a one-line definition before the headline number;
+- show the entire scale curve and its saturation, not only the peak;
+- separate physics throughput from end-to-end policy or training throughput;
+- keep raw JSON, telemetry, protocol identity, and a playable demo adjacent;
+- show one failure case where the system stops instead of hiding it.
+
+GuardianSim should not add PPO merely to resemble a competitor. Its more
+defensible hook is that any PPO, VLA, or scripted policy can propose the
+action, while Radeon performs the parallel physical check before execution.

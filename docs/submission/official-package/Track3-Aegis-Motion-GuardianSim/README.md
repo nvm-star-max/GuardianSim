@@ -82,20 +82,27 @@ bounded real-Genesis smoke, and complete-source ROCm Dockerfile.
 
 ## Measured Radeon scale
 
-A separate throughput suite ran one fixed headless Franka scene at four batch
-sizes:
+The frozen Scale V2 suite built one full headless manipulation scene per
+world: Franka, table, and four active YCB entities. It ran each of eight
+predeclared batch sizes once after a separate warmup:
 
 | Parallel worlds | Environment-steps/s | Speedup | Efficiency |
 | ---: | ---: | ---: | ---: |
-| 1 | 154.1 | 1.00x | 100.0% |
-| 16 | 2,383.7 | 15.47x | 96.7% |
-| 64 | 9,354.3 | 60.69x | 94.8% |
-| 256 | 35,166.1 | 228.16x | 89.1% |
+| 1 | 147.946 | 1.000x | 100.000% |
+| 16 | 2,214.149 | 14.966x | 93.537% |
+| 64 | 8,704.403 | 58.835x | 91.929% |
+| 256 | 35,637.980 | 240.884x | 94.095% |
+| 512 | 56,928.068 | 384.789x | 75.154% |
+| 1,024 | 96,589.308 | 652.867x | 63.757% |
+| 2,048 | 136,859.540 | 925.062x | 45.169% |
+| 4,096 | 152,099.018 | 1,028.069x | 25.099% |
 
-At 256 worlds, mean/peak GPU utilization was 85.5%/96%. The 337,000 timed
-environment steps measure raw physics throughput, not safety trials. The
-separate formal decision workload is reported in the preceding section and
-keeps its candidate-world counts distinct from the Gate 3.2 safety benchmark.
+The 4,096-world point advanced 50,331,648 environment steps at 98.651% mean
+and 99% peak GPU utilization, using about 6.25 GiB peak VRAM. The full sweep
+advanced 98,512,896 measured environment steps. Throughput still rose at
+4,096 worlds while parallel efficiency declined after 256; the report keeps
+that saturation behavior visible. Environment steps are physics throughput,
+not PPO samples, dataset rows, safety trials, or physical-robot executions.
 
 ## Innovation
 
@@ -117,23 +124,25 @@ keeps its candidate-world counts distinct from the Gate 3.2 safety benchmark.
 - **Public interactive evidence arena:**
   <https://nvm-star-max.github.io/GuardianSim/>
 - **Immutable source and evidence release:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3>
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4>
 - **Reproducibility guide:**
-  <https://github.com/nvm-star-max/GuardianSim/blob/hackathon-2026-submission-v3/REPRODUCIBILITY.md>
+  <https://github.com/nvm-star-max/GuardianSim/blob/hackathon-2026-submission-v4/REPRODUCIBILITY.md>
 - **Technical report:**
   [`GuardianSim-Technical-Report.pdf`](GuardianSim-Technical-Report.pdf)
 - **Owner-approved 4:41 English demonstration video:**
-  <https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v3/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4>
-- **80-second measured Radeon preview:**
+  <https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v4/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4>
+- **Owner-approved 80-second Scale V2 Radeon preview:**
   [`GuardianSim-Radeon-Parallel-Futures-preview.mp4`](GuardianSim-Radeon-Parallel-Futures-preview.mp4)
 - **Raw Radeon scale and Parallel Futures reports:**
   [`evidence`](evidence)
 - **Formal Safety Swarm V2 evidence:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3/docs/evidence/safety-swarm-v2-formal-2026-07-30>
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4/docs/evidence/safety-swarm-v2-formal-2026-07-30>
+- **Formal Radeon Scale V2 evidence:**
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4/docs/evidence/radeon-scale-v2-formal-20260731>
 - **Immutable Gate 3.2 evidence:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3/docs/evidence/gate-3-2>
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4/docs/evidence/gate-3-2>
 - **Validated Gate 3.3 limitation evidence:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v3/docs/evidence/gate-3-3-two-strata>
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4/docs/evidence/gate-3-3-two-strata>
 
 ## Reproduction
 
@@ -142,7 +151,7 @@ On the supported Radeon Cloud Blank OpenCode workspace:
 ```bash
 git clone https://github.com/nvm-star-max/GuardianSim.git
 cd GuardianSim
-git checkout hackathon-2026-submission-v3
+git checkout hackathon-2026-submission-v4
 
 scripts/install_system_deps.sh
 uv python install 3.12

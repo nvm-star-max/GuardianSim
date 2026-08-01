@@ -1987,3 +1987,134 @@ Evidence and working material:
   `policy proposes → Radeon simulates → hard gates verify → move or stop`.
   It still displays only previously verified V3 measurements; V2 target
   workload counts are not public-result claims.
+
+## Radeon Scale V2 formal result verified — 2026-07-31
+
+- Ran the separate capacity preflight from exact source commit
+  `3d8021a237ca0dfca41c98df1b492b7b9a523b4f`. The declared
+  `512/1024/2048/4096` capacities all passed. The preflight remains
+  capacity-only and is not merged into performance evidence.
+- Completed the frozen eight-batch formal suite at
+  `1/16/64/256/512/1024/2048/4096` full headless
+  Franka/table/four-YCB scenes. Every batch completed on its first attempt.
+- Strict schema-2 validation passed. The 4,096-world batch measured
+  `50,331,648` environment steps at
+  `152,099.018 environment-steps/s`, a `1,028.069×` speedup over the
+  one-world run and `25.099%` parallel efficiency.
+- The 4,096-world trial recorded `98.651%` mean and `99%` peak GPU
+  utilization with `6,706,667,520` peak VRAM bytes (`~6.25 GiB`).
+  The complete sweep measured `98,512,896` environment steps.
+- The scaling curve still rose at 4,096 worlds, while efficiency declined
+  after 256. This is reported as saturation behavior rather than hidden.
+- Claim boundary remains explicit: environment steps are physics throughput,
+  not training examples, dataset rows, independent safety trials, or
+  physical-robot evidence.
+- Frozen protocol SHA-256:
+  `bcb91e081b196a5b6274ce1efd461d2005f1c1505dbd7020e9fbbaab0bb536e8`.
+  Canonical report SHA-256:
+  `971769c6a051f6b2794982a02828601e91406320023a90bf85fc28103fa8b742`.
+- Preserved preflight evidence under
+  `docs/evidence/radeon-scale-v2-preflight-20260731` and formal evidence under
+  `docs/evidence/radeon-scale-v2-formal-20260731`. Formal archive SHA-256:
+  `71b7b0a2958444ec4d6b35831684223b38123291a54c8debbf25ed77a53d88de`.
+- Updated the local judge-facing showcase and copy to lead with the verified
+  Radeon receipt. This result has not yet been pushed to the public Pages site
+  or organizer PR; owner review comes before that release.
+- Local verification passed 108/108 Python unit tests, 5/5 server-rendered
+  showcase tests, 3/3 static Pages tests, both showcase builds, ESLint, Python
+  compilation, strict report validation, both evidence checksum manifests,
+  and diff hygiene.
+- Exact browser QA passed at 1,440 × 1,000 and 390 × 844 with zero page
+  horizontal overflow and no runtime/log errors. The only child elements
+  extending past the viewport are intentionally clipped scene-grid decoration
+  and the heatmap canvas inside its horizontal scroll container.
+
+## Scale V2 report and 80-second visual candidate — 2026-07-31
+
+- Updated the technical-report source to replace the superseded
+  1-to-256-world Scale V1 headline with the strictly validated eight-point
+  Scale V2 result. The report keeps Scale V2 physics throughput, Safety Swarm
+  candidate-world evidence, and Gate 3.2 safety executions as separate units.
+- Built an eight-page local PDF candidate at
+  `output/pdf/GuardianSim-Technical-Report.pdf`, SHA-256
+  `42338e06481c4caa08b6e53ab61ed7d522de0216931dfa402314cbcbdd6e850e`.
+  Rendered and inspected all eight pages; the scale and results tables, hashes,
+  limitations, margins, and footers are legible with no clipped content.
+- Built a new silent 80-second Scale V2 review candidate:
+  `docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4.mp4`,
+  SHA-256
+  `32c8d1db019f38b0b4221171894cbc76be5ab4a67f249ef7dd93cd2581c8f724`.
+- The V4 sequence is:
+  `4,096-world Radeon hook → eight-point saturation curve → 4,608 → 5 → 1
+  Safety Swarm funnel → accepted Seed 411 replay → frozen 30-scenario result
+  → move-or-stop architecture`.
+- Candidate cells A05/A07/A09/A11/A13 match the five qualifying indices in the
+  preserved Safety Swarm V2 formal report. The replay remains the accepted
+  original evidence video rather than a reconstructed animation.
+- Strict V4 validation passed full 1920×1080, 20 FPS, 80.0-second decode, all
+  evidence hashes, frozen metrics, chapter bounds, simulation-only boundaries,
+  and explicit silent-audio state.
+- Updated the narration builder and validator for a future narrated V5, but did
+  not call the remote TTS service. Visual approval comes before narration
+  generation.
+- This checkpoint does not replace the released package PDF, public Pages
+  build, organizer PR, or accepted earlier videos. It stops at the local
+  release-candidate gate.
+
+## Scale V2 narrated V5 candidate — 2026-07-31
+
+- After owner approval of the silent V4 direction, generated a separate Qwen
+  `Ethan` narrated candidate at
+  `docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v5.mp4`.
+- Final V5 SHA-256:
+  `d590a711950b17a096361e0b7ba39b9842a848c7b0cf7b78d2aff63b5eab8f8d`.
+  The sidecar binds it to silent V4 SHA-256
+  `32c8d1db019f38b0b4221171894cbc76be5ab4a67f249ef7dd93cd2581c8f724`.
+- All six narration segments finish within their frozen chapter windows. Spare
+  time is 1.440, 4.400, 4.160, 3.760, 2.080, and 4.320 seconds respectively.
+  The close was shortened instead of accelerating speech after two slower
+  natural-voice candidates correctly failed the timing guard.
+- Final audio is 96 kHz mono AAC. The earlier accepted loudness process remains
+  `-16 LUFS` target normalization; post-mux volume inspection recorded
+  approximately `-18.4 dB` mean and `-1.1 dB` maximum sample level.
+- Fixed captions were visually checked at all chapter positions and remain
+  inside the 1,920 × 1,080 frame without covering headline metrics.
+- Strict V5 validation passed full audio/video decode, narration and caption
+  hashes, immutable visual identity, source hashes, locked metrics, and claim
+  boundaries.
+- The Qwen key remained in the ignored local environment and was not written
+  to logs, metadata, sidecars, or tracked files.
+- V5 remains a local review candidate. No commit, push, public package
+  replacement, Pages deployment, or organizer PR update occurred.
+
+## V4 local official-package candidate verified — 2026-08-01
+
+- After owner approval of narrated V5, replaced the local official-package
+  candidate with the eight-page Scale V2 technical report, the approved
+  80-second narrated V5 preview, and the strict Scale V2 report and validation
+  receipt. Historical Parallel Futures and Safety Swarm evidence remain in the
+  package with explicit unit boundaries.
+- Updated the package README to show the complete eight-point
+  `1/16/64/256/512/1024/2048/4096` scale curve and the verified largest-batch
+  result: `50,331,648` measured environment steps at
+  `152,099.018 environment-steps/s`, `1,028.069x` speedup,
+  `98.651%` mean / `99%` peak GPU utilization, and approximately `6.25 GiB`
+  peak VRAM.
+- Regenerated the package checksum manifest. `SHA256SUMS` SHA-256 is
+  `f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
+- Copied the package into a clean temporary directory and verified all ten
+  manifest entries, JSON/schema receipts, exact PDF/video/Scale V2 artifact
+  identities, and a complete audio/video decode. The candidate contains ten
+  payload files plus the manifest and totals `3,551,598` bytes.
+- The package text contains no superseded Scale V1 headline. V3 figures remain
+  only in labeled historical release records and preserved historical raw
+  evidence.
+- This is a local release candidate only. No commit, V4 tag, push, Pages
+  deployment, organizer PR mutation, or public URL was created. The planned
+  `hackathon-2026-submission-v4` tag must bind to the finally approved exact
+  source commit and pass fresh public-link checks before release.
+- Final local gate passed 108/108 Python tests, Python compilation, 5/5
+  server-rendered showcase tests, 3/3 static Pages tests, both showcase builds,
+  ESLint, strict silent-V4 and narrated-V5 media validation, strict Scale V2
+  validation, package checksum verification, full packaged A/V decode, and
+  `git diff --check`.

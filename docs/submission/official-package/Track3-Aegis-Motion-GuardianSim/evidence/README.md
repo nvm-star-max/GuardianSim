@@ -5,17 +5,19 @@ the technical report. They do not modify the frozen Gate 3.2 safety benchmark.
 
 ## Parallel physics scale
 
-- Fixed batch sizes: 1, 16, 64, and 256 Genesis worlds.
-- Fixed timed interval: 1,000 steps per world after 100 warmup steps.
-- Total timed workload: 337,000 environment steps.
-- Largest point: 35,166.1 environment-steps/s.
-- Speedup at 256 worlds: 228.16x.
-- Parallel efficiency at 256 worlds: 89.1%.
+- Full scene per world: Franka, table, and four active YCB entities.
+- Frozen batch sizes: 1, 16, 64, 256, 512, 1,024, 2,048, and 4,096 worlds.
+- Fixed timed interval: 12,288 measured steps after 200 warmup steps.
+- Total measured sweep: 98,512,896 environment steps.
+- Largest point: 152,099.018 environment-steps/s at 4,096 worlds.
+- Speedup at 4,096 worlds: 1,028.069x.
+- Largest-point GPU use: 98.651% mean and 99% peak.
+- Largest-point peak VRAM: approximately 6.25 GiB.
 
 `radeon-scale-report.json` contains the raw measurements and ROCm telemetry.
 `radeon-scale-validation.json` records the strict validator result.
 
-## Parallel Futures
+## Historical bounded Parallel Futures smoke
 
 - Candidate actions: 18.
 - Repeats per candidate: 3.
@@ -28,9 +30,9 @@ the technical report. They do not modify the frozen Gate 3.2 safety benchmark.
 telemetry. `parallel-futures-validation.json` records the strict validator
 result.
 
-The environment-step count is a throughput workload, not a count of
-independent safety trials. The 54 futures are 18 candidates times three
-repeats, not 54 independent scenarios.
+This earlier run is retained as an execution-path engineering receipt. It is
+not the project's main scale result. The 54 futures are 18 candidates times
+three repeats, not 54 independent scenarios.
 
 ## Safety Swarm V2 formal decision run
 
@@ -51,3 +53,10 @@ the dedicated source repository under
 The 4,608 pairs form a candidate-by-uncertainty engineering stress-test
 population. They are not 4,608 independent robot trials and not a
 physical-robot safety guarantee.
+
+## Claim boundary
+
+Scale V2 environment steps measure sustained Genesis physics throughput after
+warmup. They are not PPO samples, training examples, dataset rows, independent
+safety trials, or physical-robot executions. The Scale V2, Safety Swarm V2,
+and Gate 3.2 units remain separate throughout the report and package.

@@ -1,0 +1,7 @@
+commit 3d8021a237ca0dfca41c98df1b492b7b9a523b4f
+Author:     aolos <2668084124@qq.com>
+AuthorDate: Fri Jul 31 13:33:33 2026 +0800
+Commit:     aolos <2668084124@qq.com>
+CommitDate: Fri Jul 31 13:33:33 2026 +0800
+
+    Freeze Radeon Scale V2 evidence path

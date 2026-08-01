@@ -1,0 +1,91 @@
+{
+  "kind": "guardiansim_radeon_parallel_futures_visual_review_v4",
+  "team": "Aegis Motion",
+  "project": "GuardianSim",
+  "review_status": "Scale V2 silent visual preview; typography and claim review pending",
+  "layout_policy": {
+    "metric_rows": "measured as one group and centered inside each card",
+    "titles_and_details": "measured and centered inside each card",
+    "overflow_asserted_during_render": true
+  },
+  "claim_boundary": "Preserved Genesis simulation evidence only; no physics re-execution; throughput worlds are not independent safety scenes; no physical-robot claim.",
+  "output": {
+    "path": "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4.mp4",
+    "sha256": "32c8d1db019f38b0b4221171894cbc76be5ab4a67f249ef7dd93cd2581c8f724",
+    "duration_seconds": 80,
+    "fps": 20,
+    "width": 1920,
+    "height": 1080,
+    "audio": false
+  },
+  "sources": {
+    "radeon_scale_report": {
+      "path": "docs/evidence/radeon-scale-v2-formal-20260731/raw/report.json",
+      "sha256": "6099fd674e89f3a8ef07a78aafa987ec2956edd9cd0c8b28b055badc48c11104",
+      "strict_validation": true
+    },
+    "safety_swarm_v2_report": {
+      "path": "docs/evidence/safety-swarm-v2-formal-2026-07-30/formal-report.json",
+      "sha256": "f04ce9a5a3399b1fe638964ca76891859e2c9a01808212b74aa7aca37a96d05d",
+      "strict_validation": true
+    },
+    "gate32_formal_report": {
+      "path": "docs/evidence/gate-3-2/formal-report.json",
+      "sha256": "d76ffbe518d4cb9499362379388a1453ec6cc7614ff312b9bcf764dbf822ffee",
+      "schema_version": 5,
+      "completed_episode_count": 30
+    },
+    "seed411_replay": {
+      "path": "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4",
+      "sha256": "38e9adfb2a3f2d90719b60449d092e4caca53afaa2b2f71fe1ade136357dff86"
+    }
+  },
+  "verified_metrics": {
+    "largest_parallel_batch": 4096,
+    "environment_steps_per_second": 152099,
+    "speedup_vs_single_world": 1028.07,
+    "total_measured_environment_steps": 98512896,
+    "safety_swarm_candidate_world_pairs": 4608,
+    "safety_swarm_qualifying_actions": 5,
+    "safety_swarm_selected_actions": 1,
+    "safety_swarm_environment_steps": 2299392,
+    "safety_swarm_wall_seconds": 226.67555617541075,
+    "formal_repeatable_safe_scenarios": {
+      "baseline": 18,
+      "guardiansim": 30,
+      "total": 30
+    }
+  },
+  "chapters": [
+    {
+      "start": 0,
+      "end": 6,
+      "name": "compute hook"
+    },
+    {
+      "start": 6,
+      "end": 24,
+      "name": "Radeon scale"
+    },
+    {
+      "start": 24,
+      "end": 40,
+      "name": "Safety Swarm funnel"
+    },
+    {
+      "start": 40,
+      "end": 58,
+      "name": "formal Seed 411 replay"
+    },
+    {
+      "start": 58,
+      "end": 72,
+      "name": "frozen 30-scenario result"
+    },
+    {
+      "start": 72,
+      "end": 80,
+      "name": "what the demo shows"
+    }
+  ]
+}

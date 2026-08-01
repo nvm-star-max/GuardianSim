@@ -226,10 +226,10 @@ const architecture = [
 ];
 
 const scaleSteps = [
-  { worlds: "1", throughput: "154", speedup: "1.00×" },
-  { worlds: "16", throughput: "2,384", speedup: "15.47×" },
-  { worlds: "64", throughput: "9,354", speedup: "60.69×" },
-  { worlds: "256", throughput: "35,166", speedup: "228.16×" },
+  { worlds: "1", throughput: "148", speedup: "1.00×" },
+  { worlds: "64", throughput: "8,704", speedup: "58.83×" },
+  { worlds: "512", throughput: "56,928", speedup: "384.79×" },
+  { worlds: "4,096", throughput: "152,099", speedup: "1,028.07×" },
 ];
 
 function MiniScene({
@@ -502,11 +502,12 @@ function RadeonScaleSection() {
       <div className="section-heading scale-heading">
         <div>
           <p className="kicker">RADEON PARALLEL PHYSICS LAB</p>
-          <h2>One GPU. 256 robot worlds.</h2>
+          <h2>One Radeon GPU. 4,096 robot worlds.</h2>
         </div>
         <p>
-          Strictly validated on Radeon Cloud with real Genesis physics. Scale
-          evidence is reported separately from the formal safety sample count.
+          Eight fixed batches, 98.51 million measured physics steps, one
+          preserved schema-2 report. This is compute evidence, separate from
+          the formal safety sample count.
         </p>
       </div>
 
@@ -531,7 +532,7 @@ function RadeonScaleSection() {
       </div>
 
       <div className="radeon-scale-shell">
-        <div className="future-wall" aria-label="Measured 256-world Radeon batch">
+        <div className="future-wall" aria-label="Measured 4,096-world Radeon batch">
           {Array.from({ length: 256 }, (_, index) => (
             <i
               key={index}
@@ -540,22 +541,24 @@ function RadeonScaleSection() {
             />
           ))}
           <div className="future-wall-label">
-            <span>256 SIMULTANEOUS FRANKA WORLDS</span>
-            <b>337,000 measured environment steps</b>
+            <span>4,096 SIMULTANEOUS FRANKA WORLDS · 1 TILE = 16 WORLDS</span>
+            <b>50,331,648 measured environment steps</b>
           </div>
         </div>
         <div className="scale-console">
-          <span>STRICT VALIDATION PASSED</span>
-          <strong>35,166 env-steps/s</strong>
-          <p>256 headless Franka worlds on one AMD Radeon GPU</p>
+          <span>STRICT SCHEMA-2 VALIDATION PASSED</span>
+          <strong>152,099 env-steps/s</strong>
+          <p>4,096 headless Franka worlds on one AMD Radeon GPU</p>
           <dl>
-            <div><dt>Speedup vs 1 world</dt><dd>228.16×</dd></div>
-            <div><dt>Parallel efficiency</dt><dd>89.1%</dd></div>
-            <div><dt>GPU use</dt><dd>85.5% mean · 96% peak</dd></div>
-            <div><dt>Measured workload</dt><dd>337,000 env-steps</dd></div>
+            <div><dt>Speedup vs 1 world</dt><dd>1,028.07×</dd></div>
+            <div><dt>Parallel efficiency</dt><dd>25.1%</dd></div>
+            <div><dt>GPU use</dt><dd>98.7% mean · 99% peak</dd></div>
+            <div><dt>Peak VRAM</dt><dd>6.25 GiB</dd></div>
+            <div><dt>Measured workload</dt><dd>50.33M env-steps</dd></div>
           </dl>
           <small>
-            Physics throughput benchmark · not 337,000 independent safety trials
+            98.51M steps across the full eight-batch sweep · not training
+            examples or independent safety trials
           </small>
         </div>
       </div>
@@ -691,13 +694,13 @@ export function ShowcaseClient() {
           <i />
           <span>MOVE OR STOP</span>
         </div>
-        <div className="hero-score" aria-label="Preserved evidence scale">
-          <span>FROZEN 4,608-PAIR RUN</span>
-          <strong>10,144</strong>
-          <p>environment steps per second · formal workload</p>
+        <div className="hero-score" aria-label="Strictly validated Radeon scale evidence">
+          <span>RADEON SCALE V2 · STRICTLY VALIDATED</span>
+          <strong>152,099</strong>
+          <p>environment steps per second · 4,096 full scenes</p>
           <div>
-            <b>2.30M measured physics steps</b>
-            <small>73.4% mean GPU · 97% peak GPU</small>
+            <b>98.51M measured physics steps</b>
+            <small>98.7% mean GPU · 99% peak GPU at 4,096 worlds</small>
           </div>
         </div>
       </section>

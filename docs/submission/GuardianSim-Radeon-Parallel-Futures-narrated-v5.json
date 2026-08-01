@@ -1,0 +1,142 @@
+{
+  "kind": "guardiansim_radeon_parallel_futures_narrated_v5",
+  "team": "Aegis Motion",
+  "project": "GuardianSim",
+  "claim_boundary": "Preserved Genesis simulation evidence only; no physics re-execution; throughput worlds are not independent safety scenes; no physical-robot claim.",
+  "output": {
+    "path": "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v5.mp4",
+    "sha256": "d590a711950b17a096361e0b7ba39b9842a848c7b0cf7b78d2aff63b5eab8f8d",
+    "duration_seconds": 80,
+    "fps": 20,
+    "width": 1920,
+    "height": 1080,
+    "audio": true
+  },
+  "visual_source": {
+    "path": "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4.mp4",
+    "sha256": "32c8d1db019f38b0b4221171894cbc76be5ab4a67f249ef7dd93cd2581c8f724",
+    "sidecar_sha256": "3a638ff2f3fdd40702154347c896a0a723fbdea1f2a6c4aa61b25f65e2a30fc9"
+  },
+  "narration": {
+    "provider": "Alibaba Cloud Model Studio",
+    "model": "qwen3-tts-instruct-flash-2026-01-26",
+    "voice": "Ethan",
+    "instructions": "Speak like a calm, confident robotics engineer explaining a breakthrough to judges. Warm and human, with conversational pacing, short natural pauses, and subtle emphasis. Avoid announcer voice and exaggerated drama. Keep the delivery concise and intelligent. Let the numbers breathe. Sound like a real engineer speaking to another engineer, not a commercial.",
+    "fixed_chapter_captions": true,
+    "caption_file": "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v5.ass",
+    "caption_sha256": "60ca873b74bfe2859b2c9a12e1651d12735166b5fcbc8ffb89e0a8373a854e1b",
+    "ambient_bed": "original synthesized low-volume sine bed and transition chimes",
+    "segments": [
+      {
+        "slug": "compute-hook",
+        "title": "One Radeon GPU, 4,096 Genesis worlds",
+        "text": "One Radeon GPU ran four thousand ninety-six full Genesis worlds in parallel.",
+        "caption": "One Radeon GPU ran 4,096 full Genesis worlds.",
+        "start_seconds": 0.0,
+        "end_seconds": 6.0,
+        "audio_duration_seconds": 4.56,
+        "audio_sha256": "48b99695ccc8f722b13bb7e88fd6e0e259ed23054d1e5354399c4bb963dab245",
+        "characters": 76,
+        "chunks": 1
+      },
+      {
+        "slug": "radeon-scale",
+        "title": "Radeon scale",
+        "text": "We measured eight frozen batch sizes, from one world to four thousand ninety-six. The largest batch reached one hundred fifty-two thousand, ninety-nine environment steps per second, with ninety-nine percent peak GPU use.",
+        "caption": "Scale V2: 1 \u2192 4,096 worlds; 152,099 environment-steps/s.",
+        "start_seconds": 6.0,
+        "end_seconds": 24.0,
+        "audio_duration_seconds": 13.6,
+        "audio_sha256": "259954730404b1ac7c5059bb325b851f22eafeac2a822526527c645801a7232c",
+        "characters": 220,
+        "chunks": 1
+      },
+      {
+        "slug": "safety-swarm",
+        "title": "Safety Swarm",
+        "text": "For one decision, GuardianSim checks eighteen actions against two hundred fifty-six frozen uncertainty worlds each. Five actions pass every hard gate. A ranking rule fixed in advance selects one.",
+        "caption": "Safety Swarm: 4,608 candidate-world pairs \u2192 5 eligible \u2192 1 selected.",
+        "start_seconds": 24.0,
+        "end_seconds": 40.0,
+        "audio_duration_seconds": 11.84,
+        "audio_sha256": "cdcc5b2fa163c156a58ebb68e819579ed1246a09a71cdcd09635cb76d04641a3",
+        "characters": 195,
+        "chunks": 1
+      },
+      {
+        "slug": "seed-411",
+        "title": "Formal Seed 411",
+        "text": "Here is seed four eleven from the frozen test set. The original path overlaps the clutter by one point four two millimeters. The selected alternative leaves seventeen point one millimeters of clearance and repeats safely three times.",
+        "caption": "Seed 411: 1.42 mm overlap becomes 17.1 mm clearance.",
+        "start_seconds": 40.0,
+        "end_seconds": 58.0,
+        "audio_duration_seconds": 14.24,
+        "audio_sha256": "478d17c8db8ea2b8f8d23d7b9b50e2e5fa057dd46b02cfb19e10ab85b8192b25",
+        "characters": 233,
+        "chunks": 1
+      },
+      {
+        "slug": "formal-proof",
+        "title": "Frozen 30-scenario result",
+        "text": "We then ran the frozen thirty-scenario set. Repeatable safe completion went from eighteen cases to all thirty. Across the ninety independent executions, sampled clutter contacts went from thirty to zero.",
+        "caption": "Frozen run: 30/30 repeatable safe; sampled contacts 30 \u2192 0.",
+        "start_seconds": 58.0,
+        "end_seconds": 72.0,
+        "audio_duration_seconds": 11.92,
+        "audio_sha256": "15d37826ff8baa80b86bffaeac945ed9b610463614bbf94c62731f0f940a3830",
+        "characters": 203,
+        "chunks": 1
+      },
+      {
+        "slug": "close",
+        "title": "Execute or stop",
+        "text": "Radeon tests each option. Pass every hard gate, or stop.",
+        "caption": "Policy proposes \u2192 Radeon simulates \u2192 hard gates verify \u2192 move or stop.",
+        "start_seconds": 72.0,
+        "end_seconds": 80.0,
+        "audio_duration_seconds": 3.68,
+        "audio_sha256": "781145e22a41a0e7d771622c184464613f275b2c0053a34897fb86b5106e1fdf",
+        "characters": 56,
+        "chunks": 1
+      }
+    ]
+  },
+  "verified_metrics": {
+    "largest_parallel_batch": 4096,
+    "environment_steps_per_second": 152099,
+    "speedup_vs_single_world": 1028.07,
+    "total_measured_environment_steps": 98512896,
+    "safety_swarm_candidate_world_pairs": 4608,
+    "safety_swarm_qualifying_actions": 5,
+    "safety_swarm_selected_actions": 1,
+    "safety_swarm_environment_steps": 2299392,
+    "safety_swarm_wall_seconds": 226.67555617541075,
+    "formal_repeatable_safe_scenarios": {
+      "baseline": 18,
+      "guardiansim": 30,
+      "total": 30
+    }
+  },
+  "sources": {
+    "radeon_scale_report": {
+      "path": "docs/evidence/radeon-scale-v2-formal-20260731/raw/report.json",
+      "sha256": "6099fd674e89f3a8ef07a78aafa987ec2956edd9cd0c8b28b055badc48c11104",
+      "strict_validation": true
+    },
+    "safety_swarm_v2_report": {
+      "path": "docs/evidence/safety-swarm-v2-formal-2026-07-30/formal-report.json",
+      "sha256": "f04ce9a5a3399b1fe638964ca76891859e2c9a01808212b74aa7aca37a96d05d",
+      "strict_validation": true
+    },
+    "gate32_formal_report": {
+      "path": "docs/evidence/gate-3-2/formal-report.json",
+      "sha256": "d76ffbe518d4cb9499362379388a1453ec6cc7614ff312b9bcf764dbf822ffee",
+      "schema_version": 5,
+      "completed_episode_count": 30
+    },
+    "seed411_replay": {
+      "path": "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4",
+      "sha256": "38e9adfb2a3f2d90719b60449d092e4caca53afaa2b2f71fe1ade136357dff86"
+    }
+  }
+}

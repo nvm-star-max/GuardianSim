@@ -20,15 +20,18 @@ Mean clutter clearance increased from `0.023191 m` to `0.046003 m`
 (`+98.36%`). The complete schema-5 report, logs, environment, checksums, and
 failed cross-process resume audit trail are preserved in the repository.
 
-The separate Radeon compute demonstration advances `256` headless Franka
-worlds at `35,166.1 environment-steps/s`, a measured `228.16×` speedup over
-the single-world baseline with `89.1%` parallel efficiency. A second batched
-run executes `18` candidate actions × `3` physical repeats as `54`
-simultaneous Genesis worlds in `12.839 s`; `32` futures passed the unchanged
-hard safety gates and `22` were rejected. These are physics-throughput and
-engineering-demo results, not additional independent safety scenes. Raw
-reports, logs, telemetry, and checksums are preserved under
-[`docs/evidence/radeon-p0-2026-07-29`](docs/evidence/radeon-p0-2026-07-29).
+The strictly validated Radeon Scale V2 suite advances `4,096` full headless
+Franka/table/four-YCB scenes at `152,099.018 environment-steps/s`. The largest
+batch contains `50,331,648` measured environment steps and records
+`98.651%` mean / `99%` peak GPU utilization. The complete eight-batch sweep
+contains `98,512,896` measured steps. These are physics-throughput results,
+not training examples or additional independent safety scenes. Raw reports,
+per-batch logs, telemetry, validation, and checksums are preserved under
+[`docs/evidence/radeon-scale-v2-formal-20260731`](docs/evidence/radeon-scale-v2-formal-20260731).
+
+An earlier batched decision demo executes `18` candidate actions × `3`
+physical repeats as `54` simultaneous Genesis worlds; it remains separate
+from both the scale suite and the safety benchmark.
 
 The earlier Gate 3.1 negative result remains part of the evidence. It showed
 that improving clearance alone did not improve safety rate, motivating the
@@ -81,6 +84,7 @@ Project documents:
 - [`docs/evidence/gate-3-3-two-strata/README.md`](docs/evidence/gate-3-3-two-strata/README.md)
 - [`docs/evidence/radeon-p0-2026-07-29`](docs/evidence/radeon-p0-2026-07-29)
 - [`docs/evidence/safety-swarm-v2-formal-2026-07-30`](docs/evidence/safety-swarm-v2-formal-2026-07-30)
+- [`docs/evidence/radeon-scale-v2-formal-20260731`](docs/evidence/radeon-scale-v2-formal-20260731)
 - [`showcase/README.md`](showcase/README.md)
 
 ## Interactive showcase

@@ -33,11 +33,13 @@ clutter contacts, 66.249 mm worst-case sampled clearance, and 0.907 minimum
 stability. This is an engineering stress-test population, not 4,608
 independent robot trials.
 
-A separate Radeon throughput run measured the same GPU backend at 1, 16, 64,
-and 256 parallel Genesis worlds. The 256-world point reached 35,166.1
-environment-steps/s, 228.16 times the single-world throughput, at 89.1%
-parallel efficiency. This is compute evidence, not an increase in the formal
-safety sample count.
+A separate frozen Radeon throughput run measured the same GPU backend at eight
+batch sizes from 1 to 4,096 full Genesis manipulation scenes. The 4,096-world
+point reached 152,099.018 environment-steps/s, 1,028.069 times the single-world
+throughput, with 98.651% mean and 99% peak GPU utilization. The full sweep
+advanced 98,512,896 measured environment steps. This is physics-throughput
+evidence, not policy-training throughput or an increase in the formal safety
+sample count.
 
 ## 1. Target application and motivation
 
@@ -221,20 +223,28 @@ three-candidate Genesis smoke, and a complete-source ROCm Dockerfile.
 
 ### 5.1 Measured parallel-physics scale
 
-The scale run used one fixed headless Franka scene, 100 warmup steps, and 1,000
-timed steps per batch size. Scene construction and JIT warmup were excluded
-from the timed interval.
+The frozen Scale V2 run built a full headless manipulation scene per world:
+one Franka, one table, and four active YCB entities. Each predeclared batch ran
+once with 200 warmup steps followed by 12,288 measured steps. Scene
+construction, shader setup, and JIT warmup were excluded from the timed
+interval.
 
 | Parallel worlds | Environment-steps/s | Speedup vs. 1 world | Parallel efficiency |
 | ---: | ---: | ---: | ---: |
-| 1 | 154.1 | 1.00x | 100.0% |
-| 16 | 2,383.7 | 15.47x | 96.7% |
-| 64 | 9,354.3 | 60.69x | 94.8% |
-| 256 | 35,166.1 | 228.16x | 89.1% |
+| 1 | 147.946 | 1.000x | 100.000% |
+| 16 | 2,214.149 | 14.966x | 93.537% |
+| 64 | 8,704.403 | 58.835x | 91.929% |
+| 256 | 35,637.980 | 240.884x | 94.095% |
+| 512 | 56,928.068 | 384.789x | 75.154% |
+| 1,024 | 96,589.308 | 652.867x | 63.757% |
+| 2,048 | 136,859.540 | 925.062x | 45.169% |
+| 4,096 | 152,099.018 | 1,028.069x | 25.099% |
 
-All four points reached 96% peak GPU utilization. At 256 worlds, mean GPU
-utilization was 85.5% and peak VRAM use was 1.34 GiB. The complete timed
-workload contained 337,000 environment steps.
+Throughput continued to rise through 4,096 worlds, while parallel efficiency
+fell after 256 worlds. The largest batch advanced 50,331,648 environment
+steps, recorded 98.651% mean and 99% peak GPU utilization, and used at most
+6,706,667,520 bytes (about 6.25 GiB) of VRAM. The complete eight-batch sweep
+advanced 98,512,896 measured environment steps. No formal batch was retried.
 
 ### 5.2 Safety Swarm V2 formal decision-scale run
 
@@ -326,7 +336,7 @@ claim universal completion under arbitrary geometry.
    stability, responsible link and obstacle, decision type, protocol identity,
    logs, and checksums.
 6. **The Radeon path is measured at two useful grains.** The raw scale suite
-   isolates 1-to-256-world physics throughput. The formal Safety Swarm V2 run
+   isolates 1-to-4,096-world full-scene physics throughput. The formal Safety Swarm V2 run
    shows how Radeon batching supports a complete 18-by-256 action decision.
    Neither result is added to the 30-scenario safety sample count.
 
@@ -342,7 +352,7 @@ Primary deliverables:
 - bounded real Genesis counterfactual smoke;
 - immutable Gate 3.2 schema-5 report and validator;
 - Gate 3.3 breadth evidence;
-- strict Radeon scale report;
+- strict eight-batch Radeon Scale V2 report and validator receipt;
 - complete Safety Swarm V2 4,608-pair report, validator, logs, and checksums;
 - annotated comparison demo and interactive showcase;
 - technical report and 3–5 minute video.
@@ -357,11 +367,12 @@ replay, aggregate Gate 3.2 result, Gate 3.3 limitation evidence, and
 simulation-only claim boundary. Its SHA-256 is recorded in the package
 checksum manifest.
 
-An 80-second supplementary Radeon preview shows the scale curve and earlier
-bounded candidate funnel; it does not replace the complete workflow video.
-The public showcase is the judge-facing view of the later 4,608-pair formal
-run and links to its immutable report. Its file identity is also recorded in
-the package checksum manifest.
+An 80-second supplementary Radeon preview shows the eight-point scale curve,
+the later 4,608-pair Safety Swarm V2 funnel, one accepted Seed 411 replay, and
+the frozen 30-scenario result. It does not replace the complete workflow
+video. The public showcase is the judge-facing interactive view and links to
+the immutable reports. Artifact identities are recorded in machine-readable
+sidecars and the package checksum manifest.
 
 ## 9. Limitations and responsible claims
 
@@ -376,7 +387,8 @@ the package checksum manifest.
   completion.
 - The reported 30-scenario result applies only to the frozen Gate 3.2 matrix.
 - The scale benchmark measures steady-state Genesis stepping after warmup; it
-  excludes scene construction and does not measure policy-training throughput.
+  excludes scene construction and does not measure PPO samples, policy-training
+  throughput, dataset rows, or independent safety trials.
 - The 4,608 Safety Swarm V2 pairs are a candidate-by-uncertainty engineering
   population, not 4,608 independent robot trials.
 

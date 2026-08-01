@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build an 80-second scale-first GuardianSim visual review cut.
+"""Build the 80-second Radeon Scale V2 GuardianSim visual review cut.
 
 This artifact is assembled only from preserved, validated evidence. It does not
 re-run Genesis, add a statistical trial, or claim that throughput worlds are
@@ -40,34 +40,34 @@ FONT_MONO = Path("/System/Library/Fonts/Supplemental/Courier New.ttf")
 
 SCALE_REPORT = (
     ROOT
-    / "docs/evidence/radeon-p0-2026-07-29/radeon-scale/report.json"
+    / "docs/evidence/radeon-scale-v2-formal-20260731/raw/report.json"
 )
 SCALE_VALIDATION = (
     ROOT
-    / "docs/evidence/radeon-p0-2026-07-29/radeon-scale/validation.json"
+    / "docs/evidence/radeon-scale-v2-formal-20260731/raw/validation.json"
 )
 FUTURES_REPORT = (
     ROOT
-    / "docs/evidence/radeon-p0-2026-07-29/parallel-futures/report.json"
+    / "docs/evidence/safety-swarm-v2-formal-2026-07-30/formal-report.json"
 )
 FUTURES_VALIDATION = (
     ROOT
-    / "docs/evidence/radeon-p0-2026-07-29/parallel-futures/validation.json"
+    / "docs/evidence/safety-swarm-v2-formal-2026-07-30/formal-validation.json"
 )
 FORMAL_REPORT = ROOT / "docs/evidence/gate-3-2/formal-report.json"
 HERO_VIDEO = ROOT / "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4"
 
 OUTPUT = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v3.mp4"
+    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4.mp4"
 )
 SIDECAR = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v3.json"
+    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4.json"
 )
 PREVIEW = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v3-preview.png"
+    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4-preview.png"
 )
 
 
@@ -234,127 +234,165 @@ def draw_world_grid(
 def render_title(t: float) -> Image.Image:
     image = base_frame("01 / THE COMPUTE HOOK")
     draw = ImageDraw.Draw(image)
-    draw.text((72, 192), "256 WORLDS ON ONE RADEON GPU.", font=font(78, bold=True), fill=WHITE)
-    draw.text((72, 310), "THEN TEST 54 WAYS TO MOVE.", font=font(78), fill=ACID)
+    draw.text((72, 175), "4,096 PARALLEL PHYSICS WORLDS.", font=font(76, bold=True), fill=WHITE)
+    draw.text((72, 292), "ONE RADEON GPU.", font=font(82), fill=ACID)
     draw.text(
-        (76, 455),
-        "We measured the GPU work first. Then we used the same",
+        (76, 425),
+        "A full Franka manipulation scene in every world.",
         font=font(32),
         fill=MUTED,
     )
     draw.text(
-        (76, 500),
-        "parallel setup to reject unsafe actions before execution.",
+        (76, 470),
+        "Then the same engine rejects unsafe actions before execution.",
         font=font(32),
         fill=MUTED,
     )
     rounded(draw, (76, 620, 610, 890), fill=ACID)
-    label(draw, "MEASURED ON RADEON CLOUD", 112, 660, color=BG)
-    draw.text((110, 710), "35,166", font=font(88, bold=True), fill=BG)
-    draw.text((112, 805), "env-steps/s · 256 worlds", font=font(25), fill=BG)
+    label(draw, "MEASURED PHYSICS RATE", 112, 660, color=BG)
+    draw.text((110, 710), "152,099", font=font(82, bold=True), fill=BG)
+    draw.text((112, 805), "environment-steps/s", font=font(25), fill=BG)
     rounded(draw, (650, 620, 1210, 890), fill=PANEL_2, outline=CYAN)
-    label(draw, "THROUGHPUT SCALE-UP", 690, 660)
-    draw.text((688, 710), "228.16×", font=font(82, bold=True), fill=WHITE)
-    draw.text((690, 805), "89.1% parallel efficiency", font=font(25), fill=MUTED)
+    label(draw, "COMPLETE FROZEN SWEEP", 690, 660)
+    draw.text((688, 710), "98.51M", font=font(82, bold=True), fill=WHITE)
+    draw.text((690, 805), "measured physics steps", font=font(25), fill=MUTED)
     rounded(draw, (1250, 620, 1844, 890), fill=PANEL_2, outline=GREEN)
-    label(draw, "GPU USE", 1290, 660, color=GREEN)
-    draw.text((1288, 710), "96%", font=font(82, bold=True), fill=WHITE)
-    draw.text((1290, 805), "peak GPU · 85.5% mean", font=font(25), fill=MUTED)
+    label(draw, "LARGEST BATCH GPU USE", 1290, 660, color=GREEN)
+    draw.text((1288, 710), "98.7%", font=font(82, bold=True), fill=WHITE)
+    draw.text((1290, 805), "mean · 99% peak", font=font(25), fill=MUTED)
     return image
 
 
 def render_scale(t: float) -> Image.Image:
     image = base_frame("02 / RADEON SCALE")
     draw = ImageDraw.Draw(image)
-    draw.text((64, 100), "MEASURED GENESIS THROUGHPUT", font=font(58, bold=True), fill=WHITE)
-    steps = [
-        (1, 154, "1.00×"),
-        (16, 2384, "15.47×"),
-        (64, 9354, "60.69×"),
-        (256, 35166, "228.16×"),
-    ]
-    stage = min(3, int(t / 4.5))
-    stage_progress = min(1.0, (t - stage * 4.5) / 2.2)
-    visible_worlds = int(steps[stage][0] * max(0.08, stage_progress))
-    draw_world_grid(draw, (64, 220, 1120, 935), visible=max(1, visible_worlds))
-    for index, (worlds, throughput, speedup) in enumerate(steps):
-        left = 1180 + (index % 2) * 330
-        top = 235 + (index // 2) * 350
-        active = index <= stage
-        outline = GREEN if index == stage else ((43, 90, 103) if active else (24, 45, 53))
-        fill = (8, 35, 34) if index == stage else PANEL
-        rounded(draw, (left, top, left + 290, top + 310), fill=fill, outline=outline, width=3)
-        label(draw, f"BATCH {index + 1:02d}", left + 24, top + 22, color=outline)
-        draw.text(
-            (left + 22, top + 68),
-            f"{worlds}",
-            font=font(72, bold=True),
-            fill=WHITE if active else (64, 82, 90),
-        )
-        draw.text((left + 24, top + 152), "parallel worlds", font=font(20), fill=MUTED)
-        draw.text(
-            (left + 24, top + 205),
-            f"{throughput:,}",
-            font=font(30, bold=True, mono=True),
-            fill=GREEN if active else (64, 82, 90),
-        )
-        draw.text((left + 24, top + 247), f"{speedup} speedup", font=font(20), fill=MUTED)
+    draw.text((64, 100), "THE CURVE KEEPS RISING TO 4,096 WORLDS", font=font(54, bold=True), fill=WHITE)
     draw.text(
-        (64, 960),
-        f"{steps[stage][0]:>3} WORLDS  ·  {steps[stage][1]:,} ENV-STEPS/S",
+        (66, 172),
+        "Full Franka + table + four YCB entities per world · 12,288 measured steps per batch",
+        font=font(25),
+        fill=MUTED,
+    )
+    steps = [
+        (1, 148, 1.00, 100.0),
+        (16, 2214, 14.97, 93.5),
+        (64, 8704, 58.83, 91.9),
+        (256, 35638, 240.88, 94.1),
+        (512, 56928, 384.79, 75.2),
+        (1024, 96589, 652.87, 63.8),
+        (2048, 136860, 925.06, 45.2),
+        (4096, 152099, 1028.07, 25.1),
+    ]
+    stage = min(7, int(t / 2.25))
+    chart = (90, 290, 1260, 850)
+    x0, y0, x1, y1 = chart
+    draw.line((x0, y1, x1, y1), fill=(48, 77, 88), width=3)
+    draw.line((x0, y0, x0, y1), fill=(48, 77, 88), width=3)
+    max_rate = 160000
+    for tick in (0, 50000, 100000, 150000):
+        y = y1 - int((tick / max_rate) * (y1 - y0))
+        draw.line((x0, y, x1, y), fill=(20, 44, 54), width=2)
+        draw.text((x0 - 16, y), f"{tick // 1000}k", anchor="rm", font=font(18, mono=True), fill=MUTED)
+    slot = (x1 - x0) / len(steps)
+    points: list[tuple[int, int]] = []
+    for index, (worlds, throughput, speedup, efficiency) in enumerate(steps):
+        center = int(x0 + slot * (index + 0.5))
+        top = y1 - int((throughput / max_rate) * (y1 - y0))
+        active = index <= stage
+        color = GREEN if index == stage else (CYAN if active else (29, 57, 66))
+        fill = (19, 99, 76) if index == stage else ((8, 49, 63) if active else (8, 24, 31))
+        draw.rounded_rectangle((center - 42, top, center + 42, y1), radius=10, fill=fill, outline=color, width=3)
+        draw.text((center, y1 + 28), f"{worlds:,}", anchor="ma", font=font(18, bold=True, mono=True), fill=color)
+        if active:
+            draw.text((center, top - 18), f"{throughput:,}", anchor="ms", font=font(18, bold=True, mono=True), fill=color)
+            points.append((center, top))
+    if len(points) > 1:
+        draw.line(points, fill=ACID, width=5, joint="curve")
+    for point in points:
+        draw.ellipse((point[0] - 6, point[1] - 6, point[0] + 6, point[1] + 6), fill=ACID)
+
+    worlds, throughput, speedup, efficiency = steps[stage]
+    rounded(draw, (1330, 285, 1835, 525), fill=PANEL_2, outline=GREEN, width=3)
+    label(draw, "CURRENT BATCH", 1370, 320, color=GREEN)
+    draw.text((1370, 370), f"{worlds:,}", font=font(70, bold=True), fill=WHITE)
+    draw.text((1372, 455), "parallel full scenes", font=font(24), fill=MUTED)
+    rounded(draw, (1330, 555, 1835, 795), fill=PANEL_2, outline=CYAN, width=3)
+    label(draw, "MEASURED RATE", 1370, 590)
+    draw.text((1370, 640), f"{throughput:,}", font=font(58, bold=True), fill=WHITE)
+    draw.text((1372, 712), "environment-steps/s", font=font(24), fill=MUTED)
+    draw.text(
+        (1330, 835),
+        f"{speedup:.2f}× speedup · {efficiency:.1f}% efficiency",
+        font=font(24, bold=True, mono=True),
+        fill=ACID if stage == 7 else CYAN,
+    )
+    draw.text(
+        (90, 925),
+        "THROUGHPUT STILL RISES; MARGINAL EFFICIENCY FALLS AFTER 256 WORLDS.",
         font=font(25, bold=True, mono=True),
-        fill=GREEN,
+        fill=GREEN if stage == 7 else MUTED,
     )
     return image
 
 
 def render_futures(t: float) -> Image.Image:
-    image = base_frame("03 / PARALLEL FUTURES")
+    image = base_frame("03 / SAFETY SWARM")
     draw = ImageDraw.Draw(image)
-    draw.text((64, 100), "54 WAYS TO MAKE THE NEXT MOVE", font=font(58, bold=True), fill=WHITE)
+    draw.text((64, 100), "4,608 FUTURES BECOME ONE AUDITABLE MOVE", font=font(52, bold=True), fill=WHITE)
     draw.text(
         (66, 170),
-        "18 bounded actions × 3 physical repeats · one batched Genesis scene",
+        "18 bounded actions × 256 frozen uncertainty worlds · hard gates before ranking",
         font=font(27),
         fill=MUTED,
     )
-    x0, y0 = 80, 300
-    columns = 9
-    cell = 92
-    gap = 14
-    reveal = min(54, max(1, int(t * 6)))
-    classified = t >= 4.8
-    for index in range(54):
+    x0, y0 = 80, 310
+    columns = 6
+    cell_w = 150
+    cell_h = 150
+    gap = 18
+    reveal = min(18, max(1, int(t * 2.5)))
+    classified = t >= 4.0
+    qualifying = {4, 6, 8, 10, 12}
+    for index in range(18):
         row, column = divmod(index, columns)
-        left = x0 + column * (cell + gap)
-        top = y0 + row * (cell + gap)
+        left = x0 + column * (cell_w + gap)
+        top = y0 + row * (cell_h + gap)
         if index >= reveal:
             fill, outline = (7, 18, 25), (24, 46, 55)
         elif not classified:
             fill, outline = (5, 40, 53), CYAN
-        elif index < 32:
+        elif index in qualifying:
             fill, outline = (18, 77, 58), GREEN
         else:
             fill, outline = (53, 28, 28), RED
-        rounded(draw, (left, top, left + cell, top + cell), fill=fill, outline=outline, radius=8)
+        rounded(draw, (left, top, left + cell_w, top + cell_h), fill=fill, outline=outline, radius=10)
         draw.text(
-            (left + cell // 2, top + cell // 2),
-            f"{index + 1:02d}",
-            anchor="mm",
-            font=font(20, bold=True, mono=True),
+            (left + cell_w // 2, top + 50),
+            f"A{index + 1:02d}",
+            anchor="ma",
+            font=font(25, bold=True, mono=True),
             fill=outline,
         )
-        if classified and index >= 32:
-            draw.line((left + 20, top + 20, left + cell - 20, top + cell - 20), fill=RED, width=5)
-    draw.text((1135, 330), "HARD GATE FUNNEL", font=font(24, bold=True, mono=True), fill=CYAN)
-    rounded(draw, (1135, 405, 1815, 620), fill=(8, 34, 31), outline=GREEN, width=3)
-    draw.text((1180, 445), "32", font=font(96, bold=True), fill=GREEN)
-    draw.text((1400, 478), "hard-safe futures", font=font(30, bold=True), fill=WHITE)
-    rounded(draw, (1135, 650, 1815, 865), fill=(38, 23, 25), outline=RED, width=3)
-    draw.text((1180, 690), "22", font=font(96, bold=True), fill=RED)
-    draw.text((1400, 723), "rejected before execution", font=font(30, bold=True), fill=WHITE)
-    draw.text((1138, 900), "12.839 s WALL TIME", font=font(38, bold=True, mono=True), fill=CYAN)
-    draw.text((1138, 950), "71.8% mean GPU · 95% peak", font=font(23), fill=MUTED)
+        status = "256/256" if index in qualifying else "REJECT"
+        draw.text(
+            (left + cell_w // 2, top + 100),
+            status if classified and index < reveal else "256 worlds",
+            anchor="ma",
+            font=font(18, bold=True, mono=True),
+            fill=outline,
+        )
+    draw.text((1125, 305), "FROZEN FUNNEL", font=font(24, bold=True, mono=True), fill=CYAN)
+    funnel = [
+        ("4,608", "candidate-world pairs", CYAN, 1125, 380, 1815),
+        ("5", "actions passed all 256 worlds", GREEN, 1210, 555, 1730),
+        ("1", "selected by frozen ranking", ACID, 1295, 730, 1645),
+    ]
+    for value, detail, color, left, top, right in funnel:
+        rounded(draw, (left, top, right, top + 135), fill=PANEL_2, outline=color, width=3, radius=14)
+        draw.text((left + 28, top + 20), value, font=font(55, bold=True), fill=color)
+        draw.text((left + 155, top + 53), detail, font=font(24, bold=True), fill=WHITE)
+    draw.text((1128, 910), "2.30M physics steps · 73.4% mean / 97% peak GPU", font=font(25, bold=True, mono=True), fill=CYAN)
+    draw.text((1128, 952), "Candidate-world pairs are engineering outcomes, not robot trials.", font=font(21), fill=MUTED)
     return image
 
 
@@ -477,14 +515,14 @@ def render_close(t: float) -> Image.Image:
     image = base_frame("06 / WHAT THE DEMO SHOWS")
     draw = ImageDraw.Draw(image)
     draw.text((90, 225), "GUARDIANSIM", font=font(116, bold=True), fill=WHITE)
-    draw.text((96, 355), "PARALLEL FUTURES ON AMD RADEON", font=font(48, bold=True), fill=ACID)
+    draw.text((96, 355), "COUNTERFACTUAL SAFETY ON AMD RADEON", font=font(48, bold=True), fill=ACID)
     rounded(draw, (96, 500, 1820, 750), fill=PANEL_2, outline=CYAN)
     draw.text(
         (140, 548),
-        "The GPU tests the options. The robot moves only if one passes every gate.",
+        "POLICY PROPOSES  →  RADEON SIMULATES  →  HARD GATES VERIFY",
         font=fit_font(
             draw,
-            "The GPU tests the options. The robot moves only if one passes every gate.",
+            "POLICY PROPOSES  →  RADEON SIMULATES  →  HARD GATES VERIFY",
             max_width=1636,
             max_size=42,
             min_size=30,
@@ -494,7 +532,7 @@ def render_close(t: float) -> Image.Image:
     )
     draw.text(
         (140, 630),
-        "If none pass, it stays put. Genesis simulation; code and evidence are public.",
+        "Move only when one action passes. Otherwise stop. Genesis simulation; evidence is public.",
         font=font(30),
         fill=MUTED,
     )
@@ -516,13 +554,17 @@ def validate_sources() -> tuple[dict, dict, dict]:
 
     assert scale_validation["status"] == "passed"
     assert futures_validation["status"] == "passed"
-    assert scale["summary"]["largest_batch_size"] == 256
-    assert round(scale["summary"]["peak_environment_steps_per_second"]) == 35166
-    assert round(scale["summary"]["largest_batch_speedup_vs_single_env"], 2) == 228.16
-    assert scale["summary"]["total_measured_environment_steps"] == 337000
-    assert futures["protocol"]["parallel_environment_count"] == 54
-    assert sum(result["hard_safe"] for result in futures["results"]) == 32
-    assert len(futures["results"]) - sum(result["hard_safe"] for result in futures["results"]) == 22
+    assert scale["schema_version"] == 2
+    assert scale["summary"]["largest_batch_size"] == 4096
+    assert round(scale["summary"]["peak_environment_steps_per_second"]) == 152099
+    assert round(scale["summary"]["largest_batch_speedup_vs_single_world"], 2) == 1028.07
+    assert scale["summary"]["total_measured_environment_steps"] == 98512896
+    assert len(scale["trials"]) == 8
+    assert futures["summary"]["candidate_count"] == 18
+    assert futures["summary"]["world_count_per_candidate"] == 256
+    assert futures["summary"]["candidate_world_count"] == 4608
+    assert len(futures["summary"]["qualifying_candidate_ids"]) == 5
+    assert futures["summary"]["decision"] == "execute"
     assert formal["schema_version"] == 5
     assert formal["completed_episode_count"] == 30
     assert formal["summary"]["guardiansim"]["repeatable_safe_completion_count"] == 30
@@ -593,12 +635,11 @@ def main() -> None:
         raise RuntimeError("Preview frame was not captured")
     preview_frame.save(PREVIEW)
 
-    hard_safe = sum(result["hard_safe"] for result in futures["results"])
     payload = {
-        "kind": "guardiansim_radeon_parallel_futures_visual_review_v3",
+        "kind": "guardiansim_radeon_parallel_futures_visual_review_v4",
         "team": "Aegis Motion",
         "project": "GuardianSim",
-        "review_status": "revised silent visual source; typography and copy review passed",
+        "review_status": "Scale V2 silent visual preview; typography and claim review pending",
         "layout_policy": {
             "metric_rows": "measured as one group and centered inside each card",
             "titles_and_details": "measured and centered inside each card",
@@ -623,7 +664,7 @@ def main() -> None:
                 "sha256": sha256(SCALE_REPORT),
                 "strict_validation": True,
             },
-            "parallel_futures_report": {
+            "safety_swarm_v2_report": {
                 "path": str(FUTURES_REPORT.relative_to(ROOT)),
                 "sha256": sha256(FUTURES_REPORT),
                 "strict_validation": True,
@@ -645,15 +686,22 @@ def main() -> None:
                 scale["summary"]["peak_environment_steps_per_second"]
             ),
             "speedup_vs_single_world": round(
-                scale["summary"]["largest_batch_speedup_vs_single_env"], 2
+                scale["summary"]["largest_batch_speedup_vs_single_world"], 2
             ),
             "total_measured_environment_steps": scale["summary"][
                 "total_measured_environment_steps"
             ],
-            "parallel_future_worlds": len(futures["results"]),
-            "parallel_future_hard_safe": hard_safe,
-            "parallel_future_rejected": len(futures["results"]) - hard_safe,
-            "parallel_future_wall_seconds": futures["summary"][
+            "safety_swarm_candidate_world_pairs": futures["summary"][
+                "candidate_world_count"
+            ],
+            "safety_swarm_qualifying_actions": len(
+                futures["summary"]["qualifying_candidate_ids"]
+            ),
+            "safety_swarm_selected_actions": 1,
+            "safety_swarm_environment_steps": futures["summary"][
+                "total_environment_steps"
+            ],
+            "safety_swarm_wall_seconds": futures["summary"][
                 "batched_execution_wall_seconds"
             ],
             "formal_repeatable_safe_scenarios": {
@@ -669,7 +717,7 @@ def main() -> None:
         "chapters": [
             {"start": 0, "end": 6, "name": "compute hook"},
             {"start": 6, "end": 24, "name": "Radeon scale"},
-            {"start": 24, "end": 40, "name": "parallel futures funnel"},
+            {"start": 24, "end": 40, "name": "Safety Swarm funnel"},
             {"start": 40, "end": 58, "name": "formal Seed 411 replay"},
             {"start": 58, "end": 72, "name": "frozen 30-scenario result"},
             {"start": 72, "end": 80, "name": "what the demo shows"},

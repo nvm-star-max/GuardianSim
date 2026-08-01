@@ -48,12 +48,14 @@ test("server-renders the GuardianSim Parallel Futures arena", async () => {
   assert.match(html, /30\/30/);
   assert.match(html, /\+98\.36%/);
   assert.match(html, /No physical-robot deployment claim/i);
-  assert.match(html, /One GPU\. 256 robot worlds\./);
-  assert.match(html, /337,000 env-steps/);
-  assert.match(html, /35,166 env-steps\/s/);
-  assert.match(html, /228\.16×/);
-  assert.match(html, /89\.1%/);
-  assert.match(html, /85\.5% mean · 96% peak/);
+  assert.match(html, /One Radeon GPU\. 4,096 robot worlds\./);
+  assert.match(html, /50,331,648 measured environment steps/);
+  assert.match(html, /152,099 env-steps\/s/);
+  assert.match(html, /1,028\.07×/);
+  assert.match(html, /25\.1%/);
+  assert.match(html, /98\.7% mean · 99% peak/);
+  assert.match(html, /6\.25 GiB/);
+  assert.match(html, /98\.51M steps across the full eight-batch sweep/);
   assert.match(html, /18 actions\. 256 uncertain worlds each\./);
   assert.match(html, /4,608/);
   assert.match(html, /candidates passed 256\/256/);
@@ -62,9 +64,11 @@ test("server-renders the GuardianSim Parallel Futures arena", async () => {
   assert.match(html, /73\.406% mean · 97% peak/);
   assert.match(html, /1,691/);
   assert.match(html, /not 4,608 independent robot trials/);
-  assert.match(html, /STRICT VALIDATION PASSED/);
+  assert.match(html, /STRICT SCHEMA-2 VALIDATION PASSED/);
   assert.doesNotMatch(html, /pending strict validation/i);
-  assert.match(html, /not 337,000 independent safety trials/);
+  assert.match(html, /not training\s+examples or independent safety trials/);
+  assert.doesNotMatch(html, /One GPU\. 256 robot worlds\./);
+  assert.doesNotMatch(html, /337,000 measured environment steps/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
@@ -151,6 +155,44 @@ test("Safety Swarm showcase data is generated from the preserved formal report",
     ),
     report.summary.contact_candidate_world_count,
   );
+});
+
+test("Radeon Scale V2 claims match the preserved schema-2 report", async () => {
+  const [client, reportText] = await Promise.all([
+    readFile(new URL("../app/ShowcaseClient.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL(
+        "../../docs/evidence/radeon-scale-v2-formal-20260731/raw/report.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  ]);
+
+  const report = JSON.parse(reportText);
+  const largest = report.trials.find((trial) => trial.n_envs === 4096);
+
+  assert.equal(report.schema_version, 2);
+  assert.equal(report.summary.trial_count, 8);
+  assert.equal(report.summary.largest_batch_size, 4096);
+  assert.equal(report.summary.largest_batch_environment_steps, 50331648);
+  assert.equal(report.summary.total_measured_environment_steps, 98512896);
+  assert.equal(report.summary.peak_gpu_utilization_pct, 99);
+  assert.equal(largest.status, "passed");
+  assert.equal(largest.gpu_telemetry.max_vram_used_bytes, 6706667520);
+  assert.ok(
+    Math.abs(largest.environment_steps_per_second - 152099.0180702075) <
+      1e-9,
+  );
+  assert.ok(
+    Math.abs(largest.speedup_vs_single_world - 1028.0686491337824) < 1e-9,
+  );
+
+  assert.match(client, /152,099/);
+  assert.match(client, /1,028\.07×/);
+  assert.match(client, /98\.51M/);
+  assert.match(client, /6\.25 GiB/);
+  assert.match(client, /STRICT SCHEMA-2 VALIDATION PASSED/);
 });
 
 test("interactive claims match the preserved Gate 3.2 and Gate 3.3 reports", async () => {

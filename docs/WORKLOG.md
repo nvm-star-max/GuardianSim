@@ -2151,3 +2151,131 @@ Gate decision:
 - Browser QA passed at 1440 × 1000 and 390 × 844 with zero page overflow,
   zero hero-content overflow, a 32.77 px mobile action-to-card gap, and no
   console warning or error.
+
+## 2026-07-31 — Completed and preserved Radeon Scale V2
+
+- Launched the capacity-only preflight from source commit
+  `3d8021a237ca0dfca41c98df1b492b7b9a523b4f`; all declared capacities
+  through 4,096 worlds passed.
+- Ran the frozen formal ladder once at
+  `1/16/64/256/512/1024/2048/4096` worlds. No formal trial failed or retried.
+- Strict schema-2 validation passed against protocol
+  `bcb91e081b196a5b6274ce1efd461d2005f1c1505dbd7020e9fbbaab0bb536e8`.
+- Verified largest-batch measurements:
+  - `4,096` full headless manipulation scenes;
+  - `50,331,648` measured environment steps;
+  - `152,099.018 environment-steps/s`;
+  - `1,028.069×` speedup and `25.099%` parallel efficiency;
+  - `98.651%` mean / `99%` peak GPU utilization;
+  - `6.25 GiB` peak VRAM.
+- Verified `98,512,896` total measured environment steps across the complete
+  eight-batch sweep. The evidence keeps the falling post-256 parallel
+  efficiency visible as the saturation curve.
+- Downloaded and preserved the raw preflight and formal outputs, trial logs,
+  source/launch/ROCm receipts, validation files, checksums, and archives under
+  `docs/evidence/radeon-scale-v2-*`.
+- Added a plain-language result note and updated the local competition
+  positioning, PR addendum, README, showcase, and render assertions. No public
+  push or organizer PR update was made at this checkpoint.
+- Re-ran strict validation and both raw checksum manifests, then passed
+  108/108 Python unit tests, Python compilation, `git diff --check`, 5/5
+  server-rendered showcase tests, 3/3 static Pages tests, both builds, and
+  ESLint.
+- Used exact 1,440 × 1,000 and 390 × 844 browser emulation to inspect the hero,
+  four representative scale cards, the 4,096-world tile map, and the compute
+  receipt. Page width matched viewport width in both sizes and no runtime or
+  browser-log error was recorded.
+- A repository-wide run with the current latest Ruff reported 68 existing
+  findings across upstream `franka_fruit_pick`, historical scripts, tests, and
+  older GuardianSim modules. This V2 result stage changes no Python source and
+  did not rewrite unrelated lint debt.
+
+## 2026-07-31 — Rebuilt the report and silent preview around Scale V2
+
+- Replaced the old Scale V1 section in `TECHNICAL_REPORT.md` with the frozen
+  eight-batch Scale V2 protocol, complete measurement table, saturation note,
+  4,096-world GPU/VRAM receipt, and explicit non-training claim boundary.
+- Built `output/pdf/GuardianSim-Technical-Report.pdf` with the bundled
+  ReportLab runtime. `pdfinfo` reported eight A4 pages and no encryption,
+  forms, JavaScript, or suspect objects.
+- Rendered all eight PDF pages to PNG at 140 DPI. Reviewed the contact sheet
+  and full-resolution pages 5–7, which contain the new scale table, Safety
+  Swarm section, results table, deliverables, and limitations. No clipping,
+  table overflow, or footer collision was found.
+- Extracted PDF text and confirmed the new `4,096`, `152,099`,
+  `98,512,896`, `4,608`, and `30/30` claims are present; superseded
+  `35,166`, `228.16`, and `337,000` Scale V1 claims are absent.
+- Revised the supplementary visual builder to use immutable Scale V2,
+  Safety Swarm V2, Gate 3.2, and Seed 411 sources. Preserved all prior V3/V4
+  media under their original filenames.
+- Generated `GuardianSim-Radeon-Parallel-Futures-review-v4.mp4` and its
+  sidecar, preview, and validation receipt. The visual now leads with 4,096
+  full parallel scenes and 152,099 environment-steps/s, then shows the
+  eight-point curve and `4,608 → 5 → 1` decision funnel.
+- Corrected the visual qualifying-candidate cells to the report-backed
+  A05/A07/A09/A11/A13 indices before final encoding.
+- Strict video validation passed 80.0 seconds, 1920×1080, 20 FPS, eight sampled
+  decodes, complete video decode, all source hashes, locked metrics, chapter
+  bounds, and simulation-only claim boundaries.
+- Reviewed seven frames decoded from the completed MP4 across all six chapters.
+  Titles, cards, graph labels, candidate cells, replay overlays, proof metrics,
+  and closing architecture remain within their frames.
+- Prepared narrated V5 script and validator inputs but did not call Qwen TTS.
+  No public upload, package replacement, commit, push, Pages deployment, or
+  organizer PR update occurred in this stage.
+
+## 2026-07-31 — Generated the Scale V2 narrated V5 review candidate
+
+- Received owner approval for the silent V4 visual direction and generated six
+  English segments with Qwen3-TTS Instruct Flash, `Ethan` voice, using the
+  existing ignored local credential path.
+- Kept the already accepted direct, engineer-to-engineer delivery instruction;
+  no key or authentication value was printed or stored in artifact metadata.
+- Two alternate closing lines synthesized too slowly for the fixed eight-second
+  chapter and were rejected by the timing guard. Shortened the line rather
+  than speeding up the voice. The accepted close is 3.680 seconds and leaves
+  4.320 seconds of breathing room.
+- Built `GuardianSim-Radeon-Parallel-Futures-narrated-v5.mp4`, SHA-256
+  `d590a711950b17a096361e0b7ba39b9842a848c7b0cf7b78d2aff63b5eab8f8d`.
+- Verified all segment windows. The tightest is the six-second compute hook,
+  which still leaves 1.440 seconds after its narration.
+- Strict V5 validation passed 80.0 seconds, 1920×1080, 20 FPS, full A/V decode,
+  eight sampled decodes, visual-source identity, six narration hashes, fixed
+  caption hash, evidence-source hashes, metrics, and claim boundaries.
+- Post-mux audio inspection reported 96 kHz mono AAC, approximately -18.4 dB
+  mean volume and -1.1 dB maximum sample level after the -16 LUFS target
+  normalization pipeline.
+- Reviewed chapter frames with burned captions. Captions remain centered inside
+  the safe lower margin and do not obscure the scale cards, Safety Swarm
+  funnel, replay labels, proof cards, or closing architecture.
+- V5 remains a local review candidate; no source commit, push, public release,
+  package replacement, Pages deployment, or organizer PR mutation occurred.
+
+## 2026-08-01 — Assembled and rehearsed the local V4 official package
+
+- Replaced only the local official-package candidate artifacts: copied the
+  inspected eight-page Scale V2 PDF, the owner-approved narrated V5 preview,
+  and the strict Scale V2 report and validator receipt into
+  `docs/submission/official-package/Track3-Aegis-Motion-GuardianSim`.
+- Rewrote the package and evidence READMEs around the eight-point Scale V2
+  curve. Kept the historical 54-world Parallel Futures smoke and Safety Swarm
+  formal evidence, while explicitly separating physics throughput,
+  candidate-world pairs, independent safety executions, and physical-robot
+  claims.
+- Regenerated `SHA256SUMS`; its SHA-256 is
+  `f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
+- Rehearsed the package from a clean temporary directory. All ten manifest
+  entries matched, strict Scale V2 validation passed, package JSON receipts
+  parsed, and FFmpeg decoded the complete narrated preview with both streams.
+  The candidate totals `3,551,598` bytes across ten payload files plus the
+  manifest.
+- Audited for old Scale V1 headline text. None remains in the candidate
+  package; older figures are confined to labeled V3 history and historical raw
+  evidence.
+- Updated the local PR/release notes with the pending V4 replacement and
+  manifest identity. Did not commit, tag, push, deploy Pages, edit organizer
+  PR #39, or claim that planned V4 URLs already exist.
+- Final release-candidate checks passed: 108/108 Python tests and compilation;
+  5/5 server-rendered and 3/3 static Pages tests; both front-end builds and
+  ESLint; strict Scale V2, silent V4, and narrated V5 validators; all package
+  checksums; full packaged audio/video decode; and `git diff --check`.

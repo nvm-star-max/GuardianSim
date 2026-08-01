@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "evidence_scope": "Capacity preflight only. Short runs are not performance evidence and must not be merged into the formal report.",
+  "finished_at_utc": "2026-07-31T06:00:58.235405+00:00",
+  "protocol_sha256": "6fed36e1cb006f9c5b9a44ac8e677c32d9bdc70d3f19ade28420d1aa82e1b935",
+  "passed_batch_sizes": [
+    512,
+    1024,
+    2048,
+    4096
+  ],
+  "failed_batch_size": null,
+  "formal_target_supported": true
+}

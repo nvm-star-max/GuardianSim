@@ -15,7 +15,7 @@ import imageio_ffmpeg
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SIDECAR = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v3.json"
+    / "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4.json"
 )
 
 
@@ -35,7 +35,7 @@ def require(condition: bool, message: str) -> None:
 def validate(sidecar: Path = DEFAULT_SIDECAR) -> dict:
     payload = json.loads(sidecar.read_text())
     require(
-        payload["kind"] == "guardiansim_radeon_parallel_futures_visual_review_v3",
+        payload["kind"] == "guardiansim_radeon_parallel_futures_visual_review_v4",
         "Unexpected review kind",
     )
     require(payload["team"] == "Aegis Motion", "Unexpected team")
@@ -82,13 +82,14 @@ def validate(sidecar: Path = DEFAULT_SIDECAR) -> dict:
         require(sha256(source_path) == source["sha256"], f"Source hash mismatch: {source_path}")
 
     metrics = payload["verified_metrics"]
-    require(metrics["largest_parallel_batch"] == 256, "Batch claim drift")
-    require(metrics["environment_steps_per_second"] == 35166, "Throughput claim drift")
-    require(metrics["speedup_vs_single_world"] == 228.16, "Speedup claim drift")
-    require(metrics["total_measured_environment_steps"] == 337000, "Workload claim drift")
-    require(metrics["parallel_future_worlds"] == 54, "Future count drift")
-    require(metrics["parallel_future_hard_safe"] == 32, "Safe future count drift")
-    require(metrics["parallel_future_rejected"] == 22, "Rejected future count drift")
+    require(metrics["largest_parallel_batch"] == 4096, "Batch claim drift")
+    require(metrics["environment_steps_per_second"] == 152099, "Throughput claim drift")
+    require(metrics["speedup_vs_single_world"] == 1028.07, "Speedup claim drift")
+    require(metrics["total_measured_environment_steps"] == 98512896, "Workload claim drift")
+    require(metrics["safety_swarm_candidate_world_pairs"] == 4608, "Pair count drift")
+    require(metrics["safety_swarm_qualifying_actions"] == 5, "Qualifying action count drift")
+    require(metrics["safety_swarm_selected_actions"] == 1, "Selected action count drift")
+    require(metrics["safety_swarm_environment_steps"] == 2299392, "Swarm workload drift")
     require(
         metrics["formal_repeatable_safe_scenarios"]
         == {"baseline": 18, "guardiansim": 30, "total": 30},
