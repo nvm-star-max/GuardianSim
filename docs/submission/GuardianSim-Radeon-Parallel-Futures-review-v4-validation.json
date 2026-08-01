@@ -1,0 +1,15 @@
+{
+  "validated": true,
+  "video": "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v4.mp4",
+  "sha256": "32c8d1db019f38b0b4221171894cbc76be5ab4a67f249ef7dd93cd2581c8f724",
+  "duration_seconds": 80.0,
+  "fps": 20.0,
+  "width": 1920,
+  "height": 1080,
+  "decoded_sample_count": 8,
+  "full_video_decode": true,
+  "source_hashes_verified": true,
+  "claim_boundaries_verified": true,
+  "verified_metrics_locked": true,
+  "audio": false
+}

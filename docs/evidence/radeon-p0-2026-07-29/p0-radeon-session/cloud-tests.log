@@ -1,0 +1,21 @@
+test_assemble_and_validate_report (tests.test_radeon_scale.RadeonScaleTest.test_assemble_and_validate_report) ... ok
+test_parse_rocm_smi_json (tests.test_radeon_scale.RadeonScaleTest.test_parse_rocm_smi_json) ... ok
+test_protocol_is_ordered_and_hashed (tests.test_radeon_scale.RadeonScaleTest.test_protocol_is_ordered_and_hashed) ... ok
+test_rejects_non_amd_or_missing_telemetry (tests.test_radeon_scale.RadeonScaleTest.test_rejects_non_amd_or_missing_telemetry) ... ok
+test_rejects_tampered_throughput (tests.test_radeon_scale.RadeonScaleTest.test_rejects_tampered_throughput) ... ok
+test_extracts_every_unique_preserved_rollout (tests.test_safety_critic_data.SafetyCriticDataTests.test_extracts_every_unique_preserved_rollout) ... ok
+test_hard_safe_labels_have_both_classes (tests.test_safety_critic_data.SafetyCriticDataTests.test_hard_safe_labels_have_both_classes) ... ok
+test_split_is_scene_held_out (tests.test_safety_critic_data.SafetyCriticDataTests.test_split_is_scene_held_out) ... ok
+test_accepts_scene_held_out_rocm_report (tests.test_safety_critic_report.SafetyCriticReportTests.test_accepts_scene_held_out_rocm_report) ... ok
+test_can_preserve_a_valid_report_that_misses_quality_gate (tests.test_safety_critic_report.SafetyCriticReportTests.test_can_preserve_a_valid_report_that_misses_quality_gate) ... ok
+test_rejects_scene_leakage (tests.test_safety_critic_report.SafetyCriticReportTests.test_rejects_scene_leakage) ... ok
+test_rejects_tampered_throughput (tests.test_safety_critic_report.SafetyCriticReportTests.test_rejects_tampered_throughput) ... ok
+test_assigns_eighteen_candidates_across_fifty_four_envs (tests.test_parallel_futures.ParallelFuturesTests.test_assigns_eighteen_candidates_across_fifty_four_envs) ... ok
+test_builds_candidate_specific_batched_poses (tests.test_parallel_futures.ParallelFuturesTests.test_builds_candidate_specific_batched_poses) ... ok
+test_rejects_coverage_or_label_tampering (tests.test_parallel_futures.ParallelFuturesTests.test_rejects_coverage_or_label_tampering) ... ok
+test_validates_complete_amd_report (tests.test_parallel_futures.ParallelFuturesTests.test_validates_complete_amd_report) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.069s
+
+OK

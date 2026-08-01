@@ -1307,3 +1307,1024 @@ Gate decision:
   - no required status checks were reported at submission time.
 - Added a durable non-private final submission record. No credentials, legal
   names, private contact details, or payment information were recorded.
+
+## 2026-07-28 — P0 Parallel Futures interactive showcase
+
+- Replaced the static evidence landing experience with **GuardianSim:
+  Parallel Futures**, a judge-facing safety time machine.
+- Added three evidence-bound challenges:
+  - Seed 411 collision trap;
+  - Seed 401 clearance decoy;
+  - Seed 509 impossible-gap safe stop.
+- Added interactive future selection, reveal animation, explicit
+  accepted/rejected/safe-stop verdicts, downloadable JSON evidence receipts,
+  immutable audit links, the preserved Seed 411 replay, and the frozen Gate
+  3.2 aggregate proof panel.
+- Generated a single project-bound social card for the new concept and added
+  local preview/video assets. No experimental result or frozen report was
+  modified.
+- Programmatically cross-checked every displayed scenario value against the
+  preserved schema-5 and schema-6 reports.
+- Verified the showcase with rendered-HTML tests, lint, and a production
+  build; the full repository regression passed `58/58`.
+- Committed the exact validated source on
+  `agent/parallel-futures-showcase` at
+  `e566b69848a4ffc79168ac39087d6c86c9ac897b`.
+- Preserved the `showcase/` subtree as Sites source commit
+  `a8bf2af3b7a367c0e5b07960028b9ee58e9156f3`, saved version 3, and deployed it
+  successfully to
+  <https://guardiansim-proof.dghcdtddgh.chatgpt.site>.
+- Kept the deployment owner-only; changing it to public requires a separate
+  access-control decision.
+
+## 2026-07-28 — Evidence-scale audit and Gate 4 local draft
+
+- Paused merge/publication at the owner's request.
+- Added a programmatic evidence-scale auditor that counts unique initial
+  rollouts, non-duplicated confirmation rollouts, and final executions from
+  the preserved schema-5 and schema-6 reports.
+- Verified:
+  - 42 scene units;
+  - 1,185 counterfactual rollouts;
+  - 202 final executions;
+  - 1,387 total simulated action traces.
+- Added local showcase copy and tests that present those counts with the
+  explicit warning that nested traces are not independent scenes.
+- Audited the public Track 3 PRs and recorded why training steps and inference
+  throughput are not directly comparable with evaluation episodes.
+- Implemented and tested the outcome-blind 240-scenario Gate 4 matrix,
+  adaptive bounded candidate family, workload accounting, and exact McNemar
+  helper.
+- New targeted tests passed `8/8`. Ruff was not available in the current uv
+  environment, so style verification remains pending before any commit.
+- No branch push, site deployment, official PR edit, or Radeon run was made.
+
+## 2026-07-29 — Radeon parallel-physics benchmark implemented locally
+
+- Audited the Genesis scene integration:
+  - `build_scene(n_envs=...)` uses Genesis batched environments;
+  - formal GuardianSim benchmark runners remain single-environment;
+  - several grasp helpers flatten or select the first batch element.
+- Defined an honest presentation split between safety effectiveness and GPU
+  physics throughput.
+- Added:
+  - `guardian_sim/radeon_scale.py`;
+  - isolated trial and suite runners;
+  - a strict report validator;
+  - ROCm utilization/VRAM sampling;
+  - protocol documentation and synthetic validator tests.
+- Default cloud matrix: `1 / 16 / 64 / 256` worlds, `100` warmup steps and
+  `1,000` timed steps per process, totaling `337,000` timed environment steps.
+- Added a local-only 256-world scale-wall section to the showcase. It contains
+  no fabricated performance result and remains marked pending.
+- No cloud run, commit, push, deployment, or official submission edit was made
+  in this stage.
+
+## 2026-07-29 — Safety Critic and 54-way parallel futures implemented locally
+
+- Converted the preserved Gate 3.2/Gate 3.3 rollout evidence into a
+  scene-held-out surrogate dataset without double-counting repeated initial
+  observations.
+- Verified dataset accounting:
+  - 1,185 candidate rollouts;
+  - 42 scene units;
+  - 34 training scenes and 8 held-out test scenes;
+  - 571 hard-safe positive rows.
+- Added a pre-trained-at-submission Safety Critic workflow with held-out
+  quality gates, ROCm inference batches through 4,096 candidates, latency and
+  throughput measurements, and GPU telemetry.
+- Kept the learned model explicitly subordinate to the deterministic physics
+  verifier.
+- Added a 54-environment engineering runner for 18 candidates × 3 repeats,
+  using batched IK, batched controls, vectorized clearance sampling, a frozen
+  preflight protocol, and strict AMD/HIP report validation.
+- Added portable tests for assignment coverage, pose expansion, report
+  arithmetic, hard-safety label derivation, and tamper rejection.
+- Full local regression passed `82/82`; targeted Ruff and `git diff --check`
+  passed.
+- The current connected Chrome session does not expose the Radeon Cloud
+  Jupyter tab, so no cloud result was fabricated or inserted into the
+  showcase. The next action is a real cloud run after that existing instance
+  is opened manually.
+- No commit, push, site deployment, official PR edit, frozen benchmark change,
+  or instance destruction occurred.
+
+## 2026-07-29 — Radeon P0 scale, 54-future run, and evidence preservation
+
+- Relaunched the Radeon Cloud Blank OpenCode workspace and restored
+  GuardianSim under `/workspace/persistent/GuardianSim`.
+- Verified ROCm/HIP PyTorch, one AMD Radeon GPU, Python, Git, and `uv`.
+- Preserved the initial failed scale logs from the missing-Genesis environment,
+  installed the project into `/opt/venv`, and reverified PyTorch/HIP identity.
+- Passed cloud targeted tests `16/16`.
+- Completed and strictly validated the frozen `1 / 16 / 64 / 256` parallel
+  physics matrix:
+  - `154.1 / 2,383.7 / 9,354.3 / 35,166.1 env-steps/s`;
+  - maximum measured speedup `228.16×`;
+  - 256-world parallel efficiency `89.1%`;
+  - 256-world mean/peak GPU use `85.5% / 96%`;
+  - `337,000` timed environment steps.
+- Completed and strictly validated the 54-way Parallel Futures engineering run:
+  - `12.839 s`, `4.206 futures/s`;
+  - `32` hard-safe, `22` rejected;
+  - mean/peak GPU use `71.8% / 95%`.
+- Ran the fixed Safety Critic experiment once. The report is structurally valid
+  but `showcase_ready=false`: F1 `0.789` and unsafe precision `0.791` missed
+  their predeclared `0.80` and `0.90` gates. No threshold was changed and the
+  model is excluded from the judge-facing claim.
+- Downloaded the evidence archive directly from the Jupyter file endpoint.
+  Cloud and local SHA-256 matched:
+  `35c1110711c96a7271fe723ffd2dd8160e179e63cd46864df4e5198f518fa46d`.
+- Preserved reports, preflight, telemetry, raw logs, validators, chart,
+  checkpoint, diagnostic failures, and checksums under
+  `docs/evidence/radeon-p0-2026-07-29`.
+- Updated the local showcase with strictly validated metrics only.
+- Final local regression passed `82/82`; `npm test` rebuilt the showcase and
+  passed all `3/3` rendered-HTML checks; `git diff --check` passed.
+- No commit, push, deployment, official PR edit, or instance destruction.
+
+## 2026-07-29 — Scale-first page and 80-second visual review cut
+
+- Promoted the measured Radeon compute result to the first judge-facing
+  screen: `256 robot worlds. One safe move.`
+- Added the complete measured progression
+  `154 / 2,384 / 9,354 / 35,166 env-steps/s` for
+  `1 / 16 / 64 / 256` worlds and retained the `228.16×`, `89.1%`, GPU
+  telemetry, and statistical-boundary labels.
+- Added an animated 54-world Parallel Futures funnel with the strictly
+  validated `32` hard-safe and `22` rejected result.
+- Ran the showcase production build and rendered-HTML tests: `3/3` passed.
+- Inspected the desktop full page, hero, Radeon section, and 390-pixel mobile
+  layout using Playwright. Browser console: zero errors and zero warnings.
+- Built
+  `docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v1.mp4`:
+  - 80.0 seconds;
+  - 1920×1080 at 20 FPS;
+  - silent visual review;
+  - preserved Seed 411 replay embedded without physics re-execution.
+- Strictly validated output decode, source hashes, report-bound metrics, and
+  claim boundaries. Output SHA-256:
+  `76948ac89f3026cf6d0b845d6d009ab63cff27975b62ba952858355b4cb5073f`.
+- Kept the existing approved Qwen V2 video unchanged. Natural Qwen narration
+  for the new scale-first edit remains gated on owner visual approval.
+- No commit, push, deployment, official PR edit, frozen-report mutation, cloud
+  run, or instance destruction.
+
+## 2026-07-29 — 80-second Qwen narrated review candidate
+
+- Kept the validated silent cut unchanged and generated a separate narrated
+  artifact from it.
+- Used Qwen3-TTS Instruct
+  `qwen3-tts-instruct-flash-2026-01-26` with the `Ethan` voice and a
+  conversational robotics-engineer instruction.
+- Added six fixed chapter captions plus an original low-volume ambient bed and
+  transition chimes.
+- Built and strictly validated
+  `docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v2.mp4`:
+  - 80.0 seconds, 1920×1080, 20 FPS;
+  - full audio/video decode passed;
+  - visual-source, narration-segment, caption, and evidence hashes passed;
+  - verified metrics and claim boundaries remained locked;
+  - SHA-256
+    `b07d0c71e7aceea5f2ebe82cd87d94ea223a99c090c5a6e1f6e06ce06559a2c9`.
+- Inspected representative frames from all evidence-heavy chapters. Captions
+  were readable and did not obscure the central scale, filtering, replay, or
+  proof comparisons.
+- Measured final audio at approximately `-18.2 dB` mean and `-1.3 dB` peak.
+- Final local regression passed `82/82`; the showcase production build and
+  rendered-HTML tests passed `3/3`; Python compilation and `git diff --check`
+  passed.
+- Kept this artifact local for owner listening and visual approval; no commit,
+  push, deployment, official PR edit, cloud execution, or instance
+  destruction occurred.
+
+## 2026-07-29 — Fixed card overflow and removed template-like copy
+
+- Reproduced the fourth-card overflow on the frozen-result screen.
+- Added measured-width font selection for all card titles, values, and detail
+  lines instead of relying on fixed font sizes.
+- Rewrote the 80-second visual and narration copy as a direct account of the
+  experiment. Removed the “formal proof” wording and several slogan-like
+  transitions without changing any evidence-backed metric.
+- Added a durable human-writing rule to `docs/PROJECT_MEMORY.md` for future
+  reports, site text, PR copy, and narration.
+- Preserved the old V1/V2 artifacts and generated new versions:
+  - silent visual source V2 SHA-256
+    `5033b75ed91fd8883e70fd6ec7f4ce52c8a2ee8092822d8c89404b7894cb6edb`;
+  - narrated V3 SHA-256
+    `70c1bf9734b29c7e698dacc3a09e9a0602757c3be93a6917fbd17372530bb9c8`.
+- Strict silent and narrated validators passed. V3 full A/V decode passed;
+  audio measured approximately `-18.2 dB` mean and `-1.2 dB` peak.
+- Inspected the opening, Parallel Futures, frozen-result, and closing frames;
+  all text remained within its intended container.
+- Final local regression passed `82/82`; the showcase production build and
+  rendered-HTML tests passed `3/3`; Python compilation and `git diff --check`
+  passed.
+- No commit, push, deployment, official PR edit, cloud execution, or instance
+  destruction occurred.
+
+## 2026-07-29 — Replaced fixed anchors with optical centering
+
+- Confirmed that V3 solved overflow but left the short `30 → 0` row visually
+  spread across fixed anchor positions.
+- Implemented measured whole-row centering with dynamic font fitting and
+  a render-time symmetry assertion of at most one pixel.
+- Centered each card title and detail line from its measured pixel width.
+- Extracted and inspected the final encoded V4 proof frame.
+- Built and validated:
+  - `GuardianSim-Radeon-Parallel-Futures-review-v3.mp4`,
+    SHA-256
+    `4e2c6eddc1bb127818dcf0368c83e4eb30f4b3dcdfe754d8933d3ed36799c85d`;
+  - `GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4`,
+    SHA-256
+    `2be66996eb0e3bb460148c5afc8060f69680f1d7e314e2e46cf2d363d53a923a`.
+- Final local regression passed `82/82`; the showcase production build and
+  rendered-HTML tests passed `3/3`; Python compilation and `git diff --check`
+  passed.
+- No commit, push, deployment, official PR edit, cloud execution, or instance
+  destruction occurred.
+
+## 2026-07-29 — Integrated the Radeon P0 evidence into the local submission package
+
+- Verified the current organizer README: Track 3 asks for a technical report,
+  reproducibility README, source repository, and a recommended 3-5 minute
+  complete-workflow video; supplementary material is allowed.
+- Kept the approved 4:41 V2 as the workflow video and accepted the 80-second
+  optically centered V4 as a supplementary Radeon preview.
+- Added measured 1/16/64/256-world throughput and the 54-world Parallel Futures
+  run to:
+  - `docs/submission/TECHNICAL_REPORT.md`;
+  - the local official-package README;
+  - `docs/submission/OFFICIAL_PR_DRAFT.md`.
+- Kept Gate 3.2 safety metrics unchanged and explicitly separated environment
+  steps/candidate futures from independent safety scenarios.
+- Copied the V4 preview and the two raw reports plus validator outputs into
+  `docs/submission/official-package/Track3-Aegis-Motion-GuardianSim`.
+- Rebuilt `GuardianSim-Technical-Report.pdf` with ReportLab. The final report
+  is seven pages and has SHA-256
+  `6a735fe0a77c0c6ec3e9461051bac29ce371a3ca04d74246f0d39d6a64a3291c`.
+- Rendered all seven PDF pages to PNG and inspected every page. No visual
+  defect was found.
+- Rebuilt and verified the recursive package checksum manifest.
+- Package-manifest SHA-256:
+  `392e624b5839e4af0799d59d321ae27d31b12a34cb225fe20d342bd4ceef0d94`.
+- Passed `82/82` Python tests, `3/3` showcase HTML tests, production build,
+  ESLint, both strict Radeon report validators, and the V4 full A/V validator.
+- Stopped before the public release boundary. The next release must publish
+  the P0 source/evidence and then update the immutable links in organizer PR
+  #39; no push or PR edit was performed.
+
+## 2026-07-29 — Published Radeon P0 release and updated organizer PR #39
+
+- Confirmed GitHub CLI authentication and scanned the staged release for
+  Qwen/OpenAI/GitHub credential patterns; no secret was staged.
+- Excluded local video intermediates and Playwright screenshots from the
+  public commit.
+- Fixed the final Ruff findings: import ordering, unused render variables, and
+  executable modes for shebang scripts.
+- Re-ran all release checks successfully:
+  - Python unit tests `82/82`;
+  - Ruff;
+  - strict scale and Parallel Futures validators;
+  - silent V3 and narrated V4 full decode/claim validators;
+  - both checksum manifests;
+  - showcase production build, rendered-HTML tests `3/3`, and ESLint;
+  - staged diff whitespace check.
+- Published GuardianSim commit
+  `830e4fc8e2467bc4a0eacbb9777b91351e20f924` and immutable tag
+  `hackathon-2026-submission-v2`.
+- Synced the official package to the contest fork and pushed commit
+  `d73bad667db22d67d737ec50ceb8ff761b0c3816`.
+- Updated PR #39's English body with measured scale, 54-world candidate
+  screening, statistical boundaries, v2 release links, and limitations.
+- Verified PR #39 is open, non-draft, cleanly mergeable, and points to the
+  expected fork commit.
+- Downloaded remote package artifacts and validated their recursive checksums.
+- Did not merge the organizer PR and did not access or destroy the Radeon
+  instance.
+
+## 2026-07-29 — Published a no-sign-in judge showcase
+
+- Audited organizer PR #39 after the P0 release. It had no comments, reviews,
+  or checks requiring action and remained open and cleanly mergeable.
+- Found that the repository's interactive-showcase URL returned HTTP 401 and
+  required ChatGPT sign-in.
+- After owner authorization, attempted to make the Sites deployment public.
+  The workspace did not permit internet-public Sites access, so the existing
+  deployment was left unchanged.
+- Added an isolated Vite static build for the same React showcase without
+  changing the evidence-backed interaction or metrics.
+- Passed:
+  - existing server-rendered showcase tests `3/3`;
+  - static GitHub Pages tests `2/2`;
+  - ESLint;
+  - both submission checksum manifests;
+  - `git diff --check`.
+- Published the public page at
+  <https://nvm-star-max.github.io/GuardianSim/>.
+- Verified unauthenticated HTTP 200 responses for its HTML, JavaScript, CSS,
+  replay video, and social-preview image.
+- Added the public quick-start URL to the repository README, official package,
+  and organizer PR body.
+- Pushed official fork commit
+  `289e4c09211974f12f74b8298e493ab93e78037f`; PR #39 remained open,
+  non-draft, and `CLEAN`.
+- Did not merge the organizer PR and did not access or destroy the Radeon
+  instance.
+
+## 2026-07-29 — Fixed arena evidence visibility and audited adjacent projects
+
+- Replaced pre-evaluation clearance/stability dashes with the preserved
+  measurements already bound to each Future card.
+- Kept safety verdicts behind the interaction boundary and clarified the
+  button/status copy so users understand that the next action applies frozen
+  gates rather than generating missing measurements.
+- Passed:
+  - Python unit tests `82/82`;
+  - showcase production build and rendered-HTML tests `3/3`;
+  - static GitHub Pages build and tests `3/3`;
+  - ESLint;
+  - submission working-set checksum verification;
+  - `git diff --check`.
+- Used a headed browser against the static build to verify:
+  - initial measurement visibility for Futures A/B/C;
+  - Future C selection;
+  - final collision/rejection/selection verdicts and decision receipt;
+  - desktop layout without card overflow.
+- Reviewed Genesis, cuRobo, ManiSkill, Isaac Lab, MoveIt 2, and
+  Safety-Gymnasium from their official repositories/documentation.
+- Recorded functional overlap, platform distinctions, AMD/ROCm status, and
+  conservative claim language in
+  `docs/submission/OPEN_SOURCE_OVERLAP_AUDIT_2026-07-29.md`.
+- Pushed source commit
+  `ea775906a4e40d38b976b21e3e1b97e27312173b`.
+- Deployed GitHub Pages commit
+  `ec824eeaa8a5d9959f7d0135c14f0ac609ab6aa8`; the Pages API reported
+  `built`.
+- Verified public HTTP 200 responses for HTML, compiled JavaScript,
+  stylesheet, and Seed 411 replay. The deployed bundle contained the visible
+  measurement copy, gate-action copy, `−1.42 mm`, and `0.936`.
+- Did not move the immutable contest tag, edit or merge organizer PR #39, or
+  publish local video/Playwright intermediates.
+- Did not access or destroy the Radeon Cloud instance.
+
+## 2026-07-29 — Closed the maintenance-backup gap and froze the next P0 direction
+
+- Reused the existing Jupyter session for Radeon instance
+  `u-13907-735d71cb`; did not restart or destroy it.
+- Confirmed that the instance mount is `/workspace/persistent`, despite the
+  organizer announcement using `/workspace/persistence`.
+- Downloaded the raw Radeon P0 archive and checksum, verified archive contents,
+  and matched SHA-256
+  `35c1110711c96a7271fe723ffd2dd8160e179e63cd46864df4e5198f518fa46d`.
+- Copied the archive and checksum into the actual NFS persistence mount and
+  preserved a local Mac copy under
+  `/Users/aolos/Downloads/GuardianSim-backups/2026-07-29/`.
+- Added `guardian_sim.backup` and
+  `scripts/backup_radeon_workspace.py`:
+  - Git bundle for committed history and refs;
+  - working-tree tarball for tracked and untracked files;
+  - optional raw external artifacts;
+  - recursive checksum manifest and restore metadata;
+  - secret/cache exclusion policy.
+- Added two unit tests covering restore artifacts, recursive checksums, raw
+  artifact inclusion, secret exclusion, cache exclusion, and invalid source
+  rejection.
+- Read the current Track 3 PRs for NaviSense AI and 1bit.systems, then compared
+  their delivery mechanisms with cuRobo, ManiSkill, Isaac Lab,
+  Safety-Gymnasium, and Genesis.
+- Defined **Radeon Safety Swarm** as the next P0 implementation gate:
+  a frozen 256-world uncertainty stress test, 16×16 robustness wall, typed
+  costs, visible AMD telemetry, execute-or-stop decision, and evidence receipt.
+- Kept the failed Safety Critic out of the headline; it remains preserved
+  negative evidence/P3 research.
+- Passed `84/84` Python unit tests, Python compilation, and
+  `git diff --check`.
+- Committed and pushed the isolated backup/tooling scope as
+  `b97fd7e9a08a9c0fc7fdf2c9232dac76fb998afd`; no video drafts, Playwright
+  scratch data, immutable-tag movement, or organizer-PR edits were included.
+- Executed the backup in the current Radeon Jupyter session. Result:
+  `/persistent/GuardianSim-backups/20260729T035224Z-1481f51cd706`.
+- Verified every `SHA256SUMS` payload, the Git bundle, and all 580 tar members.
+  The manifest covers the Git bundle, working-tree archive, metadata,
+  restore README, Git status, and both external raw P0 artifacts.
+- The cloud working tree remains on `main@1481f51cd706`; no branch switch,
+  restart, or instance destruction occurred.
+
+## 2026-07-29 — Built the frozen Safety Swarm protocol and offline future wall
+
+- Added `guardian_sim/safety_swarm.py` with:
+  - the complete 256-world matrix;
+  - typed cost vectors;
+  - hard-safe classification and ordered stop reasons;
+  - Wilson and percentile aggregation;
+  - schema-1 report assembly and strict validation;
+  - a deterministic UI-only fixture.
+- Added CLI tools to build the fixture, validate any Safety Swarm report, and
+  render the report as a standalone interactive HTML page.
+- Added five unit tests covering:
+  - matrix uniqueness, order, balance, and hash;
+  - typed costs and multi-gate failure explanations;
+  - formal AMD/HIP/ROCm report acceptance;
+  - matrix, label, summary, and hash tamper rejection;
+  - explicit separation between an offline fixture and Radeon evidence.
+- Generated the fixture report and strict validation under the ignored
+  `outputs/safety-swarm/` workspace.
+- Opened the HTML in Chromium, inspected the accessibility snapshot containing
+  all 256 cells, and captured a complete 1920×1450 review frame at
+  `output/playwright/safety-swarm-offline-fixture.png`.
+- Verified the full grid, decision card, metrics, hashes, legend, and claim
+  boundary fit their containers. Cell-level hover data contains the exact
+  physical perturbation, clearance, stability, and stop reason.
+- The fixture result (`128/256`, `safe_stop`) is synthetic UI calibration and
+  is not eligible for any submission metric or AMD performance statement.
+- Stopped before the Genesis/Radeon execution gate. No cloud run, public-site
+  change, push, organizer-PR edit, or instance destruction occurred.
+
+## 2026-07-29 — Added the isolated Safety Swarm Genesis smoke executor
+
+- Added a simulator-independent placement/timing adapter for per-environment:
+  - target XY/yaw perturbation;
+  - clutter gap/bearing perturbation;
+  - end-effector XY bias;
+  - action-start delay.
+- Added fixed balanced 4-world and 16-world subsets that reference, but never
+  mutate, the frozen 256-world matrix.
+- Added a Radeon-only engineering-smoke schema with:
+  - strict world reconstruction;
+  - AMD/HIP/ROCm requirements;
+  - recomputed labels, summaries, and report hash;
+  - `showcase_ready=false`;
+  - explicit prohibition on merging partial smoke evidence into the formal
+    population.
+- Added a Genesis GPU batched smoke runner with no-overwrite evidence paths,
+  preflight protocol preservation, per-world IK targets, delayed control,
+  sampled clearance/contact capture, retained-lift stability, and ROCm
+  telemetry.
+- Extended the validator CLI to auto-detect formal versus smoke reports.
+- Local acceptance passed `92/92` Python tests, Python compilation, unchanged
+  formal matrix/protocol hashes, and `git diff --check`.
+- No Radeon workload has been run yet in this checkpoint.
+
+## 2026-07-29 — Ran the Safety Swarm 4/16-world Radeon smoke gate
+
+- Reused instance `u-13907-735d71cb` and kept the original cloud repository
+  untouched. Created
+  `/workspace/persistent/GuardianSim-safety-swarm` as a clean detached
+  worktree for the smoke execution.
+- Preserved a valid but failed first 4-world report after discovering that the
+  runner had selected the retreat-`25 mm` candidate instead of the centered
+  Gate 3.2 candidate. The failure was diagnosed from task completion and
+  retained-lift measurements; no safety threshold was changed.
+- Bound the runner to the verified centered candidate and reran the same
+  predeclared four rows. Strict validation passed with `4/4` safe, zero
+  contacts, `16.372 mm` worst clearance, `0.925` minimum stability,
+  `239.806` environment steps/s, and `89%` peak AMD GPU use.
+- Opened the predeclared 16-world gate. Strict report validation passed, but
+  the acceptance result was `12/16`:
+  - world `69` missed only the frozen clearance threshold at `9.680 mm`;
+  - worlds `91`, `109`, and `209` contacted clutter and failed the task;
+  - batch throughput was `747.843` environment steps/s with `94%` peak AMD
+    GPU use.
+- Stopped before the formal 256-world batch, as required by the frozen gate.
+  Did not edit the matrix, threshold, row order, protocol hash, or any prior
+  report.
+- Collected the wrong-candidate 4-world run, corrected 4-world run, and
+  balanced 16-world run with preflights, logs, PIDs, validation receipts,
+  provenance, and recursive checksums under
+  `docs/evidence/safety-swarm-smoke-2026-07-29` in cloud commit
+  `599c04770aca17b32971ed417d678122dbe4c453`.
+- Built cloud transfer package
+  `/workspace/safety-swarm-smoke-evidence-2026-07-29.tar.gz`; verified package
+  SHA-256 is
+  `31a4c1c6923c793a501915260fa66eb5f8179dab8e728fc003d99b41687571c0`.
+- Downloaded the package manually after automatic browser transfer was
+  security-blocked. The local package hash matched, the 21-member archive had
+  no unsafe paths or links, and all 16 inner `SHA256SUMS` payloads passed.
+- Imported the raw evidence into
+  `docs/evidence/safety-swarm-smoke-2026-07-29` and reran strict
+  `--require-radeon` validation against all three reports. Each report's
+  schema, protocol identity, full-matrix reference, measurements, derived
+  labels, AMD/HIP/ROCm evidence, and report hash passed.
+
+## 2026-07-29 — Froze and implemented Safety Swarm V2 locally
+
+- Kept every Safety Swarm V1 protocol identity and evidence file unchanged.
+  Added an independent V2 protocol for selecting one action only after
+  evaluating the candidate across an uncertainty envelope.
+- Froze the 18-action Gate 3.2 catalog and deterministic Cartesian execution
+  order over the existing 256-world matrix:
+  - 4,608 candidate-world pairs in the formal population;
+  - candidate catalog SHA-256
+    `9c3af60dfb812e6128f6e849d27cf2acd0d672cdcb3aa98191656e4009054e44`;
+  - formal protocol SHA-256
+    `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`;
+  - formal chunks contain at most 256 Genesis environments.
+- Added frozen V2 cloud gates:
+  - `triad-4`: 12 pairs,
+    `4fad8ddaebbff6f2b328af83671465574a0482046a1361522ae8399c15fd574c`;
+  - `full-4`: 72 pairs,
+    `e6c24948ee708c20d6c6ea270ac4ff3fb5b503d18896508d7d66fa69536aa984`;
+  - `full-16`: 288 pairs,
+    `128a494aec03498c8ba6c807a3e26f8e733c87f61ec5e696371839270c3d9f44`;
+  - formal: 4,608 pairs.
+- Implemented strict all-world qualification, deterministic robust ranking,
+  typed `safe_stop`, V2 report assembly and validation, AMD/HIP/ROCm checks,
+  an offline fixture, and an adaptive candidate-by-world evidence renderer.
+- Extended `scripts/run_safety_swarm_smoke.py` with `--v2-tier` while
+  preserving the V1 interface. One tier is flattened into a single Genesis
+  GPU scene with per-environment candidate and world assignment.
+- Built and strictly validated the local 3×4 fixture. It selected the expected
+  centered `+67.5°` candidate, but remains clearly labelled offline with
+  `showcase_ready=false`; it is UI/execution-path calibration only.
+- Local verification passed `98/98` unit tests, compilation, report
+  validation, renderer inspection, and `git diff --check`.
+- Stopped before the next major gate. No Radeon workload was launched and the
+  cloud instance was not restarted or destroyed. Next action:
+  `triad-4` on Radeon Cloud, followed by 72, 288, and 4,608 pairs only when
+  each preceding frozen gate passes.
+
+## 2026-07-30 — Passed and preserved Safety Swarm V2 Gate V2-A
+
+- Reused Radeon Cloud instance `u-13907-735d71cb` without restarting or
+  destroying it. Created a separate clean detached V2 worktree at
+  `/workspace/persistent/GuardianSim-safety-swarm-v2` because the prior V1
+  evidence commit was not an ancestor of V2 source commit
+  `dd300f98320f39666f684c3aed1f3afa25884d20`.
+- Executed the frozen `triad-4` tier as one Genesis GPU scene: 3 candidates ×
+  4 worlds = 12 candidate-world pairs. Strict schema-1 validation passed.
+- The deterministic result selected `yaw_+00.0_offset_+0.000`, the only
+  candidate that passed 4/4 with zero contact. Its worst sampled clearance
+  was `42.136 mm`, fifth-percentile clearance `42.985 mm`, and minimum
+  stability `0.923`.
+- Rejected the two `+67.5°` alternatives from execution:
+  - centered approach: 2/4 safe and two clutter contacts;
+  - `25 mm` retreat: 0/4 safe, one clutter contact, and three stability
+    failures.
+- Recorded 6 safe and 3 contact candidate-world pairs overall. This does not
+  mean all 12 pairs passed; V2-A passed because one candidate survived every
+  frozen world, exactly as predeclared.
+- Measured `5,988` environment steps in `10.755 s`, or `556.783` steps/s.
+  Radeon telemetry recorded `69%` mean and `94%` peak GPU utilization, about
+  `1.049 GiB` maximum VRAM use, and no sampling errors.
+- Preserved report, preflight, logs, process ID, before/after ROCm snapshots,
+  validation receipts, source provenance, protocol, and recursive checksums
+  under `docs/evidence/safety-swarm-v2-triad-4-2026-07-30`.
+- Verified downloaded archive SHA-256
+  `7280f59866980954ec52287fd4046069c487dfb23bca5f8c51d91c72568f877f`,
+  rejected unsafe archive structures before extraction, passed all 13 inner
+  checksums, and reran strict local `--require-radeon` validation.
+- Left the offline fixture and all V1 evidence untouched. The fixture's
+  different selected candidate is additional evidence that it was not used
+  as a cloud result.
+- No protocol or threshold changed. Stopped before Gate V2-B. The only next
+  eligible scale step is the frozen 18×4 = 72-pair run; V2-C and the
+  4,608-pair formal run remain closed.
+
+## 2026-07-30 — Passed and preserved Safety Swarm V2 Gate V2-B
+
+- Revalidated the clean Radeon worktree and V2-A evidence before launch, then
+  reused instance `u-13907-735d71cb` without restart or destruction.
+- Executed the frozen `full-4` tier from source commit
+  `dd300f98320f39666f684c3aed1f3afa25884d20` as one Genesis AMD GPU scene:
+  18 candidates × worlds `0, 85, 170, 255` = 72 candidate-world pairs.
+- Strict schema-1 `--require-radeon` validation passed with the frozen
+  `full-4` protocol SHA-256
+  `e6c24948ee708c20d6c6ea270ac4ff3fb5b503d18896508d7d66fa69536aa984`
+  and unchanged formal protocol SHA-256
+  `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`.
+- The run produced eight qualifying candidates. Deterministic robust ranking
+  selected `yaw_-22.5_retreat_+0.025_approach_+0.140`: 4/4 safe, zero
+  contacts, `96.009 mm` worst-case sampled clearance, `96.857 mm`
+  fifth-percentile clearance, and `0.847` minimum stability.
+- Batch diagnostics were 41/72 safe candidate-world pairs and five sampled
+  contact pairs. The result is an action-search result, not a claim that all
+  alternatives were safe.
+- Measured `35,928` environment steps in `15.098 s`, or `2,379.598` steps/s
+  and `4.769` candidate-world pairs/s. Radeon telemetry recorded `76.378%`
+  mean and `96%` peak utilization over 37 samples, about `1.162 GiB` maximum
+  VRAM use, and no telemetry errors.
+- Preserved the raw report, preflight, validation, launch command, logs,
+  process ID, Git provenance, ROCm snapshots, protocol, acceptance receipt,
+  and checksums. Corrected only an initially generated derivative summary
+  that read nested protocol hashes from the wrong location; the original
+  report and strict validation were never changed.
+- Downloaded archive SHA-256
+  `78e3df66673037cfde9ff04e19bd35ffd040c257b4468ac2268dd1e8c3a75359`
+  matched the cloud receipt. Archive safety checks passed and all 17 inner
+  checksums verified before import to
+  `docs/evidence/safety-swarm-v2-full-4-2026-07-30`.
+- No frozen protocol element changed. Gate V2-C is now eligible but was not
+  launched. Gate V2-D and formal 4,608-pair claims remain closed.
+
+## 2026-07-30 — Passed and preserved Safety Swarm V2 Gate V2-C
+
+- Revalidated the frozen V2-B report and acceptance receipt, confirmed the
+  cloud worktree remained clean at
+  `dd300f98320f39666f684c3aed1f3afa25884d20`, and verified the V2-C output
+  and archive paths were absent before launch.
+- Reused instance `u-13907-735d71cb` without restart or destruction. Executed
+  the frozen `full-16` tier as one Genesis AMD GPU scene: all 18 candidates ×
+  16 predeclared worlds = 288 candidate-world pairs.
+- Strict schema-1 `--require-radeon` validation passed with protocol SHA-256
+  `128a494aec03498c8ba6c807a3e26f8e733c87f61ec5e696371839270c3d9f44`
+  and unchanged formal protocol SHA-256
+  `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`.
+- Five candidates qualified. Frozen robust ranking selected
+  `yaw_-45.0_retreat_+0.000_approach_+0.140`: 16/16 safe, zero contacts,
+  `66.339 mm` worst-case sampled clearance, `70.144 mm` fifth-percentile
+  clearance, and `0.909` minimum stability.
+- The four-world V2-B winner did not remain the winner under 16 worlds, and
+  the qualifying set narrowed from eight to five. This supports the intended
+  candidate-by-uncertainty selection story without changing policy after
+  inspection.
+- Batch diagnostics were 165/288 safe candidate-world pairs and 14 sampled
+  contact pairs. Measured execution was `143,712` environment steps in
+  `15.870 s`, or `9,055.573` steps/s and `18.147` candidate-world pairs/s.
+  Radeon telemetry recorded `78.282%` mean and `96%` peak utilization over
+  39 samples, about `1.414 GiB` maximum VRAM use, and no sampling errors.
+- Preserved raw report, preflight, validation, launch command, logs, process
+  ID, Git provenance, ROCm snapshots, protocol, acceptance receipt, and
+  recursive checksums.
+- Downloaded archive SHA-256
+  `b5262da3769e41fb67838eb537b37357c99544902ee8d6fa9effb9890fe82fd5`
+  matched the cloud receipt. Archive safety checks and all 17 inner checksums
+  passed before import to
+  `docs/evidence/safety-swarm-v2-full-16-2026-07-30`.
+- No frozen protocol element changed. Gate V2-D is now eligible but was not
+  launched. The 4,608-pair formal result and any formal robustness claim
+  remain absent.
+
+## 2026-07-30 — Implemented the resumable Gate V2-D formal path
+
+- Confirmed that the frozen protocol declared Gate V2-D but the runner only
+  implemented `triad-4`, `full-4`, and `full-16`; did not launch an
+  unverifiable 4,608-pair run.
+- Added exact formal chunk assignment, chunk report assembly, strict chunk
+  validation, complete-report aggregation, and complete formal validation.
+  The frozen candidate catalog, world matrix, gates, order, and formal
+  protocol hash remain byte-for-byte unchanged.
+- Extended the Genesis runner with `--v2-formal-chunk-index 0..17`. Each
+  invocation runs one candidate across all 256 frozen worlds in a maximum
+  256-environment AMD GPU batch.
+- Added `scripts/run_safety_swarm_v2_formal.py`. It preserves numbered
+  attempts, strictly validates completed chunks before resume, refuses
+  ambiguous duplicate valid attempts, requires all 18 chunks in frozen order,
+  and writes the final report and validation receipt without overwrite.
+- Extended the report validator to identify smoke, formal-chunk, and complete
+  formal reports. Added tests for exact chunk coverage, 4,608-pair
+  reconstruction, deterministic selection, missing/reordered/mixed chunk
+  rejection, label tampering, and telemetry aggregation.
+- Verification: formal protocol hash remained
+  `7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac`;
+  `101/101` unit tests passed; Python compilation, Ruff checks, and
+  `git diff --check` passed.
+- Stopped before cloud synchronization and launch. No Radeon formal result
+  exists yet.
+
+## 2026-07-30 — Passed and preserved Safety Swarm V2 Gate V2-D
+
+- Pushed formal executor commit
+  `4d0aaec1da077e333cbfdd9ee3f413d852c1cbec`, created a clean detached
+  persistent worktree, revalidated the prior 288-pair V2-C report, and passed
+  all nine targeted V2 tests on Radeon Cloud before launch.
+- The cloud-wide 101-test suite had one unrelated Gate 4 draft hash failure
+  caused by Python-micro-version random-float drift. The frozen V2 protocol
+  hash and all V2 tests passed; no Gate 4 source or V2 threshold was changed.
+- Launched the formal orchestrator once and completed chunks `00..17` in
+  frozen candidate-major order. Every chunk completed in `attempt-001`;
+  there were no partial retries, mixed commits, or overwritten reports.
+- Strict complete-report validation reconstructed all 4,608 labels,
+  candidate envelopes, qualification, ranking, source/device identity,
+  timing, telemetry, and hashes. It passed with report SHA-256
+  `a3e86baa03e84d75a81062fee5f9f22770a3753708c116168174ea291c7a93cf`.
+- Five candidates passed all 256 worlds. The selector executed
+  `yaw_-45.0_retreat_+0.000_approach_+0.140`: 256/256 safe, zero contacts,
+  `66.249 mm` worst sampled clearance, `66.304 mm` fifth-percentile
+  clearance, and `0.907` minimum stability.
+- Population diagnostics were 2,614 safe pairs and 270 sampled contact pairs
+  out of 4,608. Measured execution was 2,299,392 environment steps in
+  226.676 s: 10,143.979 steps/s and 20.329 candidate-world pairs/s.
+- AMD telemetry recorded 73.406% mean and 97% peak GPU utilization over 588
+  samples, about 1.381 GiB maximum VRAM use, and no sampling errors.
+- The first post-run validation command accidentally referenced
+  `report.json`; formal output is `formal-report.json`. Preserved the empty
+  failed receipt, reran against the correct path, and required a passing
+  strict result before packaging.
+- Downloaded archive SHA-256
+  `0450857c2d50446ba76c1358bdf622c7e5cc4f43dbcc6dd48abb2e855b48e9ee`
+  matched the cloud receipt. Safe extraction passed, all 90 inner checksums
+  matched, and local `--require-radeon` validation passed.
+- Imported 92 raw evidence files under
+  `docs/evidence/safety-swarm-v2-formal-2026-07-30`. No prior V1/V2 evidence,
+  frozen protocol identity, cloud instance, or unrelated local submission
+  media was modified.
+
+## 2026-07-30 — Built and calibrated the 4,608-pair judge showcase
+
+- Replaced the website's small 54-future engineering vignette as the main
+  scale story with the completed Safety Swarm V2 formal result:
+  18 candidates × 256 uncertainty worlds = 4,608 measured pairs.
+- Added a deterministic generator from the preserved formal JSON to a compact
+  TypeScript dataset and a test that reconciles row lengths, safe/contact
+  counts, qualification count, selected count, report hash, physics-step
+  count, and GPU peak against the original report.
+- Implemented the exact 18 × 256 result matrix, `4,608 → 5 → 1` funnel,
+  selected-action receipt, rejection histogram, AMD execution card, and
+  immutable evidence links.
+- Updated the hero and metadata to lead with the formal workload while keeping
+  the 256-world throughput benchmark explicitly separate. Kept the claim
+  boundary visible next to the formal data.
+- Browser-calibrated the site at 1440 × 1000 and 390 × 844. Corrected a mobile
+  hero overlap; final measurements showed no page/card overflow and no browser
+  console warnings or errors.
+- Rejected two generated share-card drafts because they visually overstated
+  the number of all-world qualifiers. Did not copy either image into the
+  project and removed stale OG-image references.
+- Verification passed:
+  `npm --prefix showcase test`,
+  `npm --prefix showcase run test:pages`, and
+  `npm --prefix showcase run lint`.
+- Preserved all unrelated untracked submission videos, previews, PDF output,
+  and browser artifacts. The Radeon Cloud instance was not restarted,
+  destroyed, or used during this website-only stage.
+
+## 2026-07-30 — Published the calibrated showcase as Sites version 4
+
+- Pushed exact source commit
+  `f5b9ed061e9483027f367ebfd1d950ee76ed7312` to the existing Sites `main`
+  branch.
+- Packaged the `showcase` build from that commit and saved version `4`;
+  archive content hash:
+  `sha256:91c98971aa4498571b257676b098633ddf70b1d36d45cf50fe11d81ce1916eba`.
+- Deployed the saved version to
+  `https://guardiansim-proof.dghcdtddgh.chatgpt.site`; Sites deployment
+  `appgdep_6a6b1cfe6b608191a0bd8509f0cccae2` completed with status
+  `succeeded`.
+- Kept the existing owner-only access configuration unchanged. Browser
+  navigation reached the expected sign-in gate, so protected production DOM
+  inspection was not substituted for the already completed exact-commit
+  local QA.
+- No Radeon instance, formal evidence, frozen protocol, thresholds, or
+  unrelated untracked submission artifacts changed during deployment.
+
+## 2026-07-30 — Prepared the V3 submission package and updated public Pages
+
+- Rechecked the official Track 3 repository instructions and retained the
+  required English report, source/reproducibility guide, and 3-5 minute
+  complete-workflow video structure.
+- Rewrote the submission front door so the 30-scenario safety benchmark and
+  the 4,608 candidate-world decision workload use distinct denominators and
+  claims.
+- Rebuilt and rendered the technical report. The first V3 render exposed a
+  one-reference orphan page; shortened the delivery section, rebuilt to seven
+  pages, and visually verified the corrected final page.
+- Copied the byte-identical final PDF into the working submission set and
+  organizer package. Added compact Safety Swarm V2 summary/validation files
+  and regenerated both checksum manifests.
+- Passed showcase server tests (4/4), public static tests (3/3), ESLint, PDF
+  text checks, recursive package checksums, and working-set checksums.
+- Committed and pushed V3 package preparation as `a8a8ec0`.
+- Published the tested `pages-dist` payload to `gh-pages` commit `c649178`.
+  The public CDN initially served the prior asset for four checks, then served
+  `assets/index-DZNAy0i7.js`; browser QA confirmed the 4,608 payload, zero
+  horizontal overflow, and no console warnings or errors.
+- At this preparation checkpoint, the planned V3 tag and organizer PR update
+  remained owner-authorized release actions. Their later completion is
+  recorded below.
+
+## 2026-07-30 — Released V3 to the existing organizer PR
+
+- Received explicit authorization to create the V3 release tag and update
+  existing organizer PR #39 without opening a new PR.
+- Confirmed tracked source state was clean, the branch matched its remote, no
+  local or remote V3 tag existed, and PR #39 was open, non-draft, and
+  mergeable.
+- Created and pushed annotated tag `hackathon-2026-submission-v3`, peeled
+  source commit `5f7e3f7c8f984fd378f8c147038d84fb2e4983b3`.
+- Re-cloned the organizer fork branch, synchronized only
+  `submissions/Track3-Aegis-Motion-GuardianSim`, reviewed the scoped diff,
+  passed recursive package checksums, and pushed commit
+  `2657aa23e84c9f75e4f55b8cdec49bba985a8870`.
+- Updated PR #39 title/body in place to lead with the public showcase,
+  separated Gate 3.2 safety evidence from the 4,608-pair decision workload,
+  and linked immutable V3 source, video, evidence, and reproduction paths.
+- GitHub's app connector could read but not mutate the organizer-owned
+  repository (`403 Resource not accessible by integration`), so the already
+  authenticated owner CLI performed the authorized metadata update. A
+  subsequent independent read verified the exact body and head commit.
+- Fresh-clone verification passed all ten package files; package-manifest
+  SHA-256:
+  `b55bd15e4c9bc7649e126bfd8c5a7229cecc735849871ec163090073395a0143`.
+  V3 source, reproduction guide, full video, showcase, and organizer PDF all
+  returned HTTP 200.
+- Final PR state at verification: `OPEN`, non-draft, `MERGEABLE`, head
+  `2657aa23e84c9f75e4f55b8cdec49bba985a8870`. No CI/status checks are
+  configured on the submission branch. The PR was not merged.
+
+## 2026-07-31 — Froze the Radeon Scale V2 implementation protocol
+
+- Reviewed six active Track 3 competitors and Chaal's public benchmark
+  artifacts. Recorded transferable practices without importing competitor
+  claims or presenting unlike workloads as directly comparable.
+- Defined GuardianSim's AMD-facing role as a parallel physical-simulation
+  safety co-processor downstream of PPO, VLA, or scripted action proposals.
+- Froze the V2 scale ladder at
+  `1/16/64/256/512/1024/2048/4096` full manipulation worlds, 200 warmup
+  steps, and 12,288 measured steps per batch.
+- The declared largest batch contains 50,331,648 environment steps; the full
+  sweep contains 98,512,896. Both remain target workload counts until a
+  complete strict Radeon report exists.
+- Added schema-2 protocol, raw-trial, report-hash, AMD/HIP, telemetry, derived
+  metric, and exact-formal-workload validation.
+- Added immutable per-batch output, numbered failure logs, exact-source resume,
+  Git/ROCm/command receipts, final checksum generation, and a standalone
+  strict validator.
+- Updated the local organizer-PR record with the plain-language architecture:
+  a policy proposes; Radeon simulates; GuardianSim executes one eligible
+  action or stops. The public organizer PR was not changed at this stage.
+- Added the same architecture to the local showcase hero without adding any
+  unverified V2 performance result. Server/static render tests and ESLint
+  passed.
+- Full local verification passed 111/111 Python tests, Ruff, compilation, and
+  `git diff --check`.
+- Browser QA passed at 1440 × 1000 and 390 × 844 with zero page overflow,
+  zero hero-content overflow, a 32.77 px mobile action-to-card gap, and no
+  console warning or error.
+
+## 2026-07-31 — Completed and preserved Radeon Scale V2
+
+- Launched the capacity-only preflight from source commit
+  `3d8021a237ca0dfca41c98df1b492b7b9a523b4f`; all declared capacities
+  through 4,096 worlds passed.
+- Ran the frozen formal ladder once at
+  `1/16/64/256/512/1024/2048/4096` worlds. No formal trial failed or retried.
+- Strict schema-2 validation passed against protocol
+  `bcb91e081b196a5b6274ce1efd461d2005f1c1505dbd7020e9fbbaab0bb536e8`.
+- Verified largest-batch measurements:
+  - `4,096` full headless manipulation scenes;
+  - `50,331,648` measured environment steps;
+  - `152,099.018 environment-steps/s`;
+  - `1,028.069×` speedup and `25.099%` parallel efficiency;
+  - `98.651%` mean / `99%` peak GPU utilization;
+  - `6.25 GiB` peak VRAM.
+- Verified `98,512,896` total measured environment steps across the complete
+  eight-batch sweep. The evidence keeps the falling post-256 parallel
+  efficiency visible as the saturation curve.
+- Downloaded and preserved the raw preflight and formal outputs, trial logs,
+  source/launch/ROCm receipts, validation files, checksums, and archives under
+  `docs/evidence/radeon-scale-v2-*`.
+- Added a plain-language result note and updated the local competition
+  positioning, PR addendum, README, showcase, and render assertions. No public
+  push or organizer PR update was made at this checkpoint.
+- Re-ran strict validation and both raw checksum manifests, then passed
+  108/108 Python unit tests, Python compilation, `git diff --check`, 5/5
+  server-rendered showcase tests, 3/3 static Pages tests, both builds, and
+  ESLint.
+- Used exact 1,440 × 1,000 and 390 × 844 browser emulation to inspect the hero,
+  four representative scale cards, the 4,096-world tile map, and the compute
+  receipt. Page width matched viewport width in both sizes and no runtime or
+  browser-log error was recorded.
+- A repository-wide run with the current latest Ruff reported 68 existing
+  findings across upstream `franka_fruit_pick`, historical scripts, tests, and
+  older GuardianSim modules. This V2 result stage changes no Python source and
+  did not rewrite unrelated lint debt.
+
+## 2026-07-31 — Rebuilt the report and silent preview around Scale V2
+
+- Replaced the old Scale V1 section in `TECHNICAL_REPORT.md` with the frozen
+  eight-batch Scale V2 protocol, complete measurement table, saturation note,
+  4,096-world GPU/VRAM receipt, and explicit non-training claim boundary.
+- Built `output/pdf/GuardianSim-Technical-Report.pdf` with the bundled
+  ReportLab runtime. `pdfinfo` reported eight A4 pages and no encryption,
+  forms, JavaScript, or suspect objects.
+- Rendered all eight PDF pages to PNG at 140 DPI. Reviewed the contact sheet
+  and full-resolution pages 5–7, which contain the new scale table, Safety
+  Swarm section, results table, deliverables, and limitations. No clipping,
+  table overflow, or footer collision was found.
+- Extracted PDF text and confirmed the new `4,096`, `152,099`,
+  `98,512,896`, `4,608`, and `30/30` claims are present; superseded
+  `35,166`, `228.16`, and `337,000` Scale V1 claims are absent.
+- Revised the supplementary visual builder to use immutable Scale V2,
+  Safety Swarm V2, Gate 3.2, and Seed 411 sources. Preserved all prior V3/V4
+  media under their original filenames.
+- Generated `GuardianSim-Radeon-Parallel-Futures-review-v4.mp4` and its
+  sidecar, preview, and validation receipt. The visual now leads with 4,096
+  full parallel scenes and 152,099 environment-steps/s, then shows the
+  eight-point curve and `4,608 → 5 → 1` decision funnel.
+- Corrected the visual qualifying-candidate cells to the report-backed
+  A05/A07/A09/A11/A13 indices before final encoding.
+- Strict video validation passed 80.0 seconds, 1920×1080, 20 FPS, eight sampled
+  decodes, complete video decode, all source hashes, locked metrics, chapter
+  bounds, and simulation-only claim boundaries.
+- Reviewed seven frames decoded from the completed MP4 across all six chapters.
+  Titles, cards, graph labels, candidate cells, replay overlays, proof metrics,
+  and closing architecture remain within their frames.
+- Prepared narrated V5 script and validator inputs but did not call Qwen TTS.
+  No public upload, package replacement, commit, push, Pages deployment, or
+  organizer PR update occurred in this stage.
+
+## 2026-07-31 — Generated the Scale V2 narrated V5 review candidate
+
+- Received owner approval for the silent V4 visual direction and generated six
+  English segments with Qwen3-TTS Instruct Flash, `Ethan` voice, using the
+  existing ignored local credential path.
+- Kept the already accepted direct, engineer-to-engineer delivery instruction;
+  no key or authentication value was printed or stored in artifact metadata.
+- Two alternate closing lines synthesized too slowly for the fixed eight-second
+  chapter and were rejected by the timing guard. Shortened the line rather
+  than speeding up the voice. The accepted close is 3.680 seconds and leaves
+  4.320 seconds of breathing room.
+- Built `GuardianSim-Radeon-Parallel-Futures-narrated-v5.mp4`, SHA-256
+  `d590a711950b17a096361e0b7ba39b9842a848c7b0cf7b78d2aff63b5eab8f8d`.
+- Verified all segment windows. The tightest is the six-second compute hook,
+  which still leaves 1.440 seconds after its narration.
+- Strict V5 validation passed 80.0 seconds, 1920×1080, 20 FPS, full A/V decode,
+  eight sampled decodes, visual-source identity, six narration hashes, fixed
+  caption hash, evidence-source hashes, metrics, and claim boundaries.
+- Post-mux audio inspection reported 96 kHz mono AAC, approximately -18.4 dB
+  mean volume and -1.1 dB maximum sample level after the -16 LUFS target
+  normalization pipeline.
+- Reviewed chapter frames with burned captions. Captions remain centered inside
+  the safe lower margin and do not obscure the scale cards, Safety Swarm
+  funnel, replay labels, proof cards, or closing architecture.
+- V5 remains a local review candidate; no source commit, push, public release,
+  package replacement, Pages deployment, or organizer PR mutation occurred.
+
+## 2026-08-01 — Assembled and rehearsed the local V4 official package
+
+- Replaced only the local official-package candidate artifacts: copied the
+  inspected eight-page Scale V2 PDF, the owner-approved narrated V5 preview,
+  and the strict Scale V2 report and validator receipt into
+  `docs/submission/official-package/Track3-Aegis-Motion-GuardianSim`.
+- Rewrote the package and evidence READMEs around the eight-point Scale V2
+  curve. Kept the historical 54-world Parallel Futures smoke and Safety Swarm
+  formal evidence, while explicitly separating physics throughput,
+  candidate-world pairs, independent safety executions, and physical-robot
+  claims.
+- Regenerated `SHA256SUMS`; its SHA-256 is
+  `f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
+- Rehearsed the package from a clean temporary directory. All ten manifest
+  entries matched, strict Scale V2 validation passed, package JSON receipts
+  parsed, and FFmpeg decoded the complete narrated preview with both streams.
+  The candidate totals `3,551,598` bytes across ten payload files plus the
+  manifest.
+- Audited for old Scale V1 headline text. None remains in the candidate
+  package; older figures are confined to labeled V3 history and historical raw
+  evidence.
+- Updated the local PR/release notes with the pending V4 replacement and
+  manifest identity. Did not commit, tag, push, deploy Pages, edit organizer
+  PR #39, or claim that planned V4 URLs already exist.
+- Final release-candidate checks passed: 108/108 Python tests and compilation;
+  5/5 server-rendered and 3/3 static Pages tests; both front-end builds and
+  ESLint; strict Scale V2, silent V4, and narrated V5 validators; all package
+  checksums; full packaged audio/video decode; and `git diff --check`.
+
+## 2026-08-01 — Released V4 to the existing organizer PR
+
+- Received owner authorization and committed the exact reviewed source/package
+  set as `0710dca1de8e7627c19a992164169c41e70ac338` with message
+  `Publish Radeon Scale V2 submission`.
+- Created and pushed annotated tag `hackathon-2026-submission-v4`; GitHub's tag
+  object peels to the exact release commit. Existing V1–V3 tags were unchanged.
+- Published the tested static showcase to `gh-pages` commit
+  `43af7d9578ff0f992fd1b3b242e59400123ede8f`.
+- Re-cloned the contest fork branch, replaced only
+  `submissions/Track3-Aegis-Motion-GuardianSim`, passed all ten package
+  checksums and diff hygiene, and pushed commit
+  `2dad3d4037b4cf7c3ed7dd6a8ea64df874dc7f62`.
+- Updated organizer PR #39 in place with the Scale V2 metrics, immutable V4
+  links, owner-approved narrated preview, and policy-to-Radeon architecture.
+  Verified `OPEN`, non-draft, `MERGEABLE`, and exact head `2dad3d4`; no new PR
+  was opened and the organizer PR was not merged.
+- Two independent Git clones encountered transient GitHub transport failures.
+  Downloaded a fresh branch archive through the authenticated GitHub API and
+  verified all ten package entries and manifest SHA-256
+  `f8a18439e1b1009ae807e79142f499df4a65de939c7f5e83729e0647afd8b0bd`.
+- Anonymous HTTP checks returned 200 for the V4 tag, reproduction guide,
+  workflow video, narrated V5 preview, evidence directory, organizer PDF, PR,
+  and Pages site. The live asset `assets/index-DaWXZz3t.js` contains the
+  verified Scale V2 and PPO/VLA-to-Radeon messaging.
+- Preserved all unrelated untracked review media and historical PDF/browser
+  artifacts. Did not access or destroy the Radeon Cloud instance.
+
+## 2026-08-01 — Audited the submission from the judge's view
+
+- Verified organizer PR #39 is still open, non-draft, mergeable, and unchanged
+  at package commit `2dad3d4`; it has no comments, reviews, or checks.
+- Re-read the official Luma event, the exported governing Rules & Conditions,
+  and the organizer repository README. Confirmed the Track 3 weights are
+  `30/20/20/20/10` and the submission deadline remains August 6 at 23:59
+  UTC+8.
+- Updated the time-stamped competitor scan from four to six open Track 3
+  entries. Added SmolVLA (#45) and Chaal (#49), preserving distinctions among
+  PPO training samples, Genesis environment steps, candidate-world pairs, and
+  independent safety executions.
+- Added `docs/submission/JUDGE_RED_TEAM_2026-08-01.md` with the official
+  score-path audit, current field comparison, risks, and the decision not to
+  start another broad benchmark.
+- Prepared a local PR-body refinement with a 90-second judge path and a
+  criterion-by-criterion evidence table. It states the simulation boundary and
+  explicitly makes no external upstream-patch claim.
+- Did not move V4, alter frozen evidence, edit the organizer PR, push, or touch
+  the Radeon Cloud instance in this audit step.

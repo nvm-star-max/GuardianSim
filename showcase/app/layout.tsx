@@ -21,26 +21,24 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase,
-    title: "GuardianSim · Auditable safety for Physical AI",
+    title: "GuardianSim: Parallel Futures",
     description:
-      "A verified AMD ROCm and Genesis benchmark: 60% to 100% repeatable safe completion, 30 to 0 clutter contacts, and 98.36% more clearance.",
+      "4,608 physical counterfactuals. One action. An evidence-backed parallel Physical AI decision system on AMD Radeon.",
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
     },
     openGraph: {
-      title: "GuardianSim · Choose safer. Prove it.",
+      title: "GuardianSim: Parallel Futures",
       description:
-        "30/30 repeatable safe scenarios, zero clutter contacts, and 98.36% more clearance on AMD Radeon GPU.",
+        "18 actions face 256 uncertainty worlds each on AMD Radeon. Explore the verified 4,608-pair run and try to break GuardianSim.",
       type: "website",
-      images: [{ url: "/og.png", width: 1200, height: 630 }],
     },
     twitter: {
-      card: "summary_large_image",
-      title: "GuardianSim · Auditable safety for Physical AI",
+      card: "summary",
+      title: "GuardianSim: Parallel Futures",
       description:
-        "From 60% to 100% repeatable safe completion in a frozen 30-scenario benchmark.",
-      images: ["/og.png"],
+        "Radeon parallel physics turns 4,608 bounded robot futures into an explainable execute-or-stop decision.",
     },
   };
 }

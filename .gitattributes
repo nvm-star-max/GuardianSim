@@ -1,2 +1,4 @@
 *.pdf binary
 docs/evidence/evaluator-smoke-58a76d4/raw/preflight/rocm-smi.txt -whitespace
+docs/evidence/radeon-p0-2026-07-29/**/*.log -whitespace
+docs/evidence/radeon-p0-2026-07-29/**/*.txt -whitespace

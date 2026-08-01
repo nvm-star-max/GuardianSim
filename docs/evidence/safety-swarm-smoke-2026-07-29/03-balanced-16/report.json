@@ -1,0 +1,737 @@
+{
+  "schema_version": 1,
+  "report_name": "radeon-safety-swarm-smoke",
+  "mode": "radeon_engineering_smoke",
+  "backend": "genesis_gpu_batched",
+  "evidence_status": "partial_executor_validation",
+  "showcase_ready": false,
+  "claim_boundary": "Radeon engineering smoke for executor validation only. It cannot replace or be merged into the frozen 256-world formal report.",
+  "source": {
+    "commit": "738da71c2221c6c5e7ec2120a0f95d0ce42e3e69",
+    "candidate_id": "yaw_+67.5_retreat_+0.000_approach_+0.140"
+  },
+  "protocol": {
+    "report_name": "radeon-safety-swarm-smoke",
+    "world_count": 16,
+    "world_ids": [
+      0,
+      22,
+      40,
+      62,
+      69,
+      91,
+      109,
+      115,
+      138,
+      156,
+      162,
+      180,
+      207,
+      209,
+      231,
+      249
+    ],
+    "selection_design": "Predeclared balanced subset of the frozen 256-world matrix; not a formal population result",
+    "formal_report_name": "radeon-safety-swarm",
+    "formal_protocol_sha256": "9a8c5763d2ca007be924326812e9fd19c3125b8cfa968cdd734e01e7980f462c",
+    "formal_matrix_sha256": "71ea95a7194f1e9afdc0690ecdb30037b2a309a03049d26d832b9b21789b43eb",
+    "minimum_safe_clearance_m": 0.01,
+    "minimum_stability": 0.7,
+    "maximum_contact_world_count": 0,
+    "measurement_contract": {
+      "minimum_clearance": "minimum sampled AABB separation across declared robot links and non-target YCB clutter",
+      "clutter_contact": "strict positive AABB overlap at a five-step sample or phase endpoint",
+      "stability": "retained target lift divided by the requested 0.10 m lift, clamped to [0, 1]",
+      "task_completed": "reachable and stability at or above the frozen minimum",
+      "elapsed_environment_steps": "global batched control steps from approach start through lift settle, including the maximum declared start delay"
+    },
+    "unsafe_policy": "continue_only_if_every_smoke_world_passes",
+    "evidence_scope": "Radeon engineering smoke for executor validation only. It cannot replace or be merged into the frozen 256-world formal report.",
+    "protocol_sha256": "09063376fe3897d99ba428b3b8e03c19c62257bef1ad08e52d6e474c2428e1c4"
+  },
+  "device": {
+    "name": "AMD Radeon Graphics",
+    "torch_version": "2.9.1+gitff65f5b",
+    "hip_version": "7.2.53211-e1a6bc5663",
+    "genesis_version": "1.2.3"
+  },
+  "gpu_telemetry": {
+    "sample_count": 26,
+    "mean_gpu_utilization_pct": 68.23076923076923,
+    "max_gpu_utilization_pct": 94.0,
+    "max_vram_used_bytes": 1180667904.0,
+    "total_vram_bytes": 51522830336.0,
+    "sampling_errors": []
+  },
+  "results": [
+    {
+      "world_id": 0,
+      "perturbation": {
+        "world_id": 0,
+        "row": 0,
+        "column": 0,
+        "target_pose_level": 0,
+        "clutter_geometry_level": 0,
+        "end_effector_bias_level": 0,
+        "action_delay_level": 0,
+        "target_dx_m": -0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 0
+      },
+      "measurement": {
+        "world_id": 0,
+        "minimum_clearance_m": 0.016318127512931824,
+        "stability": 0.9343624114990234,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 22,
+      "perturbation": {
+        "world_id": 22,
+        "row": 1,
+        "column": 6,
+        "target_pose_level": 0,
+        "clutter_geometry_level": 1,
+        "end_effector_bias_level": 1,
+        "action_delay_level": 2,
+        "target_dx_m": -0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 2
+      },
+      "measurement": {
+        "world_id": 22,
+        "minimum_clearance_m": 0.012689795345067978,
+        "stability": 0.9219110012054443,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 40,
+      "perturbation": {
+        "world_id": 40,
+        "row": 2,
+        "column": 8,
+        "target_pose_level": 0,
+        "clutter_geometry_level": 2,
+        "end_effector_bias_level": 2,
+        "action_delay_level": 0,
+        "target_dx_m": -0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 0
+      },
+      "measurement": {
+        "world_id": 40,
+        "minimum_clearance_m": 0.022347301244735718,
+        "stability": 0.93392014503479,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 62,
+      "perturbation": {
+        "world_id": 62,
+        "row": 3,
+        "column": 14,
+        "target_pose_level": 0,
+        "clutter_geometry_level": 3,
+        "end_effector_bias_level": 3,
+        "action_delay_level": 2,
+        "target_dx_m": -0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 2
+      },
+      "measurement": {
+        "world_id": 62,
+        "minimum_clearance_m": 0.02209557592868805,
+        "stability": 0.9268808364868164,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 69,
+      "perturbation": {
+        "world_id": 69,
+        "row": 4,
+        "column": 5,
+        "target_pose_level": 1,
+        "clutter_geometry_level": 0,
+        "end_effector_bias_level": 1,
+        "action_delay_level": 1,
+        "target_dx_m": 0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 1
+      },
+      "measurement": {
+        "world_id": 69,
+        "minimum_clearance_m": 0.009679585695266724,
+        "stability": 1.0,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0003204143047332766,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": false,
+      "primary_stop_reason": "clearance_below_minimum",
+      "failed_gates": [
+        "clearance_below_minimum"
+      ]
+    },
+    {
+      "world_id": 91,
+      "perturbation": {
+        "world_id": 91,
+        "row": 5,
+        "column": 11,
+        "target_pose_level": 1,
+        "clutter_geometry_level": 1,
+        "end_effector_bias_level": 2,
+        "action_delay_level": 3,
+        "target_dx_m": 0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 4
+      },
+      "measurement": {
+        "world_id": 91,
+        "minimum_clearance_m": 0.0,
+        "stability": 0.0,
+        "reachable": true,
+        "task_completed": false,
+        "clutter_contact": true,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 1,
+        "clearance_m": 0.01,
+        "stability": 0.7,
+        "task_failure": 1
+      },
+      "hard_safe": false,
+      "primary_stop_reason": "clutter_contact",
+      "failed_gates": [
+        "clutter_contact",
+        "clearance_below_minimum",
+        "stability_below_minimum",
+        "task_failure"
+      ]
+    },
+    {
+      "world_id": 109,
+      "perturbation": {
+        "world_id": 109,
+        "row": 6,
+        "column": 13,
+        "target_pose_level": 1,
+        "clutter_geometry_level": 2,
+        "end_effector_bias_level": 3,
+        "action_delay_level": 1,
+        "target_dx_m": 0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 1
+      },
+      "measurement": {
+        "world_id": 109,
+        "minimum_clearance_m": 0.0,
+        "stability": 0.0,
+        "reachable": true,
+        "task_completed": false,
+        "clutter_contact": true,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 1,
+        "clearance_m": 0.01,
+        "stability": 0.7,
+        "task_failure": 1
+      },
+      "hard_safe": false,
+      "primary_stop_reason": "clutter_contact",
+      "failed_gates": [
+        "clutter_contact",
+        "clearance_below_minimum",
+        "stability_below_minimum",
+        "task_failure"
+      ]
+    },
+    {
+      "world_id": 115,
+      "perturbation": {
+        "world_id": 115,
+        "row": 7,
+        "column": 3,
+        "target_pose_level": 1,
+        "clutter_geometry_level": 3,
+        "end_effector_bias_level": 0,
+        "action_delay_level": 3,
+        "target_dx_m": 0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 4
+      },
+      "measurement": {
+        "world_id": 115,
+        "minimum_clearance_m": 0.031889431178569794,
+        "stability": 0.9376883506774902,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 138,
+      "perturbation": {
+        "world_id": 138,
+        "row": 8,
+        "column": 10,
+        "target_pose_level": 2,
+        "clutter_geometry_level": 0,
+        "end_effector_bias_level": 2,
+        "action_delay_level": 2,
+        "target_dx_m": -0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 2
+      },
+      "measurement": {
+        "world_id": 138,
+        "minimum_clearance_m": 0.014923475682735443,
+        "stability": 0.9604185819625854,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 156,
+      "perturbation": {
+        "world_id": 156,
+        "row": 9,
+        "column": 12,
+        "target_pose_level": 2,
+        "clutter_geometry_level": 1,
+        "end_effector_bias_level": 3,
+        "action_delay_level": 0,
+        "target_dx_m": -0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 0
+      },
+      "measurement": {
+        "world_id": 156,
+        "minimum_clearance_m": 0.013818934559822083,
+        "stability": 0.9544640779495239,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 162,
+      "perturbation": {
+        "world_id": 162,
+        "row": 10,
+        "column": 2,
+        "target_pose_level": 2,
+        "clutter_geometry_level": 2,
+        "end_effector_bias_level": 0,
+        "action_delay_level": 2,
+        "target_dx_m": -0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 2
+      },
+      "measurement": {
+        "world_id": 162,
+        "minimum_clearance_m": 0.03244158625602722,
+        "stability": 0.9491688013076782,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 180,
+      "perturbation": {
+        "world_id": 180,
+        "row": 11,
+        "column": 4,
+        "target_pose_level": 2,
+        "clutter_geometry_level": 3,
+        "end_effector_bias_level": 1,
+        "action_delay_level": 0,
+        "target_dx_m": -0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 0
+      },
+      "measurement": {
+        "world_id": 180,
+        "minimum_clearance_m": 0.03173962980508804,
+        "stability": 0.9278631210327148,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 207,
+      "perturbation": {
+        "world_id": 207,
+        "row": 12,
+        "column": 15,
+        "target_pose_level": 3,
+        "clutter_geometry_level": 0,
+        "end_effector_bias_level": 3,
+        "action_delay_level": 3,
+        "target_dx_m": 0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 4
+      },
+      "measurement": {
+        "world_id": 207,
+        "minimum_clearance_m": 0.010329388082027435,
+        "stability": 0.9271562099456787,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 209,
+      "perturbation": {
+        "world_id": 209,
+        "row": 13,
+        "column": 1,
+        "target_pose_level": 3,
+        "clutter_geometry_level": 1,
+        "end_effector_bias_level": 0,
+        "action_delay_level": 1,
+        "target_dx_m": 0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 1
+      },
+      "measurement": {
+        "world_id": 209,
+        "minimum_clearance_m": 0.0,
+        "stability": 0.0,
+        "reachable": true,
+        "task_completed": false,
+        "clutter_contact": true,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 1,
+        "clearance_m": 0.01,
+        "stability": 0.7,
+        "task_failure": 1
+      },
+      "hard_safe": false,
+      "primary_stop_reason": "clutter_contact",
+      "failed_gates": [
+        "clutter_contact",
+        "clearance_below_minimum",
+        "stability_below_minimum",
+        "task_failure"
+      ]
+    },
+    {
+      "world_id": 231,
+      "perturbation": {
+        "world_id": 231,
+        "row": 14,
+        "column": 7,
+        "target_pose_level": 3,
+        "clutter_geometry_level": 2,
+        "end_effector_bias_level": 1,
+        "action_delay_level": 3,
+        "target_dx_m": 0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 4
+      },
+      "measurement": {
+        "world_id": 231,
+        "minimum_clearance_m": 0.028767019510269165,
+        "stability": 0.9062731266021729,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    },
+    {
+      "world_id": 249,
+      "perturbation": {
+        "world_id": 249,
+        "row": 15,
+        "column": 9,
+        "target_pose_level": 3,
+        "clutter_geometry_level": 3,
+        "end_effector_bias_level": 2,
+        "action_delay_level": 1,
+        "target_dx_m": 0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 1
+      },
+      "measurement": {
+        "world_id": 249,
+        "minimum_clearance_m": 0.022423140704631805,
+        "stability": 0.9323161840438843,
+        "reachable": true,
+        "task_completed": true,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.0,
+        "task_failure": 0
+      },
+      "hard_safe": true,
+      "primary_stop_reason": "safe",
+      "failed_gates": []
+    }
+  ],
+  "summary": {
+    "smoke_status": "failed",
+    "safe_world_count": 12,
+    "unsafe_world_count": 4,
+    "contact_world_count": 3,
+    "worst_case_clearance_m": 0.0,
+    "minimum_stability": 0.0,
+    "failure_histogram": {
+      "safe": 12,
+      "clutter_contact": 3,
+      "unreachable": 0,
+      "clearance_below_minimum": 1,
+      "stability_below_minimum": 0,
+      "task_failure": 0
+    },
+    "batched_execution_wall_seconds": 10.67604138283059,
+    "total_environment_steps": 7984,
+    "environment_steps_per_second": 747.8427362449174
+  },
+  "report_sha256": "14ce0b9a2260547cb0e399e749d76d1bc9aa1ec44ba89320d65ea47dc3e8d6cb",
+  "scene_build_seconds": 21.228432090952992,
+  "runtime": {
+    "pick_object": "011_banana",
+    "obstacle_object": "018_plum",
+    "requested_lift_height_m": 0.1,
+    "measurement_contract": {
+      "minimum_clearance": "minimum sampled AABB separation across declared robot links and non-target YCB clutter",
+      "clutter_contact": "strict positive AABB overlap at a five-step sample or phase endpoint",
+      "stability": "retained target lift divided by the requested 0.10 m lift, clamped to [0, 1]",
+      "task_completed": "reachable and stability at or above the frozen minimum",
+      "elapsed_environment_steps": "global batched control steps from approach start through lift settle, including the maximum declared start delay"
+    },
+    "phase_steps": {
+      "settle": 60,
+      "approach": 140,
+      "approach_settle": 20,
+      "descent": 80,
+      "descent_settle": 15,
+      "close": 100,
+      "lift": 120,
+      "lift_settle": 20
+    },
+    "maximum_action_delay_steps": 4
+  }
+}

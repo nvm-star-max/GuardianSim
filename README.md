@@ -1,9 +1,10 @@
 # GuardianSim
 
-GuardianSim is a Track 3 Physical AI project for the 2026 AMD AI DevMaster
-Hackathon. It adds counterfactual action evaluation, explainable risk scoring,
-post-condition monitoring, and bounded failure recovery to a Franka Panda
-manipulation pipeline on Genesis, LeRobot, AMD Radeon GPUs, and ROCm.
+GuardianSim is Aegis Motion's Track 3 Physical AI project for the 2026 AMD AI
+DevMaster Hackathon. It puts a counterfactual decision layer between a robot
+policy and execution: test bounded alternatives from the same physical state,
+reject unsafe futures, then execute one eligible action or stop. The system
+runs on Genesis, LeRobot, AMD Radeon GPUs, and ROCm.
 
 The completed system provides a simulator-independent decision core, a
 snapshot-safe Genesis rollout backend, physical candidate measurements, and a
@@ -19,10 +20,37 @@ Mean clutter clearance increased from `0.023191 m` to `0.046003 m`
 (`+98.36%`). The complete schema-5 report, logs, environment, checksums, and
 failed cross-process resume audit trail are preserved in the repository.
 
+The strictly validated Radeon Scale V2 suite advances `4,096` full headless
+Franka/table/four-YCB scenes at `152,099.018 environment-steps/s`. The largest
+batch contains `50,331,648` measured environment steps and records
+`98.651%` mean / `99%` peak GPU utilization. The complete eight-batch sweep
+contains `98,512,896` measured steps. These are physics-throughput results,
+not training examples or additional independent safety scenes. Raw reports,
+per-batch logs, telemetry, validation, and checksums are preserved under
+[`docs/evidence/radeon-scale-v2-formal-20260731`](docs/evidence/radeon-scale-v2-formal-20260731).
+
+An earlier batched decision demo executes `18` candidate actions × `3`
+physical repeats as `54` simultaneous Genesis worlds; it remains separate
+from both the scale suite and the safety benchmark.
+
 The earlier Gate 3.1 negative result remains part of the evidence. It showed
 that improving clearance alone did not improve safety rate, motivating the
 frozen Gate 3.2 action-space expansion, unsafe-nominal replacement, and
 three-execution repeatability requirement.
+
+The final Safety Swarm V2 Radeon run then stress-tested the decision itself at
+larger scale: `18` candidate actions × `256` uncertainty worlds = `4,608`
+measured candidate-world pairs. Five candidates passed all `256/256` worlds;
+the frozen ranking selected one action with `256/256` safe worlds, zero
+sampled clutter contacts, `66.249 mm` worst-case sampled clearance, and
+`0.907` minimum stability.
+
+That formal run advanced `2,299,392` Genesis environment steps in `226.676 s`
+(`10,143.979 environment-steps/s`) while Radeon telemetry recorded `73.406%`
+mean and `97%` peak GPU utilization. Across the whole search population,
+`2,614/4,608` pairs were safe and `270` recorded sampled clutter contact.
+These are candidate-by-uncertainty engineering measurements, not 4,608
+independent robot trials and not a physical-robot safety guarantee.
 
 ```bash
 # Source/evidence validation on any development machine:
@@ -54,7 +82,26 @@ Project documents:
 - [`docs/evidence/gate-3-1/README.md`](docs/evidence/gate-3-1/README.md)
 - [`docs/evidence/gate-3-2/README.md`](docs/evidence/gate-3-2/README.md)
 - [`docs/evidence/gate-3-3-two-strata/README.md`](docs/evidence/gate-3-3-two-strata/README.md)
+- [`docs/evidence/radeon-p0-2026-07-29`](docs/evidence/radeon-p0-2026-07-29)
+- [`docs/evidence/safety-swarm-v2-formal-2026-07-30`](docs/evidence/safety-swarm-v2-formal-2026-07-30)
+- [`docs/evidence/radeon-scale-v2-formal-20260731`](docs/evidence/radeon-scale-v2-formal-20260731)
 - [`showcase/README.md`](showcase/README.md)
+
+## Interactive showcase
+
+**GuardianSim: Parallel Futures** turns the frozen evidence into a
+judge-facing decision room. Its main view renders the exact `18 × 256`
+Safety Swarm V2 outcome matrix and the measured `4,608 → 5 → 1` selection
+funnel. The smaller three-action challenges remain available as
+evidence-backed interactive replays.
+
+- Public showcase, no sign-in required:
+  <https://nvm-star-max.github.io/GuardianSim/>
+- Verified formal matrix: 4,608 candidate-world pairs, five all-world
+  qualifiers, one selected action
+- Interactive challenges: collision trap, clearance decoy, and impossible gap
+- Claim boundary: Genesis simulation on AMD Radeon/ROCm; no physical-robot
+  safety claim
 
 ## Upstream reference
 

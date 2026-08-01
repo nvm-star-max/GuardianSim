@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "report_name": "radeon-safety-swarm-smoke",
+  "mode": "radeon_engineering_smoke",
+  "backend": "genesis_gpu_batched",
+  "evidence_status": "partial_executor_validation",
+  "showcase_ready": false,
+  "claim_boundary": "Radeon engineering smoke for executor validation only. It cannot replace or be merged into the frozen 256-world formal report.",
+  "source": {
+    "commit": "5abf315eaeb9b2513bc252ef5ab9ce24d0221b37",
+    "candidate_id": "yaw_+67.5_retreat_+0.025_approach_+0.140"
+  },
+  "protocol": {
+    "report_name": "radeon-safety-swarm-smoke",
+    "world_count": 4,
+    "world_ids": [
+      0,
+      85,
+      170,
+      255
+    ],
+    "selection_design": "Predeclared balanced subset of the frozen 256-world matrix; not a formal population result",
+    "formal_report_name": "radeon-safety-swarm",
+    "formal_protocol_sha256": "9a8c5763d2ca007be924326812e9fd19c3125b8cfa968cdd734e01e7980f462c",
+    "formal_matrix_sha256": "71ea95a7194f1e9afdc0690ecdb30037b2a309a03049d26d832b9b21789b43eb",
+    "minimum_safe_clearance_m": 0.01,
+    "minimum_stability": 0.7,
+    "maximum_contact_world_count": 0,
+    "measurement_contract": {
+      "minimum_clearance": "minimum sampled AABB separation across declared robot links and non-target YCB clutter",
+      "clutter_contact": "strict positive AABB overlap at a five-step sample or phase endpoint",
+      "stability": "retained target lift divided by the requested 0.10 m lift, clamped to [0, 1]",
+      "task_completed": "reachable and stability at or above the frozen minimum",
+      "elapsed_environment_steps": "global batched control steps from approach start through lift settle, including the maximum declared start delay"
+    },
+    "unsafe_policy": "continue_only_if_every_smoke_world_passes",
+    "evidence_scope": "Radeon engineering smoke for executor validation only. It cannot replace or be merged into the frozen 256-world formal report.",
+    "protocol_sha256": "b6cb473d67a9c3ab78a52271292d01e334935015d304613da8e7da235e236bff"
+  },
+  "device": {
+    "name": "AMD Radeon Graphics",
+    "torch_version": "2.9.1+gitff65f5b",
+    "hip_version": "7.2.53211-e1a6bc5663",
+    "genesis_version": "1.2.3"
+  },
+  "gpu_telemetry": {
+    "sample_count": 25,
+    "mean_gpu_utilization_pct": 66.4,
+    "max_gpu_utilization_pct": 94.0,
+    "max_vram_used_bytes": 1126129664.0,
+    "total_vram_bytes": 51522830336.0,
+    "sampling_errors": []
+  },
+  "results": [
+    {
+      "world_id": 0,
+      "perturbation": {
+        "world_id": 0,
+        "row": 0,
+        "column": 0,
+        "target_pose_level": 0,
+        "clutter_geometry_level": 0,
+        "end_effector_bias_level": 0,
+        "action_delay_level": 0,
+        "target_dx_m": -0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 0
+      },
+      "measurement": {
+        "world_id": 0,
+        "minimum_clearance_m": 0.04133499413728714,
+        "stability": 0.0,
+        "reachable": true,
+        "task_completed": false,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.7,
+        "task_failure": 1
+      },
+      "hard_safe": false,
+      "primary_stop_reason": "stability_below_minimum",
+      "failed_gates": [
+        "stability_below_minimum",
+        "task_failure"
+      ]
+    },
+    {
+      "world_id": 85,
+      "perturbation": {
+        "world_id": 85,
+        "row": 5,
+        "column": 5,
+        "target_pose_level": 1,
+        "clutter_geometry_level": 1,
+        "end_effector_bias_level": 1,
+        "action_delay_level": 1,
+        "target_dx_m": 0.008,
+        "target_dy_m": 0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": -0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": 0.003,
+        "action_start_delay_steps": 1
+      },
+      "measurement": {
+        "world_id": 85,
+        "minimum_clearance_m": 0.044752322137355804,
+        "stability": 0.0,
+        "reachable": true,
+        "task_completed": false,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.7,
+        "task_failure": 1
+      },
+      "hard_safe": false,
+      "primary_stop_reason": "stability_below_minimum",
+      "failed_gates": [
+        "stability_below_minimum",
+        "task_failure"
+      ]
+    },
+    {
+      "world_id": 170,
+      "perturbation": {
+        "world_id": 170,
+        "row": 10,
+        "column": 10,
+        "target_pose_level": 2,
+        "clutter_geometry_level": 2,
+        "end_effector_bias_level": 2,
+        "action_delay_level": 2,
+        "target_dx_m": -0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": 6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": -15.0,
+        "end_effector_dx_m": -0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 2
+      },
+      "measurement": {
+        "world_id": 170,
+        "minimum_clearance_m": 0.050875499844551086,
+        "stability": 0.0,
+        "reachable": true,
+        "task_completed": false,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.7,
+        "task_failure": 1
+      },
+      "hard_safe": false,
+      "primary_stop_reason": "stability_below_minimum",
+      "failed_gates": [
+        "stability_below_minimum",
+        "task_failure"
+      ]
+    },
+    {
+      "world_id": 255,
+      "perturbation": {
+        "world_id": 255,
+        "row": 15,
+        "column": 15,
+        "target_pose_level": 3,
+        "clutter_geometry_level": 3,
+        "end_effector_bias_level": 3,
+        "action_delay_level": 3,
+        "target_dx_m": 0.008,
+        "target_dy_m": -0.004,
+        "target_yaw_bias_deg": -6.0,
+        "clutter_gap_delta_m": 0.006,
+        "clutter_bearing_bias_deg": 15.0,
+        "end_effector_dx_m": 0.004,
+        "end_effector_dy_m": -0.003,
+        "action_start_delay_steps": 4
+      },
+      "measurement": {
+        "world_id": 255,
+        "minimum_clearance_m": 0.047500405460596085,
+        "stability": 0.0,
+        "reachable": true,
+        "task_completed": false,
+        "clutter_contact": false,
+        "elapsed_environment_steps": 499
+      },
+      "costs": {
+        "contact": 0,
+        "clearance_m": 0.0,
+        "stability": 0.7,
+        "task_failure": 1
+      },
+      "hard_safe": false,
+      "primary_stop_reason": "stability_below_minimum",
+      "failed_gates": [
+        "stability_below_minimum",
+        "task_failure"
+      ]
+    }
+  ],
+  "summary": {
+    "smoke_status": "failed",
+    "safe_world_count": 0,
+    "unsafe_world_count": 4,
+    "contact_world_count": 0,
+    "worst_case_clearance_m": 0.04133499413728714,
+    "minimum_stability": 0.0,
+    "failure_histogram": {
+      "safe": 0,
+      "clutter_contact": 0,
+      "unreachable": 0,
+      "clearance_below_minimum": 0,
+      "stability_below_minimum": 4,
+      "task_failure": 0
+    },
+    "batched_execution_wall_seconds": 10.061395782977343,
+    "total_environment_steps": 1996,
+    "environment_steps_per_second": 198.3820180672138
+  },
+  "report_sha256": "7e65c3e27a099d9411c54272f41bfd97f5089180a21acc0131e975253042cfa8",
+  "scene_build_seconds": 30.24925545696169,
+  "runtime": {
+    "pick_object": "011_banana",
+    "obstacle_object": "018_plum",
+    "requested_lift_height_m": 0.1,
+    "measurement_contract": {
+      "minimum_clearance": "minimum sampled AABB separation across declared robot links and non-target YCB clutter",
+      "clutter_contact": "strict positive AABB overlap at a five-step sample or phase endpoint",
+      "stability": "retained target lift divided by the requested 0.10 m lift, clamped to [0, 1]",
+      "task_completed": "reachable and stability at or above the frozen minimum",
+      "elapsed_environment_steps": "global batched control steps from approach start through lift settle, including the maximum declared start delay"
+    },
+    "phase_steps": {
+      "settle": 60,
+      "approach": 140,
+      "approach_settle": 20,
+      "descent": 80,
+      "descent_settle": 15,
+      "close": 100,
+      "lift": 120,
+      "lift_settle": 20
+    },
+    "maximum_action_delay_steps": 4
+  }
+}

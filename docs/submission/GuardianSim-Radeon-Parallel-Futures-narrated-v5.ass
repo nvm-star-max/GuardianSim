@@ -1,0 +1,18 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Fixed,Arial,34,&H00F7FBFF,&H00F7FBFF,&H00101A22,&HCC05090D,-1,0,0,0,100,100,0,0,3,2,0,2,150,150,125,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:06.00,Fixed,,0,0,0,,One Radeon GPU ran 4,096 full Genesis worlds.
+Dialogue: 0,0:00:06.00,0:00:24.00,Fixed,,0,0,0,,Scale V2: 1 → 4,096 worlds; 152,099 environment-steps/s.
+Dialogue: 0,0:00:24.00,0:00:40.00,Fixed,,0,0,0,,Safety Swarm: 4,608 candidate-world pairs → 5 eligible → 1 selected.
+Dialogue: 0,0:00:40.00,0:00:58.00,Fixed,,0,0,0,,Seed 411: 1.42 mm overlap becomes 17.1 mm clearance.
+Dialogue: 0,0:00:58.00,0:01:12.00,Fixed,,0,0,0,,Frozen run: 30/30 repeatable safe; sampled contacts 30 → 0.
+Dialogue: 0,0:01:12.00,0:01:20.00,Fixed,,0,0,0,,Policy proposes → Radeon simulates → hard gates verify → move or stop.

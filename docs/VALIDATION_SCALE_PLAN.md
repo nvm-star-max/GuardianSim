@@ -1,8 +1,9 @@
 # GuardianSim Validation Scale Plan
 
-Status: Stage 1 two-scenario engineering prefix complete; full 24-scenario
-smoke awaits owner direction. This document does not alter the frozen Gate 3.2
-protocol, thresholds, scenario order, report, or claims.
+Status: Stage 1 completed through two full strata; a new outcome-blind
+240-scenario Gate 4 draft is locally implemented and awaits parity/profile
+launch gates. This document does not alter the frozen Gate 3.2 or Gate 3.3
+protocols, thresholds, scenario order, reports, or claims.
 
 ## Decision
 
@@ -120,20 +121,23 @@ Implementation status:
   before the submission package is complete. Do not proceed to Stage 2 under
   the current action family.
 
-### Stage 2 — Hackathon robustness gate
+### Stage 2 — Gate 4 large-sample robustness gate
 
 Purpose: support a defensible robustness claim while remaining feasible on the
 available cloud instance.
 
-- 120 new paired scenario units:
+- 240 new paired scenario units:
   - 3 target objects;
   - 2 clutter-layout families;
   - 4 perturbation strata;
-  - 5 new seeds per cell.
+  - 10 new seeds per cell.
 - Three independent final executions per strategy:
-  360 baseline and 360 GuardianSim executions.
-- One predeclared formal run with a new immutable protocol hash and matrix hash.
+  720 baseline and 720 GuardianSim executions.
+- Four predeclared 60-scenario stratum shards with one aggregate manifest.
 - Keep all Gate 3.2 data out of the Stage 2 estimator.
+- First evaluate the original 18-candidate family. Activate a frozen
+  18-candidate retreat expansion only if no base action passes all hard gates.
+- Do not relax clearance, stability, or safe-stop semantics.
 
 Primary endpoint:
 
@@ -162,16 +166,18 @@ Predeclared pass criteria:
 Compute warning:
 
 - Gate 3.2 planning averaged `264.95 s` per scenario.
-- A naive 120-scenario run would require about 8.8 hours for planning alone,
+- A naive 240-scenario run would require about 17.7 hours for planning alone,
   before final executions and validation.
-- Stage 2 therefore requires profiling and a correctness-preserving cache or
-  batched rollout design before launch. Speed changes must be validated against
-  the original selector on a predeclared parity set.
+- Stage 2 therefore uses four 60-scenario shards and requires profiling before
+  launch. Any cache or batching change must be validated against the original
+  selector on a predeclared parity set.
 - The 12-scenario Gate 3.3 run averaged `221.53 s` of planning per scenario
   and still exposed two no-hard-safe-action cases. Before any Stage 2 launch,
-  expand the representable approach family for tight lateral lemon/plum
-  geometry and preserve safe-stop semantics. This must be a new declaration,
-  not a retune of Gate 3.3.
+  verify the predeclared adaptive retreat expansion on those geometries while
+  preserving safe-stop semantics. This is a new declaration, not a retune of
+  Gate 3.3.
+- Exact local draft:
+  [`GATE_4_PROTOCOL_DRAFT.md`](GATE_4_PROTOCOL_DRAFT.md).
 
 ### Stage 3 — Public-benchmark adapter
 
@@ -220,3 +226,37 @@ Not allowed:
 - “validated in the real world”;
 - treating 90 nested executions as 90 independent scenarios;
 - merging visual replay outcomes into the frozen formal report.
+
+## Parallel-compute showcase lane
+
+This lane is deliberately separate from Stage 2 statistical scaling. Its goal
+is to make the Radeon contribution visible to a time-constrained judge without
+asking the judge to train or configure anything.
+
+Required evidence, in order:
+
+1. **Complete.** The isolated `1 / 16 / 64 / 256` Genesis matrix passed strict
+   validation. The 256-world point measured `35,166.1 env-steps/s`, `228.16×`
+   speedup, `89.1%` parallel efficiency, and `96%` peak GPU utilization.
+2. **Complete.** The `18 × 3 = 54` candidate-futures scene passed strict
+   validation with full candidate/repeat coverage. It completed in `12.839 s`;
+   `32` futures passed the unchanged hard gates and `22` were rejected.
+3. **Measured but withheld from the showcase.** The fixed Safety Critic run
+   used all `1,185` rows with eight held-out scenes and benchmarked batches
+   through `4,096`, but missed both predeclared showcase quality gates:
+   hard-safe F1 `0.789 < 0.80`, unsafe precision `0.791 < 0.90`.
+   Thresholds were not changed after inspecting the result.
+4. **Complete for the interactive page.** Pending scale copy was replaced only
+   after strict validation. The next presentation task is an autoplay
+   scale-to-decision video using the accepted physics and 54-future evidence.
+
+The final visual should show three synchronized layers:
+
+- hundreds of live robot-world tiles to communicate GPU parallelism;
+- a candidate funnel (`18 actions × 3 repeats -> 54 physical futures -> one
+  action or safe stop`); the learned prefilter is omitted because its quality
+  gate failed;
+- the unchanged formal safety result as a separate evidence card.
+
+Do not combine environment steps, model candidates, physical futures, final
+executions, or independent scenes into one inflated sample count.

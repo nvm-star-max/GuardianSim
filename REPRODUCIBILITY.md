@@ -1,15 +1,17 @@
 # GuardianSim Reproducibility Guide
 
 This is the evaluator-first path for GuardianSim, a Track 3 Physical AI
-submission. It separates three kinds of evidence:
+submission. It separates four kinds of evidence:
 
 1. **source preflight** — tests the decision core and validates the preserved
    formal report; it does not require a GPU;
 2. **Radeon GPU smoke** — builds a real Genesis scene, evaluates three
    counterfactual grasp candidates from one captured state, and validates the
    resulting machine-readable report;
-3. **formal benchmark evidence** — validates the immutable 30-scenario Gate
-   3.2 report already recorded on AMD Radeon Cloud.
+3. **formal safety benchmark evidence** — validates the immutable 30-scenario
+   Gate 3.2 report already recorded on AMD Radeon Cloud;
+4. **formal decision-scale evidence** — validates the immutable Safety Swarm
+   V2 run covering 18 candidate actions across 256 uncertainty worlds each.
 
 The published metrics are simulation results. They are not claims of
 physical-robot deployment or universal safety.
@@ -171,6 +173,38 @@ The validator must report:
 The primary evidence narrative and exact metrics are in
 `docs/evidence/gate-3-2/README.md`. Do not regenerate or edit that report to
 obtain the published numbers.
+
+### 5.1 Validate the 4,608-pair decision-scale result
+
+The Safety Swarm V2 report is a second formal result with a different unit of
+analysis. It measures candidate-by-uncertainty stress testing and must not be
+added to the 30-scenario Gate 3.2 safety sample count.
+
+```bash
+uv run --frozen --no-sync python \
+  scripts/validate_safety_swarm_v2_report.py --require-radeon \
+  docs/evidence/safety-swarm-v2-formal-2026-07-30/formal-report.json
+
+cd docs/evidence/safety-swarm-v2-formal-2026-07-30
+sha256sum -c SHA256SUMS
+```
+
+On macOS, use `shasum -a 256 -c SHA256SUMS` instead.
+
+The strict validator must report:
+
+- `candidate_world_count: 4608`;
+- `candidate_count: 18` and `world_count_per_candidate: 256`;
+- five qualifying candidates;
+- selected candidate
+  `yaw_-45.0_retreat_+0.000_approach_+0.140`;
+- selected result `256/256` safe with zero sampled clutter contacts;
+- report SHA-256
+  `a3e86baa03e84d75a81062fee5f9f22770a3753708c116168174ea291c7a93cf`.
+
+The full search population contains 4,608 candidate-world pairs. It is an
+engineering stress-test population, not 4,608 independent robot trials and
+not a physical-robot safety guarantee.
 
 ## 6. Docker path
 

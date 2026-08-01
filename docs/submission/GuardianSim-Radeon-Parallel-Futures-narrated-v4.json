@@ -1,0 +1,141 @@
+{
+  "kind": "guardiansim_radeon_parallel_futures_narrated_v4",
+  "team": "Aegis Motion",
+  "project": "GuardianSim",
+  "claim_boundary": "Preserved Genesis simulation evidence only; no physics re-execution; throughput worlds are not independent safety scenes; no physical-robot claim.",
+  "output": {
+    "path": "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v4.mp4",
+    "sha256": "2be66996eb0e3bb460148c5afc8060f69680f1d7e314e2e46cf2d363d53a923a",
+    "duration_seconds": 80,
+    "fps": 20,
+    "width": 1920,
+    "height": 1080,
+    "audio": true
+  },
+  "visual_source": {
+    "path": "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v3.mp4",
+    "sha256": "4e2c6eddc1bb127818dcf0368c83e4eb30f4b3dcdfe754d8933d3ed36799c85d",
+    "sidecar_sha256": "e18a1e4022d9fa6985da5ddf7059d7a3017e9dbd0d5a2072b997a276a355bb24"
+  },
+  "narration": {
+    "provider": "Alibaba Cloud Model Studio",
+    "model": "qwen3-tts-instruct-flash-2026-01-26",
+    "voice": "Ethan",
+    "instructions": "Speak like a calm, confident robotics engineer explaining a breakthrough to judges. Warm and human, with conversational pacing, short natural pauses, and subtle emphasis. Avoid announcer voice and exaggerated drama. Keep the delivery concise and intelligent. Let the numbers breathe. Sound like a real engineer speaking to another engineer, not a commercial.",
+    "fixed_chapter_captions": true,
+    "caption_file": "docs/submission/GuardianSim-Radeon-Parallel-Futures-narrated-v4.ass",
+    "caption_sha256": "f0ca52fb6b0540e8b860e5e15ee76dac9d45f45607ab5e4a73f20a365ec487b2",
+    "ambient_bed": "original synthesized low-volume sine bed and transition chimes",
+    "segments": [
+      {
+        "slug": "compute-hook",
+        "title": "One Radeon GPU, 256 Genesis worlds",
+        "text": "Radeon ran two hundred fifty-six Genesis worlds in parallel, then checked the next robot move.",
+        "caption": "One Radeon GPU ran 256 Genesis worlds.",
+        "start_seconds": 0.0,
+        "end_seconds": 6.0,
+        "audio_duration_seconds": 5.818,
+        "audio_sha256": "06ae6cf515c40fee8f1d4f9e7b6ad20fdd98203c2f4201d09d1689bb141a017b",
+        "characters": 94,
+        "chunks": 1
+      },
+      {
+        "slug": "radeon-scale",
+        "title": "Radeon scale",
+        "text": "We started with one Genesis world and repeated the same measured workload at sixteen, sixty-four, and two hundred and fifty-six worlds. At the largest batch, Radeon Cloud reached thirty-five thousand, one hundred and sixty-six environment steps per second.",
+        "caption": "Measured Genesis throughput from 1 to 256 worlds.",
+        "start_seconds": 6.0,
+        "end_seconds": 24.0,
+        "audio_duration_seconds": 15.04,
+        "audio_sha256": "9c6b27eefa4171509ff9cd2f7ba3c430bd60bf1ca8a7afb39425a79d1bca92cc",
+        "characters": 256,
+        "chunks": 1
+      },
+      {
+        "slug": "parallel-futures",
+        "title": "Parallel Futures",
+        "text": "For the next move, GuardianSim checks eighteen actions three times each. That makes fifty-four simulated futures in one batch. Thirty-two pass every hard gate; twenty-two are rejected before the robot moves.",
+        "caption": "54 simulated futures are checked before the next move.",
+        "start_seconds": 24.0,
+        "end_seconds": 40.0,
+        "audio_duration_seconds": 13.44,
+        "audio_sha256": "db3d29ea1aa4eeeee0ee199ea218f2380682e219d80b969fbd541972dc6218ba",
+        "characters": 207,
+        "chunks": 1
+      },
+      {
+        "slug": "seed-411",
+        "title": "Formal Seed 411",
+        "text": "Here is seed four eleven from the frozen test set. The original path overlaps the clutter by one point four two millimeters. The selected alternative leaves seventeen point one millimeters of clearance and repeats safely three times.",
+        "caption": "Seed 411: 1.42 mm overlap becomes 17.1 mm clearance.",
+        "start_seconds": 40.0,
+        "end_seconds": 58.0,
+        "audio_duration_seconds": 13.28,
+        "audio_sha256": "34eb4c91e0ec7ff6ad2eb0bd4f1f443b2b1058111e2fb6bbd0953a5baa3873e8",
+        "characters": 233,
+        "chunks": 1
+      },
+      {
+        "slug": "formal-proof",
+        "title": "Frozen 30-scenario result",
+        "text": "We then ran the frozen thirty-scenario set. Repeatable safe completion went from eighteen cases to all thirty. Across the ninety independent executions, sampled clutter contacts went from thirty to zero.",
+        "caption": "Frozen run: 30/30 repeatable safe; sampled contacts 30 \u2192 0.",
+        "start_seconds": 58.0,
+        "end_seconds": 72.0,
+        "audio_duration_seconds": 11.84,
+        "audio_sha256": "2ba7de0ee997f253a7214d91cd694dcb07e2397f243c6c0c1c5478997615b2cf",
+        "characters": 203,
+        "chunks": 1
+      },
+      {
+        "slug": "close",
+        "title": "Execute or stop",
+        "text": "The GPU checks the options. The robot uses one only if it passes every gate. Otherwise, it stays put.",
+        "caption": "Use an action that passes every gate\u2014or stay put.",
+        "start_seconds": 72.0,
+        "end_seconds": 80.0,
+        "audio_duration_seconds": 6.88,
+        "audio_sha256": "3d0f1f2fd50f6d091e5e391d1ed5d5ac86de84d4b9a3cd4cf910007f7346d014",
+        "characters": 101,
+        "chunks": 1
+      }
+    ]
+  },
+  "verified_metrics": {
+    "largest_parallel_batch": 256,
+    "environment_steps_per_second": 35166,
+    "speedup_vs_single_world": 228.16,
+    "total_measured_environment_steps": 337000,
+    "parallel_future_worlds": 54,
+    "parallel_future_hard_safe": 32,
+    "parallel_future_rejected": 22,
+    "parallel_future_wall_seconds": 12.83930865302682,
+    "formal_repeatable_safe_scenarios": {
+      "baseline": 18,
+      "guardiansim": 30,
+      "total": 30
+    }
+  },
+  "sources": {
+    "radeon_scale_report": {
+      "path": "docs/evidence/radeon-p0-2026-07-29/radeon-scale/report.json",
+      "sha256": "a372727b5280ca6be9e58ca6ab82b01899ed24eaa45c8df39359aab83dfe539e",
+      "strict_validation": true
+    },
+    "parallel_futures_report": {
+      "path": "docs/evidence/radeon-p0-2026-07-29/parallel-futures/report.json",
+      "sha256": "126c0a2e10ffd387652c866c7c9407a4e84bbd4d5b6af1b47169bd429a37b4c4",
+      "strict_validation": true
+    },
+    "gate32_formal_report": {
+      "path": "docs/evidence/gate-3-2/formal-report.json",
+      "sha256": "d76ffbe518d4cb9499362379388a1453ec6cc7614ff312b9bcf764dbf822ffee",
+      "schema_version": 5,
+      "completed_episode_count": 30
+    },
+    "seed411_replay": {
+      "path": "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4",
+      "sha256": "38e9adfb2a3f2d90719b60449d092e4caca53afaa2b2f71fe1ade136357dff86"
+    }
+  }
+}

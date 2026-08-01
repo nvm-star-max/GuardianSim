@@ -1,0 +1,7 @@
+nohup: ignoring input
+Traceback (most recent call last):
+  File "/persistent/GuardianSim/scripts/run_radeon_scale_suite.py", line 117, in <module>
+    main()
+  File "/persistent/GuardianSim/scripts/run_radeon_scale_suite.py", line 98, in main
+    raise RuntimeError(
+RuntimeError: batch 1 failed with exit code 1; inspect /persistent/GuardianSim/outputs/radeon-scale/trial-0001.log

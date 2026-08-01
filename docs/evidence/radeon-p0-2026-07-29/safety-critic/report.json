@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "model_name": "GuardianSim Safety Critic",
+  "role": "advisory_prefilter_hard_physics_verifier_remains_authoritative",
+  "backend": "pytorch_rocm",
+  "device": {
+    "name": "AMD Radeon Graphics",
+    "torch_version": "2.9.1+gitff65f5b",
+    "hip_version": "7.2.53211-e1a6bc5663"
+  },
+  "dataset": {
+    "row_count": 1185,
+    "scene_count": 42,
+    "train_row_count": 960,
+    "test_row_count": 225,
+    "train_scenes": [
+      [
+        "gate32_formal",
+        401
+      ],
+      [
+        "gate32_formal",
+        402
+      ],
+      [
+        "gate32_formal",
+        403
+      ],
+      [
+        "gate32_formal",
+        404
+      ],
+      [
+        "gate32_formal",
+        406
+      ],
+      [
+        "gate32_formal",
+        407
+      ],
+      [
+        "gate32_formal",
+        408
+      ],
+      [
+        "gate32_formal",
+        409
+      ],
+      [
+        "gate32_formal",
+        411
+      ],
+      [
+        "gate32_formal",
+        412
+      ],
+      [
+        "gate32_formal",
+        413
+      ],
+      [
+        "gate32_formal",
+        414
+      ],
+      [
+        "gate32_formal",
+        416
+      ],
+      [
+        "gate32_formal",
+        417
+      ],
+      [
+        "gate32_formal",
+        418
+      ],
+      [
+        "gate32_formal",
+        419
+      ],
+      [
+        "gate32_formal",
+        421
+      ],
+      [
+        "gate32_formal",
+        422
+      ],
+      [
+        "gate32_formal",
+        423
+      ],
+      [
+        "gate32_formal",
+        424
+      ],
+      [
+        "gate32_formal",
+        426
+      ],
+      [
+        "gate32_formal",
+        427
+      ],
+      [
+        "gate32_formal",
+        428
+      ],
+      [
+        "gate32_formal",
+        429
+      ],
+      [
+        "gate33_engineering",
+        501
+      ],
+      [
+        "gate33_engineering",
+        502
+      ],
+      [
+        "gate33_engineering",
+        503
+      ],
+      [
+        "gate33_engineering",
+        504
+      ],
+      [
+        "gate33_engineering",
+        506
+      ],
+      [
+        "gate33_engineering",
+        507
+      ],
+      [
+        "gate33_engineering",
+        508
+      ],
+      [
+        "gate33_engineering",
+        509
+      ],
+      [
+        "gate33_engineering",
+        511
+      ],
+      [
+        "gate33_engineering",
+        512
+      ]
+    ],
+    "test_scenes": [
+      [
+        "gate32_formal",
+        405
+      ],
+      [
+        "gate32_formal",
+        410
+      ],
+      [
+        "gate32_formal",
+        415
+      ],
+      [
+        "gate32_formal",
+        420
+      ],
+      [
+        "gate32_formal",
+        425
+      ],
+      [
+        "gate32_formal",
+        430
+      ],
+      [
+        "gate33_engineering",
+        505
+      ],
+      [
+        "gate33_engineering",
+        510
+      ]
+    ],
+    "feature_names": [
+      "target_x_m",
+      "target_y_m",
+      "target_z_m",
+      "obstacle_dx_m",
+      "obstacle_dy_m",
+      "obstacle_distance_m",
+      "candidate_yaw_degrees",
+      "candidate_lateral_offset_m",
+      "candidate_target_offset_x_m",
+      "candidate_target_offset_y_m",
+      "candidate_approach_height_m",
+      "candidate_gripper_width_m",
+      "is_nominal",
+      "pick_object::011_banana",
+      "pick_object::014_lemon",
+      "pick_object::018_plum",
+      "layout::lateral_clutter",
+      "layout::radial_clutter",
+      "stratum::gate32_formal",
+      "stratum::pose_shift",
+      "stratum::gap_bearing",
+      "stratum::dynamics_extreme",
+      "stratum::perception_bias",
+      "friction_ratio",
+      "target_mass_ratio",
+      "clutter_gap_m",
+      "obstacle_bearing_offset_deg",
+      "relative_position_uncertainty_bound_m"
+    ],
+    "gate32_report_sha256": "d76ffbe518d4cb9499362379388a1453ec6cc7614ff312b9bcf764dbf822ffee",
+    "gate33_report_sha256": "423310b02e96f17eb6ee813527b1c39270179dc2af14e3a75035eef13226b80e"
+  },
+  "training": {
+    "epochs": 600,
+    "batch_size": 128,
+    "learning_rate": 0.0008,
+    "training_seconds": 10.974114651791751,
+    "initial_loss": 0.7251868695020676,
+    "final_loss": 0.028333643334917724,
+    "checkpoint_sha256": "3d0653d0294f9c517f04d7caac8ec2322109a9c55e0fe1034cfc7a70eb5b71f8",
+    "parameter_count": 107140
+  },
+  "evaluation": {
+    "true_positive": 75,
+    "true_negative": 110,
+    "false_positive": 11,
+    "false_negative": 29,
+    "hard_safe_accuracy": 0.8222222222222222,
+    "hard_safe_precision": 0.872093023255814,
+    "hard_safe_recall": 0.7211538461538461,
+    "unsafe_precision": 0.7913669064748201,
+    "unsafe_recall": 0.9090909090909091,
+    "hard_safe_f1": 0.7894736842105264,
+    "collision_margin_mae_m": 0.011281485669314861,
+    "predicted_stability_mae": 0.20244930684566498,
+    "path_length_mae_m": 0.0905744656920433,
+    "test_row_count": 225
+  },
+  "quality_gate": {
+    "minimum_hard_safe_f1": 0.8,
+    "minimum_unsafe_precision": 0.9
+  },
+  "showcase_ready": false,
+  "inference_benchmark": [
+    {
+      "batch_size": 1,
+      "latency_p50_ms": 0.186483608558774,
+      "latency_p95_ms": 0.20001684315502644,
+      "throughput_iterations": 8192,
+      "throughput_measurement_seconds": 1.0474263075739145,
+      "candidates_per_second": 7821.07527829294,
+      "gpu_telemetry": {
+        "sample_count": 5,
+        "mean_gpu_utilization_pct": 59.4,
+        "max_gpu_utilization_pct": 84.0,
+        "max_vram_used_bytes": 560427008.0,
+        "total_vram_bytes": 51522830336.0,
+        "sampling_errors": []
+      }
+    },
+    {
+      "batch_size": 18,
+      "latency_p50_ms": 0.17794384621083736,
+      "latency_p95_ms": 0.19678440876305103,
+      "throughput_iterations": 8192,
+      "throughput_measurement_seconds": 1.0959395626559854,
+      "candidates_per_second": 134547.5654174247,
+      "gpu_telemetry": {
+        "sample_count": 5,
+        "mean_gpu_utilization_pct": 58.8,
+        "max_gpu_utilization_pct": 82.0,
+        "max_vram_used_bytes": 560427008.0,
+        "total_vram_bytes": 51522830336.0,
+        "sampling_errors": []
+      }
+    },
+    {
+      "batch_size": 54,
+      "latency_p50_ms": 0.1764234621077776,
+      "latency_p95_ms": 0.1906322780996561,
+      "throughput_iterations": 8192,
+      "throughput_measurement_seconds": 1.0781361819244921,
+      "candidates_per_second": 410308.0922582204,
+      "gpu_telemetry": {
+        "sample_count": 5,
+        "mean_gpu_utilization_pct": 59.0,
+        "max_gpu_utilization_pct": 83.0,
+        "max_vram_used_bytes": 560427008.0,
+        "total_vram_bytes": 51522830336.0,
+        "sampling_errors": []
+      }
+    },
+    {
+      "batch_size": 108,
+      "latency_p50_ms": 0.1816640142351389,
+      "latency_p95_ms": 0.19646501168608665,
+      "throughput_iterations": 8192,
+      "throughput_measurement_seconds": 1.0803125463426113,
+      "candidates_per_second": 818962.9963988347,
+      "gpu_telemetry": {
+        "sample_count": 5,
+        "mean_gpu_utilization_pct": 61.6,
+        "max_gpu_utilization_pct": 86.0,
+        "max_vram_used_bytes": 560427008.0,
+        "total_vram_bytes": 51522830336.0,
+        "sampling_errors": []
+      }
+    },
+    {
+      "batch_size": 256,
+      "latency_p50_ms": 0.17983303405344486,
+      "latency_p95_ms": 0.19528677221387625,
+      "throughput_iterations": 8192,
+      "throughput_measurement_seconds": 1.130400360096246,
+      "candidates_per_second": 1855229.4160817869,
+      "gpu_telemetry": {
+        "sample_count": 6,
+        "mean_gpu_utilization_pct": 49.666666666666664,
+        "max_gpu_utilization_pct": 82.0,
+        "max_vram_used_bytes": 560427008.0,
+        "total_vram_bytes": 51522830336.0,
+        "sampling_errors": []
+      }
+    },
+    {
+      "batch_size": 1024,
+      "latency_p50_ms": 0.2093338407576084,
+      "latency_p95_ms": 0.2184434561058879,
+      "throughput_iterations": 8192,
+      "throughput_measurement_seconds": 1.0991568192839622,
+      "candidates_per_second": 7631857.304460612,
+      "gpu_telemetry": {
+        "sample_count": 5,
+        "mean_gpu_utilization_pct": 69.6,
+        "max_gpu_utilization_pct": 97.0,
+        "max_vram_used_bytes": 562524160.0,
+        "total_vram_bytes": 51522830336.0,
+        "sampling_errors": []
+      }
+    },
+    {
+      "batch_size": 4096,
+      "latency_p50_ms": 0.38783252239227295,
+      "latency_p95_ms": 0.4011085256934166,
+      "throughput_iterations": 4096,
+      "throughput_measurement_seconds": 1.3563470342196524,
+      "candidates_per_second": 12369412.529922655,
+      "gpu_telemetry": {
+        "sample_count": 6,
+        "mean_gpu_utilization_pct": 73.5,
+        "max_gpu_utilization_pct": 100.0,
+        "max_vram_used_bytes": 583495680.0,
+        "total_vram_bytes": 51522830336.0,
+        "sampling_errors": []
+      }
+    }
+  ]
+}

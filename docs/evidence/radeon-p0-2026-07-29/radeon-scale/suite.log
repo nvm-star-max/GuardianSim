@@ -1,0 +1,10 @@
+nohup: ignoring input
+{
+  "report": "/persistent/GuardianSim/outputs/radeon-scale/report.json",
+  "status": "passed",
+  "schema_version": 1,
+  "protocol_sha256": "4944cd288c1a855414c987e4229e1488498e56cd61e4d45136c62f3fb98d7603",
+  "trial_count": 4,
+  "largest_batch_size": 256,
+  "telemetry_required": true
+}

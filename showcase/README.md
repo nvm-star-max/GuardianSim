@@ -1,8 +1,13 @@
-# GuardianSim Judge Showcase
+# GuardianSim: Parallel Futures
 
-Interactive evidence presentation for the verified Gate 3.1 → Gate 3.2 story.
-It links every headline result to the frozen schema-5 report, logs, checksums,
-and source; it does not rerun Genesis or consume GPU time.
+Scale-first Physical AI showcase for the verified GuardianSim evidence. It
+opens with the strictly measured Radeon progression from 1 to 256 parallel
+Genesis worlds, connects that compute to a 54-world Parallel Futures safety
+funnel, and then lets a judge challenge the frozen formal decisions. It does
+not rerun Genesis or consume GPU time.
+
+Public judge-facing site:
+<https://nvm-star-max.github.io/GuardianSim/>
 
 From the repository root:
 
@@ -12,9 +17,12 @@ From the repository root:
 
 The site includes:
 
-- a 90-second presenter mode;
-- the preserved negative Gate 3.1 result;
-- the frozen obstacle-aware, repeatability-first Gate 3.2 policy;
-- verified Gate 3.2 metrics and recovered adversarial cells;
+- a measured 1 → 16 → 64 → 256 Radeon scale progression;
+- a 54-world safety funnel with 32 hard-safe and 22 rejected futures;
+- three evidence-backed red-team challenges;
+- a same-state, three-future safety reveal;
+- the preserved Seed 411 replay;
+- downloadable decision receipts with source hashes;
+- verified Gate 3.2 headline metrics;
 - direct raw evidence and checksum links;
 - explicit simulation-only claim boundaries.

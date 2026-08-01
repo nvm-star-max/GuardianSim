@@ -1,0 +1,1 @@
+/opt/venv/bin/python scripts/run_safety_swarm_v2_formal.py --output-dir outputs/safety-swarm-v2-formal-2026-07-30

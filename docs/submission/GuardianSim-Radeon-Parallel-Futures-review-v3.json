@@ -1,0 +1,90 @@
+{
+  "kind": "guardiansim_radeon_parallel_futures_visual_review_v3",
+  "team": "Aegis Motion",
+  "project": "GuardianSim",
+  "review_status": "revised silent visual source; typography and copy review passed",
+  "layout_policy": {
+    "metric_rows": "measured as one group and centered inside each card",
+    "titles_and_details": "measured and centered inside each card",
+    "overflow_asserted_during_render": true
+  },
+  "claim_boundary": "Preserved Genesis simulation evidence only; no physics re-execution; throughput worlds are not independent safety scenes; no physical-robot claim.",
+  "output": {
+    "path": "docs/submission/GuardianSim-Radeon-Parallel-Futures-review-v3.mp4",
+    "sha256": "4e2c6eddc1bb127818dcf0368c83e4eb30f4b3dcdfe754d8933d3ed36799c85d",
+    "duration_seconds": 80,
+    "fps": 20,
+    "width": 1920,
+    "height": 1080,
+    "audio": false
+  },
+  "sources": {
+    "radeon_scale_report": {
+      "path": "docs/evidence/radeon-p0-2026-07-29/radeon-scale/report.json",
+      "sha256": "a372727b5280ca6be9e58ca6ab82b01899ed24eaa45c8df39359aab83dfe539e",
+      "strict_validation": true
+    },
+    "parallel_futures_report": {
+      "path": "docs/evidence/radeon-p0-2026-07-29/parallel-futures/report.json",
+      "sha256": "126c0a2e10ffd387652c866c7c9407a4e84bbd4d5b6af1b47169bd429a37b4c4",
+      "strict_validation": true
+    },
+    "gate32_formal_report": {
+      "path": "docs/evidence/gate-3-2/formal-report.json",
+      "sha256": "d76ffbe518d4cb9499362379388a1453ec6cc7614ff312b9bcf764dbf822ffee",
+      "schema_version": 5,
+      "completed_episode_count": 30
+    },
+    "seed411_replay": {
+      "path": "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4",
+      "sha256": "38e9adfb2a3f2d90719b60449d092e4caca53afaa2b2f71fe1ade136357dff86"
+    }
+  },
+  "verified_metrics": {
+    "largest_parallel_batch": 256,
+    "environment_steps_per_second": 35166,
+    "speedup_vs_single_world": 228.16,
+    "total_measured_environment_steps": 337000,
+    "parallel_future_worlds": 54,
+    "parallel_future_hard_safe": 32,
+    "parallel_future_rejected": 22,
+    "parallel_future_wall_seconds": 12.83930865302682,
+    "formal_repeatable_safe_scenarios": {
+      "baseline": 18,
+      "guardiansim": 30,
+      "total": 30
+    }
+  },
+  "chapters": [
+    {
+      "start": 0,
+      "end": 6,
+      "name": "compute hook"
+    },
+    {
+      "start": 6,
+      "end": 24,
+      "name": "Radeon scale"
+    },
+    {
+      "start": 24,
+      "end": 40,
+      "name": "parallel futures funnel"
+    },
+    {
+      "start": 40,
+      "end": 58,
+      "name": "formal Seed 411 replay"
+    },
+    {
+      "start": 58,
+      "end": 72,
+      "name": "frozen 30-scenario result"
+    },
+    {
+      "start": 72,
+      "end": 80,
+      "name": "what the demo shows"
+    }
+  ]
+}

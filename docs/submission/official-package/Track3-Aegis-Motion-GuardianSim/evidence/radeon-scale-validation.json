@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "schema_version": 2,
+  "protocol_sha256": "bcb91e081b196a5b6274ce1efd461d2005f1c1505dbd7020e9fbbaab0bb536e8",
+  "report_sha256": "971769c6a051f6b2794982a02828601e91406320023a90bf85fc28103fa8b742",
+  "trial_count": 8,
+  "largest_batch_size": 4096,
+  "largest_batch_environment_steps": 50331648,
+  "total_measured_environment_steps": 98512896,
+  "telemetry_required": true,
+  "frozen_formal_required": true
+}

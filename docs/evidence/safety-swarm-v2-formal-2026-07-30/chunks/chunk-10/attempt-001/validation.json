@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "schema_version": 1,
+  "mode": "radeon_formal_chunk",
+  "formal_protocol_sha256": "7fedeeeea436f3b0fe04196e4ad5ec225ccfe7bf26ad60cd3af8a7a4f4da43ac",
+  "chunk_index": 10,
+  "candidate_id": "yaw_+22.5_retreat_+0.000_approach_+0.140",
+  "candidate_world_count": 256,
+  "showcase_ready": false,
+  "report_sha256": "a9e0edfd3f7f76c5a1362317201257bfc7512d5cc415037bcee8fcd2f0ee4950"
+}
