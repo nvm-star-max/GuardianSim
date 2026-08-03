@@ -1,5 +1,6 @@
 # --- Generated artifacts (eval results, videos, scripted-demo frames) ---
 outputs/
+output/
 tmp/
 
 # --- Python ---
@@ -9,6 +10,8 @@ __pycache__/
 *.egg-info/
 .eggs/
 build/
+!showcase/build/
+!showcase/build/sites-vite-plugin.ts
 dist/
 .venv/
 venv/
@@ -19,6 +22,7 @@ venv/
 .DS_Store
 .vscode/
 .idea/
+.playwright-cli/
 MUJOCO_LOG.TXT
 
 # Stray debug renders occasionally written next to the code.

@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase,
     title: "GuardianSim: Parallel Futures",
     description:
-      "4,608 physical counterfactuals. One action. An evidence-backed parallel Physical AI decision system on AMD Radeon.",
+      "Think thousands. Execute one. One AMD Radeon GPU runs 16,384 parallel robot worlds across a 293.6-million-step frozen endurance suite, then demonstrates a separate 4,608-to-1 formal decision run.",
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
@@ -31,14 +31,14 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "GuardianSim: Parallel Futures",
       description:
-        "18 actions face 256 uncertainty worlds each on AMD Radeon. Explore the verified 4,608-pair run and try to break GuardianSim.",
+        "One Radeon GPU. 16,384 full robot worlds. 278,051 environment steps per second P50. See parallel ROCm physics become one robot decision.",
       type: "website",
     },
     twitter: {
       card: "summary",
       title: "GuardianSim: Parallel Futures",
       description:
-        "Radeon parallel physics turns 4,608 bounded robot futures into an explainable execute-or-stop decision.",
+        "Think thousands. Execute one. Radeon runs 16,384 robot worlds at 98.33% average GPU use, then turns a separate 4,608-pair workload into one robot action.",
     },
   };
 }

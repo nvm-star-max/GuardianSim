@@ -1,4 +1,4 @@
-# GuardianSim: Counterfactual Safety Certification for Robot Manipulation on AMD Radeon GPUs
+# GuardianSim: Think Thousands, Execute One on AMD Radeon GPUs
 
 **Track:** Track 3 — Physical AI Challenge
 **Project repository:** <https://github.com/nvm-star-max/GuardianSim>
@@ -12,15 +12,24 @@ nominally successful grasp can still pass too close to nearby objects, contact
 clutter, or become unstable when scene geometry changes. GuardianSim is a
 safety-oriented decision layer for simulated Franka Panda fruit picking. Given
 a nominal grasp, it generates counterfactual alternatives, restores every
-alternative to the same Genesis scene snapshot, measures physical rollout
+alternative to the same Genesis scene snapshot, measures simulated physics rollout
 outcomes on an AMD Radeon GPU, and selects an action only when it satisfies
 frozen reachability, stability, clearance, and repeatability requirements. If
 no candidate passes every hard gate, the system explicitly stops.
 
-In the primary frozen Gate 3.2 benchmark, GuardianSim achieved repeatable safe
-completion in 30 of 30 declared clutter scenarios, compared with 18 of 30 for the
-nominal baseline. Across three independent physical executions per scenario,
-safe executions improved from 58/90 to 90/90, while sampled clutter contacts
+A frozen Radeon Scale V3 endurance suite ran 4,096, 8,192, and 16,384 complete
+Genesis manipulation worlds on one AMD Radeon GPU. Five independent processes
+per batch advanced 293,601,280 measured physics environment steps. At 16,384
+worlds, P50 throughput was 278,051.244 environment-steps/s, P95 was
+278,660.488, and the five-repeat range was 274,989.939 to 278,671.733.
+Weighted mean GPU utilization across all 15 measurements was 98.330%, observed
+peak utilization was 100%, and peak VRAM use was 22.05 GiB.
+
+The compute is then used to make an auditable robot decision. In the primary
+frozen Gate 3.2 benchmark, GuardianSim achieved repeatable safe completion in
+30 of 30 declared clutter scenarios, compared with 18 of 30 for the nominal
+baseline. Across three independent Genesis simulations per scenario, safe
+executions improved from 58/90 to 90/90, while sampled clutter contacts
 decreased from 30 to zero. Mean sampled clutter clearance increased from
 0.023191 m to 0.046003 m. These are Genesis simulation results on AMD Radeon
 Cloud, not physical-robot deployment claims.
@@ -33,13 +42,10 @@ clutter contacts, 66.249 mm worst-case sampled clearance, and 0.907 minimum
 stability. This is an engineering stress-test population, not 4,608
 independent robot trials.
 
-A separate frozen Radeon throughput run measured the same GPU backend at eight
-batch sizes from 1 to 4,096 full Genesis manipulation scenes. The 4,096-world
-point reached 152,099.018 environment-steps/s, 1,028.069 times the single-world
-throughput, with 98.651% mean and 99% peak GPU utilization. The full sweep
-advanced 98,512,896 measured environment steps. This is physics-throughput
-evidence, not policy-training throughput or an increase in the formal safety
-sample count.
+Scale V3 environment steps, Safety Swarm candidate-world pairs, and Gate 3.2
+independent executions are deliberately kept as separate units. The Scale V3
+result is physics-throughput evidence, not policy-training throughput or an
+increase in the formal safety sample count.
 
 ## 1. Target application and motivation
 
@@ -72,7 +78,7 @@ flowchart LR
     F -->|Yes| G["Repeatability confirmation"]
     G --> H["Select safest eligible action"]
     F -->|No eligible action| I["Explicit safe stop"]
-    H --> J["Independent physical execution"]
+    H --> J["Independent Genesis simulation"]
     J --> K["Post-condition monitoring and diagnosis"]
     K --> L["Bounded recovery or finish"]
 ```
@@ -176,7 +182,7 @@ because the evaluated nominal policy is scripted rather than learned:
 - three target objects: banana, lemon, and plum;
 - lateral and radial clutter configurations;
 - five deterministic seeds per object/configuration cell;
-- three independent physical executions for each strategy and scenario.
+- three independent Genesis simulations for each strategy and scenario.
 
 The scenario order, thresholds, protocol hash, and matrix hash were frozen
 before the formal outcomes were inspected:
@@ -211,7 +217,7 @@ Recorded formal environment:
 - HIP `7.2.53211-e1a6bc5663`;
 - Genesis 1.2.3.
 
-The GPU accelerates Genesis scene stepping and the repeated physical
+The GPU accelerates Genesis scene stepping and the repeated physics
 counterfactual rollouts. Mean Gate 3.2 planning wall time was 264.95 seconds per
 scenario for the frozen candidate and confirmation protocol. Mean independent
 execution time was 9.08 seconds for the baseline and 8.94 seconds for
@@ -221,30 +227,27 @@ The repository includes exact ROCm wheel installation, a dependency lock, an
 environment-manifest collector, a GPU-required preflight, a bounded
 three-candidate Genesis smoke, and a complete-source ROCm Dockerfile.
 
-### 5.1 Measured parallel-physics scale
+### 5.1 Measured parallel-physics endurance at 16,384 worlds
 
-The frozen Scale V2 run built a full headless manipulation scene per world:
+The frozen Scale V3 run built a full headless manipulation scene per world:
 one Franka, one table, and four active YCB entities. Each predeclared batch ran
-once with 200 warmup steps followed by 12,288 measured steps. Scene
+in five independent processes with an independently rebuilt scene. Every
+process used 200 warmup steps followed by 2,048 measured steps. Scene
 construction, shader setup, and JIT warmup were excluded from the timed
-interval.
+interval. Capacity-preflight short runs were excluded from the formal report.
 
-| Parallel worlds | Environment-steps/s | Speedup vs. 1 world | Parallel efficiency |
-| ---: | ---: | ---: | ---: |
-| 1 | 147.946 | 1.000x | 100.000% |
-| 16 | 2,214.149 | 14.966x | 93.537% |
-| 64 | 8,704.403 | 58.835x | 91.929% |
-| 256 | 35,637.980 | 240.884x | 94.095% |
-| 512 | 56,928.068 | 384.789x | 75.154% |
-| 1,024 | 96,589.308 | 652.867x | 63.757% |
-| 2,048 | 136,859.540 | 925.062x | 45.169% |
-| 4,096 | 152,099.018 | 1,028.069x | 25.099% |
+| Parallel worlds | Measured steps | P50 env-steps/s | P95 env-steps/s | Mean GPU | Peak VRAM |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 4,096 | 41,943,040 | 152,697.384 | 153,087.797 | 97.768% | 6.246 GiB |
+| 8,192 | 83,886,080 | 214,944.307 | 215,406.452 | 97.978% | 11.524 GiB |
+| 16,384 | 167,772,160 | 278,051.244 | 278,660.488 | 98.817% | 22.051 GiB |
 
-Throughput continued to rise through 4,096 worlds, while parallel efficiency
-fell after 256 worlds. The largest batch advanced 50,331,648 environment
-steps, recorded 98.651% mean and 99% peak GPU utilization, and used at most
-6,706,667,520 bytes (about 6.25 GiB) of VRAM. The complete eight-batch sweep
-advanced 98,512,896 measured environment steps. No formal batch was retried.
+P50 throughput rose 1.821x from 4,096 to 16,384 worlds. The largest batch's
+five-repeat range was 274,989.939 to 278,671.733 environment-steps/s and its
+coefficient of variation was 0.493%. Across all 15 formal measurements, the
+suite advanced 293,601,280 environment steps, recorded 98.330% weighted mean
+GPU utilization and 100% peak utilization, and observed no telemetry sampling
+errors. Strict schema-3 validation and every sealed payload checksum passed.
 
 ### 5.2 Safety Swarm V2 formal decision-scale run
 
@@ -305,7 +308,7 @@ motivated three Gate 3.2 changes:
 
 - expanded obstacle-aware action geometry;
 - an explicit rule forbidding fallback to an unsafe nominal action;
-- three independent physical executions for repeatability.
+- three independent Genesis simulations for repeatability.
 
 ### 6.4 Breadth evidence and limitation
 
@@ -335,10 +338,11 @@ claim universal completion under arbitrary geometry.
 5. **The report explains each decision.** It records the measured clearance,
    stability, responsible link and obstacle, decision type, protocol identity,
    logs, and checksums.
-6. **The Radeon path is measured at two useful grains.** The raw scale suite
-   isolates 1-to-4,096-world full-scene physics throughput. The formal Safety Swarm V2 run
-   shows how Radeon batching supports a complete 18-by-256 action decision.
-   Neither result is added to the 30-scenario safety sample count.
+6. **The Radeon path is measured at two useful grains.** The endurance suite
+   isolates 4,096-to-16,384-world full-scene physics throughput across 15
+   independent processes. The formal Safety Swarm V2 run shows how Radeon
+   batching supports a complete 18-by-256 action decision. Neither result is
+   added to the 30-scenario safety sample count.
 
 ## 8. Reproducibility and deliverables
 
@@ -352,7 +356,8 @@ Primary deliverables:
 - bounded real Genesis counterfactual smoke;
 - immutable Gate 3.2 schema-5 report and validator;
 - Gate 3.3 breadth evidence;
-- strict eight-batch Radeon Scale V2 report and validator receipt;
+- strict 15-measurement Radeon Scale V3 report, trial logs, telemetry, and
+  validator receipts;
 - complete Safety Swarm V2 4,608-pair report, validator, logs, and checksums;
 - annotated comparison demo and interactive showcase;
 - technical report and 3–5 minute video.
@@ -367,12 +372,12 @@ replay, aggregate Gate 3.2 result, Gate 3.3 limitation evidence, and
 simulation-only claim boundary. Its SHA-256 is recorded in the package
 checksum manifest.
 
-An 80-second supplementary Radeon preview shows the eight-point scale curve,
-the later 4,608-pair Safety Swarm V2 funnel, one accepted Seed 411 replay, and
-the frozen 30-scenario result. It does not replace the complete workflow
-video. The public showcase is the judge-facing interactive view and links to
-the immutable reports. Artifact identities are recorded in machine-readable
-sidecars and the package checksum manifest.
+An 80-second supplementary Radeon preview shows the measured full-scene scale
+curve, the later 4,608-pair Safety Swarm V2 funnel, one accepted Seed 411
+replay, and the frozen 30-scenario result. It does not replace the complete
+workflow video. The public showcase is the judge-facing interactive view and
+links to the immutable reports. Artifact identities are recorded in
+machine-readable sidecars and the package checksum manifest.
 
 ## 9. Limitations and responsible claims
 

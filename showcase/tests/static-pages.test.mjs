@@ -37,4 +37,11 @@ test("ships visible measurements before gate evaluation", async () => {
   assert.match(script, /APPLY GATES TO 18 FUTURES/);
   assert.match(script, /−1\.42 mm/);
   assert.match(script, /0\.936/);
+  assert.match(script, /Think thousands\./);
+  assert.match(script, /Execute one\./);
+  assert.match(script, /16,384 complete robot worlds in parallel/);
+  assert.match(script, /293\.6 million physics environment steps/);
+  assert.match(script, /98\.33% average GPU use/);
+  assert.match(script, /4,608-pair formal decision run/);
+  assert.match(script, /Units are never combined/);
 });

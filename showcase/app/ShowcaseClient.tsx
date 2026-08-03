@@ -48,6 +48,8 @@ const SAFETY_SWARM_V2_REPORT =
   "https://github.com/nvm-star-max/GuardianSim/blob/975a82b3e09d0458a4c02ac945859f2fdf874c4f/docs/evidence/safety-swarm-v2-formal-2026-07-30/formal-report.json";
 const SAFETY_SWARM_V2_EVIDENCE =
   "https://github.com/nvm-star-max/GuardianSim/tree/975a82b3e09d0458a4c02ac945859f2fdf874c4f/docs/evidence/safety-swarm-v2-formal-2026-07-30";
+const RADEON_SCALE_V3_EVIDENCE =
+  "https://github.com/nvm-star-max/GuardianSim/tree/7b59ebca8028806b1234453c071244a4dc9d21ae/docs/evidence/radeon-scale-v3-formal-2026-08-03";
 
 const challenges: Record<ChallengeKey, Challenge> = {
   collision: {
@@ -226,10 +228,32 @@ const architecture = [
 ];
 
 const scaleSteps = [
-  { worlds: "1", throughput: "148", speedup: "1.00×" },
-  { worlds: "64", throughput: "8,704", speedup: "58.83×" },
-  { worlds: "512", throughput: "56,928", speedup: "384.79×" },
-  { worlds: "4,096", throughput: "152,099", speedup: "1,028.07×" },
+  { worlds: "4,096", throughput: "152,697", speedup: "1.00×" },
+  { worlds: "8,192", throughput: "214,944", speedup: "1.41×" },
+  { worlds: "16,384", throughput: "278,051", speedup: "1.82×" },
+];
+
+const heroMetrics = [
+  {
+    value: "16,384",
+    label: "full robot worlds",
+    detail: "One measured Radeon batch",
+  },
+  {
+    value: "293.6M",
+    label: "physics environment steps",
+    detail: "15 independent-process measurements",
+  },
+  {
+    value: "278,051",
+    label: "env-steps / second P50",
+    detail: "At 16,384 full scenes",
+  },
+  {
+    value: "98.33%",
+    label: "average GPU use",
+    detail: "100% measured peak",
+  },
 ];
 
 function MiniScene({
@@ -502,12 +526,13 @@ function RadeonScaleSection() {
       <div className="section-heading scale-heading">
         <div>
           <p className="kicker">RADEON PARALLEL PHYSICS LAB</p>
-          <h2>One Radeon GPU. 4,096 robot worlds.</h2>
+          <h2>One Radeon GPU. 16,384 robot worlds.</h2>
         </div>
         <p>
-          Eight fixed batches, 98.51 million measured physics steps, one
-          preserved schema-2 report. This is compute evidence, separate from
-          the formal safety sample count.
+          Three frozen endurance batches, five independent processes each,
+          293.6 million measured physics environment steps, and one preserved
+          schema-3 report. This is compute evidence, separate from the formal
+          safety sample count.
         </p>
       </div>
 
@@ -523,7 +548,7 @@ function RadeonScaleSection() {
                 <dd>{step.throughput}</dd>
               </div>
               <div>
-                <dt>Speedup</dt>
+                <dt>P50 vs 4,096</dt>
                 <dd>{step.speedup}</dd>
               </div>
             </dl>
@@ -532,7 +557,7 @@ function RadeonScaleSection() {
       </div>
 
       <div className="radeon-scale-shell">
-        <div className="future-wall" aria-label="Measured 4,096-world Radeon batch">
+        <div className="future-wall" aria-label="Measured 16,384-world Radeon batch">
           {Array.from({ length: 256 }, (_, index) => (
             <i
               key={index}
@@ -541,29 +566,81 @@ function RadeonScaleSection() {
             />
           ))}
           <div className="future-wall-label">
-            <span>4,096 SIMULTANEOUS FRANKA WORLDS · 1 TILE = 16 WORLDS</span>
-            <b>50,331,648 measured environment steps</b>
+            <span>16,384 SIMULTANEOUS FRANKA WORLDS · 1 TILE = 64 WORLDS</span>
+            <b>167,772,160 measured environment steps at the largest batch</b>
           </div>
         </div>
         <div className="scale-console">
-          <span>STRICT SCHEMA-2 VALIDATION PASSED</span>
-          <strong>152,099 env-steps/s</strong>
-          <p>4,096 headless Franka worlds on one AMD Radeon GPU</p>
+          <span>STRICT SCHEMA-3 VALIDATION PASSED</span>
+          <strong>278,051 env-steps/s</strong>
+          <p>P50 at 16,384 headless Franka worlds on one AMD Radeon GPU</p>
           <dl>
-            <div><dt>Speedup vs 1 world</dt><dd>1,028.07×</dd></div>
-            <div><dt>Parallel efficiency</dt><dd>25.1%</dd></div>
-            <div><dt>GPU use</dt><dd>98.7% mean · 99% peak</dd></div>
-            <div><dt>Peak VRAM</dt><dd>6.25 GiB</dd></div>
-            <div><dt>Measured workload</dt><dd>50.33M env-steps</dd></div>
+            <div><dt>P95 throughput</dt><dd>278,660 env-steps/s</dd></div>
+            <div><dt>Repeat range</dt><dd>274,990–278,672</dd></div>
+            <div><dt>GPU use</dt><dd>98.82% batch mean · 100% peak</dd></div>
+            <div><dt>Peak VRAM</dt><dd>22.05 GiB</dd></div>
+            <div><dt>Formal workload</dt><dd>293.60M env-steps</dd></div>
           </dl>
           <small>
-            98.51M steps across the full eight-batch sweep · not training
-            examples or independent safety trials
+            15 independent-process measurements · capacity preflights excluded
+            · not training examples or independent safety trials
           </small>
+          <a href={RADEON_SCALE_V3_EVIDENCE} target="_blank" rel="noreferrer">
+            Inspect schema-3 report, trials and checksums ↗
+          </a>
         </div>
       </div>
 
       <SafetySwarmFormalSection />
+    </section>
+  );
+}
+
+function DecisionImpactSection() {
+  return (
+    <section className="decision-impact" id="decision">
+      <div className="decision-impact-heading">
+        <div>
+          <p className="kicker dark">FROM PARALLEL COMPUTE TO ROBOT ACTION</p>
+          <h2>Thousands of measured futures. One decision.</h2>
+        </div>
+        <p>
+          Radeon parallelism is not a background implementation detail. It is
+          the engine that lets GuardianSim evaluate an entire uncertainty
+          field before the robot commits to a single action.
+        </p>
+      </div>
+
+      <div className="decision-funnel" aria-label="4,608 futures reduced to one robot action">
+        <article>
+          <span>PARALLEL PHYSICAL EVALUATION</span>
+          <strong>4,608</strong>
+          <p>measured candidate-world pairs</p>
+        </article>
+        <i>→</i>
+        <article>
+          <span>HARD-GATE SURVIVORS</span>
+          <strong>5</strong>
+          <p>candidates passed all 256 worlds</p>
+        </article>
+        <i>→</i>
+        <article className="decision-selected">
+          <span>ROBOT OUTPUT</span>
+          <strong>1</strong>
+          <p>action selected for execution</p>
+        </article>
+      </div>
+
+      <div className="decision-outcomes" aria-label="Measured robot outcomes">
+        <article><span>REPEATABLE SCENARIOS</span><strong>18/30 <i>→</i> 30/30</strong></article>
+        <article><span>INDEPENDENT EXECUTIONS</span><strong>58/90 <i>→</i> 90/90</strong></article>
+        <article><span>CLUTTER CONTACTS</span><strong>30 <i>→</i> 0</strong></article>
+      </div>
+
+      <small>
+        The 16,384-world scale benchmark and the 4,608-pair formal decision run
+        are separately frozen, validated workloads. Units are never combined.
+      </small>
     </section>
   );
 }
@@ -646,10 +723,9 @@ export function ShowcaseClient() {
           <span>GUARDIANSIM</span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#arena">Arena</a>
           <a href="#scale">Radeon Scale</a>
-          <a href="#formal">4,608 Run</a>
-          <a href="#replay">Replay</a>
+          <a href="#decision">4,608 → 1</a>
+          <a href="#arena">Arena</a>
           <a href="#proof">Proof</a>
         </nav>
         <a
@@ -665,45 +741,49 @@ export function ShowcaseClient() {
       <section className="hero" id="top">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
-          <p className="kicker">AMD RADEON · ROBOT SAFETY CO-PROCESSOR</p>
+          <p className="kicker">AMD RADEON + ROCM · PARALLEL FUTURE ENGINE</p>
           <h1>
-            4,608 futures.
+            Think thousands.
             <br />
-            <span>One action.</span>
+            <span>Execute one.</span>
           </h1>
           <p className="hero-lede">
-            A PPO, VLA, or scripted policy proposes a motion. GuardianSim uses
-            Radeon to test it across physical futures before one action
-            executes—or the robot stops.
+            One AMD Radeon GPU runs 16,384 complete robot worlds in parallel.
+            Across 15 independent-process measurements, GuardianSim records
+            293.6 million physics environment steps and 98.33% average GPU use.
+            A separate formal run turns thousands of physical futures into one
+            evidence-backed robot decision.
           </p>
           <div className="hero-actions">
             <a className="primary-action" href="#scale">
-              Enter the parallel lab <span>↓</span>
+              Watch Radeon scale <span>↓</span>
             </a>
             <a className="secondary-action" href="#arena">
-              Try the safety arena
+              Try the robot arena
             </a>
           </div>
         </div>
-        <div className="hero-manifesto">
-          <span>POLICY PROPOSES</span>
-          <i />
-          <span>RADEON SIMULATES</span>
-          <i />
-          <span>HARD GATES VERIFY</span>
-          <i />
-          <span>MOVE OR STOP</span>
+        <div className="hero-benchmark-grid" aria-label="Verified Radeon benchmark highlights">
+          {heroMetrics.map((metric) => (
+            <article key={metric.label}>
+              <strong>{metric.value}</strong>
+              <span>{metric.label}</span>
+              <small>{metric.detail}</small>
+            </article>
+          ))}
         </div>
-        <div className="hero-score" aria-label="Strictly validated Radeon scale evidence">
-          <span>RADEON SCALE V2 · STRICTLY VALIDATED</span>
-          <strong>152,099</strong>
-          <p>environment steps per second · 4,096 full scenes</p>
-          <div>
-            <b>98.51M measured physics steps</b>
-            <small>98.7% mean GPU · 99% peak GPU at 4,096 worlds</small>
-          </div>
+        <div className="hero-manifesto">
+          <span>ONE RADEON GPU</span>
+          <i />
+          <span>THOUSANDS OF PHYSICAL FUTURES</span>
+          <i />
+          <span>MEASURED WITH ROCM</span>
+          <i />
+          <span>ONE ROBOT DECISION</span>
         </div>
       </section>
+
+      <DecisionImpactSection />
 
       <RadeonScaleSection />
 
@@ -980,7 +1060,7 @@ export function ShowcaseClient() {
           <article className="metric-card">
             <span>INDEPENDENT SAFE EXECUTIONS</span>
             <div><b>58/90</b><i>→</i><strong>90/90</strong></div>
-            <p>Three physical executions per strategy and scenario.</p>
+            <p>Three independent Genesis simulations per strategy and scenario.</p>
           </article>
           <article className="metric-card">
             <span>CLUTTER CONTACT EXECUTIONS</span>
@@ -1005,12 +1085,15 @@ export function ShowcaseClient() {
         </div>
       </section>
 
-      <section className="evidence-cta">
+      <section className="evidence-cta" id="evidence">
         <div>
           <p className="kicker">AUDIT THE CLAIM</p>
           <h2>No magic numbers. Just preserved evidence.</h2>
         </div>
         <div className="evidence-links">
+          <a href={RADEON_SCALE_V3_EVIDENCE} target="_blank" rel="noreferrer">
+            Radeon Scale V3 · 16,384-world formal evidence <span>↗</span>
+          </a>
           <a href={SAFETY_SWARM_V2_REPORT} target="_blank" rel="noreferrer">
             Safety Swarm V2 · 4,608-pair report <span>↗</span>
           </a>
@@ -1047,7 +1130,7 @@ export function ShowcaseClient() {
           <br />
           No physical-robot deployment claim.
         </p>
-        <span>Test 4,608 futures before one action moves.</span>
+        <span>Think thousands. Execute one.</span>
       </footer>
     </main>
   );

@@ -2231,3 +2231,42 @@ Evidence and working material:
 - This result is preserved only on `agent/radeon-scale-v3`. The released V4,
   Pages site, organizer package, and PR #39 remain unchanged pending owner
   review of the public presentation direction.
+
+## Local Radeon Scale V3 presentation candidate — 2026-08-03
+
+- Built an isolated review branch, `agent/radeon-scale-v3-showcase`, from the
+  verified Scale V3 evidence commit `7b59ebca8028806b1234453c071244a4dc9d21ae`.
+  The released V4 worktree and its existing uncommitted review artifacts were
+  not modified.
+- Reframed the judge-facing opening around the locked line **“Think thousands.
+  Execute one.”** AMD Radeon is the compute protagonist: the first viewport
+  now shows `16,384` complete Genesis worlds, `293.6M` measured environment
+  steps, `278,051 env-steps/s` largest-batch P50, and `98.33%` weighted mean
+  GPU utilization with `100%` observed peak.
+- Kept unlike units separate. The Scale V3 full-scene benchmark is not added to
+  the Safety Swarm `4,608 → 5 → 1` candidate-world funnel or the Gate 3.2
+  `18/30 → 30/30`, `58/90 → 90/90`, and `30 → 0` safety results.
+- Produced a local eight-page Scale V3 technical-report PDF, SHA-256
+  `dc0f38bf47544187eec274d876d5f72cbecbf686d1c9f548227eb5e3beb9dcef`.
+  All pages were rendered and visually inspected; text extraction and wording
+  checks passed.
+- Produced an intentionally silent 80-second, 1920×1080, 20 FPS review video,
+  SHA-256 `b10515d7f880345a6db840f00d7236c1ae6f05da0b20ba7edf3a405434a7035f`.
+  Full decode, eight sampled decodes, source hashes, metric locks, and claim
+  boundaries passed strict validation. The sidecar SHA-256 is
+  `ccdeedccc34a8f5368218cfd86b2c72831cec191da346f6f58e69bdeef28f678`.
+- Corrected judge-facing wording from “physical executions” to “independent
+  Genesis simulations” so the visual and report cannot be mistaken for a
+  physical-robot experiment.
+- Final local checks passed 116/116 Python tests, Python compilation, 5/5
+  server-rendered showcase tests, 3/3 static Pages tests, both showcase builds,
+  ESLint, strict Scale V3 video validation, PDF structure/text checks, desktop
+  1440×1050 and mobile 390×844 overflow checks, and `git diff --check`.
+- A detached clean worktree at the candidate commit rebuilt both front-end
+  targets and reran 5/5 + 3/3 presentation tests successfully. The previously
+  ignored Vite hosting plugin is now tracked, so a clean checkout no longer
+  depends on an unversioned local file.
+- Candidate scope and the public gate are recorded in
+  `docs/submission/RADEON_SCALE_V3_PRESENTATION_CANDIDATE_2026-08-03.md`.
+  No commit was pushed, no Pages deployment occurred, no release tag moved,
+  and organizer PR #39 remains unchanged pending owner visual approval.

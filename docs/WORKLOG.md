@@ -2389,3 +2389,51 @@ Gate decision:
   unchanged. Scale V3 remains an isolated experiment until the owner approves
   how the new Radeon-first numbers should replace or supplement the released
   narrative.
+
+## 2026-08-03 — Built the local Scale V3 judge-facing candidate
+
+- Created isolated worktree
+  `/Users/aolos/Downloads/stitch_/GuardianSim-scale-v3-showcase` on branch
+  `agent/radeon-scale-v3-showcase`, based on verified Scale V3 evidence commit
+  `7b59ebc`. Preserved the dirty released-V4 worktree unchanged.
+- Selectively integrated the existing showcase architecture and replaced the
+  Scale V2 presentation with the three-batch Scale V3 endurance evidence.
+  Added source-backed rendering tests for schema-3 metrics and immutable
+  evidence links.
+- Put `16,384`, `293.6M`, `278,051`, and `98.33% / 100% peak` in the first
+  desktop viewport. Added the three formal batches, five-repeat P50/P95/range,
+  GPU utilization, VRAM, and capacity-preflight exclusion to the scale section.
+- Preserved the explicit unit boundary between environment steps,
+  candidate-world pairs, simulated safety executions, and physical-robot
+  claims. Replaced ambiguous “physical executions” wording with “independent
+  Genesis simulations” in the website, report, and video.
+- Updated `TECHNICAL_REPORT.md` and built
+  `output/pdf/GuardianSim-Technical-Report-Scale-V3-Candidate.pdf`. `pdfinfo`
+  reported eight unencrypted A4 pages, no JavaScript, forms, or suspect flags.
+  Rendered every page; visually checked the dense abstract, Scale V3 table,
+  result table, references, headers, and footers. Final SHA-256 is
+  `dc0f38bf47544187eec274d876d5f72cbecbf686d1c9f548227eb5e3beb9dcef`.
+- Added a separate historical-safe V3 video generator and validator rather
+  than overwriting the V2 scripts. Generated the silent
+  `GuardianSim-Radeon-Scale-V3-review-v1.mp4`, 80.0 seconds at 1920×1080 and
+  20 FPS. Full decode and source/metric validation passed; final video SHA-256
+  is `b10515d7f880345a6db840f00d7236c1ae6f05da0b20ba7edf3a405434a7035f`
+  and sidecar SHA-256 is
+  `ccdeedccc34a8f5368218cfd86b2c72831cec191da346f6f58e69bdeef28f678`.
+- Inspected title, all three scale stages, Safety Swarm funnel, accepted Seed
+  411 replay, full four-card proof frame, and close. No text overflow, card
+  escape, or metric collision was observed.
+- Rebuilt and inspected the static site at 1440×1050 and 390×844. Both reported
+  `scrollWidth == clientWidth`, and the updated Genesis-simulation wording was
+  present. Full-page desktop and mobile screenshots were inspected.
+- Verification passed: 116 Python tests, Python compilation, Vite Pages build,
+  Vinext build, ESLint, 5 server-rendered tests, 3 static Pages tests, strict
+  video validation, PDF text/structure checks, and `git diff --check`.
+- Fixed clean-checkout reproducibility by explicitly tracking
+  `showcase/build/sites-vite-plugin.ts`, which had been hidden by the generic
+  `build/` ignore rule. A detached worktree at the candidate checkpoint rebuilt
+  Vite Pages and Vinext and passed the 5/5 + 3/3 presentation tests.
+- Wrote
+  `docs/submission/RADEON_SCALE_V3_PRESENTATION_CANDIDATE_2026-08-03.md` as
+  the local review record. Did not push, deploy Pages, replace the organizer
+  package, move a tag, edit PR #39, or access/destroy the Radeon Cloud instance.
