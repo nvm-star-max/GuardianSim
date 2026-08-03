@@ -11,7 +11,9 @@ submission. It separates four kinds of evidence:
 3. **formal safety benchmark evidence** — validates the immutable 30-scenario
    Gate 3.2 report already recorded on AMD Radeon Cloud;
 4. **formal decision-scale evidence** — validates the immutable Safety Swarm
-   V2 run covering 18 candidate actions across 256 uncertainty worlds each.
+   V2 run covering 18 candidate actions across 256 uncertainty worlds each;
+5. **formal Radeon endurance evidence** — validates 15 independent Scale V3
+   measurements at 4,096, 8,192, and 16,384 complete Genesis worlds.
 
 The published metrics are simulation results. They are not claims of
 physical-robot deployment or universal safety.
@@ -205,6 +207,37 @@ The strict validator must report:
 The full search population contains 4,608 candidate-world pairs. It is an
 engineering stress-test population, not 4,608 independent robot trials and
 not a physical-robot safety guarantee.
+
+### 5.2 Validate the 16,384-world Radeon Scale V3 result
+
+The Scale V3 suite is a separate physics-throughput benchmark. It must not be
+combined with the Gate 3.2 execution count or Safety Swarm candidate-world
+count.
+
+```bash
+uv run --frozen --no-sync python scripts/validate_radeon_scale_v3_report.py \
+  docs/evidence/radeon-scale-v3-formal-2026-08-03/report.json
+
+cd docs/evidence/radeon-scale-v3-formal-2026-08-03
+sha256sum -c SHA256SUMS
+```
+
+On macOS, use `shasum -a 256 -c SHA256SUMS` instead.
+
+The strict validator must report:
+
+- schema version `3` and `15` formal measurements;
+- largest batch `16,384` complete Genesis worlds;
+- `293,601,280` total measured environment steps;
+- report SHA-256
+  `c09573787e474f8573b9a3ebab7bd9d1f6a81502c6d880c43b07aec5817bc692`.
+
+At the largest batch, the preserved aggregate records `278,051.244`
+environment-steps/s P50, `278,660.488` P95, `98.817%` mean GPU use, and
+`22.05 GiB` peak VRAM. Across all 15 processes, weighted mean GPU use was
+`98.330%` and observed peak use was `100%`. Environment steps are Genesis
+physics steps, not policy-training samples, inference tokens, independent
+safety trials, or physical-robot executions.
 
 ## 6. Docker path
 

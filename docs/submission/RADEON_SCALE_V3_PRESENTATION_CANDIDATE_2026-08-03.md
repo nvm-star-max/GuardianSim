@@ -1,7 +1,8 @@
 # Radeon Scale V3 presentation candidate — 2026-08-03
 
-Status: local review candidate. This note does not authorize a public release,
-Pages deployment, tag move, organizer-package replacement, or PR #39 edit.
+Status: owner approved for V5 publication on 2026-08-03. Publication must use
+a new immutable tag, preserve V4 unchanged, replace only the existing
+organizer-package directory, and update PR #39 in place.
 
 ## Judge-facing thesis
 
@@ -60,10 +61,10 @@ safe-clearance action on the right. Its sidecar binds source hashes, output
 hash, chapter windows, claim boundaries, and locked metrics. V1 remains intact
 as a historical candidate.
 
-The owner approved the V2 visual sequence. A separate V3 review candidate adds
+The owner approved the V2 visual sequence. The V3 release version adds
 seven English Qwen `Ethan` narration segments and fixed English captions without
-changing the approved 90-second image sequence. It remains a local listening
-candidate rather than a public release.
+changing the approved 90-second image sequence. The owner approved that V3
+narrated version for final publication on 2026-08-03.
 
 ## Review completed locally
 
@@ -85,14 +86,10 @@ candidate rather than a public release.
 - wording uses “Genesis simulations” rather than “physical executions” to
   avoid implying a hardware-robot experiment.
 
-## Public-release gate
+## Public-release decision
 
-The owner should review the local website screenshots, PDF, and silent video.
-Only after explicit approval should the project decide whether to:
-
-1. replace the public V4/Scale V2 presentation with a V5/Scale V3 release;
-2. publish a new immutable source tag and Pages build;
-3. replace only the organizer package contents in the existing contest fork;
-4. update organizer PR #39 in place without opening a new PR.
-
-Until then, public V4, Pages, the organizer package, and PR #39 remain unchanged.
+The owner approved the website, report, silent V2 sequence, and narrated V3
+version. The V5 release therefore replaces the public presentation layer while
+retaining every older immutable tag and evidence set. It publishes a new source
+tag and Pages build, replaces only the existing organizer package directory,
+and updates PR #39 without opening, closing, or merging another pull request.

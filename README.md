@@ -20,14 +20,16 @@ Mean clutter clearance increased from `0.023191 m` to `0.046003 m`
 (`+98.36%`). The complete schema-5 report, logs, environment, checksums, and
 failed cross-process resume audit trail are preserved in the repository.
 
-The strictly validated Radeon Scale V2 suite advances `4,096` full headless
-Franka/table/four-YCB scenes at `152,099.018 environment-steps/s`. The largest
-batch contains `50,331,648` measured environment steps and records
-`98.651%` mean / `99%` peak GPU utilization. The complete eight-batch sweep
-contains `98,512,896` measured steps. These are physics-throughput results,
-not training examples or additional independent safety scenes. Raw reports,
-per-batch logs, telemetry, validation, and checksums are preserved under
-[`docs/evidence/radeon-scale-v2-formal-20260731`](docs/evidence/radeon-scale-v2-formal-20260731).
+The strictly validated Radeon Scale V3 endurance suite ran `4,096`, `8,192`,
+and `16,384` complete headless Franka/table/four-YCB worlds in five independent
+processes per batch. At `16,384` worlds it sustained `278,051.244`
+environment-steps/s P50 (`278,660.488` P95), with `98.817%` mean GPU use and
+`22.05 GiB` peak VRAM. Across all 15 measurements the suite advanced
+`293,601,280` environment steps, recorded `98.330%` weighted mean GPU use, and
+reached `100%` observed peak utilization. These are physics-throughput
+results, not training examples or additional independent safety scenes. Raw
+reports, per-process logs, telemetry, validation, and checksums are preserved
+under [`docs/evidence/radeon-scale-v3-formal-2026-08-03`](docs/evidence/radeon-scale-v3-formal-2026-08-03).
 
 An earlier batched decision demo executes `18` candidate actions × `3`
 physical repeats as `54` simultaneous Genesis worlds; it remains separate
@@ -85,6 +87,7 @@ Project documents:
 - [`docs/evidence/radeon-p0-2026-07-29`](docs/evidence/radeon-p0-2026-07-29)
 - [`docs/evidence/safety-swarm-v2-formal-2026-07-30`](docs/evidence/safety-swarm-v2-formal-2026-07-30)
 - [`docs/evidence/radeon-scale-v2-formal-20260731`](docs/evidence/radeon-scale-v2-formal-20260731)
+- [`docs/evidence/radeon-scale-v3-formal-2026-08-03`](docs/evidence/radeon-scale-v3-formal-2026-08-03)
 - [`showcase/README.md`](showcase/README.md)
 
 ## Interactive showcase

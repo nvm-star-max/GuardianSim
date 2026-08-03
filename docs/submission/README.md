@@ -1,7 +1,7 @@
 # GuardianSim Submission Working Set
 
-This directory contains the English source material for the Track 3
-submission. It is a working set, not yet the final uploaded package.
+This directory contains the English source material and immutable release
+records for the Track 3 submission.
 
 ## Current artifacts
 
@@ -9,16 +9,9 @@ submission. It is a working set, not yet the final uploaded package.
   aligned to the official Track 3 section list and limited to preserved
   metrics.
 - [`../../output/pdf/GuardianSim-Technical-Report.pdf`](../../output/pdf/GuardianSim-Technical-Report.pdf):
-  local eight-page Scale V2 release candidate. It was rendered page by page
-  and visually inspected, but has not replaced the released V3 package PDF.
-  PDF SHA-256:
-  `42338e06481c4caa08b6e53ab61ed7d522de0216931dfa402314cbcbdd6e850e`.
+  final eight-page Scale V3 report generated from the source below.
 - [`GuardianSim-Technical-Report.pdf`](GuardianSim-Technical-Report.pdf):
-  currently released seven-page V3 submission edition with no draft markings.
-  The Radeon section now separates the 1/16/64/256-world throughput curve, the
-  30-scenario safety benchmark, and the formal 18 × 256 = 4,608-pair decision
-  run. PDF SHA-256:
-  `4028372be15ca2fba2a0cd7f1ddd7e51c8d9cd012521e4be80cc40a523500ef3`.
+  package copy of that final report.
 - [`GuardianSim-Aegis-Motion-demo-review-v2.mp4`](GuardianSim-Aegis-Motion-demo-review-v2.mp4):
   the approved 4:41 complete-workflow submission video with Qwen3-TTS Instruct
   narration, fixed chapter captions, and normalized loudness.
@@ -69,6 +62,13 @@ submission. It is a working set, not yet the final uploaded package.
 - [`GuardianSim-Radeon-Parallel-Futures-narrated-v4-validation.json`](GuardianSim-Radeon-Parallel-Futures-narrated-v4-validation.json):
   strict V4 full audio/video decode, narration and caption hashes, source
   identity, metric, duration, and claim-boundary validation.
+- [`GuardianSim-Radeon-Scale-V3-narrated-v3.mp4`](GuardianSim-Radeon-Scale-V3-narrated-v3.mp4):
+  owner-approved 90-second Scale V3 Radeon preview with Qwen `Ethan` narration,
+  fixed captions, and the formal Seed 411 simulation replay finale.
+- [`GuardianSim-Radeon-Scale-V3-narrated-v3.json`](GuardianSim-Radeon-Scale-V3-narrated-v3.json),
+  [`GuardianSim-Radeon-Scale-V3-narrated-v3.ass`](GuardianSim-Radeon-Scale-V3-narrated-v3.ass),
+  and [`GuardianSim-Radeon-Scale-V3-narrated-v3-validation.json`](GuardianSim-Radeon-Scale-V3-narrated-v3-validation.json):
+  source identity, narration, caption, locked-metric, and strict decode receipts.
 - [`COMPETITOR_SCAN_2026-07-27.md`](COMPETITOR_SCAN_2026-07-27.md): a
   time-stamped inventory of the official repository and GuardianSim's
   evidence-backed competitive position.
@@ -82,16 +82,16 @@ submission. It is a working set, not yet the final uploaded package.
   record without private identity data.
 - [`OFFICIAL_PR_DRAFT.md`](OFFICIAL_PR_DRAFT.md): the English official-repo
   pull-request title and body draft.
+- [`OFFICIAL_PR_BODY_V5.md`](OFFICIAL_PR_BODY_V5.md): the exact approved V5
+  body for updating organizer PR #39 in place.
 - **Public judge-facing showcase:**
   <https://nvm-star-max.github.io/GuardianSim/> (no sign-in required). The
   published V3 static build promotes the exact 4,608-pair matrix and
   `4,608 → 5 → 1` funnel.
 - [`official-package/Track3-Aegis-Motion-GuardianSim`](official-package/Track3-Aegis-Motion-GuardianSim):
-  self-contained V4 release candidate prepared for the official contest fork.
-  It now includes the eight-page Scale V2 report, owner-approved narrated V5
-  supplementary preview, strict eight-batch scale report, compact Safety Swarm
-  V2 formal summary, validator outputs, and recursive checksums. The candidate
-  remains local until the V4 release gate is explicitly opened.
+  self-contained V5 package for the existing official contest PR. It includes
+  the Scale V3 report, approved 90-second preview, strict schema-3 scale report,
+  compact Safety Swarm V2 summary, validator outputs, and recursive checksums.
 
 Earlier scale-video review iterations remain local development artifacts and
 are intentionally excluded from the public release.
@@ -152,6 +152,19 @@ Existing organizer PR #39 was updated in place at fork commit
 all ten package checksums; PR state was `OPEN`, non-draft, and `MERGEABLE`.
 The organizer repository reports no configured status checks for the branch.
 The PR remains unmerged for organizer review.
+
+## V5 release state
+
+The owner approved the Scale V3 presentation on 2026-08-03. V5 promotes the
+verified 16,384-world endurance result, 293,601,280 measured environment steps,
+278,051 env-steps/s P50, 98.330% full-suite weighted mean GPU use, and 22.05
+GiB peak VRAM. The units remain separate from the 4,608 → 5 → 1 decision
+funnel and the 30-scenario safety result.
+
+The approved 90-second narrated preview is
+[`GuardianSim-Radeon-Scale-V3-narrated-v3.mp4`](GuardianSim-Radeon-Scale-V3-narrated-v3.mp4).
+Its sidecar, fixed captions, and strict validation receipt are retained beside
+it. V4 remains immutable as historical evidence.
 
 ## V4 release state
 

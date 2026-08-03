@@ -2323,3 +2323,21 @@ Evidence and working material:
 - The Qwen credential remains only in ignored local `.env.local` files and was
   neither printed nor added to metadata or Git. V3 is not pushed or public;
   V4/Pages, the organizer package, release tags, and PR #39 remain unchanged.
+## V5 final-publication gate opened — 2026-08-03
+
+- The owner approved the Scale V3 website, eight-page report, silent V2 visual
+  sequence, narrated V3, and final Seed 411 simulation replay.
+- The approved public thesis is `Think thousands. Execute one.` Radeon compute
+  is the first-screen result; the 4,608 → 5 → 1 decision and Gate 3.2 safety
+  result remain separate evidence with separate units.
+- Prepared a V5 official package with the final PDF, 90-second narrated Scale
+  V3 preview, strict schema-3 report/validation, compact Safety Swarm receipts,
+  and recursive checksums. Package manifest SHA-256 is
+  `827f442d5f31d7824f2699c3c1853cd5e6f544abb549f3a9ec0824370b9d98d6`.
+- Local release gate passed 116/116 Python tests, Python compilation, strict
+  Scale V3 evidence checks, 5/5 rendered-site tests, 3/3 static Pages tests,
+  both builds, ESLint, complete media validation/decode, eight-page PDF visual
+  inspection, package checksums, and diff hygiene.
+- V4 and all older tags remain immutable. The authorized remote operation is a
+  new V5 tag, a new Pages deployment, replacement of only the existing contest
+  package directory, and an in-place update to PR #39.

@@ -372,7 +372,7 @@ replay, aggregate Gate 3.2 result, Gate 3.3 limitation evidence, and
 simulation-only claim boundary. Its SHA-256 is recorded in the package
 checksum manifest.
 
-An 80-second supplementary Radeon preview shows the measured full-scene scale
+An approved 90-second supplementary Radeon preview shows the measured full-scene scale
 curve, the later 4,608-pair Safety Swarm V2 funnel, one accepted Seed 411
 replay, and the frozen 30-scenario result. It does not replace the complete
 workflow video. The public showcase is the judge-facing interactive view and

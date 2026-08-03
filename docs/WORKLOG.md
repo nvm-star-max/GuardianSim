@@ -2493,3 +2493,25 @@ Gate decision:
 - Kept the result local for owner listening review. No push, Pages deployment,
   organizer-package replacement, tag move, PR #39 edit, or Radeon Cloud action
   occurred.
+## 2026-08-03 — Opened the V5 final-publication gate
+
+- Received owner approval for the Scale V3 website, final report, 90-second
+  narrated preview, and simulation replay ending.
+- Updated the root README and reproducibility guide to the strictly validated
+  16,384-world Scale V3 result. Kept Genesis environment steps, Safety Swarm
+  candidate-world pairs, and Gate 3.2 independent simulations separate.
+- Rebuilt the final eight-page report from the Scale V3 Markdown source,
+  rendered all pages, and visually checked every page for clipping, overlap,
+  broken tables, draft labels, and glyph failures.
+- Replaced the local official package's PDF, preview, scale report, scale
+  validation, package README, evidence README, and recursive manifest. The
+  package totals 4,127,637 bytes and manifest SHA-256 is
+  `827f442d5f31d7824f2699c3c1853cd5e6f544abb549f3a9ec0824370b9d98d6`.
+- Added the exact V5 organizer PR body and a pre-publication artifact receipt.
+- Local release gate passed: 116/116 Python tests, compilation, strict schema-3
+  validation and sealed evidence checksums, 5/5 rendered tests, 3/3 Pages
+  tests, both builds, ESLint, strict silent/narrated media validation, full
+  package A/V decode, package checksums, PDF visual QA, and diff hygiene.
+- No remote branch, tag, Pages deployment, organizer package, or PR was changed
+  during this preparation step. The Radeon Cloud instance was not accessed or
+  destroyed.

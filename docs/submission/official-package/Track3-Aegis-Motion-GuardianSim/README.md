@@ -1,6 +1,6 @@
-# GuardianSim - Counterfactual Safety Certification for Robot Manipulation
+# GuardianSim — Think Thousands. Execute One.
 
-**Track:** Track 3 - Physical AI Challenge
+**Track:** Track 3 — Physical AI Challenge
 
 **Team:** Aegis Motion
 
@@ -9,65 +9,74 @@
 
 ## Judge quick start
 
-Open the public **Parallel Futures** evidence arena:
-<https://nvm-star-max.github.io/GuardianSim/>
+1. Open the public evidence arena: <https://nvm-star-max.github.io/GuardianSim/>
+2. Watch the packaged 90-second Radeon preview.
+3. Read the packaged technical report and inspect the machine-readable evidence.
 
-No account or sign-in is required. The main view renders the exact 18 × 256
-formal outcome matrix and the `4,608 → 5 → 1` decision funnel. Judges can also
-challenge three preserved decisions, inspect the Radeon scale path, and follow
-displayed metrics to immutable evidence. The site replays published results;
-it does not create new benchmark samples.
+No account is required. The site replays preserved results; it does not create
+new benchmark samples in the browser.
 
-## Project overview
+## What GuardianSim does
 
-GuardianSim is a policy-agnostic safety layer for robot manipulation in
-Genesis. Before a Franka arm executes a policy-proposed fruit-picking action,
-GuardianSim restores a fingerprinted scene snapshot, evaluates bounded
-counterfactual grasp actions through physical rollouts on an AMD Radeon GPU,
-applies frozen hard safety gates, and either selects an eligible action or
-explicitly stops.
+GuardianSim is a policy-agnostic decision layer for simulated robot
+manipulation. A PPO, VLA, or scripted policy can propose a motion. GuardianSim
+restores one fingerprinted Genesis state, evaluates bounded counterfactual
+actions on an AMD Radeon GPU, applies frozen hard safety gates, then permits
+one eligible action or explicitly stops.
 
-The project addresses a practical failure mode: a robot can complete a grasp
-while contacting nearby clutter or following an unnecessarily low-clearance
-path. GuardianSim separates task completion from physical execution safety and
-preserves an auditable decision report for every scenario.
+The Radeon role is direct: run thousands of complete robot worlds in parallel,
+then use the same parallel-physics path to screen candidate actions before one
+simulated motion is executed.
 
-## Verified result
+## Memorable Radeon result
 
-The primary result comes from a frozen 30-scenario Gate 3.2 Genesis benchmark
-with three independent physical executions per strategy and scenario:
+The frozen Scale V3 endurance suite ran one full headless manipulation scene
+per world: Franka, table, and four active YCB entities.
 
-| Metric | Nominal baseline | GuardianSim |
-| --- | ---: | ---: |
-| Repeatable safe scenarios | 18/30 | 30/30 |
-| Independent safe executions | 58/90 | 90/90 |
-| Sampled clutter-contact executions | 30 | 0 |
-| Mean sampled clutter clearance | 23.191 mm | 46.003 mm |
+| Parallel worlds | Measured steps | P50 env-steps/s | P95 env-steps/s | Mean GPU | Peak VRAM |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 4,096 | 41,943,040 | 152,697.384 | 153,087.797 | 97.768% | 6.246 GiB |
+| 8,192 | 83,886,080 | 214,944.307 | 215,406.452 | 97.978% | 11.524 GiB |
+| 16,384 | 167,772,160 | 278,051.244 | 278,660.488 | 98.817% | 22.051 GiB |
 
-Mean sampled clearance increased by **98.36%**. These are Genesis simulation
-measurements, not physical-robot deployment claims.
+Five independent processes were run per batch. Across all 15 formal
+measurements, Radeon advanced **293,601,280** Genesis environment steps,
+recorded **98.330%** weighted mean GPU utilization, and reached **100%**
+observed peak utilization. The largest batch's five-repeat range was
+274,989.939–278,671.733 environment-steps/s.
 
-## Formal decision-scale result
+These are physics environment steps from complete simulated worlds, not PPO
+samples, inference tokens, independent robot trials, or physical-robot data.
 
-Safety Swarm V2 evaluated **18 candidate actions × 256 uncertainty worlds =
-4,608 measured candidate-world pairs**. Five candidates passed all 256 worlds.
-Frozen ranking selected
-`yaw_-45.0_retreat_+0.000_approach_+0.140`, which recorded:
+## Robot-decision result
+
+The separate Safety Swarm V2 run evaluated **18 candidate actions × 256
+uncertainty worlds = 4,608 candidate-world pairs**. Five actions passed all
+256 worlds. Frozen ranking selected one action with:
 
 - **256/256** safe worlds;
 - **0** sampled clutter contacts;
 - **66.249 mm** worst-case sampled clearance;
-- **66.304 mm** fifth-percentile sampled clearance;
 - **0.907** minimum stability.
 
-The run advanced **2,299,392** Genesis environment steps in **226.676 s**
-(`10,143.979 environment-steps/s`). Radeon telemetry recorded **73.406% mean /
-97% peak GPU utilization**. The 4,608 pairs are an engineering
-candidate-by-uncertainty population, not independent robot trials.
+This produces the judge-facing funnel **4,608 → 5 → 1**. The candidate-world
+pairs are an engineering stress-test population, not independent robot trials.
 
-## AMD Radeon GPU and ROCm
+## Frozen 30-scenario result
 
-The preserved formal benchmark and evaluator smoke used:
+The primary Gate 3.2 benchmark used three independent Genesis simulations per
+strategy and scenario:
+
+| Metric | Nominal | GuardianSim |
+| --- | ---: | ---: |
+| Repeatable safe scenarios | 18/30 | 30/30 |
+| Independent safe simulations | 58/90 | 90/90 |
+| Sampled clutter-contact executions | 30 | 0 |
+| Mean sampled clutter clearance | 23.191 mm | 46.003 mm |
+
+These are Genesis simulation results, not physical-robot deployment claims.
+
+## AMD Radeon / ROCm path
 
 - AMD Radeon Cloud, one `gfx1100` Radeon GPU;
 - Genesis 1.2.3 with the `gs.amdgpu` backend;
@@ -75,83 +84,38 @@ The preserved formal benchmark and evaluator smoke used:
 - HIP `7.2.53211-e1a6bc5663`;
 - Python 3.12.3.
 
-The Radeon GPU accelerates scene stepping and repeated physical
-counterfactual rollouts. The repository includes the exact ROCm wheel
-installer, dependency lock, GPU-required preflight, environment collector,
-bounded real-Genesis smoke, and complete-source ROCm Dockerfile.
-
-## Measured Radeon scale
-
-The frozen Scale V2 suite built one full headless manipulation scene per
-world: Franka, table, and four active YCB entities. It ran each of eight
-predeclared batch sizes once after a separate warmup:
-
-| Parallel worlds | Environment-steps/s | Speedup | Efficiency |
-| ---: | ---: | ---: | ---: |
-| 1 | 147.946 | 1.000x | 100.000% |
-| 16 | 2,214.149 | 14.966x | 93.537% |
-| 64 | 8,704.403 | 58.835x | 91.929% |
-| 256 | 35,637.980 | 240.884x | 94.095% |
-| 512 | 56,928.068 | 384.789x | 75.154% |
-| 1,024 | 96,589.308 | 652.867x | 63.757% |
-| 2,048 | 136,859.540 | 925.062x | 45.169% |
-| 4,096 | 152,099.018 | 1,028.069x | 25.099% |
-
-The 4,096-world point advanced 50,331,648 environment steps at 98.651% mean
-and 99% peak GPU utilization, using about 6.25 GiB peak VRAM. The full sweep
-advanced 98,512,896 measured environment steps. Throughput still rose at
-4,096 worlds while parallel efficiency declined after 256; the report keeps
-that saturation behavior visible. Environment steps are physics throughput,
-not PPO samples, dataset rows, safety trials, or physical-robot executions.
-
-## Innovation
-
-1. **Safety layer rather than another task policy.** GuardianSim can wrap a
-   nominal action supplied by a scripted or learned policy.
-2. **Snapshot-safe comparison.** Every counterfactual begins from the same
-   fingerprinted physical state.
-3. **Hard eligibility before utility ranking.** A high utility score cannot
-   compensate for a failed safety requirement.
-4. **Repeatability-aware evidence.** Formal completion requires three
-   independent safe executions.
-5. **Explicit safe stop.** Unsupported geometry does not silently fall back to
-   an unsafe nominal action.
-6. **Auditable evidence.** Reports preserve decisions, physical measurements,
-   responsible links and obstacles, protocol identities, logs, and checksums.
+The repository includes the exact ROCm installer, dependency lock,
+GPU-required preflight, bounded real-Genesis smoke, strict validators,
+checksums, and complete-source ROCm Dockerfile.
 
 ## Deliverables
 
-- **Public interactive evidence arena:**
-  <https://nvm-star-max.github.io/GuardianSim/>
-- **Immutable source and evidence release:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4>
-- **Reproducibility guide:**
-  <https://github.com/nvm-star-max/GuardianSim/blob/hackathon-2026-submission-v4/REPRODUCIBILITY.md>
-- **Technical report:**
-  [`GuardianSim-Technical-Report.pdf`](GuardianSim-Technical-Report.pdf)
-- **Owner-approved 4:41 English demonstration video:**
-  <https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v4/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4>
-- **Owner-approved 80-second Scale V2 Radeon preview:**
+- Public evidence arena: <https://nvm-star-max.github.io/GuardianSim/>
+- Immutable V5 source and evidence:
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v5>
+- Reproducibility guide:
+  <https://github.com/nvm-star-max/GuardianSim/blob/hackathon-2026-submission-v5/REPRODUCIBILITY.md>
+- Technical report: [`GuardianSim-Technical-Report.pdf`](GuardianSim-Technical-Report.pdf)
+- 90-second narrated Radeon preview:
   [`GuardianSim-Radeon-Parallel-Futures-preview.mp4`](GuardianSim-Radeon-Parallel-Futures-preview.mp4)
-- **Raw Radeon scale and Parallel Futures reports:**
-  [`evidence`](evidence)
-- **Formal Safety Swarm V2 evidence:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4/docs/evidence/safety-swarm-v2-formal-2026-07-30>
-- **Formal Radeon Scale V2 evidence:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4/docs/evidence/radeon-scale-v2-formal-20260731>
-- **Immutable Gate 3.2 evidence:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4/docs/evidence/gate-3-2>
-- **Validated Gate 3.3 limitation evidence:**
-  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v4/docs/evidence/gate-3-3-two-strata>
+- 4:41 complete workflow demo:
+  <https://raw.githubusercontent.com/nvm-star-max/GuardianSim/hackathon-2026-submission-v5/docs/submission/GuardianSim-Aegis-Motion-demo-review-v2.mp4>
+- Scale V3 and decision evidence: [`evidence`](evidence)
+- Full Scale V3 evidence:
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v5/docs/evidence/radeon-scale-v3-formal-2026-08-03>
+- Full Safety Swarm V2 evidence:
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v5/docs/evidence/safety-swarm-v2-formal-2026-07-30>
+- Immutable Gate 3.2 evidence:
+  <https://github.com/nvm-star-max/GuardianSim/tree/hackathon-2026-submission-v5/docs/evidence/gate-3-2>
 
 ## Reproduction
 
-On the supported Radeon Cloud Blank OpenCode workspace:
+On a supported Radeon Cloud Blank OpenCode workspace:
 
 ```bash
 git clone https://github.com/nvm-star-max/GuardianSim.git
 cd GuardianSim
-git checkout hackathon-2026-submission-v4
+git checkout hackathon-2026-submission-v5
 
 scripts/install_system_deps.sh
 uv python install 3.12
@@ -163,31 +127,24 @@ scripts/install_rocm_stack.sh
 ./scripts/run_evaluator_smoke.sh
 ```
 
-The bounded smoke verifies source identity, Radeon/ROCm readiness, the real
-Genesis scene, three counterfactual candidates from one captured snapshot,
-strict preserved-report validation, and checksums. It checks that the
-documented execution path is runnable; it is not used as the performance
-benchmark.
+The smoke checks the documented Radeon/Genesis execution path. It is not the
+Scale V3 performance benchmark.
 
 ## Responsible limitations
 
-- All published evidence comes from Genesis simulation.
-- No physical robot was tested.
+- All published evidence comes from Genesis simulation; no physical robot was
+  tested.
 - Sampled axis-aligned clearance is an engineering proxy, not a formal
   continuous-time collision proof.
 - The action family is bounded and planning is not yet real-time.
-- Harder unsupported geometry may produce a deliberate safe stop.
-- The 30-scenario result applies only to the frozen Gate 3.2 matrix.
-- The 4,608 Safety Swarm V2 pairs are candidate-by-uncertainty engineering
-  evidence, not 4,608 independent robot trials.
-- The scale suite measures steady-state Genesis stepping after warmup; scene
-  construction is excluded.
+- Unsupported geometry can produce a deliberate safe stop.
+- Scale V3 environment steps, Safety Swarm candidate-world pairs, and Gate 3.2
+  independent executions remain separate units.
 
 ## Team contribution
 
 The solo developer `@nvm-star-max` completed project direction, system design,
 implementation, Radeon Cloud experiments, evidence preservation,
-reproducibility documentation, report production, and demonstration-video
-production. AI-assisted development tools were used for implementation and
-documentation support; the submitting team remains responsible for technical
-validation, claims, licenses, and competition compliance.
+reproducibility documentation, report production, and video production.
+AI-assisted tools supported implementation and documentation; the submitting
+team remains responsible for validation, claims, licenses, and compliance.
