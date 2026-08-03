@@ -2512,6 +2512,11 @@ Gate decision:
   validation and sealed evidence checksums, 5/5 rendered tests, 3/3 Pages
   tests, both builds, ESLint, strict silent/narrated media validation, full
   package A/V decode, package checksums, PDF visual QA, and diff hygiene.
+- The first clean `npm ci` audit exposed production advisories in Next.js's
+  transitive PostCSS/Sharp tree. Upgraded Next.js to `16.2.12`, constrained
+  PostCSS to `8.5.18` and Sharp to `0.35.0`, then reran both builds, all eight
+  website tests, ESLint, and `npm audit --omit=dev`; the production audit now
+  reports zero vulnerabilities.
 - No remote branch, tag, Pages deployment, organizer package, or PR was changed
   during this preparation step. The Radeon Cloud instance was not accessed or
   destroyed.

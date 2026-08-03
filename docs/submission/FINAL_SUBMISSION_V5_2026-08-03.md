@@ -53,6 +53,9 @@ never added together.
   passed.
 - 5/5 server-rendered and 3/3 static Pages tests passed.
 - Both website builds and ESLint passed.
+- Next.js was updated to `16.2.12`; transitive PostCSS and Sharp versions were
+  constrained to patched releases. `npm audit --omit=dev` reported zero
+  production vulnerabilities after the clean install.
 - Strict silent and narrated Scale V3 media validation passed; the packaged
   video is byte-identical and passed complete audio/video decode.
 - The latest PDF was rendered to eight PNG pages and inspected page by page;

@@ -2338,6 +2338,10 @@ Evidence and working material:
   Scale V3 evidence checks, 5/5 rendered-site tests, 3/3 static Pages tests,
   both builds, ESLint, complete media validation/decode, eight-page PDF visual
   inspection, package checksums, and diff hygiene.
+- A clean-install audit exposed production advisories in the prior Next.js
+  dependency tree. Updated Next.js to `16.2.12` and constrained PostCSS/Sharp
+  to patched releases; `npm audit --omit=dev` now reports zero production
+  vulnerabilities and all website checks still pass.
 - V4 and all older tags remain immutable. The authorized remote operation is a
   new V5 tag, a new Pages deployment, replacement of only the existing contest
   package directory, and an in-place update to PR #39.
