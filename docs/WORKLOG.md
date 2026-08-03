@@ -2461,3 +2461,35 @@ Gate decision:
   title, label overflow, or metric collision remains. This work stayed local;
   public V4, Pages, organizer package, PR #39, and the Radeon instance were not
   changed.
+
+## 2026-08-03 — Built the Qwen-narrated Scale V3 V3 listening candidate
+
+- After owner approval of the V2 image sequence, added isolated builder and
+  validator scripts for a 90-second narrated V3. Did not modify the approved
+  silent V2 or historical V1.
+- Reused the previously accepted Qwen `Ethan` voice and natural engineering
+  instructions through an ignored local `.env.local`; no API credential was
+  printed, recorded in sidecars, or staged for Git.
+- Wrote seven concise chapter narrations around the verified Scale V3 numbers,
+  Safety Swarm funnel, Gate 3.2 evidence, and final Seed 411 simulation. The
+  duration guard rejected two overlong scale drafts instead of applying an
+  unnatural speed-up; the accepted segment fits at `17.52/18.00` seconds.
+- Added fixed English captions. The final ten-second simulation chapter uses a
+  separate top-aligned caption style to preserve the bottom `1.42 mm` versus
+  `17.1 mm` comparison legend.
+- Strict validation passed complete audio/video decode, V2 visual-source and
+  sidecar identity, all seven narration hashes, caption hash, frozen source
+  hashes, locked metrics, and the claim boundary. Audio measured `-17.6 dB`
+  mean and `-1.2 dB` peak. Decoded frames at 10, 30, 45, 65, 75, and 85 seconds
+  passed visual inspection.
+- Artifact identities: MP4
+  `2ac6959ed73588d60e0cdea0aa901330a13e5ff60f8fca620704c718679c850e`;
+  sidecar
+  `ac65e5075638d6b6fbc0b643484988a67fb7f096260735019b596b247c611e58`;
+  captions
+  `bb626f978518ca03b465370489484e0752077c5f53e30bdd29095d74a913f825`;
+  validation receipt
+  `71d802a7d0b24b8dc88cd7ba733dc5fb2d6b579621ccabad5ff92caa9eaf438d`.
+- Kept the result local for owner listening review. No push, Pages deployment,
+  organizer-package replacement, tag move, PR #39 edit, or Radeon Cloud action
+  occurred.

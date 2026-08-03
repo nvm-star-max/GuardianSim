@@ -44,6 +44,12 @@ independent robot trials, or physical-robot evidence.
 - preserved first cut: `docs/submission/GuardianSim-Radeon-Scale-V3-review-v1.mp4`;
 - current review cut: `docs/submission/GuardianSim-Radeon-Scale-V3-review-v2.mp4`;
 - current sidecar: `docs/submission/GuardianSim-Radeon-Scale-V3-review-v2.json`;
+- narrated review candidate:
+  `docs/submission/GuardianSim-Radeon-Scale-V3-narrated-v3.mp4`;
+- narrated sidecar, fixed captions, and strict validation receipt:
+  `docs/submission/GuardianSim-Radeon-Scale-V3-narrated-v3.json`,
+  `docs/submission/GuardianSim-Radeon-Scale-V3-narrated-v3.ass`, and
+  `docs/submission/GuardianSim-Radeon-Scale-V3-narrated-v3-validation.json`;
 - `scripts/build_radeon_scale_v3_showcase_cut.py`;
 - `scripts/validate_radeon_scale_v3_showcase_cut.py`.
 
@@ -53,6 +59,11 @@ formal Seed 411 Genesis replay: nominal contact on the left and GuardianSim's
 safe-clearance action on the right. Its sidecar binds source hashes, output
 hash, chapter windows, claim boundaries, and locked metrics. V1 remains intact
 as a historical candidate.
+
+The owner approved the V2 visual sequence. A separate V3 review candidate adds
+seven English Qwen `Ethan` narration segments and fixed English captions without
+changing the approved 90-second image sequence. It remains a local listening
+candidate rather than a public release.
 
 ## Review completed locally
 
@@ -66,6 +77,11 @@ as a historical candidate.
 - the 82-, 85-, and 89-second finale frames were inspected at original
   resolution; the complete ending contains robot motion rather than compressed
   explanatory cards, and no title, label, or metric crosses its frame bounds;
+- V3 full audio/video decode, all narration and caption hashes, the V2 visual
+  identity, frozen source hashes, locked metrics, and claim boundaries passed;
+- decoded V3 frames at 10, 30, 45, 65, 75, and 85 seconds were inspected. The
+  simulation-finale caption uses a dedicated top safe area and does not cover
+  the left/right result labels;
 - wording uses “Genesis simulations” rather than “physical executions” to
   avoid implying a hardware-robot experiment.
 

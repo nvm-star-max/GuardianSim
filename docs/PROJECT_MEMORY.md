@@ -2292,3 +2292,34 @@ Evidence and working material:
 - This is still a local review candidate. No push, Pages deployment, tag move,
   organizer-package change, PR #39 edit, or Radeon Cloud instance operation is
   authorized by this update.
+
+## Scale V3 narrated review V3 — 2026-08-03
+
+- The owner approved the 90-second V2 visual sequence. Built a separate V3
+  listening candidate from the exact V2 visual source, using Alibaba Cloud
+  Model Studio `qwen3-tts-instruct-flash-2026-01-26`, voice `Ethan`, with seven
+  chapter-aligned English segments and fixed English captions.
+- Preserved the locked narrative order: `16,384` full worlds, `278,051`
+  environment-steps/s P50, `293.6M` measured steps, Safety Swarm
+  `4,608 → 5 → 1`, formal Seed 411, frozen Gate 3.2 results, then the direct
+  left-contact/right-clearance simulation finale.
+- Rejected two overlong Radeon-scale narration drafts at `22.16` and `20.24`
+  seconds rather than speeding them into the 18-second chapter. The accepted
+  wording lasts `17.52` seconds. All seven accepted segments finish within
+  their chapter windows.
+- The final simulation caption uses a dedicated top-aligned subtitle style, so
+  it does not cover the bottom comparison legend. Original-resolution decoded
+  frames at 10, 30, 45, 65, 75, and 85 seconds were inspected.
+- Strict validation passed complete audio/video decode, eight sampled video
+  decodes, all narration/caption/source hashes, the V2 visual identity, frozen
+  metrics, and claim boundaries. Output volume measured `-17.6 dB` mean and
+  `-1.2 dB` peak.
+- V3 MP4 SHA-256 is
+  `2ac6959ed73588d60e0cdea0aa901330a13e5ff60f8fca620704c718679c850e`;
+  sidecar SHA-256 is
+  `ac65e5075638d6b6fbc0b643484988a67fb7f096260735019b596b247c611e58`;
+  caption SHA-256 is
+  `bb626f978518ca03b465370489484e0752077c5f53e30bdd29095d74a913f825`.
+- The Qwen credential remains only in ignored local `.env.local` files and was
+  neither printed nor added to metadata or Git. V3 is not pushed or public;
+  V4/Pages, the organizer package, release tags, and PR #39 remain unchanged.

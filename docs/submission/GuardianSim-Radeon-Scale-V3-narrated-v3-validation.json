@@ -1,0 +1,16 @@
+{
+  "validated": true,
+  "video": "docs/submission/GuardianSim-Radeon-Scale-V3-narrated-v3.mp4",
+  "sha256": "2ac6959ed73588d60e0cdea0aa901330a13e5ff60f8fca620704c718679c850e",
+  "duration_seconds": 90.0,
+  "fps": 20.0,
+  "width": 1920,
+  "height": 1080,
+  "decoded_sample_count": 8,
+  "full_audio_video_decode": true,
+  "source_hashes_verified": true,
+  "narration_hashes_verified": true,
+  "fixed_captions_verified": true,
+  "claim_boundaries_verified": true,
+  "verified_metrics_locked": true
+}
