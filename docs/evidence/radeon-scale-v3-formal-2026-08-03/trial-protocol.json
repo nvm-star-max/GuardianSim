@@ -1,0 +1,21 @@
+{
+  "schema_version": 2,
+  "benchmark_name": "radeon-full-scene-concurrency-v2",
+  "batch_sizes": [
+    1,
+    4096,
+    8192,
+    16384
+  ],
+  "warmup_steps": 200,
+  "measurement_steps": 2048,
+  "simulation_dt_s": 0.01,
+  "scene": "Franka + table + four active YCB entities per world; headless; cameras disabled",
+  "scene_source_sha256": "a12eae5690f9c97614ca305cca15f5a2df9ea8d7b47158d4627509d8c60160df",
+  "scene_config_sha256": "ab8e92f8bf9344cb3222592b6d7a2d3b53068740ba372766f38ef16209f36340",
+  "trial_runner_sha256": "5cd97f43ff6d596207cbf4076f6e2a3a11468504ea25006ac7bf84d55c86012a",
+  "timing_scope": "steady-state Franka position hold plus Genesis scene.step after a separate warmup; scene build, shader setup, and JIT warmup are excluded",
+  "primary_metric": "environment_steps_per_second",
+  "claim_boundary": "Sustained Genesis physics-throughput benchmark. Environment steps are not training examples, independent safety trials, or physical-robot evidence.",
+  "protocol_sha256": "8c5df763e346799356f9e9def9268f5f3fd5f7e66e26dc280df3be517dcf7999"
+}

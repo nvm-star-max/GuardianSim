@@ -1,0 +1,11 @@
+GuardianSim-scale-v3-formal/outputs/radeon-scale-v3-formal-20260803
+radeon-scale-v3-formal-20260803.log
+radeon-scale-v3-formal-20260803.pid
+radeon-scale-v3-launch-status.txt
+radeon-scale-v3-diagnostic.txt
+radeon-scale-v3-finalize-diagnostic.txt
+radeon-scale-v3-status.txt
+radeon-scale-v3-strict-validation.json
+radeon-scale-v3-checksum-verification.txt
+radeon-scale-v3-report-summary.json
+radeon-scale-v3-archive-contents.txt

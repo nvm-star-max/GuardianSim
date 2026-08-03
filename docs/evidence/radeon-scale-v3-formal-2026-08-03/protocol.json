@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "benchmark_name": "radeon-full-scene-high-scale-endurance-v3",
+  "batch_sizes": [
+    4096,
+    8192,
+    16384
+  ],
+  "repeats_per_batch": 5,
+  "warmup_steps": 200,
+  "measurement_steps_per_repeat": 2048,
+  "repeat_scope": "independent process and independently rebuilt scene",
+  "percentile_method": "linear interpolation at rank (n - 1) * q",
+  "primary_metric": "P50 environment steps per wall-clock second",
+  "claim_boundary": "Independent-process Genesis physics endurance measurements at 4,096, 8,192, and 16,384 complete robot worlds on one AMD Radeon GPU. Environment steps are not training samples, inference tokens, independent safety trials, or physical-robot evidence. Capacity preflight results are excluded.",
+  "suite_runner_sha256": "077a2e5c7a46f1e8c643964f779d22faac7f40be1de20e4016fb04aef28e24e5",
+  "trial_protocol": {
+    "schema_version": 2,
+    "benchmark_name": "radeon-full-scene-concurrency-v2",
+    "batch_sizes": [
+      1,
+      4096,
+      8192,
+      16384
+    ],
+    "warmup_steps": 200,
+    "measurement_steps": 2048,
+    "simulation_dt_s": 0.01,
+    "scene": "Franka + table + four active YCB entities per world; headless; cameras disabled",
+    "scene_source_sha256": "a12eae5690f9c97614ca305cca15f5a2df9ea8d7b47158d4627509d8c60160df",
+    "scene_config_sha256": "ab8e92f8bf9344cb3222592b6d7a2d3b53068740ba372766f38ef16209f36340",
+    "trial_runner_sha256": "5cd97f43ff6d596207cbf4076f6e2a3a11468504ea25006ac7bf84d55c86012a",
+    "timing_scope": "steady-state Franka position hold plus Genesis scene.step after a separate warmup; scene build, shader setup, and JIT warmup are excluded",
+    "primary_metric": "environment_steps_per_second",
+    "claim_boundary": "Sustained Genesis physics-throughput benchmark. Environment steps are not training examples, independent safety trials, or physical-robot evidence.",
+    "protocol_sha256": "8c5df763e346799356f9e9def9268f5f3fd5f7e66e26dc280df3be517dcf7999"
+  },
+  "protocol_sha256": "118b2757a1ce71c1d7fc2f5143f21072b86adf25f7e1fb1a9e50d6a9f71ff203"
+}

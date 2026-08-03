@@ -1,0 +1,8 @@
+DATE=2026-08-03T07:29:26+00:00
+From https://gh-proxy.org/https://github.com/nvm-star-max/GuardianSim
+ * branch            agent/radeon-scale-v3 -> FETCH_HEAD
+FETCH_RC=0
+REMOTE_COMMIT=origin/agent/radeon-scale-v3
+FORMAL_EXISTS=no
+OUTPUT_EXISTS=no
+PID=absent

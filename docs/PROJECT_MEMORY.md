@@ -2202,3 +2202,32 @@ Evidence and working material:
   `docs/submission/FINAL_SUBMISSION_LOCK_2026-08-01.md`. From this point, make
   public changes only for organizer feedback, broken links, or material
   factual, licensing, security, or eligibility errors.
+
+## Radeon Scale V3 formal result — 2026-08-03
+
+- Completed the frozen Scale V3 endurance protocol at source commit
+  `64ca781471d9ba0729f19b48058030df26509f4f` on AMD Radeon Cloud.
+- The run used 4,096, 8,192, and 16,384 complete Genesis robot worlds, with
+  five independent processes per batch, 200 warmup steps, and 2,048 measured
+  steps per process. All 15 measurements completed, totaling 293,601,280
+  measured environment steps.
+- The 16,384-world batch sustained `278,051.244 env-steps/s` P50 and
+  `278,660.488 env-steps/s` P95, with a measured range of
+  `274,989.939–278,671.733 env-steps/s`.
+- P50 throughput increased `1.821x` between the 4,096- and 16,384-world
+  batches. Weighted mean GPU utilization across all formal measurements was
+  `98.330%`; the observed peak was `100%`. Peak VRAM use was
+  `23,677,100,032 bytes` (`22.05 GiB`).
+- Strict schema-3 validation passed. Report SHA-256 is
+  `c09573787e474f8573b9a3ebab7bd9d1f6a81502c6d880c43b07aec5817bc692`;
+  protocol SHA-256 is
+  `118b2757a1ce71c1d7fc2f5143f21072b86adf25f7e1fb1a9e50d6a9f71ff203`.
+- The downloaded evidence archive passed SHA-256 verification at
+  `b5adc496eadf9257cbcedf52104b2864ced3c459a2ca4fd2eb74909a549e3b0a`,
+  and every sealed payload checksum passed locally.
+- Claim boundary: Scale V3 counts Genesis physics environment steps, not
+  training samples, tokens, independent safety trials, or physical-robot
+  executions. Capacity-preflight short runs remain excluded.
+- This result is preserved only on `agent/radeon-scale-v3`. The released V4,
+  Pages site, organizer package, and PR #39 remain unchanged pending owner
+  review of the public presentation direction.

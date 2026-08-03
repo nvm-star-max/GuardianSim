@@ -1,0 +1,68 @@
+{
+  "schema_version": 3,
+  "benchmark_name": "radeon-full-scene-high-scale-endurance-v3",
+  "summary": {
+    "batch_count": 3,
+    "measurement_count": 15,
+    "largest_parallel_batch": 16384,
+    "total_measured_environment_steps": 293601280,
+    "largest_batch_throughput_p50": 278051.243641299,
+    "largest_batch_throughput_p95": 278660.488130357,
+    "largest_batch_throughput_min": 274989.9387339657,
+    "largest_batch_throughput_max": 278671.73301140475,
+    "largest_vs_smallest_batch_p50_ratio": 1.8209299806018995,
+    "peak_batch_p50_throughput": 278051.243641299,
+    "mean_gpu_utilization_pct": 98.33049603756972,
+    "peak_gpu_utilization_pct": 100.0,
+    "peak_vram_used_bytes": 23677100032.0
+  },
+  "batch_summaries": [
+    {
+      "n_envs": 4096,
+      "repeat_count": 5,
+      "measured_environment_steps": 41943040,
+      "throughput_min": 151505.80162306048,
+      "throughput_p50": 152697.38353662041,
+      "throughput_mean": 152428.5616162102,
+      "throughput_p95": 153087.7968630903,
+      "throughput_max": 153127.08717353697,
+      "throughput_coefficient_of_variation": 0.004110221606554363,
+      "mean_gpu_utilization_pct": 97.76819407008087,
+      "max_gpu_utilization_pct": 99.0,
+      "peak_vram_used_bytes": 6706696192.0,
+      "total_vram_bytes": 51522830336.0
+    },
+    {
+      "n_envs": 8192,
+      "repeat_count": 5,
+      "measured_environment_steps": 83886080,
+      "throughput_min": 213958.83837877098,
+      "throughput_p50": 214944.30706552975,
+      "throughput_mean": 214815.5901219907,
+      "throughput_p95": 215406.45203697617,
+      "throughput_max": 215431.23085993624,
+      "throughput_coefficient_of_variation": 0.0025627282569488635,
+      "mean_gpu_utilization_pct": 97.9780534351145,
+      "max_gpu_utilization_pct": 100.0,
+      "peak_vram_used_bytes": 12373348352.0,
+      "total_vram_bytes": 51522830336.0
+    },
+    {
+      "n_envs": 16384,
+      "repeat_count": 5,
+      "measured_environment_steps": 167772160,
+      "throughput_min": 274989.9387339657,
+      "throughput_p50": 278051.243641299,
+      "throughput_mean": 277673.3321352834,
+      "throughput_p95": 278660.488130357,
+      "throughput_max": 278671.73301140475,
+      "throughput_coefficient_of_variation": 0.004927693090754513,
+      "mean_gpu_utilization_pct": 98.8169449598021,
+      "max_gpu_utilization_pct": 100.0,
+      "peak_vram_used_bytes": 23677100032.0,
+      "total_vram_bytes": 51522830336.0
+    }
+  ],
+  "protocol_sha256": "118b2757a1ce71c1d7fc2f5143f21072b86adf25f7e1fb1a9e50d6a9f71ff203",
+  "report_sha256": "c09573787e474f8573b9a3ebab7bd9d1f6a81502c6d880c43b07aec5817bc692"
+}

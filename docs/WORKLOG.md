@@ -2364,3 +2364,28 @@ Gate decision:
   `465d1d5c5bf4c6ce59bbc4cc5d945d1ee6cfb37bb45f410c7f64bcf874ce7b0c`.
 - Added `docs/submission/FINAL_SUBMISSION_LOCK_2026-08-01.md` as the controlling
   pre-deadline freeze and monitoring record.
+
+## 2026-08-03 — Completed and preserved Radeon Scale V3
+
+- Ran the frozen Scale V3 suite from clean cloud worktree
+  `/workspace/persistent/GuardianSim-scale-v3-formal` at commit `64ca781`.
+- Completed 15/15 independent-process measurements: five repeats each at
+  4,096, 8,192, and 16,384 complete Genesis robot worlds. The formal workload
+  contains 293,601,280 measured environment steps.
+- Strict schema-3 validation and the sealed `SHA256SUMS` both passed. The
+  16,384-world formal aggregate is `278,051.244 env-steps/s` P50,
+  `278,660.488 env-steps/s` P95, and `274,989.939–278,671.733 env-steps/s`
+  min–max.
+- Recorded `98.330%` weighted mean GPU utilization across the full suite,
+  `100%` peak utilization, and `23,677,100,032 bytes` peak VRAM use.
+- Downloaded the 19.6 KB evidence archive, verified archive SHA-256
+  `b5adc496eadf9257cbcedf52104b2864ced3c459a2ca4fd2eb74909a549e3b0a`,
+  and rechecked all sealed payload hashes on the local machine.
+- Preserved the raw report, all 15 trial JSON files and logs, before/after
+  ROCm receipts, launch and process records, strict validation receipts,
+  checksums, and the original archive under
+  `docs/evidence/radeon-scale-v3-formal-2026-08-03`.
+- Kept the public V4 release, Pages deployment, organizer package, and PR #39
+  unchanged. Scale V3 remains an isolated experiment until the owner approves
+  how the new Radeon-first numbers should replace or supplement the released
+  narrative.
