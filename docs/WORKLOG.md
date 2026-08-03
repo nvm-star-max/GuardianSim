@@ -2520,3 +2520,29 @@ Gate decision:
 - No remote branch, tag, Pages deployment, organizer package, or PR was changed
   during this preparation step. The Radeon Cloud instance was not accessed or
   destroyed.
+
+## 2026-08-03 — Released Radeon Scale V3 as V5
+
+- Pushed `agent/radeon-scale-v3-showcase` and created immutable annotated tag
+  `hackathon-2026-submission-v5` at source commit `32ded989`; tag object is
+  `012e77a8`. Initial SSH-over-443 pushes were closed by the transport, so the
+  exact same refs were published through authenticated HTTPS.
+- Deployed the tested Pages build to `bc716777`. The public asset is
+  byte-identical to the local build and includes `16,384`, `293,601,280`, and
+  `278,051`.
+- Replaced only `submissions/Track3-Aegis-Motion-GuardianSim` in the contest
+  fork. Removing the previous sole package also removed the empty parent; the
+  first copy failed and produced transient deletion-only commit `84b4fc5`.
+  Recreated the parent and immediately pushed complete package commit
+  `49c94b3`; all package checksums passed before and after the push.
+- Updated existing organizer PR #39 in place. Verified `OPEN`, non-draft,
+  `MERGEABLE`, head `49c94b3`, zero reviews/comments/checks, and canonical body
+  SHA-256 `aaf2c98304489f299a37aff4b79278f56491be3c61408b88c50e9239997d87c0`.
+- Downloaded a fresh GitHub API tarball of the fork branch. All ten payloads
+  passed, the manifest hash was `827f442d...d98d6`, and total package size was
+  4,127,637 bytes.
+- Anonymous range requests succeeded for the V5 tag, reproduction guide,
+  workflow demo, narrated Scale V3 preview, organizer PDF, and PR. Live Pages
+  JS SHA-256 `6b2715a2...a230` matched the local build.
+- Did not open, close, or merge another PR; did not move V1–V4 tags; did not
+  access or destroy the Radeon Cloud instance.

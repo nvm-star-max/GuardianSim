@@ -2345,3 +2345,28 @@ Evidence and working material:
 - V4 and all older tags remain immutable. The authorized remote operation is a
   new V5 tag, a new Pages deployment, replacement of only the existing contest
   package directory, and an in-place update to PR #39.
+
+## V5 public release completed — 2026-08-03
+
+- Published source commit `32ded989d575602f0427badaf98e4c1a20d92934`
+  and annotated tag `hackathon-2026-submission-v5`; GitHub tag object
+  `012e77a8a18b92db3888f61b977cb497adb5a6ba` peels to that exact commit.
+- Published the tested static showcase to `gh-pages` commit
+  `bc7167770fd2b79466e0f2bfe973d22354f8168e`. The live JS hash
+  `6b2715a2164caa47ae0266fd256a516853ab00961d3f8ae89bc3d1884824a230`
+  matches the local Pages build byte for byte.
+- Updated only the contest fork's GuardianSim package. Final branch head is
+  `49c94b37bdf2b5fff28a3b215cba873aae1a14a1`; a fresh API tarball passed all
+  ten payload checksums, reproduced manifest SHA-256 `827f442d...d98d6`, and
+  totaled 4,127,637 bytes.
+- Updated organizer PR #39 in place with the Scale V3 body. Verified `OPEN`,
+  non-draft, `MERGEABLE`, exact head `49c94b3`, and canonical body SHA-256
+  `aaf2c98304489f299a37aff4b79278f56491be3c61408b88c50e9239997d87c0`.
+- Anonymous access succeeded for V5 source, reproduction guide, complete demo,
+  90-second Scale V3 preview, organizer PDF, PR, and Pages asset.
+- Organizer sync produced one transparent transient deletion-only commit
+  `84b4fc5` when the empty `submissions/` parent disappeared. It was immediately
+  repaired at `49c94b3`; remote archive verification proves the final PR head
+  contains the complete V5 package. No other submission was changed.
+- V4 and all older tags remain unchanged. The Radeon Cloud instance was not
+  accessed or destroyed.

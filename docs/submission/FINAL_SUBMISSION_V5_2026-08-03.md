@@ -65,7 +65,30 @@ never added together.
 
 ## Publication receipt
 
-The exact source commit, annotated V5 tag object, Pages commit, organizer fork
-commit, normalized PR-body hash, public-link checks, and fresh-download package
-verification are appended to `PROJECT_MEMORY.md` and `WORKLOG.md` only after
-the remote operations succeed.
+| Public item | Verified identity |
+| --- | --- |
+| V5 tagged source commit | `32ded989d575602f0427badaf98e4c1a20d92934` |
+| Annotated tag | `hackathon-2026-submission-v5` |
+| Annotated tag object | `012e77a8a18b92db3888f61b977cb497adb5a6ba` |
+| Pages deployment commit | `bc7167770fd2b79466e0f2bfe973d22354f8168e` |
+| Organizer package head | `49c94b37bdf2b5fff28a3b215cba873aae1a14a1` |
+| Package manifest SHA-256 | `827f442d5f31d7824f2699c3c1853cd5e6f544abb549f3a9ec0824370b9d98d6` |
+| Canonical PR-body SHA-256 | `aaf2c98304489f299a37aff4b79278f56491be3c61408b88c50e9239997d87c0` |
+| Published Pages JS SHA-256 | `6b2715a2164caa47ae0266fd256a516853ab00961d3f8ae89bc3d1884824a230` |
+
+GitHub reports organizer PR #39 as `OPEN`, non-draft, and `MERGEABLE` at the
+exact package head above, with zero comments, reviews, or configured checks at
+verification time. No new PR was opened and the organizer PR was not merged.
+
+A fresh GitHub API tarball of the fork branch passed all ten package payload
+checksums, reproduced the manifest hash above, and totaled 4,127,637 bytes.
+Anonymous HTTP range checks returned 206 for the V5 tag, reproducibility guide,
+both videos, organizer PDF, and PR. The live Pages JavaScript was byte-identical
+to the tested local build and contained the three Scale V3 headline values.
+
+During organizer synchronization, deleting the previous package also removed
+its now-empty parent directory. The first copy therefore failed and briefly
+produced deletion-only commit `84b4fc5`. The same branch was immediately
+repaired by `49c94b3`; a fresh remote download proves the final PR head contains
+the complete checksum-valid V5 package. No other submission directory was
+changed.

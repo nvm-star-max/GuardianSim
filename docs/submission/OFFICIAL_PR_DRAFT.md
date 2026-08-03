@@ -22,11 +22,11 @@ PR is opened, closed, or merged.
 
 V4 remains immutable and available as historical evidence.
 
-## V5 release gate
+## V5 release completed
 
 The owner approved the Scale V3 website, eight-page report, 90-second visual
-sequence, Qwen `Ethan` narration, and simulation finale on 2026-08-03. V5 must
-still pass:
+sequence, Qwen `Ethan` narration, and simulation finale on 2026-08-03. V5
+passed:
 
 1. strict schema-3 Scale V3 validation and sealed checksums;
 2. all Python, server-rendered, static Pages, build, and lint checks;
@@ -35,5 +35,12 @@ still pass:
 5. clean-checkout reproduction;
 6. public tag, Pages, package, PR-state, checksum, and anonymous-link checks.
 
-Final commit, tag object, Pages commit, organizer package commit, manifest
-hash, and normalized PR-body hash are recorded after publication.
+Final identities:
+
+- tagged source `32ded989d575602f0427badaf98e4c1a20d92934`;
+- tag object `012e77a8a18b92db3888f61b977cb497adb5a6ba`;
+- Pages `bc7167770fd2b79466e0f2bfe973d22354f8168e`;
+- organizer package `49c94b37bdf2b5fff28a3b215cba873aae1a14a1`;
+- manifest `827f442d5f31d7824f2699c3c1853cd5e6f544abb549f3a9ec0824370b9d98d6`;
+- canonical PR body
+  `aaf2c98304489f299a37aff4b79278f56491be3c61408b88c50e9239997d87c0`.

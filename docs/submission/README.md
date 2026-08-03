@@ -166,6 +166,14 @@ The approved 90-second narrated preview is
 Its sidecar, fixed captions, and strict validation receipt are retained beside
 it. V4 remains immutable as historical evidence.
 
+V5 was released as annotated tag `hackathon-2026-submission-v5`, which peels
+to `32ded989d575602f0427badaf98e4c1a20d92934`. Pages was deployed at
+`bc7167770fd2b79466e0f2bfe973d22354f8168e`. The official package is at fork
+commit `49c94b37bdf2b5fff28a3b215cba873aae1a14a1`; a fresh API archive passed
+all ten payload checksums and reproduced manifest SHA-256
+`827f442d5f31d7824f2699c3c1853cd5e6f544abb549f3a9ec0824370b9d98d6`.
+Existing PR #39 remains open, non-draft, and mergeable.
+
 ## V4 release state
 
 The Scale V2 release was published from `agent/parallel-futures-showcase` as
