@@ -2270,3 +2270,25 @@ Evidence and working material:
   `docs/submission/RADEON_SCALE_V3_PRESENTATION_CANDIDATE_2026-08-03.md`.
   No commit was pushed, no Pages deployment occurred, no release tag moved,
   and organizer PR #39 remains unchanged pending owner visual approval.
+
+## Scale V3 simulation-finale review V2 — 2026-08-03
+
+- Preserved the 80-second Scale V3 review V1 unchanged and produced a separate
+  90-second V2 candidate. The additional final ten seconds show the actual
+  side-by-side Seed 411 Genesis replay instead of ending on a static card.
+- The finale uses only the replay's `05.00–12.30` robot-motion window. It does
+  not compress the surrounding geometry and result cards into the ending.
+  Left remains the measured nominal contact (`1.42 mm` overlap); right remains
+  GuardianSim (`17.1 mm` clearance, `3/3` safe in the formal episode).
+- V2 is 1920×1080 at 20 FPS and remains intentionally silent. Strict full-video
+  decode and source/hash/claim/metric validation passed. MP4 SHA-256 is
+  `4c635438b417cb73c4c8529c077601fda0f8e82515717291c079724adf798125`;
+  sidecar SHA-256 is
+  `ec9fe8cccc2131f1eb719223dc7a5338a96fb320711e319dc98d7f35471c7702`.
+- Original-resolution frames at 82, 85, and 89 seconds were inspected after a
+  rejected first render exposed clipped explanatory titles. The accepted
+  render contains continuous robot motion and keeps all replacement labels and
+  metrics inside the frame.
+- This is still a local review candidate. No push, Pages deployment, tag move,
+  organizer-package change, PR #39 edit, or Radeon Cloud instance operation is
+  authorized by this update.

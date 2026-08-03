@@ -41,14 +41,18 @@ independent robot trials, or physical-robot evidence.
 - website source under `showcase/`, with the Radeon scale metrics in the first
   desktop viewport and a separate-unit claim boundary;
 - `output/pdf/GuardianSim-Technical-Report-Scale-V3-Candidate.pdf`;
-- `docs/submission/GuardianSim-Radeon-Scale-V3-review-v1.mp4`;
-- `docs/submission/GuardianSim-Radeon-Scale-V3-review-v1.json`;
+- preserved first cut: `docs/submission/GuardianSim-Radeon-Scale-V3-review-v1.mp4`;
+- current review cut: `docs/submission/GuardianSim-Radeon-Scale-V3-review-v2.mp4`;
+- current sidecar: `docs/submission/GuardianSim-Radeon-Scale-V3-review-v2.json`;
 - `scripts/build_radeon_scale_v3_showcase_cut.py`;
 - `scripts/validate_radeon_scale_v3_showcase_cut.py`.
 
-The 80-second video is intentionally silent until the visual sequence is
-approved. Its sidecar binds source hashes, output hash, chapter windows, claim
-boundaries, and locked metrics.
+The 90-second V2 video is intentionally silent until the visual sequence is
+approved. Its final ten seconds use only the preserved motion window from the
+formal Seed 411 Genesis replay: nominal contact on the left and GuardianSim's
+safe-clearance action on the right. Its sidecar binds source hashes, output
+hash, chapter windows, claim boundaries, and locked metrics. V1 remains intact
+as a historical candidate.
 
 ## Review completed locally
 
@@ -56,9 +60,12 @@ boundaries, and locked metrics.
 - website mobile viewport: 390×844, no horizontal overflow;
 - full-page desktop and mobile screenshots inspected;
 - eight-page A4 report rendered page-by-page and inspected;
-- video rendered at 1920×1080, 20 FPS, 80 seconds;
+- V2 video rendered at 1920×1080, 20 FPS, 90 seconds;
 - video full decode, eight sampled decodes, source hashes, metric locks, and
   simulation claim boundaries passed strict validation;
+- the 82-, 85-, and 89-second finale frames were inspected at original
+  resolution; the complete ending contains robot motion rather than compressed
+  explanatory cards, and no title, label, or metric crosses its frame bounds;
 - wording uses “Genesis simulations” rather than “physical executions” to
   avoid implying a hardware-robot experiment.
 

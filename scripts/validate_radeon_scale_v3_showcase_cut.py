@@ -15,7 +15,7 @@ import imageio_ffmpeg
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SIDECAR = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Scale-V3-review-v1.json"
+    / "docs/submission/GuardianSim-Radeon-Scale-V3-review-v2.json"
 )
 
 
@@ -35,7 +35,7 @@ def require(condition: bool, message: str) -> None:
 def validate(sidecar: Path = DEFAULT_SIDECAR) -> dict:
     payload = json.loads(sidecar.read_text())
     require(
-        payload["kind"] == "guardiansim_radeon_scale_v3_visual_review_v1",
+        payload["kind"] == "guardiansim_radeon_scale_v3_visual_review_v2",
         "Unexpected review kind",
     )
     require(payload["team"] == "Aegis Motion", "Unexpected team")
@@ -73,13 +73,19 @@ def validate(sidecar: Path = DEFAULT_SIDECAR) -> dict:
     duration = frames / fps
     require(width == 1920 and height == 1080, "Output must be 1920x1080")
     require(abs(fps - 20.0) < 0.01, "Output must be 20 FPS")
-    require(79.9 <= duration <= 80.1, "Output duration drift")
+    require(89.9 <= duration <= 90.1, "Output duration drift")
     require(abs(duration - output["duration_seconds"]) < 0.1, "Sidecar duration drift")
 
     for source in payload["sources"].values():
         source_path = ROOT / source["path"]
         require(source_path.is_file(), f"Missing source {source_path}")
         require(sha256(source_path) == source["sha256"], f"Source hash mismatch: {source_path}")
+
+    require(
+        payload["sources"]["seed411_replay"]["finale_motion_window_seconds"]
+        == [5.0, 12.3],
+        "Simulation finale source window drift",
+    )
 
     metrics = payload["verified_metrics"]
     require(metrics["measurement_count"] == 15, "Measurement count drift")
@@ -102,9 +108,13 @@ def validate(sidecar: Path = DEFAULT_SIDECAR) -> dict:
         == {"baseline": 18, "guardiansim": 30, "total": 30},
         "Formal safety claim drift",
     )
-    require(len(payload["chapters"]) == 6, "Chapter count drift")
+    require(len(payload["chapters"]) == 7, "Chapter count drift")
     require(payload["chapters"][0]["start"] == 0, "Chapter start drift")
-    require(payload["chapters"][-1]["end"] == 80, "Chapter end drift")
+    require(payload["chapters"][-1]["end"] == 90, "Chapter end drift")
+    require(
+        payload["chapters"][-1]["name"] == "final Seed 411 simulation replay",
+        "Simulation finale chapter drift",
+    )
 
     ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
     full_decode = subprocess.run(

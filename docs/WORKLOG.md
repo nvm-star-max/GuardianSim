@@ -2437,3 +2437,27 @@ Gate decision:
   `docs/submission/RADEON_SCALE_V3_PRESENTATION_CANDIDATE_2026-08-03.md` as
   the local review record. Did not push, deploy Pages, replace the organizer
   package, move a tag, edit PR #39, or access/destroy the Radeon Cloud instance.
+
+## 2026-08-03 — Added a direct simulation finale to Scale V3 review V2
+
+- Kept `GuardianSim-Radeon-Scale-V3-review-v1.mp4` byte-for-byte unchanged and
+  generated a separate 90-second V2 candidate.
+- Added a ten-second final chapter built from the preserved formal Seed 411
+  Genesis replay. The ending maintains a direct left/right comparison:
+  nominal contact with `1.42 mm` overlap versus GuardianSim with `17.1 mm`
+  clearance and `3/3` safe executions.
+- Rejected the first V2 render during frame inspection because mapping the
+  entire 17.55-second source into the finale inserted explanatory cards and
+  left their headings partially covered. Restricted the accepted render to the
+  source's `05.00–12.30` robot-motion window and fully covered the source title
+  band before adding the new finale label.
+- Strict validation passed a complete decode, eight sampled decodes, source
+  hashes, frozen metrics, chapter boundaries, and the simulation-only claim
+  boundary. Accepted MP4 SHA-256 is
+  `4c635438b417cb73c4c8529c077601fda0f8e82515717291c079724adf798125`;
+  sidecar SHA-256 is
+  `ec9fe8cccc2131f1eb719223dc7a5338a96fb320711e319dc98d7f35471c7702`.
+- Inspected 82-, 85-, and 89-second frames at 1920×1080. No clipped source
+  title, label overflow, or metric collision remains. This work stayed local;
+  public V4, Pages, organizer package, PR #39, and the Radeon instance were not
+  changed.

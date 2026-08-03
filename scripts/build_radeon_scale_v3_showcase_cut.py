@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the 80-second Radeon Scale V3 GuardianSim visual review cut.
+"""Build the 90-second Radeon Scale V3 GuardianSim visual review cut.
 
 This artifact is assembled only from preserved, validated evidence. It does not
 re-run Genesis, add a statistical trial, or claim that throughput worlds are
@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WIDTH = 1920
 HEIGHT = 1080
 FPS = 20
-DURATION_SECONDS = 80
+DURATION_SECONDS = 90
 
 BG = (3, 9, 13)
 PANEL = (7, 18, 25)
@@ -59,15 +59,15 @@ HERO_VIDEO = ROOT / "docs/demo/gate-3-2-seed-411-aegis-showcase-v3.mp4"
 
 OUTPUT = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Scale-V3-review-v1.mp4"
+    / "docs/submission/GuardianSim-Radeon-Scale-V3-review-v2.mp4"
 )
 SIDECAR = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Scale-V3-review-v1.json"
+    / "docs/submission/GuardianSim-Radeon-Scale-V3-review-v2.json"
 )
 PREVIEW = (
     ROOT
-    / "docs/submission/GuardianSim-Radeon-Scale-V3-review-v1-preview.png"
+    / "docs/submission/GuardianSim-Radeon-Scale-V3-review-v2-preview.png"
 )
 
 
@@ -536,6 +536,41 @@ def render_close(t: float) -> Image.Image:
     return image
 
 
+def render_simulation_finale(t: float, frames: list[Image.Image]) -> Image.Image:
+    """End on the preserved Seed 411 motion instead of a static title card."""
+    # The preserved replay is 17.55 seconds long. Its actual side-by-side robot
+    # motion occupies 05.00--12.30; the surrounding frames are explanatory
+    # cards. Stretch only that motion window across the ten-second finale.
+    progress = min(0.999, max(0.0, t / 10.0))
+    motion_start = min(round(5.0 * FPS), len(frames) - 1)
+    motion_end = min(round(12.3 * FPS), len(frames) - 1)
+    index = min(
+        motion_start + int(progress * (motion_end - motion_start)),
+        motion_end,
+    )
+    image = frames[index].resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS)
+    draw = ImageDraw.Draw(image)
+
+    # Cover the replay's own title block completely; leaving only part of it
+    # visible reads as accidental clipping beneath our finale label.
+    draw.rectangle((0, 0, WIDTH, 168), fill=BG)
+    label(draw, "FINAL SIMULATION RESULT  ·  FORMAL SEED 411", 50, 28)
+
+    draw.rectangle((0, HEIGHT - 112, WIDTH, HEIGHT), fill=BG)
+    draw.text((70, HEIGHT - 78), "LEFT  ·  NOMINAL CONTACT", font=font(24, bold=True), fill=RED)
+    draw.text((520, HEIGHT - 78), "1.42 mm overlap", font=font(24), fill=WHITE)
+    draw.text((875, HEIGHT - 78), "→", font=font(30, bold=True), fill=CYAN)
+    draw.text((975, HEIGHT - 78), "RIGHT  ·  GUARDIANSIM", font=font(24, bold=True), fill=GREEN)
+    draw.text((1370, HEIGHT - 78), "17.1 mm clearance · 3/3 safe", font=font(24), fill=WHITE)
+    draw.text(
+        (70, HEIGHT - 35),
+        "Same task · same initial state · preserved Genesis replay · no physical-robot claim",
+        font=font(18, mono=True),
+        fill=MUTED,
+    )
+    return image
+
+
 def validate_sources() -> tuple[dict, dict, dict]:
     scale = json.loads(SCALE_REPORT.read_text())
     scale_validation = json.loads(SCALE_VALIDATION.read_text())
@@ -616,9 +651,11 @@ def main() -> None:
             image = render_replay(timestamp - 40, hero_frames)
         elif timestamp < 72:
             image = render_proof(timestamp - 58)
-        else:
+        elif timestamp < 80:
             image = render_close(timestamp - 72)
-        if frame_index == 18 * FPS:
+        else:
+            image = render_simulation_finale(timestamp - 80, hero_frames)
+        if frame_index == 85 * FPS:
             preview_frame = image.copy()
         process.stdin.write(image.tobytes())
 
@@ -631,10 +668,10 @@ def main() -> None:
     preview_frame.save(PREVIEW)
 
     payload = {
-        "kind": "guardiansim_radeon_scale_v3_visual_review_v1",
+        "kind": "guardiansim_radeon_scale_v3_visual_review_v2",
         "team": "Aegis Motion",
         "project": "GuardianSim",
-        "review_status": "Scale V3 silent visual candidate; local typography and claim review passed",
+        "review_status": "Scale V3 silent visual candidate with Seed 411 simulation finale",
         "layout_policy": {
             "metric_rows": "measured as one group and centered inside each card",
             "titles_and_details": "measured and centered inside each card",
@@ -673,6 +710,7 @@ def main() -> None:
             "seed411_replay": {
                 "path": str(HERO_VIDEO.relative_to(ROOT)),
                 "sha256": sha256(HERO_VIDEO),
+                "finale_motion_window_seconds": [5.0, 12.3],
             },
         },
         "verified_metrics": {
@@ -719,6 +757,7 @@ def main() -> None:
             {"start": 40, "end": 58, "name": "formal Seed 411 replay"},
             {"start": 58, "end": 72, "name": "frozen 30-scenario result"},
             {"start": 72, "end": 80, "name": "what the demo shows"},
+            {"start": 80, "end": 90, "name": "final Seed 411 simulation replay"},
         ],
     }
     SIDECAR.write_text(json.dumps(payload, indent=2) + "\n")
